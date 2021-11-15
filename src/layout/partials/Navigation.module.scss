@@ -1,0 +1,38 @@
+
+@keyframes move-it {
+  0%,
+  100% {
+    transform: translateX(0%);
+    transform-origin: 50% 50%;
+  }
+
+  50% {
+    transform: translateX(600px);
+  }
+}
+
+.text {
+  animation: move-it 3s linear infinite both;
+  font-size: 38px;
+  width: fit-content;
+}
+
+
+@keyframes move-it-2 {
+  0%,
+  100% {
+    left: 0px;
+  }
+
+  50% {
+    left: 600px;
+  }
+}
+
+
+.text2 {
+  animation: move-it-2 3s linear infinite both;
+  font-size: 38px;
+  width: fit-content;
+  position: relative;
+}
