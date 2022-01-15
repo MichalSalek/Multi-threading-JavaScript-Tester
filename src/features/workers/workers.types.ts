@@ -31,7 +31,7 @@ export type WorkerNameType = string
 export type WorkerCalculationType = number
 
 
-export type NewWorkerJobType = {workerName: WorkerNameType, lastCalculations: WorkerCalculationType}
+export type NewWorkerJobType = { workerName: WorkerNameType, lastCalculations: WorkerCalculationType }
 
 
 export interface IWorkerKey {
@@ -140,6 +140,7 @@ export enum WorkerTriggerMessageCommandEnum {
 
 
 export type SocketResponseStatusesType = 201
+
 
 export interface ISocketToAppCalculationDataDTO {
 	data: WorkersJobsType

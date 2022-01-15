@@ -3,8 +3,6 @@ import type {AppProps} from 'next/app'
 import {Provider} from 'react-redux'
 
 import 'semantic-ui-css/semantic.min.css'
-import '/node_modules/react-grid-layout/css/styles.css'
-import '/node_modules/react-resizable/css/styles.css'
 import '@/global-styles.scss'
 
 import store from '@/core/store.core'
@@ -12,7 +10,7 @@ import store from '@/core/store.core'
 import LayoutComposition from '@/layout/Layout.composition'
 import MetaHeader from '@/layout/partials/MetaHeader'
 import FPSMonitorFloatingMolecule from '@/features/fps-monitor/FPSMonitorFloating.molecule'
-import CalculationResultsFloatingMolecule from '@/features/calculation-results/CalculationResultsFloating.molecule'
+import CalculationResultsFloatingMolecule from '@/features/calculations-components/calculation-results/CalculationResultsFloating.molecule'
 
 // Controllers with no return body below:
 //

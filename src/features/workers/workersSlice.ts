@@ -12,7 +12,6 @@ import {
 	WorkerAmountChangeActionEnum,
 	WorkersAmountStateType
 } from '@/features/workers/workers.types'
-import {isUndefinedType, MAX_WORKERS_LIMIT} from '@/utils-and-constants.core'
 import {getValidatedAndCorrectRequestedWorkersAmount} from '@/features/workers/workers.api'
 
 
@@ -58,9 +57,11 @@ export const workersSlice = createSlice({
 				if (typeof action.payload.amount === 'undefined') break
 				state.expectedAmount.amount = getValidatedAndCorrectRequestedWorkersAmount(action.payload.amount)
 				break
-			case WorkerAmountChangeActionEnum.addOne: state.expectedAmount.amount += 1
+			case WorkerAmountChangeActionEnum.addOne:
+				state.expectedAmount.amount += 1
 				break
-			case WorkerAmountChangeActionEnum.removeLast: state.expectedAmount.amount -= 1
+			case WorkerAmountChangeActionEnum.removeLast:
+				state.expectedAmount.amount -= 1
 			}
 		},
 
