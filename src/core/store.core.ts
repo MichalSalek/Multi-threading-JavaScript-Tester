@@ -5,7 +5,6 @@ import {socketSlice} from '@/features/socket-client/socketSlice'
 
 
 
-
 export function makeStore() {
 	return configureStore({
 		reducer: {
@@ -29,7 +28,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 >
 
 // Redux store hooks.
-// Use throughout your core instead of plain `useDispatch` and `useSelector`.
+// Typed.
 //
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector

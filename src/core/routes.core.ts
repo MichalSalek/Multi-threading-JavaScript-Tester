@@ -1,13 +1,4 @@
-//
-//
-// Here are a constants of whole application.
-//
-// Why?
-// Using a naked strings is highly not recommended
-// because of high vulnerability of a mistake
-//
-//
-
+//@TODO here is a field for create a script in nodejs to keeping these well automatic
 
 // An actual application routes
 // Keep it correct with a real route names

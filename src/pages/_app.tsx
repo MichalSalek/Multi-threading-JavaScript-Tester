@@ -5,7 +5,7 @@ import {Provider} from 'react-redux'
 import 'semantic-ui-css/semantic.min.css'
 import '/node_modules/react-grid-layout/css/styles.css'
 import '/node_modules/react-resizable/css/styles.css'
-import '@/styles/globals.scss'
+import '@/global-styles.scss'
 
 import store from '@/core/store.core'
 
