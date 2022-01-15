@@ -13,7 +13,7 @@
 
 .text {
   animation: move-it 3s linear infinite both;
-  font-size: 38px;
+  font-size: 18px;
   width: fit-content;
 }
 
@@ -21,7 +21,7 @@
 @keyframes move-it-2 {
   0%,
   100% {
-    left: 0px;
+    left: 0;
   }
 
   50% {
@@ -32,7 +32,7 @@
 
 .text2 {
   animation: move-it-2 3s linear infinite both;
-  font-size: 38px;
+  font-size: 28px;
   width: fit-content;
   position: relative;
 }

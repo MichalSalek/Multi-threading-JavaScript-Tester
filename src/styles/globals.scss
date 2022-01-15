@@ -14,3 +14,28 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+.display-none {
+  display: none !important;
+}
+
+.display-inline-block {
+  display: inline-block;
+}
+
+.drag-item {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+
+  > strong {
+    cursor: pointer;
+
+    > span {
+      @extend .display-inline-block
+
+    }
+  }
+}

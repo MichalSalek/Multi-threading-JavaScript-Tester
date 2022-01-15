@@ -1,3 +1,4 @@
-# Desk reservation application
-## For companies with hybrid work flow
+WIP
 
+contact@michalsalek.pl
+0048 532 345 304
