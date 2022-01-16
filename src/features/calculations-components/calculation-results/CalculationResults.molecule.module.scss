@@ -1,41 +1,41 @@
 .host {
-	background-color: #191938;
-	color: #19ffff;
-	padding: 0.5rem;
+  background-color: #191938;
+  color: #19ffff;
+  padding: 0.5rem;
 }
 
 .worker {
-	font-size: 16px;
-	font-family: monospace;
-	letter-spacing: -1px;
+  font-size: 16px;
+  font-family: monospace;
+  letter-spacing: -1px;
 }
 
 .mainThread {
-	font-size: 24px;
+  font-size: 24px;
 }
 
 .listReset {
-	padding-left: 0;
-	list-style-type: none;
+  padding-left: 0;
+  list-style-type: none;
 }
 
 .labelInfo {
-	font-size: 0.8rem;
-	letter-spacing: 0.4px;
-	text-transform: lowercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.4px;
+  text-transform: lowercase;
 }
 
 .listGrid {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: repeat(12, 1fr);
-	grid-auto-flow: column;
-	row-gap: 10px;
-	column-gap: 50px;
-	min-width: fit-content;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  grid-auto-flow: column;
+  row-gap: 10px;
+  column-gap: 50px;
+  min-width: fit-content;
 }
 
 .smallAndBoldHeading {
-	font-size: 1rem;
-	font-weight: bold;
+  font-size: 1rem;
+  font-weight: bold;
 }

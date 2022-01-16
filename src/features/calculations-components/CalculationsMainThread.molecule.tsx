@@ -5,16 +5,16 @@ import {useMainThreadCalculations} from '@/features/calculations-components/calc
 
 const CalculationsMainThreadMolecule = (): JSX.Element => {
 
-	const [isMainThreadOn, handleMainThreadSwitchChange] =
+    const [isMainThreadOn, handleMainThreadSwitchChange] =
 		useMainThreadCalculations(120, 80, false)
 
 
-	return (<>
-		<button onClick={handleMainThreadSwitchChange}
-		> <span>Main thread job is: {isMainThreadOn ? <strong>ON</strong> : 'OFF'}</span>
-		</button>
-		<br/>
-	</>)
+    return (<>
+        <button onClick={handleMainThreadSwitchChange}
+        ><span>Main thread job is: {isMainThreadOn ? <strong>ON</strong> : 'OFF'}</span>
+        </button>
+        <br/>
+    </>)
 }
 
 export default CalculationsMainThreadMolecule

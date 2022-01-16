@@ -8,9 +8,11 @@ export type SocketResponseType<T> = {
 	data: T
 }
 
+
 export interface ISocketEmitEvent<T = unknown> {
 	eventName: WebSocketEventTriggersType,
 	dataToSend: T
 }
+
 
 export type SocketEmitType = (eventName: WebSocketEventTriggersType, dataToSend: ISocketDTO<IWorkerDTO> | undefined) => void

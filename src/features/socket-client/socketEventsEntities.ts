@@ -1,8 +1,7 @@
-
-export const WEB_SOCKET_EVENTS_TRIGGERS = (() => Object.freeze( {
-	reportJobDone: 'report-job-done',
-	allJobsDone: 'all-jobs-done',
-	wholeSummaryGetOnly: 'whole-summary-get-only'
+export const WEB_SOCKET_EVENTS_TRIGGERS = (() => Object.freeze({
+    reportJobDone: 'report-job-done',
+    allJobsDone: 'all-jobs-done',
+    wholeSummaryGetOnly: 'whole-summary-get-only'
 } as const))()
 
 

@@ -17,20 +17,20 @@ import {IWorkerKey} from '@/features/workers/workers.types'
 // to monitor an app life.
 //
 export const runInDevEnvOnly = <D>(developmentEnvCallback: UnknownFunctionType<undefined, D>): D | boolean =>
-	IS_ENABLED_DEV_ONLY_FN_CALLS && process.env.NODE_ENV === 'development' && developmentEnvCallback()
+    IS_ENABLED_DEV_ONLY_FN_CALLS && process.env.NODE_ENV === 'development' && developmentEnvCallback()
 
 
 // Server Side Rendering guard for browser global objects access while Next.js making a build.
 //
-export const fireJustClientSide = <D>(justClientSideCallback: UnknownFunctionType<undefined, D>, tryingToAdditionalEcho = ''): D|boolean => {
-	tryingToAdditionalEcho && runInDevEnvOnly(() => console.log(`[Trying to -> ${tryingToAdditionalEcho}]`))
-	if (!(typeof window === 'undefined' && !process.browser)) {
-		const execution = justClientSideCallback()
-		return isUndefinedType(execution) ? true : execution
-	} else {
-		tryingToAdditionalEcho && runInDevEnvOnly(() => console.log(`[Failed -> ${tryingToAdditionalEcho}] - Probably server side.`))
-		return false
-	}
+export const fireJustClientSide = <D>(justClientSideCallback: UnknownFunctionType<undefined, D>, tryingToAdditionalEcho = ''): D | boolean => {
+    tryingToAdditionalEcho && runInDevEnvOnly(() => console.log(`[Trying to -> ${tryingToAdditionalEcho}]`))
+    if (!(typeof window === 'undefined' && !process.browser)) {
+        const execution = justClientSideCallback()
+        return isUndefinedType(execution) ? true : execution
+    } else {
+        tryingToAdditionalEcho && runInDevEnvOnly(() => console.log(`[Failed -> ${tryingToAdditionalEcho}] - Probably server side.`))
+        return false
+    }
 }
 
 

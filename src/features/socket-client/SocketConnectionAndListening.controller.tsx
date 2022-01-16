@@ -6,17 +6,17 @@ import {connectSocketThunk} from '@/features/socket-client/socketSlice'
 
 
 const SocketConnectionAndListeningController = (): JSX.Element => {
-	const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch()
 
-	useEffect(() => {
-		fireJustClientSide(() => {
-			dispatch(connectSocketThunk())
-		})
-		return () => undefined
-	}, [dispatch])
+    useEffect(() => {
+        fireJustClientSide(() => {
+            dispatch(connectSocketThunk())
+        })
+        return () => undefined
+    }, [dispatch])
 
 
-	return <></>
+    return <></>
 }
 
 export default SocketConnectionAndListeningController

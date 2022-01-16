@@ -86,8 +86,8 @@ const CalculationResultsFloatingMolecule = (): JSX.Element => {
 
                                     <span className={scss.labelInfo}>
                                         {workerName} {allWorkersReadyStatuses[workerName].ready ?
-                                            <strong>Ready!</strong> :
-                                            <span>OFF</span>
+	                                    <strong>Ready!</strong> :
+	                                    <span>OFF</span>
                                         }
                                     </span>
 
@@ -103,8 +103,8 @@ const CalculationResultsFloatingMolecule = (): JSX.Element => {
 
                                         <span>
                                             {!workerHasResponseData(workerName) ?
-                                                'No work yet' :
-                                                'Already made'
+	                                            'No work yet' :
+	                                            'Already made'
                                             }
                                         </span>
 

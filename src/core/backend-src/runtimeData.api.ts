@@ -20,14 +20,14 @@ export const IPAddressesData: string[] = []                     //
 
 
 const returnNewKeyBodyWithDefaultValues = (): IWorkersJobsBody => ({
-	results: [],
-	amount: 0
+    results: [],
+    amount: 0
 })
 
 
 const checkAndCreateNotExistingWorkerKey = (name: string): true => {
-	typeof workersRuntimeData[name] === 'undefined' && (() => workersRuntimeData[name] = returnNewKeyBodyWithDefaultValues())()
-	return true
+    typeof workersRuntimeData[name] === 'undefined' && (() => workersRuntimeData[name] = returnNewKeyBodyWithDefaultValues())()
+    return true
 }
 
 
@@ -35,20 +35,20 @@ const roundDecimalCalculationResultToInt = (number: number): number => Math.roun
 
 
 const setNewValuesToWorkerKey = ({workerName, lastCalculations}: NewWorkerJobType): true => {
-	workersRuntimeData[workerName].results.push(roundDecimalCalculationResultToInt(lastCalculations))
-	workersRuntimeData[workerName].amount = workersRuntimeData[workerName].results.length
-	return true
+    workersRuntimeData[workerName].results.push(roundDecimalCalculationResultToInt(lastCalculations))
+    workersRuntimeData[workerName].amount = workersRuntimeData[workerName].results.length
+    return true
 }
 
 
 // Data receive handler
 //
 export const setNewJobDone = ({workerName, lastCalculations}: NewWorkerJobType): true => {
-	checkAndCreateNotExistingWorkerKey(workerName) && setNewValuesToWorkerKey({
-		workerName,
-		lastCalculations
-	})
-	return true // TODO: In the future, here we can handle any validations etc.
+    checkAndCreateNotExistingWorkerKey(workerName) && setNewValuesToWorkerKey({
+        workerName,
+        lastCalculations
+    })
+    return true // TODO: In the future, here we can handle any validations etc.
 }
 
 
@@ -60,9 +60,9 @@ export const getAllJobsDone = (): WorkersJobsType => workersRuntimeData
 // Clear data
 //
 export const setClearRuntimeData = (): true => {
-	const keys: string[] = Object.keys(workersRuntimeData)
-	keys.forEach((key) => delete workersRuntimeData[key])
-	return true
+    const keys: string[] = Object.keys(workersRuntimeData)
+    keys.forEach((key) => delete workersRuntimeData[key])
+    return true
 }
 
 

@@ -1,15 +1,11 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {io} from 'socket.io-client'
 import store, {AppState} from '@/core/store.core'
-import {ROUTE_API_WEB_SOCKET} from '@/core/routes.core'
 import {INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES, runInDevEnvOnly} from '@/utils-and-constants.core'
 import {WEB_SOCKET_EVENTS_TRIGGERS} from '@/features/socket-client/socketEventsEntities'
 import {SocketResponseType} from '@/features/socket-client/socket.types'
 import {WorkersJobsType} from '@/features/workers/workers.types'
 import {sendTriggerMessageToSocket} from '@/features/socket-client/socket.api'
-import {UnknownFunctionType} from '@/core/types.core'
-
-
 
 
 
@@ -80,58 +76,59 @@ interface IConnectSocketThunkPayload {
 	isSocketActive: boolean
 }
 
+
 export const connectSocketThunk = createAsyncThunk('connectSocketThunk', async () => {
-	return await new Promise<IConnectSocketThunkPayload>((resolve) => {
-		fetch('api/_/socket-io-server').finally(async () => {
-			const ioSocket = await io().connect()
+    return await new Promise<IConnectSocketThunkPayload>((resolve) => {
+        fetch('api/_/socket-io-server').finally(async () => {
+            const ioSocket = await io().connect()
 
-			ioSocket.on('connect', () =>
-				runInDevEnvOnly(() => console.log('Socket-client connected to Socket-server.')))
-			ioSocket.on('disconnect', () =>
-				runInDevEnvOnly(() => console.warn('Socket-client disconnected from Socket-server.')))
-
-
-
-			// Pin socket for an App common usage
-			//
-			window.clientSocket = ioSocket
+            ioSocket.on('connect', () =>
+                runInDevEnvOnly(() => console.log('Socket-client connected to Socket-server.')))
+            ioSocket.on('disconnect', () =>
+                runInDevEnvOnly(() => console.warn('Socket-client disconnected from Socket-server.')))
 
 
-			// Enable listening and passing the last data with all calculation jobs done from Socket to Redux store
-			//
-			let timeoutID = 0
-			ioSocket.on(WEB_SOCKET_EVENTS_TRIGGERS.allJobsDone, (response: SocketResponseType<WorkersJobsType>) => {
 
-				if (INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES === 0) {
-					store.dispatch(socketSlice.actions.handleNewDataReceiveFromSocket(response.data))
-				} else {
-					if (!timeoutID) {
-						store.dispatch(socketSlice.actions.handleNewDataReceiveFromSocket(response.data))
-						timeoutID = window.setTimeout(() => {
-
-							store.dispatch(socketSlice.actions.handleNewDataReceiveFromSocket(response.data))
-							timeoutID = 0
-
-						}, INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES)
-					}
-				}
-			})
+            // Pin socket for an App common usage
+            //
+            window.clientSocket = ioSocket
 
 
-			ioSocket.on(WEB_SOCKET_EVENTS_TRIGGERS.wholeSummaryGetOnly, (response: SocketResponseType<string[]>) => {
-				console.log(response)
-				console.table(response)
-			})
+            // Enable listening and passing the last data with all calculation jobs done from Socket to Redux store
+            //
+            let timeoutID = 0
+            ioSocket.on(WEB_SOCKET_EVENTS_TRIGGERS.allJobsDone, (response: SocketResponseType<WorkersJobsType>) => {
+
+                if (INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES === 0) {
+                    store.dispatch(socketSlice.actions.handleNewDataReceiveFromSocket(response.data))
+                } else {
+                    if (!timeoutID) {
+                        store.dispatch(socketSlice.actions.handleNewDataReceiveFromSocket(response.data))
+                        timeoutID = window.setTimeout(() => {
+
+                            store.dispatch(socketSlice.actions.handleNewDataReceiveFromSocket(response.data))
+                            timeoutID = 0
+
+                        }, INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES)
+                    }
+                }
+            })
 
 
-			// When listening is enabled - trigger Socket to send last Server data
-			//
-			sendTriggerMessageToSocket(WEB_SOCKET_EVENTS_TRIGGERS.allJobsDone, undefined)
+            ioSocket.on(WEB_SOCKET_EVENTS_TRIGGERS.wholeSummaryGetOnly, (response: SocketResponseType<string[]>) => {
+                console.log(response)
+                console.table(response)
+            })
 
-			resolve({isSocketActive: true})
-		})
 
-	})
+            // When listening is enabled - trigger Socket to send last Server data
+            //
+            sendTriggerMessageToSocket(WEB_SOCKET_EVENTS_TRIGGERS.allJobsDone, undefined)
+
+            resolve({isSocketActive: true})
+        })
+
+    })
 
 
 })
@@ -144,25 +141,25 @@ interface ISocketState {
 
 
 const initialState: ISocketState = {
-	active: false,
-	lastReceivedData: {}
+    active: false,
+    lastReceivedData: {}
 }
 
 export const socketSlice = createSlice({
-	name: 'socketSlice',
-	initialState,
-	reducers: {
+    name: 'socketSlice',
+    initialState,
+    reducers: {
 
-		handleNewDataReceiveFromSocket: (state, action: PayloadAction<WorkersJobsType>) => {
-			state.lastReceivedData = action.payload
-		}
-	},
-	extraReducers: (builder) => {
+        handleNewDataReceiveFromSocket: (state, action: PayloadAction<WorkersJobsType>) => {
+            state.lastReceivedData = action.payload
+        }
+    },
+    extraReducers: (builder) => {
 
-		builder.addCase(connectSocketThunk.fulfilled, (state, action: PayloadAction<IConnectSocketThunkPayload>) => {
-			state.active = action.payload.isSocketActive
-		})
-	}
+        builder.addCase(connectSocketThunk.fulfilled, (state, action: PayloadAction<IConnectSocketThunkPayload>) => {
+            state.active = action.payload.isSocketActive
+        })
+    }
 })
 
 

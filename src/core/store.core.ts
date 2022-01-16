@@ -1,4 +1,4 @@
-import {configureStore, ThunkAction, Action} from '@reduxjs/toolkit'
+import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit'
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux'
 import {workersSlice} from '@/features/workers/workersSlice'
 import {socketSlice} from '@/features/socket-client/socketSlice'
@@ -6,13 +6,14 @@ import {socketSlice} from '@/features/socket-client/socketSlice'
 
 
 export function makeStore() {
-	return configureStore({
-		reducer: {
-			calculationsWorkersSlice: workersSlice.reducer,
-			socketSlice: socketSlice.reducer
-		},
-	})
+    return configureStore({
+        reducer: {
+            calculationsWorkersSlice: workersSlice.reducer,
+            socketSlice: socketSlice.reducer
+        }
+    })
 }
+
 
 const store = makeStore()
 
@@ -20,12 +21,10 @@ const store = makeStore()
 //
 export type AppState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  AppState,
-  unknown,
-  Action<string>
->
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType,
+	AppState,
+	unknown,
+	Action<string>>
 
 // Redux store hooks.
 // Typed.

@@ -12,17 +12,17 @@ interface IProps {
 
 export const DraggableItemComposition = ({children, initialPosition = {x: 0, y: 0}}: IProps): JSX.Element => {
 
-	const nodeRef = React.createRef<HTMLDivElement>()
+    const nodeRef = React.createRef<HTMLDivElement>()
 
-	return (
-		<Draggable nodeRef={nodeRef} handle="strong" defaultPosition={initialPosition}>
-			<div ref={nodeRef} className={'drag-item'}>
-				<strong>
-					<span>Drag here</span>
-				</strong>
-				{children}
-			</div>
-		</Draggable>
-	)
+    return (
+        <Draggable nodeRef={nodeRef} handle="strong" defaultPosition={initialPosition}>
+            <div ref={nodeRef} className={'drag-item'}>
+                <strong>
+                    <span>Drag here</span>
+                </strong>
+                {children}
+            </div>
+        </Draggable>
+    )
 
 }
