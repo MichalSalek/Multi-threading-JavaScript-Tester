@@ -18,6 +18,7 @@ import CalculationResultsFloatingMolecule
 import WorkersActiveInstancesAndCommunicationController
     from '@/features/workers/WorkersActiveInstancesAndCommunication.controller'
 import SocketConnectionAndListeningController from '@/features/socket-client/SocketConnectionAndListening.controller'
+import WorkersRequestedAmountStoragePersist from '@/features/workers/WorkersRequestedAmountStoragePersist.controller'
 
 
 
@@ -35,6 +36,7 @@ export default function MyApp({Component, pageProps}: AppProps) {
 			*/}
             <SocketConnectionAndListeningController/>
             <WorkersActiveInstancesAndCommunicationController/>
+            <WorkersRequestedAmountStoragePersist/>
 
 
             {/* Free floating components */}

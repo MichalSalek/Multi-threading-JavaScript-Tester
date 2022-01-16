@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react'
+import React, {useMemo, useState} from 'react'
 import {handleWorkerAmountChange, selectExpectedWorkersAmount} from '@/features/workers/workersSlice'
 import {WorkerAmountChangeActionEnum} from '@/features/workers/workers.types'
 import CalculationsWorkerSwitchMolecule from '@/features/calculations-components/CalculationsWorkerSwitch.molecule'
@@ -7,8 +7,7 @@ import {
     getValidatedAndCorrectRequestedWorkersAmount
 } from '@/features/workers/workers.api'
 import {useAppDispatch, useAppSelector} from '@/core/store.core'
-import {MAX_WORKERS_LIMIT, STORAGE_WORKERS_AMOUNT_KEY} from '@/utils-and-constants.core'
-import {getStorageItem, setStorageItem} from '@/features/browser-storage/browserStorage.api'
+import {MAX_WORKERS_LIMIT} from '@/utils-and-constants.core'
 
 
 
@@ -18,42 +17,22 @@ const CalculationsWorkersGeneratorOrganism = (): JSX.Element => {
 
     const dispatch = useAppDispatch()
 
-    const workersAmountArray = useMemo(() => Array(workerExpectedAmount.amount).fill(undefined), [workerExpectedAmount])
-
-    //
-    //  DO OGARNIĘCIA
-    // TO W OGÓLE NIE MUSI BYC TUTAJ TYLKO W np. APP.tsx jako controller
-    //
-    useEffect(() => {
-        const memorizedStorageWorkersAmountValue = getStorageItem(STORAGE_WORKERS_AMOUNT_KEY)
-        const memorizedAmountOfWorkers = memorizedStorageWorkersAmountValue ? Number(memorizedStorageWorkersAmountValue) : 0
-        memorizedAmountOfWorkers > 0 && dispatch(handleWorkerAmountChange({
-            amountChangeAction: WorkerAmountChangeActionEnum.setAmount,
-            amount: memorizedAmountOfWorkers
-        }))
-        return () => undefined
-    }, [dispatch])
-
-    useEffect(() => {
-        setStorageItem(STORAGE_WORKERS_AMOUNT_KEY, String(workerExpectedAmount.amount))
-        return () => undefined
-    }, [workerExpectedAmount.amount])
-
-
     const [newWorkersAmount, setNewWorkersAmount] = useState(1)
+
+    const workersAmountArray = useMemo(() => Array(workerExpectedAmount.amount).fill(undefined), [workerExpectedAmount])
 
 
     return (<>
         <button
             disabled={workerExpectedAmount.amount === MAX_WORKERS_LIMIT}
             onClick={() => dispatch(handleWorkerAmountChange({amountChangeAction: WorkerAmountChangeActionEnum.addOne}))}>Add
-			new
-			Worker +
+            new
+            Worker +
         </button>
         <button
             disabled={workerExpectedAmount.amount === 0}
             onClick={() => dispatch(handleWorkerAmountChange({amountChangeAction: WorkerAmountChangeActionEnum.removeLast}))}>Remove
-			last Worker -
+            last Worker -
         </button>
 
         <br/>
@@ -66,14 +45,14 @@ const CalculationsWorkersGeneratorOrganism = (): JSX.Element => {
             amountChangeAction: WorkerAmountChangeActionEnum.setAmount,
             amount: newWorkersAmount
         }))}>
-			Set specific Workers amount
+            Set specific Workers amount
         </button>
         <br/>
         <button onClick={() => dispatch(handleWorkerAmountChange({
             amountChangeAction: WorkerAmountChangeActionEnum.setAmount,
             amount: MAX_WORKERS_LIMIT
         }))}>
-			Set Workers amount equals to yours CPU cores amount
+            Set Workers amount equals to yours CPU cores amount
         </button>
         <br/><br/>
 
