@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react'
+import React, { useEffect, useRef } from 'react'
 import {
     constructCalculationWorkerKeyByName,
     constructWorkerJobSocketDTO,
@@ -28,12 +28,12 @@ import {
     runInDevEnvOnly,
     WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS
 } from '@/utils-and-constants.core'
-import store, {useAppSelector} from '@/core/store.core'
-import {IWorkersSlice, selectRequestedWorkersAmount} from '@/features/workers/workersSlice'
-import {selectSocketIsActive} from '@/features/socket-client/socketSlice'
-import {WEB_WORKER_TASKS} from '@/features/workers/workers-events'
-import {WEB_SOCKET_EVENTS_TRIGGERS} from '@/features/socket-client/socketEventsEntities'
-import {sendTriggerMessageToSocket} from '@/features/socket-client/socket.api'
+import store, { useAppSelector } from '@/core/store.core'
+import { IWorkersSlice, selectRequestedWorkersAmount } from '@/features/workers/workersSlice'
+import { selectSocketIsActive } from '@/features/socket-client/socketSlice'
+import { WEB_WORKER_TASKS } from '@/features/workers/workers-events'
+import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/socket-client/socketEventsEntities'
+import { sendTriggerMessageToSocket } from '@/features/socket-client/socket.api'
 
 
 
@@ -143,7 +143,9 @@ const controlAmountOfActiveWorkerInstances = (requestedNumberOfWorkers: WorkersA
             const workerKeyOfRequestedWorker = constructCalculationWorkerKeyByName(constructWorkerNameByOrderIndex(index))
 
             workerLifeSwitch(workerKeyOfRequestedWorker, WorkerLifeSwitchCommandEnum.uninstall)
-                .then(() => updateWorkerIsReadyState(workerKeyOfRequestedWorker) && flagIfWorkerHasError(workerKeyOfRequestedWorker, false) && flagIfWorkerIsWorking(workerKeyOfRequestedWorker, false))
+                .then(() => updateWorkerIsReadyState(workerKeyOfRequestedWorker)
+                    && flagIfWorkerHasError(workerKeyOfRequestedWorker, false)
+                    && flagIfWorkerIsWorking(workerKeyOfRequestedWorker, false))
                 .catch((error: Error) => flagIfWorkerHasError(workerKeyOfRequestedWorker, true, error))
         }
     }

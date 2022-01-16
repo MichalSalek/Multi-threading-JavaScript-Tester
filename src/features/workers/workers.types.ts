@@ -1,14 +1,14 @@
-import {WEB_WORKER_TASKS} from '@/features/workers/workers-events'
-import {UnknownFunctionType} from '@/core/types.core'
-import {workersKeysNames} from '@/features/workers/add-new-physical-worker-here'
-import {MAIN_THREAD_KEY} from '@/utils-and-constants.core'
+import { WEB_WORKER_TASKS } from '@/features/workers/workers-events'
+import { UnknownFunctionType } from '@/core/types.core'
+import { workersKeysNames } from '@/features/workers/add-new-physical-worker-here'
+import { MAIN_THREAD_KEY } from '@/utils-and-constants.core'
 
 
 
 declare global {
-	interface Window {
-		[key: string]: unknown | Worker
-	}
+    interface Window {
+        [key: string]: unknown | Worker
+    }
 }
 
 
@@ -21,8 +21,8 @@ export type WorkerTasksName = typeof WEB_WORKER_TASKS[Keys]
 // Types of Workers utils
 //
 export interface IWorkerTask {
-	workerTaskName: WorkerTasksName
-	complexity?: number
+    workerTaskName: WorkerTasksName
+    complexity?: number
 }
 
 
@@ -35,8 +35,8 @@ export type NewWorkerJobType = { workerName: WorkerNameType, lastCalculations: W
 
 
 export interface IWorkerKey {
-	fileName?: string,
-	workerName: WorkerNameType
+    fileName?: string,
+    workerName: WorkerNameType
 }
 
 
@@ -44,17 +44,9 @@ type KeyOfWorkersKeysNamesType = keyof typeof workersKeysNames
 export type WorkerKeyType = typeof workersKeysNames[KeyOfWorkersKeysNamesType] | IWorkerKey
 
 
-export type ServiceWorkerEventTargetType = {
-	state: 'activated' | unknown
-	addEventListener(type: string, callback: EventListenerOrEventListenerObject | null, options?: AddEventListenerOptions | boolean): void
-	dispatchEvent(event: Event): boolean;
-	removeEventListener(type: string, callback: EventListenerOrEventListenerObject | null, options?: EventListenerOptions | boolean): void
-}
-
-
 export interface IWorkersJobsBody {
-	results: number[]
-	amount: number
+    results: number[]
+    amount: number
 }
 
 
@@ -68,32 +60,28 @@ export type WorkersJobsType = Record<WorkerNameType, IWorkersJobsBody>
 
 
 export interface IWorkerReadyState {
-	ready: boolean
-	listenerActive?: boolean
+    ready: boolean
+    listenerActive?: boolean
 }
 
 
 export interface IWorkerErrorState {
-	error: boolean
+    error: boolean
 }
 
 
 export interface IWorkerWorkState {
-	working: boolean
+    working: boolean
 }
 
 
 export interface IWorkerLastCalculation {
-	lastCalculations: WorkerCalculationType | null
+    lastCalculations: WorkerCalculationType | null
 }
 
 
 export interface IWorkerDTO extends IWorkerWorkState, IWorkerLastCalculation {
-	timestamp: number
-}
-
-
-export interface IWorkerCalculationReport extends IWorkerLastCalculation, IWorkerKey {
+    timestamp: number
 }
 
 
@@ -116,26 +104,26 @@ export type NamedWorkerReadyStatusType = Record<WorkerNameType, IWorkerReadyStat
 export type NamedWorkerErrorStatusType = Record<WorkerNameType, IWorkerErrorState>
 
 export type WorkersAmountStateType = {
-	amount: number
+    amount: number
 }
 
 
 export enum WorkerAmountChangeActionEnum {
-	'addOne' = 'addOne',
-	'removeLast' = 'removeLast',
-	'setAmount' = 'setAmount'
+    'addOne' = 'addOne',
+    'removeLast' = 'removeLast',
+    'setAmount' = 'setAmount'
 }
 
 
 export enum WorkerLifeSwitchCommandEnum {
-	'install' = 'install',
-	'uninstall' = 'uninstall'
+    'install' = 'install',
+    'uninstall' = 'uninstall'
 }
 
 
 export enum WorkerTriggerMessageCommandEnum {
-	'activate' = 'activate',
-	'kill' = 'kill'
+    'activate' = 'activate',
+    'kill' = 'kill'
 }
 
 
@@ -143,14 +131,14 @@ export type SocketResponseStatusesType = 201
 
 
 export interface ISocketToAppCalculationDataDTO {
-	data: WorkersJobsType
-	status: SocketResponseStatusesType
+    data: WorkersJobsType
+    status: SocketResponseStatusesType
 }
 
 
 export interface ISocketDTO<T> {
-	keyNames: WorkerKeyType | typeof MAIN_THREAD_KEY
-	unknownData: T
+    keyNames: WorkerKeyType | typeof MAIN_THREAD_KEY
+    unknownData: T
 }
 
 

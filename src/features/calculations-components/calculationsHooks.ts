@@ -1,8 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react'
-import {doCalculations} from '@/features/calculations-components/doCalculations'
-import {MAIN_THREAD_KEY} from '@/utils-and-constants.core'
-import {sendTriggerMessageToSocket} from '@/features/socket-client/socket.api'
-import {WEB_SOCKET_EVENTS_TRIGGERS} from '@/features/socket-client/socketEventsEntities'
+import React, { useEffect, useRef, useState } from 'react'
+import { doCalculations } from '@/features/calculations-components/doCalculations'
+import { MAIN_THREAD_KEY } from '@/utils-and-constants.core'
+import { sendTriggerMessageToSocket } from '@/features/socket-client/socket.api'
+import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/socket-client/socketEventsEntities'
 import {
     IWorkerReadyState,
     IWorkerWorkState,
@@ -10,8 +10,8 @@ import {
     NamedWorkerWorkStatusType,
     WorkerKeyType
 } from '@/features/workers/workers.types'
-import {useAppSelector} from '@/core/store.core'
-import {selectWholeWorkersReadyState, selectWholeWorkersWorkState} from '@/features/workers/workersSlice'
+import { useAppSelector } from '@/core/store.core'
+import { selectWholeWorkersReadyState, selectWholeWorkersWorkState } from '@/features/workers/workersSlice'
 
 
 
@@ -71,14 +71,15 @@ export const useMainThreadCalculations = <D>(CALCULATION_INTERVAL_TIMING_IN_MS =
 
 // Hook to enable worker status data retrieval.
 //
+type ReturnedWorkerStatus = boolean | undefined
+export type UseSpecificWorkerStatusType = [ReturnedWorkerStatus]
+
+
 export enum UseSpecificWorkerStatusCommandEnum {
     'ready' = 'ready',
     'working' = 'working'
 }
 
-
-type ReturnedWorkerStatus = boolean | undefined
-export type UseSpecificWorkerStatusType = [ReturnedWorkerStatus]
 
 export const useSpecificWorkerStatus = (command: UseSpecificWorkerStatusCommandEnum, workerKey: WorkerKeyType): UseSpecificWorkerStatusType => {
 
@@ -110,7 +111,7 @@ export const useSpecificWorkerStatus = (command: UseSpecificWorkerStatusCommandE
         return () => undefined
     }, [allWorkersWorkStatuses, workerKey.workerName, command])
 
-    
+
     useEffect(() => {
         setReturnedSpecificWorkerStatus(() => {
             switch (command) {

@@ -1,5 +1,5 @@
-import {UnknownFunctionType} from '@/core/types.core'
-import {IWorkerKey} from '@/features/workers/workers.types'
+import { UnknownFunctionType } from '@/core/types.core'
+import { IWorkerKey } from '@/features/workers/workers.types'
 ////////////////////////////////////////////////////////////
 //
 // Here you can addOne a global and generic utilities
@@ -58,8 +58,6 @@ export const STORAGE_WORKERS_AMOUNT_KEY = 'workersAmount'
 
 export const WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS = 390
 
-// @TODO WYPROWADZIC tą zmienną na front z dopiskiem, że mniejsza wartość obciąża procesor urządzenia (albo input albo jakiś drop down, ew. multibutton)
-// Dodać jeszcze obok checkbox REALTIME i tutaj ostrzeżenie że zasrywa procka najbardziej (główny wątek przegląraki)
 // Debounce - Optimal for CPU usage
 // Realtime - The most accurate way to receive data over time (expert mode)
 export const INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES: number | 0 = 0 // 0 means realtime
