@@ -1,5 +1,5 @@
 import React, {useMemo, useState} from 'react'
-import {handleWorkerAmountChange, selectExpectedWorkersAmount} from '@/features/workers/workersSlice'
+import {handleWorkerAmountChange, selectRequestedWorkersAmount} from '@/features/workers/workersSlice'
 import {WorkerAmountChangeActionEnum} from '@/features/workers/workers.types'
 import CalculationsWorkerSwitchMolecule from '@/features/calculations-components/CalculationsWorkerSwitch.molecule'
 import {
@@ -13,26 +13,25 @@ import {MAX_WORKERS_LIMIT} from '@/utils-and-constants.core'
 
 const CalculationsWorkersGeneratorOrganism = (): JSX.Element => {
 
-    const workerExpectedAmount = useAppSelector(selectExpectedWorkersAmount)
+    const workerRequestedAmount = useAppSelector(selectRequestedWorkersAmount)
 
     const dispatch = useAppDispatch()
 
     const [newWorkersAmount, setNewWorkersAmount] = useState(1)
 
-    const workersAmountArray = useMemo(() => Array(workerExpectedAmount.amount).fill(undefined), [workerExpectedAmount])
+    const workersAmountArray = useMemo(() => Array(workerRequestedAmount.amount).fill(undefined), [workerRequestedAmount])
 
 
     return (<>
         <button
-            disabled={workerExpectedAmount.amount === MAX_WORKERS_LIMIT}
-            onClick={() => dispatch(handleWorkerAmountChange({amountChangeAction: WorkerAmountChangeActionEnum.addOne}))}>Add
-            new
-            Worker +
+            disabled={workerRequestedAmount.amount === MAX_WORKERS_LIMIT}
+            onClick={() => dispatch(handleWorkerAmountChange({amountChangeAction: WorkerAmountChangeActionEnum.addOne}))}>
+            Add new Worker +
         </button>
         <button
-            disabled={workerExpectedAmount.amount === 0}
-            onClick={() => dispatch(handleWorkerAmountChange({amountChangeAction: WorkerAmountChangeActionEnum.removeLast}))}>Remove
-            last Worker -
+            disabled={workerRequestedAmount.amount === 0}
+            onClick={() => dispatch(handleWorkerAmountChange({amountChangeAction: WorkerAmountChangeActionEnum.removeLast}))}>
+            Remove last Worker -
         </button>
 
         <br/>

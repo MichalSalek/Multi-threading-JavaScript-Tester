@@ -11,7 +11,7 @@ import {DraggableItemComposition} from '@/features/draggable-item/DraggableItem.
 import {useAppSelector} from '@/core/store.core'
 import {
     selectActuallyWorkingWorkersAmount,
-    selectExpectedWorkersAmount,
+    selectRequestedWorkersAmount,
     selectWholeWorkersReadyState,
     selectWholeWorkersWorkState
 } from '@/features/workers/workersSlice'
@@ -24,7 +24,7 @@ const CalculationResultsFloatingMolecule = (): JSX.Element => {
 
     // Instant get a requested amount of workers
     //
-    const workerExpectedAmount: WorkersAmountStateType = useAppSelector(selectExpectedWorkersAmount)
+    const workerRequestedAmount: WorkersAmountStateType = useAppSelector(selectRequestedWorkersAmount)
 
 
     // Listening to worker's READY state
@@ -55,7 +55,7 @@ const CalculationResultsFloatingMolecule = (): JSX.Element => {
                 <h4>Calculation results:</h4> <span>Show all, even currently deactivated: </span><input
                     type={'checkbox'} checked={shouldShowDeactivated}
                     onChange={(event => setShouldShowDeactivated(event.currentTarget.checked))}/>
-                <h5>Required number of workers: {workerExpectedAmount.amount}</h5>
+                <h5>Required number of workers: {workerRequestedAmount.amount}</h5>
                 <h5>Workers who actually work: {allActuallyWorkWorkersAmount.amount}</h5>
 
                 <p className={scss.mainThread}>
@@ -69,7 +69,7 @@ const CalculationResultsFloatingMolecule = (): JSX.Element => {
 
                 </p>
 
-                <ol className={[scss.listGrid, (() => (shouldShowDeactivated || workerExpectedAmount.amount > 0) ? '' : 'display-none')()].join(' ')}>
+                <ol className={[scss.listGrid, (() => (shouldShowDeactivated || workerRequestedAmount.amount > 0) ? '' : 'display-none')()].join(' ')}>
 
                     {Object.keys(allWorkersReadyStatuses)
                         .filter((workerName: WorkerNameType) => { // showDeactivated checkbox handling here
@@ -86,8 +86,8 @@ const CalculationResultsFloatingMolecule = (): JSX.Element => {
 
                                     <span className={scss.labelInfo}>
                                         {workerName} {allWorkersReadyStatuses[workerName].ready ?
-	                                    <strong>Ready!</strong> :
-	                                    <span>OFF</span>
+                                            <strong>Ready!</strong> :
+                                            <span>OFF</span>
                                         }
                                     </span>
 
@@ -103,8 +103,8 @@ const CalculationResultsFloatingMolecule = (): JSX.Element => {
 
                                         <span>
                                             {!workerHasResponseData(workerName) ?
-	                                            'No work yet' :
-	                                            'Already made'
+                                                'No work yet' :
+                                                'Already made'
                                             }
                                         </span>
 

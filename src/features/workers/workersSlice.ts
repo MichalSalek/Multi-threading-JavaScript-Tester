@@ -25,16 +25,16 @@ export const dispatchActuallyWorkingWorkersAmount = (workerSlice: WritableDraft<
 
 
 export interface IWorkersSlice {
-	expectedAmount: WorkersAmountStateType
-	actuallyWorks: WorkersAmountStateType
-	readyStatuses: NamedWorkerReadyStatusType
-	workStatuses: NamedWorkerWorkStatusType
-	errorStatuses: NamedWorkerErrorStatusType
+    requestedAmount: WorkersAmountStateType
+    actuallyWorks: WorkersAmountStateType
+    readyStatuses: NamedWorkerReadyStatusType
+    workStatuses: NamedWorkerWorkStatusType
+    errorStatuses: NamedWorkerErrorStatusType
 }
 
 
 const initialState: IWorkersSlice = {
-    expectedAmount: {
+    requestedAmount: {
         amount: 0
     },
     actuallyWorks: {
@@ -55,13 +55,13 @@ export const workersSlice = createSlice({
             switch (action.payload.amountChangeAction) {
             case WorkerAmountChangeActionEnum.setAmount:
                 if (typeof action.payload.amount === 'undefined') break
-                state.expectedAmount.amount = getValidatedAndCorrectRequestedWorkersAmount(action.payload.amount)
+                state.requestedAmount.amount = getValidatedAndCorrectRequestedWorkersAmount(action.payload.amount)
                 break
             case WorkerAmountChangeActionEnum.addOne:
-                state.expectedAmount.amount += 1
+                state.requestedAmount.amount += 1
                 break
             case WorkerAmountChangeActionEnum.removeLast:
-                state.expectedAmount.amount -= 1
+                state.requestedAmount.amount -= 1
             }
         },
 
@@ -116,10 +116,10 @@ export const {
     handleWorkerErrorStateReport
 } = workersSlice.actions
 
-export const selectExpectedWorkersAmount = (state: AppState): WorkersAmountStateType => state.calculationsWorkersSlice.expectedAmount
+export const selectRequestedWorkersAmount = (state: AppState): WorkersAmountStateType => state.calculationsWorkersSlice.requestedAmount
 export const selectWholeWorkersReadyState = (state: AppState): NamedWorkerReadyStatusType => state.calculationsWorkersSlice.readyStatuses
 export const selectWholeWorkersWorkState = (state: AppState): NamedWorkerWorkStatusType => state.calculationsWorkersSlice.workStatuses
-export const selectWholeWorkersErrorState = (state: AppState): NamedWorkerErrorStatusType => state.calculationsWorkersSlice.errorStatuses // można zrobić mechanizm randomowych errorów i dodać obsługę błędów workerów
 export const selectActuallyWorkingWorkersAmount = (state: AppState): WorkersAmountStateType => state.calculationsWorkersSlice.actuallyWorks
+export const selectWholeWorkersErrorState = (state: AppState): NamedWorkerErrorStatusType => state.calculationsWorkersSlice.errorStatuses // można zrobić mechanizm randomowych errorów i dodać obsługę błędów workerów
 
 export default workersSlice.reducer

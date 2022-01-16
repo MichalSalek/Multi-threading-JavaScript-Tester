@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {useAppDispatch, useAppSelector} from '@/core/store.core'
-import {handleWorkerAmountChange, selectExpectedWorkersAmount} from '@/features/workers/workersSlice'
+import {handleWorkerAmountChange, selectRequestedWorkersAmount} from '@/features/workers/workersSlice'
 import {getStorageItem, setStorageItem} from '@/features/browser-storage/browserStorage.api'
 import {STORAGE_WORKERS_AMOUNT_KEY} from '@/utils-and-constants.core'
 import {WorkerAmountChangeActionEnum} from '@/features/workers/workers.types'
@@ -9,7 +9,7 @@ import {WorkerAmountChangeActionEnum} from '@/features/workers/workers.types'
 
 const WorkersRequestedAmountStoragePersist = (): JSX.Element => {
 
-    const workerExpectedAmount = useAppSelector(selectExpectedWorkersAmount)
+    const workerRequestedAmount = useAppSelector(selectRequestedWorkersAmount)
 
     const dispatch = useAppDispatch()
 
@@ -25,9 +25,9 @@ const WorkersRequestedAmountStoragePersist = (): JSX.Element => {
     }, [dispatch])
 
     useEffect(() => {
-        setStorageItem(STORAGE_WORKERS_AMOUNT_KEY, String(workerExpectedAmount.amount))
+        setStorageItem(STORAGE_WORKERS_AMOUNT_KEY, String(workerRequestedAmount.amount))
         return () => undefined
-    }, [workerExpectedAmount.amount])
+    }, [workerRequestedAmount.amount])
 
     return <></>
 }

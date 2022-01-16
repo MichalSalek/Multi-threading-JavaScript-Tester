@@ -30,7 +30,6 @@ export const useMainThreadCalculations = <D>(CALCULATION_INTERVAL_TIMING_IN_MS =
     const intervalIDRef: React.MutableRefObject<number> = useRef(0)
 
 
-
     useEffect(() => {
         const clearInterval = (() => window.clearInterval(intervalIDRef.current))
 
@@ -45,7 +44,6 @@ export const useMainThreadCalculations = <D>(CALCULATION_INTERVAL_TIMING_IN_MS =
             clearInterval()
         }
     }, [isMainThreadOn, CALCULATION_INTERVAL_TIMING_IN_MS, CALCULATIONS_COMPLEXITY])
-
 
 
     useEffect(() => {
@@ -74,8 +72,8 @@ export const useMainThreadCalculations = <D>(CALCULATION_INTERVAL_TIMING_IN_MS =
 // Hook to enable worker status data retrieval.
 //
 export enum UseSpecificWorkerStatusCommandEnum {
-	'ready' = 'ready',
-	'working' = 'working'
+    'ready' = 'ready',
+    'working' = 'working'
 }
 
 
@@ -85,7 +83,6 @@ export type UseSpecificWorkerStatusType = [ReturnedWorkerStatus]
 export const useSpecificWorkerStatus = (command: UseSpecificWorkerStatusCommandEnum, workerKey: WorkerKeyType): UseSpecificWorkerStatusType => {
 
     const [returnedSpecificWorkerStatus, setReturnedSpecificWorkerStatus] = useState<ReturnedWorkerStatus>(undefined)
-
 
 
     const allWorkersReadyStatuses: NamedWorkerReadyStatusType = useAppSelector(selectWholeWorkersReadyState)
@@ -101,7 +98,6 @@ export const useSpecificWorkerStatus = (command: UseSpecificWorkerStatusCommandE
     }, [allWorkersReadyStatuses, workerKey.workerName, command])
 
 
-
     const allWorkersWorkStatuses: NamedWorkerWorkStatusType = useAppSelector(selectWholeWorkersWorkState)
     const [isWorking, setIsWorking] = useState(false)
     useEffect(() => {
@@ -114,8 +110,7 @@ export const useSpecificWorkerStatus = (command: UseSpecificWorkerStatusCommandE
         return () => undefined
     }, [allWorkersWorkStatuses, workerKey.workerName, command])
 
-
-
+    
     useEffect(() => {
         setReturnedSpecificWorkerStatus(() => {
             switch (command) {

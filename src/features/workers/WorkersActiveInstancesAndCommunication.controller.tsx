@@ -29,7 +29,7 @@ import {
     WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS
 } from '@/utils-and-constants.core'
 import store, {useAppSelector} from '@/core/store.core'
-import {IWorkersSlice, selectExpectedWorkersAmount} from '@/features/workers/workersSlice'
+import {IWorkersSlice, selectRequestedWorkersAmount} from '@/features/workers/workersSlice'
 import {selectSocketIsActive} from '@/features/socket-client/socketSlice'
 import {WEB_WORKER_TASKS} from '@/features/workers/workers-events'
 import {WEB_SOCKET_EVENTS_TRIGGERS} from '@/features/socket-client/socketEventsEntities'
@@ -113,42 +113,42 @@ const workerLifeSwitch = (workerKey: WorkerKeyType, command: WorkerLifeSwitchCom
 })
 
 
-const controlAmountOfActiveWorkerInstances = (expectedNumberOfWorkers: WorkersAmountStateType): void => {
+const controlAmountOfActiveWorkerInstances = (requestedNumberOfWorkers: WorkersAmountStateType): void => {
     const existingWorkersKeyNames: IWorkerKey[] = getExistingWorkersKeys()
 
 
-    // If expected workers amount:
+    // If requested workers amount:
     //
-    if (expectedNumberOfWorkers.amount > existingWorkersKeyNames.length) {
+    if (requestedNumberOfWorkers.amount > existingWorkersKeyNames.length) {
         // ...is higher - increase a real workers amount by adding more instances.
 
-        for (let index = 0; index < expectedNumberOfWorkers.amount; index++) {
-            const workerKeyOfExpectedWorker = constructCalculationWorkerKeyByName(constructWorkerNameByOrderIndex(index + 1))
+        for (let index = 0; index < requestedNumberOfWorkers.amount; index++) {
+            const workerKeyOfRequestedWorker = constructCalculationWorkerKeyByName(constructWorkerNameByOrderIndex(index + 1))
 
             if (!existingWorkersKeyNames.length || !(existingWorkersKeyNames.some((existingWorkerKey: IWorkerKey) => {
-                return workerKeyOfExpectedWorker.workerName === existingWorkerKey.workerName
+                return workerKeyOfRequestedWorker.workerName === existingWorkerKey.workerName
             }))) {
 
-                workerLifeSwitch(workerKeyOfExpectedWorker, WorkerLifeSwitchCommandEnum.install)
-                    .then(() => updateWorkerIsReadyState(workerKeyOfExpectedWorker) && flagIfWorkerHasError(workerKeyOfExpectedWorker, false))
-                    .catch((error: Error) => flagIfWorkerHasError(workerKeyOfExpectedWorker, true, error))
+                workerLifeSwitch(workerKeyOfRequestedWorker, WorkerLifeSwitchCommandEnum.install)
+                    .then(() => updateWorkerIsReadyState(workerKeyOfRequestedWorker) && flagIfWorkerHasError(workerKeyOfRequestedWorker, false))
+                    .catch((error: Error) => flagIfWorkerHasError(workerKeyOfRequestedWorker, true, error))
             }
 
         }
 
-    } else if (expectedNumberOfWorkers.amount < existingWorkersKeyNames.length) {
+    } else if (requestedNumberOfWorkers.amount < existingWorkersKeyNames.length) {
         // ...is lower - removeLast one or few last instances.
 
-        for (let index = existingWorkersKeyNames.length; expectedNumberOfWorkers.amount < index; index--) {
-            const workerKeyOfExpectedWorker = constructCalculationWorkerKeyByName(constructWorkerNameByOrderIndex(index))
+        for (let index = existingWorkersKeyNames.length; requestedNumberOfWorkers.amount < index; index--) {
+            const workerKeyOfRequestedWorker = constructCalculationWorkerKeyByName(constructWorkerNameByOrderIndex(index))
 
-            workerLifeSwitch(workerKeyOfExpectedWorker, WorkerLifeSwitchCommandEnum.uninstall)
-                .then(() => updateWorkerIsReadyState(workerKeyOfExpectedWorker) && flagIfWorkerHasError(workerKeyOfExpectedWorker, false) && flagIfWorkerIsWorking(workerKeyOfExpectedWorker, false))
-                .catch((error: Error) => flagIfWorkerHasError(workerKeyOfExpectedWorker, true, error))
+            workerLifeSwitch(workerKeyOfRequestedWorker, WorkerLifeSwitchCommandEnum.uninstall)
+                .then(() => updateWorkerIsReadyState(workerKeyOfRequestedWorker) && flagIfWorkerHasError(workerKeyOfRequestedWorker, false) && flagIfWorkerIsWorking(workerKeyOfRequestedWorker, false))
+                .catch((error: Error) => flagIfWorkerHasError(workerKeyOfRequestedWorker, true, error))
         }
     }
 
-    // If both amounts (expected with a real one) are equals - nothing to do here - it's fine.
+    // If both amounts (requested with a real one) are equals - nothing to do here - it's fine.
     return void undefined
 }
 
@@ -172,7 +172,7 @@ const WorkersActiveInstancesAndCommunicationController = (): JSX.Element => {
 
     // Requested from UI, a number of workers
     //
-    const expectedNumberOfWorkers: WorkersAmountStateType = useAppSelector(selectExpectedWorkersAmount)
+    const requestedNumberOfWorkers: WorkersAmountStateType = useAppSelector(selectRequestedWorkersAmount)
 
     // Interval ID var - for debounce
     //
@@ -186,12 +186,12 @@ const WorkersActiveInstancesAndCommunicationController = (): JSX.Element => {
 
             window.clearTimeout(intervalID.current)
             intervalID.current = window.setTimeout(() =>
-                controlAmountOfActiveWorkerInstances(expectedNumberOfWorkers)
+                controlAmountOfActiveWorkerInstances(requestedNumberOfWorkers)
             , WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS)
 
         })
         return () => undefined
-    }, [isSocketActive, expectedNumberOfWorkers])
+    }, [isSocketActive, requestedNumberOfWorkers])
 
 
     useEffect(() => {
