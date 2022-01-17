@@ -1,7 +1,9 @@
-import React, {JSXElementConstructor, ReactElement} from 'react'
+import React, { JSXElementConstructor, ReactElement } from 'react'
+import { AppProps } from 'next/app'
+import { Container } from 'semantic-ui-react'
+
 import Navigation from '@/layout/partials/Navigation'
 import Footer from '@/layout/partials/Footer'
-import {AppProps} from 'next/app'
 
 
 
@@ -9,7 +11,9 @@ const LayoutComposition = ({children}: { children: ReactElement<AppProps, JSXEle
 
     return (<nav>
         <Navigation/>
-        <main>{children}</main>
+        <main>
+            <Container>{children}</Container>
+        </main>
         <Footer/>
     </nav>)
 }

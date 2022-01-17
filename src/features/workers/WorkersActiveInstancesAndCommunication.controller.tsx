@@ -31,7 +31,7 @@ import {
 import store, { useAppSelector } from '@/core/store.core'
 import { IWorkersSlice, selectRequestedWorkersAmount } from '@/features/workers/workersSlice'
 import { selectSocketIsActive } from '@/features/socket-client/socketSlice'
-import { WEB_WORKER_TASKS } from '@/features/workers/workers-events'
+import { WEB_WORKER_TASKS } from '@/features/workers/workersEvents'
 import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/socket-client/socketEventsEntities'
 import { sendTriggerMessageToSocket } from '@/features/socket-client/socket.api'
 

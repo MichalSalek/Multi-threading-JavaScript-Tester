@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
-import {queueWorkerTask} from '@/features/workers/workers.api'
-import {WEB_WORKER_TASKS} from '@/features/workers/workers-events'
-import {WorkerKeyType} from '@/features/workers/workers.types'
+import React, { useState } from 'react'
+import { queueWorkerTask } from '@/features/workers/workers.api'
+import { WEB_WORKER_TASKS } from '@/features/workers/workersEvents'
+import { WorkerKeyType } from '@/features/workers/workers.types'
 import {
     useSpecificWorkerStatus,
     UseSpecificWorkerStatusCommandEnum
@@ -10,7 +10,7 @@ import {
 
 
 interface IProps {
-	workerKey: WorkerKeyType
+    workerKey: WorkerKeyType
 }
 
 

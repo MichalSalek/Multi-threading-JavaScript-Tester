@@ -1,6 +1,6 @@
 import React from 'react'
-import type {AppProps} from 'next/app'
-import {Provider} from 'react-redux'
+import type { AppProps } from 'next/app'
+import { Provider } from 'react-redux'
 
 import 'semantic-ui-css/semantic.min.css'
 import '@/global-styles.scss'
@@ -12,6 +12,7 @@ import MetaHeader from '@/layout/partials/MetaHeader'
 import FPSMonitorFloatingMolecule from '@/features/fps-monitor/FPSMonitorFloating.molecule'
 import CalculationResultsFloatingMolecule
     from '@/features/calculations-components/calculation-results/CalculationResultsFloating.molecule'
+import { ControlPanelMolecule } from '@/features/control-panel/ControlPanel.molecule'
 
 // Controllers with no return body below:
 //
@@ -19,6 +20,7 @@ import WorkersActiveInstancesAndCommunicationController
     from '@/features/workers/WorkersActiveInstancesAndCommunication.controller'
 import SocketConnectionAndListeningController from '@/features/socket-client/SocketConnectionAndListening.controller'
 import WorkersRequestedAmountStoragePersist from '@/features/workers/WorkersRequestedAmountStoragePersist.controller'
+import FontAwesomeController from '@/features/font-awesome/FontAwesome.controller'
 
 
 
@@ -32,16 +34,19 @@ export default function MyApp({Component, pageProps}: AppProps) {
 
             {/*
 			Controllers required for keeping the proper functionality of some the application parts.
-			With them, operating the each others APIs they served, at a different app's nooks becomes simple and declarative.
+			With them, operating the each others APIs they served, at a different app's nooks becomes simple and DECLARATIVE.
 			*/}
+            <FontAwesomeController/>
             <SocketConnectionAndListeningController/>
             <WorkersActiveInstancesAndCommunicationController/>
             <WorkersRequestedAmountStoragePersist/>
 
 
-            {/* Free floating components */}
+            {/* Whole app runtime components - above all pages during a whole app life. */}
             <FPSMonitorFloatingMolecule/>
             <CalculationResultsFloatingMolecule/>
+
+            <ControlPanelMolecule/>
 
 
             <LayoutComposition>
