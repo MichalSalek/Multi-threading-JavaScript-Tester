@@ -1,5 +1,7 @@
 import { UnknownFunctionType } from '@/core/types.core'
 import { IWorkerKey } from '@/features/workers/workers.types'
+import { IS_ENABLED_DEV_ONLY_FN_CALLS } from '@/debug-mode-switch'
+
 ////////////////////////////////////////////////////////////
 //
 // Here you can addOne a global and generic utilities
@@ -46,9 +48,6 @@ export const isUndefinedType = (somethingToCheck: unknown | undefined): boolean 
 /// CONSTANTS SECTION
 ///
 //
-
-// Dev debug flag
-export const IS_ENABLED_DEV_ONLY_FN_CALLS = true
 
 // Worker limit. Automatic set - window.navigator.hardwareConcurrency
 export const MAX_WORKERS_LIMIT = fireJustClientSide<number>(() => window.navigator.hardwareConcurrency || 4) as number
