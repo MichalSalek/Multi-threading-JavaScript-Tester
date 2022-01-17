@@ -27,7 +27,7 @@ import {
     MAX_WORKERS_LIMIT,
     runInDevEnvOnly,
     WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS
-} from '@/utils-and-constants.core'
+} from '@/constants-and-dev-utils'
 import store, { useAppSelector } from '@/core/store.core'
 import { IWorkersSlice, selectRequestedWorkersAmount } from '@/features/workers/workersSlice'
 import { selectSocketIsActive } from '@/features/socket-client/socketSlice'

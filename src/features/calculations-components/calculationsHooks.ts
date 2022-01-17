@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { doCalculations } from '@/features/calculations-components/doCalculations'
-import { MAIN_THREAD_KEY } from '@/utils-and-constants.core'
+import { MAIN_THREAD_KEY } from '@/constants-and-dev-utils'
 import { sendTriggerMessageToSocket } from '@/features/socket-client/socket.api'
 import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/socket-client/socketEventsEntities'
 import {

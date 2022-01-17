@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react'
-import {useAppDispatch, useAppSelector} from '@/core/store.core'
-import {handleWorkerAmountChange, selectRequestedWorkersAmount} from '@/features/workers/workersSlice'
-import {getStorageItem, setStorageItem} from '@/features/browser-storage/browserStorage.api'
-import {STORAGE_WORKERS_AMOUNT_KEY} from '@/utils-and-constants.core'
-import {WorkerAmountChangeActionEnum} from '@/features/workers/workers.types'
+import React, { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '@/core/store.core'
+import { handleWorkerAmountChange, selectRequestedWorkersAmount } from '@/features/workers/workersSlice'
+import { getStorageItem, setStorageItem } from '@/features/browser-storage/browserStorage.api'
+import { STORAGE_WORKERS_AMOUNT_KEY } from '@/constants-and-dev-utils'
+import { WorkerAmountChangeActionEnum } from '@/features/workers/workers.types'
 
 
 

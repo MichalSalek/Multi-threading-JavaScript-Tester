@@ -1,7 +1,7 @@
 import { WEB_WORKER_TASKS } from '@/features/workers/workersEvents'
 import { UnknownFunctionType } from '@/core/types.core'
 import { workersKeysNames } from '@/features/workers/add-new-physical-worker-here'
-import { MAIN_THREAD_KEY } from '@/utils-and-constants.core'
+import { MAIN_THREAD_KEY } from '@/constants-and-dev-utils'
 
 
 

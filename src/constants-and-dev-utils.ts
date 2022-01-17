@@ -50,12 +50,16 @@ export const isUndefinedType = (somethingToCheck: unknown | undefined): boolean 
 // Dev debug flag
 export const IS_ENABLED_DEV_ONLY_FN_CALLS = true
 
+// Worker limit. Automatic set - window.navigator.hardwareConcurrency
 export const MAX_WORKERS_LIMIT = fireJustClientSide<number>(() => window.navigator.hardwareConcurrency || 4) as number
 
+// WorkerKey entity for main thread. Exceptionally - it is not a Worker :-) But using the same logic and the case is singular.
 export const MAIN_THREAD_KEY: IWorkerKey = {workerName: 'mainThread'}
 
+// Browser storage key name
 export const STORAGE_WORKERS_AMOUNT_KEY = 'workersAmount'
 
+// Debounce freeze time for bundle actions. Check the usage to know more.
 export const WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS = 390
 
 // Debounce - Optimal for CPU usage

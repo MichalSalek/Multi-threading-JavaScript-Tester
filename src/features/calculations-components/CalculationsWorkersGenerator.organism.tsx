@@ -1,13 +1,13 @@
-import React, {useMemo, useState} from 'react'
-import {handleWorkerAmountChange, selectRequestedWorkersAmount} from '@/features/workers/workersSlice'
-import {WorkerAmountChangeActionEnum} from '@/features/workers/workers.types'
+import React, { useMemo, useState } from 'react'
+import { handleWorkerAmountChange, selectRequestedWorkersAmount } from '@/features/workers/workersSlice'
+import { WorkerAmountChangeActionEnum } from '@/features/workers/workers.types'
 import CalculationsWorkerSwitchMolecule from '@/features/calculations-components/CalculationsWorkerSwitch.molecule'
 import {
     constructWorkerNameByOrderIndex,
     getValidatedAndCorrectRequestedWorkersAmount
 } from '@/features/workers/workers.api'
-import {useAppDispatch, useAppSelector} from '@/core/store.core'
-import {MAX_WORKERS_LIMIT} from '@/utils-and-constants.core'
+import { useAppDispatch, useAppSelector } from '@/core/store.core'
+import { MAX_WORKERS_LIMIT } from '@/constants-and-dev-utils'
 
 
 

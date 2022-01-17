@@ -1,4 +1,4 @@
-import {MAX_WORKERS_LIMIT, runInDevEnvOnly} from '@/utils-and-constants.core'
+import { MAX_WORKERS_LIMIT, runInDevEnvOnly } from '@/constants-and-dev-utils'
 import {
     ISocketDTO,
     IWorkerKey,
@@ -13,7 +13,7 @@ import {
     handleWorkerReadyStateReport,
     handleWorkerWorkStateReport
 } from '@/features/workers/workersSlice'
-import {workersKeysNames} from '@/features/workers/add-new-physical-worker-here'
+import { workersKeysNames } from '@/features/workers/add-new-physical-worker-here'
 
 
 

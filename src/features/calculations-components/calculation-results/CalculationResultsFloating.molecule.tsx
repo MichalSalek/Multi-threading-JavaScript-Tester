@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import scss from './CalculationResults.molecule.module.scss'
 import {
     NamedWorkerReadyStatusType,
@@ -7,16 +7,16 @@ import {
     WorkersAmountStateType,
     WorkersJobsType
 } from '@/features/workers/workers.types'
-import {DraggableItemComposition} from '@/features/draggable-item/DraggableItem.composition'
-import {useAppSelector} from '@/core/store.core'
+import { DraggableItemComposition } from '@/features/draggable-item/DraggableItem.composition'
+import { useAppSelector } from '@/core/store.core'
 import {
     selectActuallyWorkingWorkersAmount,
     selectRequestedWorkersAmount,
     selectWholeWorkersReadyState,
     selectWholeWorkersWorkState
 } from '@/features/workers/workersSlice'
-import {selectLastSocketResponseData} from '@/features/socket-client/socketSlice'
-import {MAIN_THREAD_KEY} from '@/utils-and-constants.core'
+import { selectLastSocketResponseData } from '@/features/socket-client/socketSlice'
+import { MAIN_THREAD_KEY } from '@/constants-and-dev-utils'
 
 
 

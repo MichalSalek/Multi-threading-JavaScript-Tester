@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { io } from 'socket.io-client'
 import store, { AppState } from '@/core/store.core'
-import { INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES, runInDevEnvOnly } from '@/utils-and-constants.core'
+import { INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES, runInDevEnvOnly } from '@/constants-and-dev-utils'
 import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/socket-client/socketEventsEntities'
 import { SocketResponseType } from '@/features/socket-client/socket.types'
 import { WorkersJobsType } from '@/features/workers/workers.types'
