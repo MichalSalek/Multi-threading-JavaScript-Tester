@@ -10,8 +10,8 @@ import store from '@/core/store.core'
 import LayoutComposition from '@/layout/Layout.composition'
 import MetaHeader from '@/layout/partials/MetaHeader'
 import FPSMonitorFloatingMolecule from '@/features/fps-monitor/FPSMonitorFloating.molecule'
-import CalculationResultsFloatingMolecule
-    from '@/features/calculations-components/calculation-results/CalculationResultsFloating.molecule'
+import CalculationScoreboardFloatingMolecule
+    from '@/features/calculations-components/calculation-scoreboard/CalculationScoreboardFloating.molecule'
 import { ControlPanelMolecule } from '@/features/control-panel/ControlPanel.molecule'
 
 // Controllers with no return body below:
@@ -44,7 +44,7 @@ export default function MyApp({Component, pageProps}: AppProps) {
 
             {/* Whole app runtime components - above all pages during a whole app life. */}
             <FPSMonitorFloatingMolecule/>
-            <CalculationResultsFloatingMolecule/>
+            <CalculationScoreboardFloatingMolecule/>
 
             <ControlPanelMolecule/>
 

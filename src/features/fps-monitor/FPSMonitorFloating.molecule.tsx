@@ -1,13 +1,21 @@
-import React, {useEffect, useRef} from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import scss from './FPSMonitor.atom.module.scss'
-import {DraggableItemComposition} from '@/features/draggable-item/DraggableItem.composition'
+import { DraggableItemComposition } from '@/features/draggable-item/DraggableItem.composition'
+import { useAppSelector } from '@/core/store.core'
+import {
+    ISystemComponentsVisibilities,
+    selectSystemComponentsVisibilities
+} from '@/features/control-panel/controlPanelSlice'
+import SystemComponentVisibilityComposition from '@/layout/compositions/SystemComponentVisibility.composition'
 
 
 
 const FPSMonitorFloatingMolecule = (): JSX.Element => {
 
     const FPSMonitorRef = useRef<HTMLElement>(null)
+
+    const systemComponentsVisibilities: ISystemComponentsVisibilities = useAppSelector(selectSystemComponentsVisibilities)
 
     // Importing .min.js file from public directory to get around TypeScript processor,
     // without any ban ts-ignore comments
@@ -30,10 +38,16 @@ const FPSMonitorFloatingMolecule = (): JSX.Element => {
         return () => undefined
     }, [])
 
+
     return (
-        <DraggableItemComposition initialPosition={{x: 500, y: 150}}>
-            <article ref={FPSMonitorRef} className={`${scss.host} display-inline-block`}/>
-        </DraggableItemComposition>
+        <SystemComponentVisibilityComposition visibilityOfSystemComponentControl={'FPSMonitor'}>
+            <DraggableItemComposition
+                initialPosition={{x: 500, y: 150}}>
+                <article
+                    ref={FPSMonitorRef}
+                    className={`${scss.host} display-inline-block`}/>
+            </DraggableItemComposition>
+        </SystemComponentVisibilityComposition>
     )
 }
 
