@@ -2,11 +2,6 @@ import React, { useEffect, useRef } from 'react'
 
 import scss from './FPSMonitor.atom.module.scss'
 import { DraggableItemComposition } from '@/features/draggable-item/DraggableItem.composition'
-import { useAppSelector } from '@/core/store.core'
-import {
-    ISystemComponentsVisibilities,
-    selectSystemComponentsVisibilities
-} from '@/features/control-panel/controlPanelSlice'
 import SystemComponentVisibilityComposition from '@/layout/compositions/SystemComponentVisibility.composition'
 
 
@@ -14,8 +9,6 @@ import SystemComponentVisibilityComposition from '@/layout/compositions/SystemCo
 const FPSMonitorFloatingMolecule = (): JSX.Element => {
 
     const FPSMonitorRef = useRef<HTMLElement>(null)
-
-    const systemComponentsVisibilities: ISystemComponentsVisibilities = useAppSelector(selectSystemComponentsVisibilities)
 
     // Importing .min.js file from public directory to get around TypeScript processor,
     // without any ban ts-ignore comments
