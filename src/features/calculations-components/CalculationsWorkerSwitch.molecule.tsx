@@ -3,9 +3,9 @@ import { queueWorkerTask } from '@/features/workers/workers.api'
 import { WEB_WORKER_TASKS } from '@/features/workers/workersEvents'
 import { WorkerKeyType } from '@/features/workers/workers.types'
 import {
-    useSpecificWorkerStatus,
+    useSingleWorkerSpecificStatus,
     UseSpecificWorkerStatusCommandEnum
-} from '@/features/calculations-components/calculationsHooks'
+} from '@/features/calculations-components/calculations.hooks'
 
 
 
@@ -18,11 +18,11 @@ const CalculationsWorkerSwitchMolecule = ({workerKey}: IProps): JSX.Element => {
 
     // Listening to worker's ready state
     //
-    const [isWorkerReady] = useSpecificWorkerStatus(UseSpecificWorkerStatusCommandEnum.ready, workerKey)
+    const [isWorkerReady] = useSingleWorkerSpecificStatus(UseSpecificWorkerStatusCommandEnum.ready, workerKey)
 
     // Listening to worker's work state
     //
-    const [isWorkerWorking] = useSpecificWorkerStatus(UseSpecificWorkerStatusCommandEnum.working, workerKey)
+    const [isWorkerWorking] = useSingleWorkerSpecificStatus(UseSpecificWorkerStatusCommandEnum.working, workerKey)
 
     // Complexity of calculations defined by user
     //

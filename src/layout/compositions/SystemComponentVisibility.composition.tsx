@@ -3,7 +3,7 @@ import { AppProps } from 'next/app'
 import {
     ISystemComponentsVisibilities,
     selectSystemComponentsVisibilities,
-    VisibilityOfSystemComponentType
+    VisibilityOfSystemComponentNameType
 } from '@/features/control-panel/controlPanelSlice'
 import { useAppSelector } from '@/core/store.core'
 
@@ -11,14 +11,12 @@ import { useAppSelector } from '@/core/store.core'
 
 interface IProps {
     children: ReactElement<AppProps, JSXElementConstructor<unknown>>
-    visibilityOfSystemComponentControl: VisibilityOfSystemComponentType
+    visibilityOfSystemComponentControl: VisibilityOfSystemComponentNameType
 }
 
 
 const SystemComponentVisibilityComposition = ({children, visibilityOfSystemComponentControl}: IProps) => {
 
-    // Listen to changes at the visibility of whole system components
-    //
     const systemComponentsVisibilities: ISystemComponentsVisibilities = useAppSelector(selectSystemComponentsVisibilities)
 
     const getVisibilityClassName = (): string => systemComponentsVisibilities[visibilityOfSystemComponentControl] ? '' : 'display-none'

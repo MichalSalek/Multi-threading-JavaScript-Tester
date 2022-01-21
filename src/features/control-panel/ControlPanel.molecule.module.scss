@@ -7,22 +7,58 @@
 }
 
 
-%hoverEffect {
+//
+//
+// VARS, MIXINS AND PLACEHOLDERS
+//
+
+$control-panel-background-color: #0f100f;
+
+%hoverEffectBackgroundColorLighter {
   &:hover {
-    background-color: #3b3b3b
+    background-color: lighten($control-panel-background-color, 5%);
   }
 }
 
 %darkBackgroundColor {
-  background-color: #202221;
+  background-color: $control-panel-background-color;
 }
 
+%hoverEffectControlChange {
+  filter: drop-shadow(0 5px 2px rgba(113, 113, 240, 0.9));
+}
+
+%dropShadowLightColor {
+  filter: drop-shadow(0 5px 3px #FFFFFF22);
+}
 
 @mixin svgSize($width: 32px) {
   height: auto;
   width: $width;
 }
 
+// Duo-tone color states
+//
+.controlsList {
+  .disabledControl {
+    --fa-primary-color: #b0b0b0;
+    --fa-secondary-color: gray;
+  }
+
+  .enabledControl {
+    --fa-primary-color: #f9245d;
+    --fa-secondary-color: #51d5e6c4;
+  }
+}
+
+%animateOnTurnOn {
+  animation: animate-on-turn-on 0.8s linear 0s forwards;
+}
+
+//
+//
+// STYLING
+//
 
 .controlsList {
   @extend %darkBackgroundColor;
@@ -30,8 +66,16 @@
   z-index: 1;
   transition: transform 0.2s cubic-bezier(0.37, 0.98, 0.63, 0.88);
 
+  .enabledControl {
+    svg {
+      @extend %dropShadowLightColor;
+      @extend %animateOnTurnOn;
+    }
+  }
+
+
   .listItem {
-    @extend %hoverEffect;
+    @extend %hoverEffectBackgroundColorLighter;
 
     > button {
       width: 100%;
@@ -43,14 +87,37 @@
       align-items: center;
 
       > svg {
-        @include svgSize(42px);
+        @include svgSize(62px);
         padding: 0 3px;
       }
     }
 
     span {
-      font-size: 1.2rem;
+      font-size: 0.8rem;
+      letter-spacing: -0.2px;
+      font-weight: bold;
       padding: 0 0.5rem;
+      color: #d5d5d5;
+    }
+
+    &:hover {
+      span {
+        filter: drop-shadow(0 0 3px black);
+      }
+
+      svg {
+        $animation-time: 0.15s;
+
+        > g > path {
+          &:first-child {
+            animation: animate-on-hover $animation-time cubic-bezier(1, 0, 0, 1) 0s both;
+          }
+
+          &:last-of-type {
+            animation: animate-on-hover $animation-time cubic-bezier(1, 0, 0, 1) 0.1s both;
+          }
+        }
+      }
     }
   }
 }
@@ -60,12 +127,12 @@
 }
 
 .collapsedControlsList {
-  transform: translateX(-184px);
+  transform: translateX(-132px);
 }
 
-.buttonSupportsCollapse {
+.buttonCollapseHandler {
   z-index: 2;
-  @extend %hoverEffect;
+  @extend %hoverEffectBackgroundColorLighter;
   @extend %darkBackgroundColor;
   padding: 0 3px;
 
@@ -84,3 +151,38 @@
     transform: rotate(180deg);
   }
 }
+
+
+//
+//
+// KEYFRAMES
+//
+
+
+$svg-animation-scale: 1.04;
+
+@keyframes animate-on-hover {
+  0%, 80%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale($svg-animation-scale);
+  }
+}
+
+
+@keyframes animate-on-turn-on {
+  0% {
+    filter: brightness(7) drop-shadow(0 5px 2px rgba(113, 113, 240, 0.7)) sepia(1);
+  }
+
+  50% {
+    filter: brightness(6) drop-shadow(0 5px 2px rgba(113, 113, 240, 0.3));
+  }
+
+  100% {
+    filter: brightness(1) drop-shadow(0 5px 2px rgba(113, 113, 240, 0.5));
+  }
+}
+

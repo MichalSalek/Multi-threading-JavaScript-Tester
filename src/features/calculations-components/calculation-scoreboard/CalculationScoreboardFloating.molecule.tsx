@@ -52,7 +52,7 @@ const CalculationScoreboardFloatingMolecule = (): JSX.Element => {
 
     return (
         <SystemComponentVisibilityComposition visibilityOfSystemComponentControl={'scoreboard'}>
-            <DraggableItemComposition initialPosition={{x: 500, y: 300}}>
+            <DraggableItemComposition initialPosition={{x: 700, y: 10}}>
                 <section
                     className={`${scss.host} display-inline-block`}>
                     <h4>Calculation results:</h4> <span>Show all, even currently deactivated: </span><input

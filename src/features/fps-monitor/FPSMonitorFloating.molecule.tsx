@@ -34,8 +34,7 @@ const FPSMonitorFloatingMolecule = (): JSX.Element => {
 
     return (
         <SystemComponentVisibilityComposition visibilityOfSystemComponentControl={'FPSMonitor'}>
-            <DraggableItemComposition
-                initialPosition={{x: 500, y: 150}}>
+            <DraggableItemComposition initialPosition={{x: 500, y: 150}}>
                 <article
                     ref={FPSMonitorRef}
                     className={`${scss.host} display-inline-block`}/>

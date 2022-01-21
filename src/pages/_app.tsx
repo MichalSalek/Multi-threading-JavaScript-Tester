@@ -19,7 +19,7 @@ import { ControlPanelMolecule } from '@/features/control-panel/ControlPanel.mole
 import WorkersActiveInstancesAndCommunicationController
     from '@/features/workers/WorkersActiveInstancesAndCommunication.controller'
 import SocketConnectionAndListeningController from '@/features/socket-client/SocketConnectionAndListening.controller'
-import WorkersRequestedAmountStoragePersist from '@/features/workers/WorkersRequestedAmountStoragePersist.controller'
+import BrowserStoragePersistController from '@/features/browser-storage/BrowserStoragePersist.controller'
 import FontAwesomeController from '@/features/font-awesome/FontAwesome.controller'
 
 
@@ -39,7 +39,7 @@ export default function MyApp({Component, pageProps}: AppProps) {
             <FontAwesomeController/>
             <SocketConnectionAndListeningController/>
             <WorkersActiveInstancesAndCommunicationController/>
-            <WorkersRequestedAmountStoragePersist/>
+            <BrowserStoragePersistController/>
 
 
             {/* Whole app runtime components - above all pages during a whole app life. */}

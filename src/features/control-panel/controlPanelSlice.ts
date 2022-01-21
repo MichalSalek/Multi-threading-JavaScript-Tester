@@ -21,34 +21,37 @@ const initialState: IControlPanelState = {
     }
 } as const
 
-export type VisibilityOfSystemComponentType = keyof typeof initialState.visibilitySwitches
+// All visibility switch control possibilities - no enums, no hard-typed strings.
+// You can use it to handle some crazy logic - without data turnouts (single source of truth).
+//
+export type VisibilityOfSystemComponentNameType = keyof typeof initialState.visibilitySwitches
+
+export const possibleControlPanelSwitchesNames = Object.keys(initialState.visibilitySwitches) as VisibilityOfSystemComponentNameType[]
+
+type ControlPanelSwitchVisibilityType = { name: VisibilityOfSystemComponentNameType; switchState?: boolean | undefined }
 
 export const controlPanelSlice = createSlice({
     name: 'controlPanelSlice',
     initialState,
     reducers: {
 
-        handleFPSMonitorVisibility: (state, action: PayloadAction<boolean | undefined>) => {
-            const existingSwitchValue = state.visibilitySwitches.FPSMonitor
-            const newSwitchValue = action.payload
+        handleControlPanelSwitchVisibility: (state, action: PayloadAction<ControlPanelSwitchVisibilityType>) => {
+            const actionSwitchName = action.payload.name
+            const newSwitchValue = action.payload.switchState
 
-            state.visibilitySwitches.FPSMonitor = (typeof newSwitchValue === 'undefined') ? !existingSwitchValue : newSwitchValue
-        },
-        handleScoreboardVisibility: (state, action: PayloadAction<boolean | undefined>) => {
-            const existingSwitchValue = state.visibilitySwitches.scoreboard
-            const newSwitchValue = action.payload
-
-            state.visibilitySwitches.scoreboard = (typeof newSwitchValue === 'undefined') ? !existingSwitchValue : newSwitchValue
+            const existingSwitchValues = state.visibilitySwitches
+            
+            state.visibilitySwitches[actionSwitchName] = (typeof newSwitchValue === 'undefined') ? !existingSwitchValues[actionSwitchName] : newSwitchValue
         }
     }
 })
 
-
+// Listen to changes at the visibility of whole system components
+//
 export const selectSystemComponentsVisibilities = (state: AppState): ISystemComponentsVisibilities => state.controlPanelSlice.visibilitySwitches
 
 export const {
-    handleFPSMonitorVisibility,
-    handleScoreboardVisibility
+    handleControlPanelSwitchVisibility
 } = controlPanelSlice.actions
 
 export default controlPanelSlice.reducer

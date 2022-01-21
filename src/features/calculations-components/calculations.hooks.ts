@@ -72,7 +72,7 @@ export const useMainThreadCalculations = <D>(CALCULATION_INTERVAL_TIMING_IN_MS =
 // Hook to enable worker status data retrieval.
 //
 type ReturnedWorkerStatus = boolean | undefined
-export type UseSpecificWorkerStatusType = [ReturnedWorkerStatus]
+export type UseSingleWorkerSpecificStatusType = [ReturnedWorkerStatus]
 
 
 export enum UseSpecificWorkerStatusCommandEnum {
@@ -81,9 +81,9 @@ export enum UseSpecificWorkerStatusCommandEnum {
 }
 
 
-export const useSpecificWorkerStatus = (command: UseSpecificWorkerStatusCommandEnum, workerKey: WorkerKeyType): UseSpecificWorkerStatusType => {
+export const useSingleWorkerSpecificStatus = (command: UseSpecificWorkerStatusCommandEnum, workerKey: WorkerKeyType): UseSingleWorkerSpecificStatusType => {
 
-    const [returnedSpecificWorkerStatus, setReturnedSpecificWorkerStatus] = useState<ReturnedWorkerStatus>(undefined)
+    const [returnedSingleWorkerSpecificStatus, setReturnedSingleWorkerSpecificStatus] = useState<ReturnedWorkerStatus>(undefined)
 
 
     const allWorkersReadyStatuses: NamedWorkerReadyStatusType = useAppSelector(selectWholeWorkersReadyState)
@@ -113,7 +113,7 @@ export const useSpecificWorkerStatus = (command: UseSpecificWorkerStatusCommandE
 
 
     useEffect(() => {
-        setReturnedSpecificWorkerStatus(() => {
+        setReturnedSingleWorkerSpecificStatus(() => {
             switch (command) {
             case UseSpecificWorkerStatusCommandEnum.ready:
                 return isReady
@@ -125,7 +125,7 @@ export const useSpecificWorkerStatus = (command: UseSpecificWorkerStatusCommandE
     }, [command, isReady, isWorking])
 
 
-    return [returnedSpecificWorkerStatus]
+    return [returnedSingleWorkerSpecificStatus]
 }
 
 export default {}
