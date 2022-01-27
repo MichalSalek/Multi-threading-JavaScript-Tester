@@ -7,7 +7,7 @@ import {
     WorkersAmountStateType,
     WorkersJobsType
 } from '@/features/workers/workers.types'
-import { DraggableItemComposition } from '@/features/draggable-item/DraggableItem.composition'
+import { DraggableItemComposition } from '@/layout/compositions/draggable-item/DraggableItem.composition'
 import { useAppSelector } from '@/core/store.core'
 import {
     selectActuallyWorkingWorkersAmount,
@@ -17,7 +17,8 @@ import {
 } from '@/features/workers/workersSlice'
 import { selectLastSocketResponseData } from '@/features/socket-client/socketSlice'
 import { MAIN_THREAD_KEY } from '@/constants-and-dev-utils'
-import SystemComponentVisibilityComposition from '@/layout/compositions/SystemComponentVisibility.composition'
+import SystemComponentVisibilityComposition
+    from '@/layout/compositions/system-component-visibility/SystemComponentVisibility.composition'
 
 
 
@@ -52,7 +53,11 @@ const CalculationScoreboardFloatingMolecule = (): JSX.Element => {
 
     return (
         <SystemComponentVisibilityComposition visibilityOfSystemComponentControl={'scoreboard'}>
-            <DraggableItemComposition initialPosition={{x: 700, y: 10}}>
+            <DraggableItemComposition
+                componentUITitleBarName={'Scoreboard'}
+                systemComponentName={'scoreboard'}
+                onTheScreenPosition={{x: 700, y: 10}}
+            >
                 <section
                     className={`${scss.host} display-inline-block`}>
                     <h4>Calculation results:</h4> <span>Show all, even currently deactivated: </span><input

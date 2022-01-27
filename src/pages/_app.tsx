@@ -3,7 +3,8 @@ import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
 
 import 'semantic-ui-css/semantic.min.css'
-import '@/global-styles.scss'
+
+import '@/global-styles/global-styles.scss'
 
 import store from '@/core/store.core'
 
@@ -32,10 +33,8 @@ export default function MyApp({Component, pageProps}: AppProps) {
         <MetaHeader/>
         <Provider store={store}>
 
-            {/*
-			Controllers required for keeping the proper functionality of some the application parts.
-			With them, operating the each others APIs they served, at a different app's nooks becomes simple and DECLARATIVE.
-			*/}
+            {/* Controllers required for keeping the proper functionality of some the application parts.
+			With them, operating the each others APIs they served, at a different app's nooks becomes simple and DECLARATIVE. */}
             <FontAwesomeController/>
             <SocketConnectionAndListeningController/>
             <WorkersActiveInstancesAndCommunicationController/>

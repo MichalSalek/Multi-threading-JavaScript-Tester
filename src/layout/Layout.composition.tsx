@@ -2,20 +2,23 @@ import React, { JSXElementConstructor, ReactElement } from 'react'
 import { AppProps } from 'next/app'
 import { Container } from 'semantic-ui-react'
 
-import Navigation from '@/layout/partials/Navigation'
+import Header from '@/layout/partials/Header'
 import Footer from '@/layout/partials/Footer'
+import scss from './partials/Layout.composition.module.scss'
 
 
 
 const LayoutComposition = ({children}: { children: ReactElement<AppProps, JSXElementConstructor<unknown>> }) => {
 
-    return (<nav>
-        <Navigation/>
-        <main>
-            <Container>{children}</Container>
+    return (
+        <main className={scss.hostMain}>
+            <Header/>
+            <main className={scss.main}>
+                <Container>{children}</Container>
+            </main>
+            <Footer/>
         </main>
-        <Footer/>
-    </nav>)
+    )
 }
 
 export default LayoutComposition

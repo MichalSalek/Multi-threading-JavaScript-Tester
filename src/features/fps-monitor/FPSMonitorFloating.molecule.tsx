@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 
 import scss from './FPSMonitor.atom.module.scss'
-import { DraggableItemComposition } from '@/features/draggable-item/DraggableItem.composition'
-import SystemComponentVisibilityComposition from '@/layout/compositions/SystemComponentVisibility.composition'
+import { DraggableItemComposition } from '@/layout/compositions/draggable-item/DraggableItem.composition'
+import SystemComponentVisibilityComposition
+    from '@/layout/compositions/system-component-visibility/SystemComponentVisibility.composition'
 
 
 
@@ -34,7 +35,10 @@ const FPSMonitorFloatingMolecule = (): JSX.Element => {
 
     return (
         <SystemComponentVisibilityComposition visibilityOfSystemComponentControl={'FPSMonitor'}>
-            <DraggableItemComposition initialPosition={{x: 500, y: 150}}>
+            <DraggableItemComposition
+                componentUITitleBarName={'FPS monitor'}
+                systemComponentName={'FPSMonitor'}
+                onTheScreenPosition={{x: 500, y: 150}}>
                 <article
                     ref={FPSMonitorRef}
                     className={`${scss.host} display-inline-block`}/>

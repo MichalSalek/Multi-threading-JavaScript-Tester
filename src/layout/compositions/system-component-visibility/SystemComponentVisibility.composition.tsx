@@ -3,7 +3,7 @@ import { AppProps } from 'next/app'
 import {
     ISystemComponentsVisibilities,
     selectSystemComponentsVisibilities,
-    VisibilityOfSystemComponentNameType
+    SystemComponentNameType
 } from '@/features/control-panel/controlPanelSlice'
 import { useAppSelector } from '@/core/store.core'
 
@@ -11,7 +11,7 @@ import { useAppSelector } from '@/core/store.core'
 
 interface IProps {
     children: ReactElement<AppProps, JSXElementConstructor<unknown>>
-    visibilityOfSystemComponentControl: VisibilityOfSystemComponentNameType
+    visibilityOfSystemComponentControl: SystemComponentNameType
 }
 
 
@@ -19,13 +19,13 @@ const SystemComponentVisibilityComposition = ({children, visibilityOfSystemCompo
 
     const systemComponentsVisibilities: ISystemComponentsVisibilities = useAppSelector(selectSystemComponentsVisibilities)
 
-    const getVisibilityClassName = (): string => systemComponentsVisibilities[visibilityOfSystemComponentControl] ? '' : 'display-none'
+    const getGenericComponentClassName = (): string => `component-visibility component-visibility-${visibilityOfSystemComponentControl}`
 
-    const getGenericComponentClassName = (): string => `component-visibility-${visibilityOfSystemComponentControl}`
+    const getVisibilityClassName = (): string => systemComponentsVisibilities[visibilityOfSystemComponentControl] ? '' : 'display-none'
 
     return (
         <aside
-            className={[getVisibilityClassName(), getGenericComponentClassName()].join(' ')}>
+            className={[getGenericComponentClassName(), getVisibilityClassName(), 'turn-on-opacity-animation'].join(' ')}>
             {children}
         </aside>
     )

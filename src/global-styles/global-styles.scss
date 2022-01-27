@@ -1,3 +1,5 @@
+@use '../global-styles/variables';
+
 //
 //
 // RESET ZONE
@@ -9,6 +11,10 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
   Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+body {
+  border: variables.$masterBorderStyle;
 }
 
 * {
@@ -33,6 +39,9 @@ button {
   color: inherit;
 }
 
+#__next {
+  height: 100%;
+}
 
 //
 //
@@ -43,22 +52,25 @@ button {
   display: none !important;
 }
 
-.display-inline-block {
-  display: inline-block;
-}
 
-.drag-item {
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
+.turn-on-opacity-animation {
+  @keyframes turn-on-animation-keyframe {
+    0% {
+      opacity: 0
+    }
 
-  > strong {
-    cursor: pointer;
+    50% {
+      opacity: 0.4
+    }
 
-    > span {
-      @extend .display-inline-block
-
+    50% {
+      opacity: 1
     }
   }
+  animation: turn-on-animation-keyframe 0.5s cubic-bezier(1, 0, 0, 1) forwards;
+}
+
+// Second layer of duo-tone FA icons opacity (increased)
+.svg-inline--fa .fa-secondary {
+  opacity: 0.7;
 }

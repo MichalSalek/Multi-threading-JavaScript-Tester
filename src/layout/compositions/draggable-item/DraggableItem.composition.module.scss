@@ -1,0 +1,71 @@
+@import "../../../global-styles/variables";
+
+
+$borderColor: #0b375b;
+$heightOfBar: 30px;
+$sideBarPadding: 3px;
+
+.dragItem {
+  border: 2px solid $borderColor;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+
+  > strong {
+    height: $heightOfBar;
+    border-bottom: 1px solid $borderColor;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    > span {
+      display: inline-block;
+      color: white;
+      font-weight: 300;
+
+      padding-left: $sideBarPadding;
+    }
+  }
+
+  .inactive {
+    background-color: black;
+  }
+
+  .active {
+    background-color: #0264b2;
+  }
+}
+
+.closeButton {
+  position: relative;
+  cursor: pointer;
+  width: 40px;
+  height: 29px;
+
+  &:hover {
+    background-color: #e62223;
+  }
+
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 15px;
+    right: 13px;
+    width: 13px;
+    height: 1px;
+    background-color: white;
+    transform-origin: center;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+  }
+}

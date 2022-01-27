@@ -68,3 +68,4 @@ export const INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES: number | 0 = 0 // 0 means
 export const STORAGE_KEY_WORKERS_AMOUNT = 'workersAmount'
 export const STORAGE_KEY_CONTROL_PANEL_COLLAPSE_STATE = 'controlPanelCollapsedState'
 export const STORAGE_KEY_CONTROL_PANEL_SWITCHES = 'controlPanelSwitches'
+export const STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION = 'onTheScreenPosition'

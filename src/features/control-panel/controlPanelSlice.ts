@@ -23,12 +23,15 @@ const initialState: IControlPanelState = {
 
 // All visibility switch control possibilities - no enums, no hard-typed strings.
 // You can use it to handle some crazy logic - without data turnouts (single source of truth).
-//
-export type VisibilityOfSystemComponentNameType = keyof typeof initialState.visibilitySwitches
+export type SystemComponentNameType = keyof typeof initialState.visibilitySwitches
 
-export const possibleControlPanelSwitchesNames = Object.keys(initialState.visibilitySwitches) as VisibilityOfSystemComponentNameType[]
+export const possibleControlPanelSwitchesNames = Object.keys(initialState.visibilitySwitches) as SystemComponentNameType[]
 
-type ControlPanelSwitchVisibilityType = { name: VisibilityOfSystemComponentNameType; switchState?: boolean | undefined }
+// By this switch you can:
+// pass nothing - then switch works like typical on/off switch
+// true - turn on the visibility
+// false - turn it off - hide component
+type ControlPanelSwitchVisibilityType = { name: SystemComponentNameType; visibilitySwitchState?: boolean | undefined }
 
 export const controlPanelSlice = createSlice({
     name: 'controlPanelSlice',
@@ -37,10 +40,10 @@ export const controlPanelSlice = createSlice({
 
         handleControlPanelSwitchVisibility: (state, action: PayloadAction<ControlPanelSwitchVisibilityType>) => {
             const actionSwitchName = action.payload.name
-            const newSwitchValue = action.payload.switchState
+            const newSwitchValue = action.payload.visibilitySwitchState
 
             const existingSwitchValues = state.visibilitySwitches
-            
+
             state.visibilitySwitches[actionSwitchName] = (typeof newSwitchValue === 'undefined') ? !existingSwitchValues[actionSwitchName] : newSwitchValue
         }
     }
