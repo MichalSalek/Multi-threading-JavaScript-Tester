@@ -104,7 +104,7 @@ $sideButtonWidth: 20px;
   @extend %darkBackgroundColor;
   padding: 3px;
   z-index: 1;
-  transition: transform 0.1s cubic-bezier(0.37, 0.98, 0.63, 0.88);
+  transition: transform 0.5s cubic-bezier(0.37, 0.98, 0.63, 0.88);
 
   border: variables.$masterBorderStyle;
   border-width: 2px 2px 2px 0;
