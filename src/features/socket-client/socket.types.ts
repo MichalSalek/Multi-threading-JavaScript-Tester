@@ -1,17 +1,17 @@
-import {WebSocketEventTriggersType} from '@/features/socket-client/socketEventsEntities'
-import {ISocketDTO, IWorkerDTO} from '@/features/workers/workers.types'
+import { WebSocketEventTriggersType } from '@/features/socket-client/socketEventsEntities'
+import { ISocketDTO, IWorkerDTO } from '@/features/web-workers-configuration/webWorkers.types'
 
 
 
 export type SocketResponseType<T> = {
-	status: number;
-	data: T
+    status: number;
+    data: T
 }
 
 
 export interface ISocketEmitEvent<T = unknown> {
-	eventName: WebSocketEventTriggersType,
-	dataToSend: T
+    eventName: WebSocketEventTriggersType,
+    dataToSend: T
 }
 
 

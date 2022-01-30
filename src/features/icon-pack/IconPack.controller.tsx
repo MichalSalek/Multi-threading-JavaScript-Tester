@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 
 
-const FontAwesomeController = (): JSX.Element => {
+const IconPackController = (): JSX.Element => {
 
     useEffect(() => {
         const script1 = document.createElement('script')
@@ -18,4 +18,4 @@ const FontAwesomeController = (): JSX.Element => {
     return (<></>)
 }
 
-export default FontAwesomeController
+export default IconPackController

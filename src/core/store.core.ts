@@ -1,6 +1,6 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { workersSlice } from '@/features/workers/workersSlice'
+import { webWorkersSlice } from '@/features/web-workers-configuration/webWorkersSlice'
 import { socketSlice } from '@/features/socket-client/socketSlice'
 import { controlPanelSlice } from '@/features/control-panel/controlPanelSlice'
 
@@ -9,7 +9,7 @@ import { controlPanelSlice } from '@/features/control-panel/controlPanelSlice'
 export function makeStore() {
     return configureStore({
         reducer: {
-            calculationsWorkersSlice: workersSlice.reducer,
+            calculationsWorkersSlice: webWorkersSlice.reducer,
             socketSlice: socketSlice.reducer,
             controlPanelSlice: controlPanelSlice.reducer
         }

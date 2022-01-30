@@ -1,5 +1,5 @@
 import { UnknownFunctionType } from '@/core/types.core'
-import { IWorkerKey } from '@/features/workers/workers.types'
+import { IWorkerKey } from '@/features/web-workers-configuration/webWorkers.types'
 import { IS_ENABLED_DEV_ONLY_FN_CALLS } from '@/debug-mode-switch'
 
 ////////////////////////////////////////////////////////////

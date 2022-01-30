@@ -1,11 +1,11 @@
 import { Server, Socket } from 'socket.io'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/socket-client/socketEventsEntities'
-import { IPAddressesData, setNewJobDone } from '@/core/backend-src/runtimeData.api'
-import { ISocketDTO, IWorkerDTO, WorkerKeyType } from '@/features/workers/workers.types'
-import { runInDevEnvOnly } from '@/constants-and-dev-utils'
-import { wholeDataResponse } from '@/core/backend-src/responsesEntities'
-import { IPNumberRegExp } from '@/core/backend-src/types'
+import { IPAddressesData, setNewJobDone } from '@/backend-src/runtimeData.api'
+import { ISocketDTO, IWorkerDTO, WorkerKeyType } from '@/features/web-workers-configuration/webWorkers.types'
+import { runInDevEnvOnly } from '@/app-config-and-utils'
+import { wholeDataResponse } from '@/backend-src/responsesEntities'
+import { IPNumberRegExp } from '@/backend-src/types'
 
 
 

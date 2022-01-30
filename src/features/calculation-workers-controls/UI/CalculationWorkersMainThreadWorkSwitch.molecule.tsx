@@ -1,9 +1,9 @@
 import React from 'react'
-import { useMainThreadCalculations } from '@/features/calculations-components/calculations.hooks'
+import { useMainThreadCalculations } from '@/features/calculation-workers-controls/calculationWorkersControls.hooks'
 
 
 
-const CalculationsMainThreadMolecule = (): JSX.Element => {
+const CalculationWorkersMainThreadWorkSwitchMolecule = (): JSX.Element => {
 
     const [isMainThreadOn, handleMainThreadSwitchChange] =
         useMainThreadCalculations(120, 80, false)
@@ -17,4 +17,4 @@ const CalculationsMainThreadMolecule = (): JSX.Element => {
     </>)
 }
 
-export default CalculationsMainThreadMolecule
+export default CalculationWorkersMainThreadWorkSwitchMolecule

@@ -1,6 +1,6 @@
-import {setClearRuntimeData} from '@/core/backend-src/runtimeData.api'
-import {ResponseType} from '@/core/backend-src/types'
-import {IWorkerDTO} from '@/features/workers/workers.types'
+import { setClearRuntimeData } from '@/backend-src/runtimeData.api'
+import { ResponseType } from '@/backend-src/types'
+import { IWorkerDTO } from '@/features/web-workers-configuration/webWorkers.types'
 
 
 

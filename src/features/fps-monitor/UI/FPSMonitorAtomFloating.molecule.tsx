@@ -7,7 +7,7 @@ import SystemComponentVisibilityComposition
 
 
 
-const FPSMonitorFloatingMolecule = (): JSX.Element => {
+const FPSMonitorAtomFloatingMolecule = (): JSX.Element => {
 
     const FPSMonitorRef = useRef<HTMLElement>(null)
 
@@ -47,4 +47,4 @@ const FPSMonitorFloatingMolecule = (): JSX.Element => {
     )
 }
 
-export default FPSMonitorFloatingMolecule
+export default FPSMonitorAtomFloatingMolecule

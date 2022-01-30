@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import scss from './CalculationScoreboard.molecule.module.scss'
+import scss from './CalculationWorkersScoreboard.molecule.module.scss'
 import {
     NamedWorkerReadyStatusType,
     NamedWorkerWorkStatusType,
     WorkerNameType,
     WorkersAmountStateType,
     WorkersJobsType
-} from '@/features/workers/workers.types'
+} from '@/features/web-workers-configuration/webWorkers.types'
 import { DraggableItemComposition } from '@/layout/compositions/draggable-item/DraggableItem.composition'
 import { useAppSelector } from '@/core/store.core'
 import {
@@ -14,17 +14,17 @@ import {
     selectRequestedWorkersAmount,
     selectWholeWorkersReadyState,
     selectWholeWorkersWorkState
-} from '@/features/workers/workersSlice'
+} from '@/features/web-workers-configuration/webWorkersSlice'
 import { selectLastSocketResponseData } from '@/features/socket-client/socketSlice'
-import { MAIN_THREAD_KEY } from '@/constants-and-dev-utils'
+import { MAIN_THREAD_KEY } from '@/app-config-and-utils'
 import SystemComponentVisibilityComposition
     from '@/layout/compositions/system-component-visibility/SystemComponentVisibility.composition'
 
 
 
-const CalculationScoreboardFloatingMolecule = (): JSX.Element => {
+const CalculationWorkersScoreboardFloatingMolecule = (): JSX.Element => {
 
-    // Instant get a requested amount of workers
+    // Instant get a requested amount of web-workers-configuration
     //
     const workerRequestedAmount: WorkersAmountStateType = useAppSelector(selectRequestedWorkersAmount)
 
@@ -129,4 +129,4 @@ const CalculationScoreboardFloatingMolecule = (): JSX.Element => {
     )
 }
 
-export default CalculationScoreboardFloatingMolecule
+export default CalculationWorkersScoreboardFloatingMolecule

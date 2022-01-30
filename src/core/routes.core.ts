@@ -7,4 +7,4 @@ export const ROUTE_PAGE_CALCULATIONS = '/calculations'
 
 // API routes below
 //
-export const ROUTE_API_WEB_SOCKET = '/api/_/socket-io-server'
+export const ROUTE_API_WEB_SOCKET = '/api/_/socket-io-connector'

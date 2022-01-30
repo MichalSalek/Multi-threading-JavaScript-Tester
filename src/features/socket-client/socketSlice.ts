@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { io } from 'socket.io-client'
 import store, { AppState } from '@/core/store.core'
-import { INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES, runInDevEnvOnly } from '@/constants-and-dev-utils'
+import { INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES, runInDevEnvOnly } from '@/app-config-and-utils'
 import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/socket-client/socketEventsEntities'
 import { SocketResponseType } from '@/features/socket-client/socket.types'
-import { WorkersJobsType } from '@/features/workers/workers.types'
+import { WorkersJobsType } from '@/features/web-workers-configuration/webWorkers.types'
 import { sendTriggerMessageToSocket } from '@/features/socket-client/socket.api'
+import { ROUTE_API_WEB_SOCKET } from '@/core/routes.core'
 
 
 
@@ -16,7 +17,7 @@ interface IConnectSocketThunkPayload {
 
 export const connectSocketThunk = createAsyncThunk('connectSocketThunk', async () => {
     return await new Promise<IConnectSocketThunkPayload>((resolve) => {
-        fetch('api/_/socket-io-server').finally(async () => {
+        fetch(ROUTE_API_WEB_SOCKET).finally(async () => {
             const ioSocket = await io().connect()
 
             ioSocket.on('connect', () =>

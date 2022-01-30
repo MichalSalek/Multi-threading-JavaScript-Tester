@@ -1,4 +1,8 @@
-import {IWorkersJobsBody, NewWorkerJobType, WorkersJobsType} from '@/features/workers/workers.types'
+import {
+    IWorkersJobsBody,
+    NewWorkerJobType,
+    WorkersJobsType
+} from '@/features/web-workers-configuration/webWorkers.types'
 
 //
 // It's a pseudo-DB for the app presentation

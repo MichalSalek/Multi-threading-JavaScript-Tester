@@ -1,4 +1,4 @@
-import { runInDevEnvOnly } from '@/constants-and-dev-utils'
+import { runInDevEnvOnly } from '@/app-config-and-utils'
 
 
 

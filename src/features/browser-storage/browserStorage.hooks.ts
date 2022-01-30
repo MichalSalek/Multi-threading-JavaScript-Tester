@@ -1,7 +1,10 @@
 // Hook for handling a main thread fake background calculations.
 //
 import { useAppDispatch, useAppSelector } from '@/core/store.core'
-import { handleWorkerAmountChange, selectRequestedWorkersAmount } from '@/features/workers/workersSlice'
+import {
+    handleWorkerAmountChange,
+    selectRequestedWorkersAmount
+} from '@/features/web-workers-configuration/webWorkersSlice'
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import { getStorageItem, setStorageItem } from '@/features/browser-storage/browserStorage.api'
 import {
@@ -10,8 +13,8 @@ import {
     STORAGE_KEY_CONTROL_PANEL_SWITCHES,
     STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION,
     STORAGE_KEY_WORKERS_AMOUNT
-} from '@/constants-and-dev-utils'
-import { WorkerAmountChangeActionEnum } from '@/features/workers/workers.types'
+} from '@/app-config-and-utils'
+import { WorkerAmountChangeActionEnum } from '@/features/web-workers-configuration/webWorkers.types'
 import {
     handleControlPanelSwitchVisibility,
     ISystemComponentsVisibilities,

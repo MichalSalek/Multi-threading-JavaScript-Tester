@@ -9,7 +9,7 @@ import {
 } from '@/features/control-panel/controlPanelSlice'
 import { useControlPanelCollapseStateStoragePersist } from '@/features/browser-storage/browserStorage.hooks'
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable'
-import { STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION } from '@/constants-and-dev-utils'
+import { STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION } from '@/app-config-and-utils'
 import { getStorageItem, setStorageItem } from '@/features/browser-storage/browserStorage.api'
 
 

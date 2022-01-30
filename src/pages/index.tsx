@@ -1,12 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
-import {NextPage} from 'next'
+import { NextPage } from 'next'
 
-import {ROUTE_PAGE_CALCULATIONS} from '@/core/routes.core'
+import { ROUTE_PAGE_CALCULATIONS } from '@/core/routes.core'
 
 
 
-const IndexPage: NextPage = () => {
+const HomeScreenPage: NextPage = () => {
 
     return (
         <Link passHref href={ROUTE_PAGE_CALCULATIONS}>
@@ -15,4 +15,4 @@ const IndexPage: NextPage = () => {
     )
 }
 
-export default IndexPage
+export default HomeScreenPage

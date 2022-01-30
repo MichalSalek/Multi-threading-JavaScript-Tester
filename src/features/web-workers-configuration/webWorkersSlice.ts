@@ -1,6 +1,6 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {WritableDraft} from 'immer/dist/types/types-external'
-import {AppState} from '@/core/store.core'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { WritableDraft } from 'immer/dist/types/types-external'
+import { AppState } from '@/core/store.core'
 import {
     IWorkerErrorStateReport,
     IWorkerReadyStateReport,
@@ -11,8 +11,8 @@ import {
     NamedWorkerWorkStatusType,
     WorkerAmountChangeActionEnum,
     WorkersAmountStateType
-} from '@/features/workers/workers.types'
-import {getValidatedAndCorrectRequestedWorkersAmount} from '@/features/workers/workers.api'
+} from '@/features/web-workers-configuration/webWorkers.types'
+import { getValidatedAndCorrectRequestedWorkersAmount } from '@/features/web-workers-configuration/webWorkers.api'
 
 
 
@@ -46,7 +46,7 @@ const initialState: IWorkersSlice = {
 }
 
 
-export const workersSlice = createSlice({
+export const webWorkersSlice = createSlice({
     name: 'calculationsWorkersSlice',
     initialState,
     reducers: {
@@ -114,7 +114,7 @@ export const {
     handleWorkerReadyStateReport,
     handleWorkerWorkStateReport,
     handleWorkerErrorStateReport
-} = workersSlice.actions
+} = webWorkersSlice.actions
 
 export const selectRequestedWorkersAmount = (state: AppState): WorkersAmountStateType => state.calculationsWorkersSlice.requestedAmount
 export const selectWholeWorkersReadyState = (state: AppState): NamedWorkerReadyStatusType => state.calculationsWorkersSlice.readyStatuses
@@ -122,4 +122,4 @@ export const selectWholeWorkersWorkState = (state: AppState): NamedWorkerWorkSta
 export const selectActuallyWorkingWorkersAmount = (state: AppState): WorkersAmountStateType => state.calculationsWorkersSlice.actuallyWorks
 export const selectWholeWorkersErrorState = (state: AppState): NamedWorkerErrorStatusType => state.calculationsWorkersSlice.errorStatuses // można zrobić mechanizm randomowych errorów i dodać obsługę błędów workerów
 
-export default workersSlice.reducer
+export default webWorkersSlice.reducer

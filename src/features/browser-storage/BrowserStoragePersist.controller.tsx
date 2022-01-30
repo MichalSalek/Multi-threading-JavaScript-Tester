@@ -8,7 +8,7 @@ import {
 
 const BrowserStoragePersistController = (): JSX.Element => {
 
-    // Persist amount of ready Workers (how many workers should be existing)
+    // Persist amount of ready Workers (how many web-workers-configuration should be existing)
     useWorkersAmountStoragePersist()
 
     // Persist Control Panel switches state (what's on, what's off)

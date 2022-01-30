@@ -1,4 +1,4 @@
-import { MAX_WORKERS_LIMIT, runInDevEnvOnly } from '@/constants-and-dev-utils'
+import { MAX_WORKERS_LIMIT, runInDevEnvOnly } from '@/app-config-and-utils'
 import {
     ISocketDTO,
     IWorkerKey,
@@ -6,14 +6,14 @@ import {
     IWorkerWorkState,
     WorkerKeyType,
     WorkerNameType
-} from '@/features/workers/workers.types'
+} from '@/features/web-workers-configuration/webWorkers.types'
 import store from '@/core/store.core'
 import {
     handleWorkerErrorStateReport,
     handleWorkerReadyStateReport,
     handleWorkerWorkStateReport
-} from '@/features/workers/workersSlice'
-import { workersKeysNames } from '@/features/workers/add-new-physical-worker-here'
+} from '@/features/web-workers-configuration/webWorkersSlice'
+import { workersKeysNames } from '@/features/web-workers-configuration/add-new-physical-worker-here'
 
 
 
@@ -49,7 +49,7 @@ export const getWorkerRealActivityStatus = (workerName: WorkerNameType): boolean
 
 export const getExistingWorkersKeys = (): IWorkerKey[] => {
 
-    // Maybe-worker array of the maximum number of workers:
+    // Maybe-worker array of the maximum number of web-workers-configuration:
     // [Worker, undefined, Worker, Worker, undefined, ...].length === MAX_WORKERS_LIMIT
     //
     const allWorkersPossibilities = Array(MAX_WORKERS_LIMIT as number).fill(undefined)

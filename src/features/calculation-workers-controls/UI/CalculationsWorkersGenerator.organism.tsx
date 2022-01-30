@@ -1,13 +1,17 @@
 import React, { useMemo, useState } from 'react'
-import { handleWorkerAmountChange, selectRequestedWorkersAmount } from '@/features/workers/workersSlice'
-import { WorkerAmountChangeActionEnum } from '@/features/workers/workers.types'
-import CalculationsWorkerSwitchMolecule from '@/features/calculations-components/CalculationsWorkerSwitch.molecule'
+import {
+    handleWorkerAmountChange,
+    selectRequestedWorkersAmount
+} from '@/features/web-workers-configuration/webWorkersSlice'
+import { WorkerAmountChangeActionEnum } from '@/features/web-workers-configuration/webWorkers.types'
+import CalculationWorkersWorkSwitchMolecule
+    from '@/features/calculation-workers-controls/UI/CalculationWorkersWorkSwitch.molecule'
 import {
     constructWorkerNameByOrderIndex,
     getValidatedAndCorrectRequestedWorkersAmount
-} from '@/features/workers/workers.api'
+} from '@/features/web-workers-configuration/webWorkers.api'
 import { useAppDispatch, useAppSelector } from '@/core/store.core'
-import { MAX_WORKERS_LIMIT } from '@/constants-and-dev-utils'
+import { MAX_WORKERS_LIMIT } from '@/app-config-and-utils'
 
 
 
@@ -56,7 +60,7 @@ const CalculationsWorkersGeneratorOrganism = (): JSX.Element => {
         <br/><br/>
 
         {workersAmountArray.map((_, index) =>
-            <CalculationsWorkerSwitchMolecule
+            <CalculationWorkersWorkSwitchMolecule
                 workerKey={{
                     workerName: constructWorkerNameByOrderIndex(index + 1),
                     fileName: 'calculations-worker.js'

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useAppDispatch } from '@/core/store.core'
-import { fireJustClientSide } from '@/constants-and-dev-utils'
+import { fireJustClientSide } from '@/app-config-and-utils'
 import { connectSocketThunk } from '@/features/socket-client/socketSlice'
 
 

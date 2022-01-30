@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { queueWorkerTask } from '@/features/workers/workers.api'
-import { WEB_WORKER_TASKS } from '@/features/workers/workersEvents'
-import { WorkerKeyType } from '@/features/workers/workers.types'
+import { queueWorkerTask } from '@/features/web-workers-configuration/webWorkers.api'
+import { WEB_WORKER_TASKS } from '@/features/web-workers-configuration/webWorkersEvents'
+import { WorkerKeyType } from '@/features/web-workers-configuration/webWorkers.types'
 import {
     useSingleWorkerSpecificStatus,
     UseSpecificWorkerStatusCommandEnum
-} from '@/features/calculations-components/calculations.hooks'
+} from '@/features/calculation-workers-configuration/calculationWorkers.hooks'
 
 
 
@@ -14,7 +14,7 @@ interface IProps {
 }
 
 
-const CalculationsWorkerSwitchMolecule = ({workerKey}: IProps): JSX.Element => {
+const CalculationWorkersWorkSwitchMolecule = ({workerKey}: IProps): JSX.Element => {
 
     // Listening to worker's ready state
     //
@@ -59,4 +59,4 @@ const CalculationsWorkerSwitchMolecule = ({workerKey}: IProps): JSX.Element => {
     )
 }
 
-export default CalculationsWorkerSwitchMolecule
+export default CalculationWorkersWorkSwitchMolecule

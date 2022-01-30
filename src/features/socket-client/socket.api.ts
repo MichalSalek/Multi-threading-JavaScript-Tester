@@ -1,7 +1,7 @@
-import {Socket} from 'socket.io-client'
-import {SocketEmitType} from '@/features/socket-client/socket.types'
-import {WebSocketEventTriggersType} from '@/features/socket-client/socketEventsEntities'
-import {ISocketDTO, IWorkerDTO} from '@/features/workers/workers.types'
+import { Socket } from 'socket.io-client'
+import { SocketEmitType } from '@/features/socket-client/socket.types'
+import { WebSocketEventTriggersType } from '@/features/socket-client/socketEventsEntities'
+import { ISocketDTO, IWorkerDTO } from '@/features/web-workers-configuration/webWorkers.types'
 
 
 
