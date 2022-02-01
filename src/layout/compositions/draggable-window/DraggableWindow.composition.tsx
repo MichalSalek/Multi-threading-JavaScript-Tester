@@ -44,7 +44,6 @@ export const DraggableWindowComposition = ({
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            console.dir(event.target)
             if (nodeRef.current && !nodeRef.current.contains(event.target as Node)) {
                 setClickedOutsideThisWindow(true)
             } else {

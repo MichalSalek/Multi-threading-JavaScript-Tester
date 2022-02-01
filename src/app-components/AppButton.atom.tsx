@@ -1,13 +1,16 @@
 import React from 'react'
 import { Button } from '@mui/material'
+import { ButtonProps } from '@mui/material/Button/Button'
 
 
 
-const AppButtonAtom = (props: any): JSX.Element => {
+const AppButtonAtom = (props: ButtonProps): JSX.Element => {
 
-    console.log(props)
+    return <Button
+        color={'info'}
+        variant={'outlined'}
 
-    return <Button>{props.children}</Button>
+        {...props}>{props.children}</Button>
 }
 
 export default AppButtonAtom

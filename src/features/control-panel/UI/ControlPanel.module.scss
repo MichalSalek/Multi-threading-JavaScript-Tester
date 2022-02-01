@@ -139,7 +139,7 @@ $sideButtonWidth: 20px;
       align-items: center;
 
       > svg {
-        @include svgSize(62px);
+        @include svgSize(48px);
         padding: 0 3px;
       }
     }

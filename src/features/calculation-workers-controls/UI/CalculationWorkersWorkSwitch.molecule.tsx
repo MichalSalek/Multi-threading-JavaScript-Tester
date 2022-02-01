@@ -6,7 +6,8 @@ import {
     useSingleWorkerSpecificStatus,
     UseSpecificWorkerStatusCommandEnum
 } from '@/features/calculation-workers-configuration/calculationWorkers.hooks'
-import { Button } from '@mui/material'
+import AppButtonAtom from '@/app-components/AppButton.atom'
+import AppInputAtom from '@/app-components/AppInput.atom'
 
 
 
@@ -35,23 +36,27 @@ const CalculationWorkersWorkSwitchMolecule = ({workerKey}: IProps): JSX.Element 
     return (
         <section>
 
-            <input
+            <AppInputAtom
                 disabled={isWorkerWorking}
-                type={'number'}
                 value={userInputComplexity}
-                min={2}
-                max={200}
-                onInput={(e) => setUserInputComplexity(Number(e.currentTarget.value))}
+                inputProps={
+                    {
+                        min: 2,
+                        max: 200,
+                        type: 'number'
+                    }
+                }
+                onChange={(e) => setUserInputComplexity(Number(e.currentTarget.value))}
             />
 
-            <Button onClick={() => {
+            <AppButtonAtom onClick={() => {
                 queueWorkerTask(workerKey, !isWorkerWorking ?
                     {workerTaskName: WEB_WORKER_TASKS.turnOnCalculations, complexity: userInputComplexity}
                     : {workerTaskName: WEB_WORKER_TASKS.turnOffCalculations},
                 `Triggering a switch at the "${workerKey.workerName}"`)
             }}
             > Worker {workerKey.workerName} {isWorkerWorking ? <strong>ON</strong> : 'OFF'}
-            </Button>
+            </AppButtonAtom>
             <br/>
 
         </section>

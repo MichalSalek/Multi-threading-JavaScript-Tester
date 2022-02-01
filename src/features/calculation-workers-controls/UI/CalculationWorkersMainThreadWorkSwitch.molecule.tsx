@@ -1,6 +1,6 @@
 import React from 'react'
 import { useMainThreadCalculations } from '@/features/calculation-workers-controls/calculationWorkersControls.hooks'
-import { Button } from '@mui/material'
+import AppButtonAtom from '@/app-components/AppButton.atom'
 
 
 
@@ -11,9 +11,9 @@ const CalculationWorkersMainThreadWorkSwitchMolecule = (): JSX.Element => {
 
 
     return (<>
-        <Button onClick={handleMainThreadSwitchChange}
+        <AppButtonAtom onClick={handleMainThreadSwitchChange}
         ><span>Main thread job is: {isMainThreadOn ? <strong>ON</strong> : 'OFF'}</span>
-        </Button>
+        </AppButtonAtom>
         <br/>
     </>)
 }
