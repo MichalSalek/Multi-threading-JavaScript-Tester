@@ -12,10 +12,18 @@ $sideBarPadding: 3px;
   flex-direction: column;
   width: fit-content;
 
+  %inactiveWindow {
+    background-color: black;
+  }
+
+  %activeWindow {
+    background-color: #0264b2;
+  }
+
   > strong {
     height: $heightOfBar;
     border-bottom: 1px solid $borderColor;
-    cursor: pointer;
+    cursor: default;
 
     display: flex;
     justify-content: space-between;
@@ -31,21 +39,21 @@ $sideBarPadding: 3px;
   }
 
   .inactive {
-    background-color: black;
+    @extend %inactiveWindow;
   }
 
   .active {
-    background-color: #0264b2;
+    @extend %activeWindow;
   }
 }
 
 .closeButton {
   position: relative;
-  cursor: pointer;
-  width: 40px;
+  width: 50px;
   height: 29px;
+  z-index: 1001;
 
-  &:hover {
+  &:hover, &:active {
     background-color: #e62223;
   }
 
@@ -54,7 +62,7 @@ $sideBarPadding: 3px;
     position: absolute;
     display: block;
     top: 15px;
-    right: 13px;
+    right: 18px;
     width: 13px;
     height: 1px;
     background-color: white;

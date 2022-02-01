@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from 'react'
 
 import scss from './FPSMonitor.atom.module.scss'
-import { DraggableItemComposition } from '@/layout/compositions/draggable-item/DraggableItem.composition'
+import { DraggableWindowComposition } from '@/layout/compositions/draggable-window/DraggableWindow.composition'
 import SystemComponentVisibilityComposition
-    from '@/layout/compositions/system-component-visibility/SystemComponentVisibility.composition'
+    from '@/layout/compositions/SystemComponentVisibility/SystemComponentVisibility.composition'
 
 
 
-const FPSMonitorAtomFloatingMolecule = (): JSX.Element => {
+const FPSMonitorFloatingMolecule = (): JSX.Element => {
 
     const FPSMonitorRef = useRef<HTMLElement>(null)
 
@@ -35,16 +35,16 @@ const FPSMonitorAtomFloatingMolecule = (): JSX.Element => {
 
     return (
         <SystemComponentVisibilityComposition visibilityOfSystemComponentControl={'FPSMonitor'}>
-            <DraggableItemComposition
+            <DraggableWindowComposition
                 componentUITitleBarName={'FPS monitor'}
                 systemComponentName={'FPSMonitor'}
-                onTheScreenPosition={{x: 500, y: 150}}>
+                onTheScreenPosition={{x: 50, y: 10}}>
                 <article
                     ref={FPSMonitorRef}
                     className={`${scss.host} display-inline-block`}/>
-            </DraggableItemComposition>
+            </DraggableWindowComposition>
         </SystemComponentVisibilityComposition>
     )
 }
 
-export default FPSMonitorAtomFloatingMolecule
+export default FPSMonitorFloatingMolecule

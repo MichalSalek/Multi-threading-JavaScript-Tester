@@ -5,6 +5,7 @@ import scss from './DraggableItem.composition.module.scss'
 import { handleControlPanelSwitchVisibility, SystemComponentNameType } from '@/features/control-panel/controlPanelSlice'
 import { useAppDispatch } from '@/core/store.core'
 import { useMemoizedOnTheScreenPosition } from '@/features/browser-storage/browserStorage.hooks'
+import { Button } from 'semantic-ui-react'
 
 
 
@@ -78,7 +79,7 @@ export const DraggableItemComposition = ({
             <div ref={nodeRef} className={scss.dragItem}>
                 <strong className={clickedOutsideThisWindow ? scss.inactive : scss.active}>
                     <span>{componentUITitleBarName}</span>
-                    <button onClick={handleCloseWindow} className={scss.closeButton}
+                    <Button onClick={handleCloseWindow} className={scss.closeButton}
                         data-description={'close-window-button'}/>
                 </strong>
                 {children}

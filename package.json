@@ -13,6 +13,9 @@
     "lint": "next lint --fix && npm run type-check"
   },
   "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.3.1",
     "@reduxjs/toolkit": "^1.7.0",
     "next": "latest",
     "react": "^17.0.2",
@@ -20,8 +23,6 @@
     "react-draggable": "^4.4.4",
     "react-redux": "^7.2.6",
     "sass": "^1.43.4",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^2.0.4",
     "socket.io": "^4.3.2",
     "socket.io-client": "^4.3.2"
   },
