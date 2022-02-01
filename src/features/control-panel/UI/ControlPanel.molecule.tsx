@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
-import scss from './ControlPanel.molecule.module.scss'
+import scss from './ControlPanel.module.scss'
 import { useAppDispatch, useAppSelector } from '@/core/store.core'
 import {
     handleControlPanelSwitchVisibility,
@@ -16,7 +16,7 @@ import { getStorageItem, setStorageItem } from '@/features/browser-storage/brows
 
 const Y_AXIS_STORAGE_KEY = `${STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION}_controlPanelYAxis`
 
-export const ControlPanelMolecule = (): JSX.Element => {
+const ControlPanelMolecule = (): JSX.Element => {
 
     const dispatch = useAppDispatch()
 
@@ -63,13 +63,15 @@ export const ControlPanelMolecule = (): JSX.Element => {
             <aside ref={nodeRef} className={`${scss.host} turn-on-opacity-animation`}>
 
                 <button id={'moveHandler'}
+                    name={'move'}
                     className={[scss.buttonMoveHandler, 'fa-lg', isAlreadyDragged ? scss.buttonMoveHandlerIsEnabled : ''].join(' ')}>
                     <i className="fad fa-arrows-alt-v"/>
                 </button>
 
                 <section className={`${scss.hostSection} turn-on-opacity-animation`}>
 
-                    <button onClick={collapseListHandler} className={scss.buttonCollapseHandler}>
+                    <button name={'collapseSwitch'} onClick={collapseListHandler}
+                        className={scss.buttonCollapseHandler}>
                         <section className={isListCollapsed ? 'display-none' : ''}>
                             <i className="fad fa-arrow-alt-from-right"/>
                             <i className="fad fa-arrow-alt-from-right"/>
@@ -106,3 +108,4 @@ export const ControlPanelMolecule = (): JSX.Element => {
 
 }
 
+export default ControlPanelMolecule

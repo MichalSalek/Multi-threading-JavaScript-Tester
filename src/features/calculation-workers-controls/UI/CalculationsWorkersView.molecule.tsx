@@ -7,7 +7,7 @@ import { useAppSelector } from '@/core/store.core'
 
 
 
-const CalculationsWorkersViewOrganism = (): JSX.Element => {
+const CalculationsWorkersViewMolecule = (): JSX.Element => {
 
     const workerRequestedAmount = useAppSelector(selectRequestedWorkersAmount)
 
@@ -15,7 +15,6 @@ const CalculationsWorkersViewOrganism = (): JSX.Element => {
 
 
     return (<>
-
         {workersAmountArray.map((_, index) =>
             <CalculationWorkersWorkSwitchMolecule
                 workerKey={{
@@ -27,4 +26,4 @@ const CalculationsWorkersViewOrganism = (): JSX.Element => {
     </>)
 }
 
-export default CalculationsWorkersViewOrganism
+export default CalculationsWorkersViewMolecule

@@ -1,10 +1,10 @@
 import React, { JSXElementConstructor, ReactElement } from 'react'
 import { AppProps } from 'next/app'
-import { Container } from 'semantic-ui-react'
 
 import Header from '@/layout/partials/Header'
 import Footer from '@/layout/partials/Footer'
-import scss from './partials/Layout.composition.module.scss'
+import scss from './partials/Layout.module.scss'
+import { Container } from '@mui/material'
 
 
 

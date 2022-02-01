@@ -1,10 +1,7 @@
 import React from 'react'
 import { NextPage } from 'next'
-
-import CalculationWorkersMainThreadWorkSwitchMolecule
-    from '@/features/calculation-workers-controls/UI/CalculationWorkersMainThreadWorkSwitch.molecule'
-import CalculationsWorkersGeneratorOrganism
-    from '@/features/calculation-workers-controls/UI/CalculationsWorkersGenerator.organism'
+import CalculationsWorkersControlsOrganism
+    from '@/features/calculation-workers-controls/UI/CalculationsWorkersControls.organism'
 
 
 
@@ -12,9 +9,7 @@ const MainAppScreenPage: NextPage = () => {
 
     return (
         <>
-            <CalculationWorkersMainThreadWorkSwitchMolecule/>
-
-            <CalculationsWorkersGeneratorOrganism/>
+            <CalculationsWorkersControlsOrganism/>
         </>
     )
 }

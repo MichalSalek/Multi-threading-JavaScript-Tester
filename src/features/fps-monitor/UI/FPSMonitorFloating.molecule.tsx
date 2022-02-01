@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 
-import scss from './FPSMonitor.atom.module.scss'
+import scss from './FPSMonitor.module.scss'
 import { DraggableWindowComposition } from '@/layout/compositions/draggable-window/DraggableWindow.composition'
 import SystemComponentVisibilityComposition
     from '@/layout/compositions/SystemComponentVisibility/SystemComponentVisibility.composition'

@@ -3,7 +3,7 @@
 // An actual application routes
 // Keep it correct with a real route names
 //
-export const ROUTE_PAGE_CALCULATIONS = '/calculations'
+export const ROUTE_PAGE_CALCULATIONS = '/main-app-screen'
 
 // API routes below
 //

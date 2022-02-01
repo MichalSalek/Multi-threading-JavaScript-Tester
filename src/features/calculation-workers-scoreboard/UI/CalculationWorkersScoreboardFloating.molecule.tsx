@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import scss from './CalculationWorkersScoreboard.molecule.module.scss'
+import scss from './CalculationWorkersScoreboard.module.scss'
 import {
     NamedWorkerReadyStatusType,
     NamedWorkerWorkStatusType,
@@ -7,7 +7,7 @@ import {
     WorkersAmountStateType,
     WorkersJobsType
 } from '@/features/web-workers-configuration/webWorkers.types'
-import { DraggableItemComposition } from '@/layout/compositions/draggable-item/DraggableItem.composition'
+import { DraggableWindowComposition } from '@/layout/compositions/draggable-window/DraggableWindow.composition'
 import { useAppSelector } from '@/core/store.core'
 import {
     selectActuallyWorkingWorkersAmount,
@@ -18,7 +18,7 @@ import {
 import { selectLastSocketResponseData } from '@/features/socket-client/socketSlice'
 import { MAIN_THREAD_KEY } from '@/app-config-and-utils'
 import SystemComponentVisibilityComposition
-    from '@/layout/compositions/system-component-visibility/SystemComponentVisibility.composition'
+    from '@/layout/compositions/SystemComponentVisibility/SystemComponentVisibility.composition'
 
 
 
@@ -53,18 +53,17 @@ const CalculationWorkersScoreboardFloatingMolecule = (): JSX.Element => {
 
     return (
         <SystemComponentVisibilityComposition visibilityOfSystemComponentControl={'scoreboard'}>
-            <DraggableItemComposition
+            <DraggableWindowComposition
                 componentUITitleBarName={'Scoreboard'}
                 systemComponentName={'scoreboard'}
-                onTheScreenPosition={{x: 700, y: 10}}
+                onTheScreenPosition={{x: 50, y: 70}}
             >
                 <section
                     className={`${scss.host} display-inline-block`}>
                     <h4>Calculation results:</h4> <span>Show all, even currently deactivated: </span><input
                         type={'checkbox'} checked={shouldShowDeactivated}
                         onChange={(event => setShouldShowDeactivated(event.currentTarget.checked))}/>
-                    <h5>Required number of workers: {workerRequestedAmount.amount}</h5>
-                    <h5>Workers who actually work: {allActuallyWorkWorkersAmount.amount}</h5>
+
 
                     <p className={scss.mainThread}>
                         <span>{MAIN_THREAD_KEY.workerName}:</span>
@@ -76,6 +75,10 @@ const CalculationWorkersScoreboardFloatingMolecule = (): JSX.Element => {
                         }</span>
 
                     </p>
+
+                    <h3>Required number of workers: {workerRequestedAmount.amount}</h3>
+
+                    <h5>Workers who actually work: {allActuallyWorkWorkersAmount.amount}</h5>
 
                     <ol className={[scss.listGrid, (() => (shouldShowDeactivated || workerRequestedAmount.amount > 0) ? '' : 'display-none')()].join(' ')}>
 
@@ -124,7 +127,7 @@ const CalculationWorkersScoreboardFloatingMolecule = (): JSX.Element => {
 
                     </ol>
                 </section>
-            </DraggableItemComposition>
+            </DraggableWindowComposition>
         </SystemComponentVisibilityComposition>
     )
 }

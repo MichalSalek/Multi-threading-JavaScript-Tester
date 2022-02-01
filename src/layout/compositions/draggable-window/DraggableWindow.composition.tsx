@@ -1,11 +1,10 @@
 import Draggable, { ControlPosition, DraggableData, DraggableEvent } from 'react-draggable'
 import React, { JSXElementConstructor, ReactElement, useEffect, useState } from 'react'
 import { AppProps } from 'next/app'
-import scss from './DraggableItem.composition.module.scss'
+import scss from './DraggableWindow.module.scss'
 import { handleControlPanelSwitchVisibility, SystemComponentNameType } from '@/features/control-panel/controlPanelSlice'
 import { useAppDispatch } from '@/core/store.core'
 import { useMemoizedOnTheScreenPosition } from '@/features/browser-storage/browserStorage.hooks'
-import { Button } from 'semantic-ui-react'
 
 
 
@@ -17,7 +16,7 @@ interface IProps {
 }
 
 
-export const DraggableItemComposition = ({
+export const DraggableWindowComposition = ({
     children,
     componentUITitleBarName,
     systemComponentName,
@@ -45,6 +44,7 @@ export const DraggableItemComposition = ({
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
+            console.dir(event.target)
             if (nodeRef.current && !nodeRef.current.contains(event.target as Node)) {
                 setClickedOutsideThisWindow(true)
             } else {
@@ -56,6 +56,7 @@ export const DraggableItemComposition = ({
             document.removeEventListener('mousedown', handleClickOutside, true)
         }
     }, [nodeRef])
+
 
     const [memoizedOnTheScreenPosition, setMemoizedOnTheScreenPosition] = useMemoizedOnTheScreenPosition(systemComponentName, onTheScreenPosition)
 
@@ -79,7 +80,7 @@ export const DraggableItemComposition = ({
             <div ref={nodeRef} className={scss.dragItem}>
                 <strong className={clickedOutsideThisWindow ? scss.inactive : scss.active}>
                     <span>{componentUITitleBarName}</span>
-                    <Button onClick={handleCloseWindow} className={scss.closeButton}
+                    <button onClick={handleCloseWindow} className={scss.closeButton}
                         data-description={'close-window-button'}/>
                 </strong>
                 {children}

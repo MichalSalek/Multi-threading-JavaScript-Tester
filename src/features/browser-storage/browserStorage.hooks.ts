@@ -189,9 +189,18 @@ export const useMemoizedOnTheScreenPosition = (
 
 
 
+    const validateControlPosition = (position: ControlPositionType): ControlPositionType => (
+        {
+            x: (() => position.x < 0 ? 0 : position.x)(),
+            y: (() => position.y < 0 ? 50 : position.y)()
+        })
+
+
     useEffect(() => {
         if (!isUndefinedType(memoizedPosition)) {
-            setStorageItem(browserStorageKey, JSON.stringify(memoizedPosition))
+            const validatedPosition = validateControlPosition(memoizedPosition)
+
+            setStorageItem(browserStorageKey, JSON.stringify(validatedPosition))
         }
         return () => undefined
     }, [memoizedPosition, browserStorageKey])

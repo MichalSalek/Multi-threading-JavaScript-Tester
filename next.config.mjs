@@ -10,5 +10,9 @@ export default {
     reactStrictMode: true,
     sassOptions: {
         includePaths: [path.join(path.dirname('./src'), 'styles')]
+    },
+    i18n: {
+        locales: ["en"],
+        defaultLocale: "en",
     }
 }

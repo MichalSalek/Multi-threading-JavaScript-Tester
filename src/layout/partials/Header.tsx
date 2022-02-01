@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './Header.module.scss'
-import scss from './Layout.composition.module.scss'
+import scss from './Layout.module.scss'
 
 
 

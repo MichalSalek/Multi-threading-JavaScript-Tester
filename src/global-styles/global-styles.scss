@@ -11,6 +11,9 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
   Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+  min-height: 100vh;
+  height: 100%;
 }
 
 body {
@@ -73,4 +76,42 @@ button {
 // Second layer of duo-tone FA icons opacity (increased)
 .svg-inline--fa .fa-secondary {
   opacity: 0.7;
+}
+
+
+.kek {
+  @keyframes kekk {
+    0%, 100% {
+      transform: rotate(0)
+    }
+
+    50% {
+      transform: rotate(360deg)
+    }
+
+  }
+
+  display: inline-block;
+  transform-origin: center;
+  transition: transform 0.2s ease;
+  animation: kekk 0.9s cubic-bezier(1, 0, 0, 1) infinite both;
+}
+
+
+.geg {
+  @keyframes gegg {
+    0%, 100% {
+      transform: scale(1)
+    }
+
+    50% {
+      transform: scale(2)
+    }
+
+  }
+
+  display: inline-block;
+  transform-origin: left;
+  transition: transform 0.5s ease-out;
+  animation: gegg 0.5s cubic-bezier(1, 0, 0, 1) infinite both;
 }
