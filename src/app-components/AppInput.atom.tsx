@@ -7,7 +7,6 @@ import { InputProps } from '@mui/material/Input/Input'
 const AppInputAtom = (props: InputProps): JSX.Element => {
 
     return <Input
-        type={'number'}
 
         {...props}/>
 }

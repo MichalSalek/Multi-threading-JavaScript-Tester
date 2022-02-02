@@ -128,19 +128,20 @@ export const flagIfWorkerIsWorking = (workerKey: WorkerKeyType, workingNewFlag: 
 }
 
 
-
-export const getValidatedAndCorrectPassedAmount = (requestedAmount: number | string, minValue: number, maxValue: number): number => {
+// Give number or string with the range, get a number in the range.
+//
+export const getValidatedPassedAmount = (requestedAmount: number | string, minValue: number, maxValue: number): number => {
 
     // Usually: a whitespace or nothing. (probably user removes everything from input by a backspace)
-    if (!requestedAmount) return minValue
+    if (!requestedAmount) return 0
 
     // IF fulfilled, when number has more than x digits, where x is amount of digits in the passed number.
     if (typeof requestedAmount === 'string' && requestedAmount.length > String(maxValue).length) return maxValue
 
     // Simple range check and making a nice iteration loop when User will use arrows to control amount
     const newAmountValue = Number(requestedAmount)
-    if (newAmountValue < minValue) return maxValue
-    if (newAmountValue > maxValue) return minValue
+    if (newAmountValue < minValue) return minValue
+    if (newAmountValue > maxValue) return maxValue
 
     // Validation passed, return actual value
     return newAmountValue

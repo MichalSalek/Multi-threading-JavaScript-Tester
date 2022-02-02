@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { queueWorkerTask } from '@/features/web-workers-configuration/webWorkers.api'
+import React, { FormEvent, useState } from 'react'
+import { getValidatedPassedAmount, queueWorkerTask } from '@/features/web-workers-configuration/webWorkers.api'
 import { WEB_WORKER_TASKS } from '@/features/web-workers-configuration/webWorkersEvents'
 import { WorkerKeyType } from '@/features/web-workers-configuration/webWorkers.types'
 import {
@@ -8,6 +8,7 @@ import {
 } from '@/features/calculation-workers-configuration/calculationWorkers.hooks'
 import AppButtonAtom from '@/app-components/AppButton.atom'
 import AppInputAtom from '@/app-components/AppInput.atom'
+import { MAX_WORKER_COMPLEXITY_POSSIBILITY } from '@/app-config-and-utils'
 
 
 
@@ -28,7 +29,7 @@ const CalculationWorkersWorkSwitchMolecule = ({workerKey}: IProps): JSX.Element 
 
     // Complexity of calculations defined by user
     //
-    const [userInputComplexity, setUserInputComplexity] = useState(25)
+    const [userInputComplexity, setUserInputComplexity] = useState<number | string>(25)
 
 
 
@@ -39,19 +40,19 @@ const CalculationWorkersWorkSwitchMolecule = ({workerKey}: IProps): JSX.Element 
             <AppInputAtom
                 disabled={isWorkerWorking}
                 value={userInputComplexity}
-                inputProps={
-                    {
-                        min: 2,
-                        max: 200,
-                        type: 'number'
-                    }
-                }
-                onChange={(e) => setUserInputComplexity(Number(e.currentTarget.value))}
+                inputProps={{type: 'number'}}
+                onChange={(e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+                    setUserInputComplexity(e.currentTarget.value)}
+                onBlur={(e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+                    setUserInputComplexity(getValidatedPassedAmount(e.currentTarget.value, 2, MAX_WORKER_COMPLEXITY_POSSIBILITY))}
             />
 
             <AppButtonAtom onClick={() => {
                 queueWorkerTask(workerKey, !isWorkerWorking ?
-                    {workerTaskName: WEB_WORKER_TASKS.turnOnCalculations, complexity: userInputComplexity}
+                    {
+                        workerTaskName: WEB_WORKER_TASKS.turnOnCalculations,
+                        complexity: getValidatedPassedAmount(userInputComplexity, 2, MAX_WORKER_COMPLEXITY_POSSIBILITY)
+                    }
                     : {workerTaskName: WEB_WORKER_TASKS.turnOffCalculations},
                 `Triggering a switch at the "${workerKey.workerName}"`)
             }}

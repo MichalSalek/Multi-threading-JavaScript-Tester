@@ -4,7 +4,7 @@ import {
     selectRequestedWorkersAmount
 } from '@/features/web-workers-configuration/webWorkersSlice'
 import { WorkerAmountChangeActionEnum } from '@/features/web-workers-configuration/webWorkers.types'
-import { getValidatedAndCorrectPassedAmount } from '@/features/web-workers-configuration/webWorkers.api'
+import { getValidatedPassedAmount } from '@/features/web-workers-configuration/webWorkers.api'
 import { useAppDispatch, useAppSelector } from '@/core/store.core'
 import { MAX_WORKERS_LIMIT } from '@/app-config-and-utils'
 import { ButtonGroup } from '@mui/material'
@@ -19,7 +19,7 @@ const CalculationsWorkersAmountMolecule = (): JSX.Element => {
 
     const dispatch = useAppDispatch()
 
-    const [newWorkersAmount, setNewWorkersAmount] = useState(1)
+    const [newWorkersAmount, setNewWorkersAmount] = useState<number | string>(1)
 
 
     return (<>
@@ -40,14 +40,16 @@ const CalculationsWorkersAmountMolecule = (): JSX.Element => {
         <br/>
         <AppInputAtom
             type={'number'}
+            value={newWorkersAmount}
             aria-label={'Expected Workers amount'}
             placeholder="How many workers do you want?"
-            value={newWorkersAmount}
-            onChange={(e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => setNewWorkersAmount(getValidatedAndCorrectPassedAmount(e.currentTarget.value, 0, MAX_WORKERS_LIMIT))}
+            onChange={(e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => setNewWorkersAmount(e.currentTarget.value)}
+            onBlur={(e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+                setNewWorkersAmount(getValidatedPassedAmount(e.currentTarget.value, 0, MAX_WORKERS_LIMIT))}
         />
         <AppButtonAtom onClick={() => dispatch(handleWorkerAmountChange({
             amountChangeAction: WorkerAmountChangeActionEnum.setAmount,
-            amount: newWorkersAmount
+            amount: getValidatedPassedAmount(newWorkersAmount, 0, MAX_WORKERS_LIMIT)
         }))}>
             Set specific Workers amount
         </AppButtonAtom>

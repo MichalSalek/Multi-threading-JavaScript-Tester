@@ -12,7 +12,7 @@ import {
     WorkerAmountChangeActionEnum,
     WorkersAmountStateType
 } from '@/features/web-workers-configuration/webWorkers.types'
-import { getValidatedAndCorrectPassedAmount } from '@/features/web-workers-configuration/webWorkers.api'
+import { getValidatedPassedAmount } from '@/features/web-workers-configuration/webWorkers.api'
 import { MAX_WORKERS_LIMIT } from '@/app-config-and-utils'
 
 
@@ -56,7 +56,7 @@ export const webWorkersSlice = createSlice({
             switch (action.payload.amountChangeAction) {
             case WorkerAmountChangeActionEnum.setAmount:
                 if (typeof action.payload.amount === 'undefined') break
-                state.requestedAmount.amount = getValidatedAndCorrectPassedAmount(action.payload.amount, 0, MAX_WORKERS_LIMIT)
+                state.requestedAmount.amount = getValidatedPassedAmount(action.payload.amount, 0, MAX_WORKERS_LIMIT)
                 break
             case WorkerAmountChangeActionEnum.addOne:
                 state.requestedAmount.amount += 1

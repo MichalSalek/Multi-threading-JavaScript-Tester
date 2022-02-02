@@ -62,6 +62,9 @@ export const WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS = 390
 // Realtime - The most accurate way to receive data over time (expert mode)
 export const INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES: number | 0 = 0 // 0 means realtime
 
+// Complexity limit. So high values can just crash the browsers (event loop overload)
+export const MAX_WORKER_COMPLEXITY_POSSIBILITY = 200
+
 
 // Browser storage:
 //
