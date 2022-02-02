@@ -156,12 +156,12 @@ export const useControlPanelCollapseStateStoragePersist = (initialBehavior: bool
 //
 type ControlPositionType = ControlPosition
 type SetControlPositionType = (event: DraggableEvent, data: DraggableData) => void
-export type UseMemoizedOnTheScreenPositionType = [ControlPositionType, SetControlPositionType]
+export type UsePersistedPositionByBrowserStorageType = [ControlPositionType, SetControlPositionType]
 
-export const useMemoizedOnTheScreenPosition = (
+export const usePersistedPositionByBrowserStorage = (
     storageSwitchName: SystemComponentNameType | string,
     initialBehavior: ControlPositionType
-): UseMemoizedOnTheScreenPositionType => {
+): UsePersistedPositionByBrowserStorageType => {
 
     const [memoizedPosition, setMemoizedPosition] = useState<ControlPositionType>(initialBehavior)
 

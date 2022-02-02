@@ -7,7 +7,7 @@ import {
     handleControlPanelSwitchVisibility
 } from '@/features/control-panel/controlPanelSlice'
 import { useAppDispatch } from '@/core/store.core'
-import { useMemoizedOnTheScreenPosition } from '@/features/browser-storage/browserStorage.hooks'
+import { usePersistedPositionByBrowserStorage } from '@/features/browser-storage/browserStorage.hooks'
 
 
 
@@ -53,7 +53,7 @@ export const DraggableWindowComposition = ({
     }, [nodeRef])
 
 
-    const [memoizedOnTheScreenPosition, onDragStopHandler] = useMemoizedOnTheScreenPosition(switchVisibilityConfiguration.name, onTheScreenPosition)
+    const [memoizedOnTheScreenPosition, onDragStopHandler] = usePersistedPositionByBrowserStorage(switchVisibilityConfiguration.name, onTheScreenPosition)
 
 
 
