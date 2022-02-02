@@ -31,7 +31,7 @@ export const possibleControlPanelSwitchesNames = Object.keys(initialState.visibi
 // pass nothing - then switch works like typical on/off switch
 // true - turn on the visibility
 // false - turn it off - hide component
-type ControlPanelSwitchVisibilityType = { name: SystemComponentNameType; visibilitySwitchState?: boolean | undefined }
+export type ControlPanelSwitchVisibilityType = { name: SystemComponentNameType; visibilitySwitchState?: boolean | undefined }
 
 export const controlPanelSlice = createSlice({
     name: 'controlPanelSlice',

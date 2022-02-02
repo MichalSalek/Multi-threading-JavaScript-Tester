@@ -37,7 +37,7 @@ const FPSMonitorFloatingMolecule = (): JSX.Element => {
         <SystemComponentVisibilityComposition visibilityOfSystemComponentControl={'FPSMonitor'}>
             <DraggableWindowComposition
                 componentUITitleBarName={'FPS monitor'}
-                systemComponentName={'FPSMonitor'}
+                switchVisibilityConfiguration={{name: 'FPSMonitor', visibilitySwitchState: false}}
                 onTheScreenPosition={{x: 50, y: 10}}>
                 <article
                     ref={FPSMonitorRef}

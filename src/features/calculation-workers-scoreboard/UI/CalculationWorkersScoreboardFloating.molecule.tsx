@@ -55,7 +55,7 @@ const CalculationWorkersScoreboardFloatingMolecule = (): JSX.Element => {
         <SystemComponentVisibilityComposition visibilityOfSystemComponentControl={'scoreboard'}>
             <DraggableWindowComposition
                 componentUITitleBarName={'Scoreboard'}
-                systemComponentName={'scoreboard'}
+                switchVisibilityConfiguration={{name: 'scoreboard', visibilitySwitchState: false}}
                 onTheScreenPosition={{x: 50, y: 70}}
             >
                 <section

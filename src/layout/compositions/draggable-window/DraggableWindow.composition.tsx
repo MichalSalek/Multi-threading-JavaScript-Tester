@@ -2,7 +2,10 @@ import Draggable, { ControlPosition, DraggableData, DraggableEvent } from 'react
 import React, { JSXElementConstructor, ReactElement, useEffect, useState } from 'react'
 import { AppProps } from 'next/app'
 import scss from './DraggableWindow.module.scss'
-import { handleControlPanelSwitchVisibility, SystemComponentNameType } from '@/features/control-panel/controlPanelSlice'
+import {
+    ControlPanelSwitchVisibilityType,
+    handleControlPanelSwitchVisibility
+} from '@/features/control-panel/controlPanelSlice'
 import { useAppDispatch } from '@/core/store.core'
 import { useMemoizedOnTheScreenPosition } from '@/features/browser-storage/browserStorage.hooks'
 
@@ -11,7 +14,7 @@ import { useMemoizedOnTheScreenPosition } from '@/features/browser-storage/brows
 interface IProps {
     children: ReactElement<AppProps, JSXElementConstructor<unknown>>
     componentUITitleBarName: string
-    systemComponentName: SystemComponentNameType
+    switchVisibilityConfiguration: ControlPanelSwitchVisibilityType
     onTheScreenPosition?: ControlPosition
 }
 
@@ -19,7 +22,7 @@ interface IProps {
 export const DraggableWindowComposition = ({
     children,
     componentUITitleBarName,
-    systemComponentName,
+    switchVisibilityConfiguration,
     onTheScreenPosition = {x: 50, y: 50}
 }: IProps): JSX.Element => {
 
@@ -29,14 +32,7 @@ export const DraggableWindowComposition = ({
 
 
     const handleCloseWindow = (): void => {
-        switch (systemComponentName) {
-        case 'scoreboard':
-            dispatch(handleControlPanelSwitchVisibility({name: 'scoreboard', visibilitySwitchState: false}))
-            break
-        case 'FPSMonitor':
-            dispatch(handleControlPanelSwitchVisibility({name: 'FPSMonitor', visibilitySwitchState: false}))
-            break
-        }
+        dispatch(handleControlPanelSwitchVisibility(switchVisibilityConfiguration))
     }
 
 
@@ -57,7 +53,7 @@ export const DraggableWindowComposition = ({
     }, [nodeRef])
 
 
-    const [memoizedOnTheScreenPosition, setMemoizedOnTheScreenPosition] = useMemoizedOnTheScreenPosition(systemComponentName, onTheScreenPosition)
+    const [memoizedOnTheScreenPosition, setMemoizedOnTheScreenPosition] = useMemoizedOnTheScreenPosition(switchVisibilityConfiguration.name, onTheScreenPosition)
 
 
     const onDragStopHandler = (event: DraggableEvent, data: DraggableData): void => {
