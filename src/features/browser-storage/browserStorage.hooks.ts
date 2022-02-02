@@ -22,7 +22,7 @@ import {
     selectSystemComponentsVisibilities,
     SystemComponentNameType
 } from '@/features/control-panel/controlPanelSlice'
-import { ControlPosition } from 'react-draggable'
+import { ControlPosition, DraggableData, DraggableEvent } from 'react-draggable'
 
 
 
@@ -155,7 +155,7 @@ export const useControlPanelCollapseStateStoragePersist = (initialBehavior: bool
 // CONTROL PANEL COLLAPSE STATE STORAGE PERSIST
 //
 type ControlPositionType = ControlPosition
-type SetControlPositionType = Dispatch<SetStateAction<ControlPosition>>
+type SetControlPositionType = (event: DraggableEvent, data: DraggableData) => void
 export type UseMemoizedOnTheScreenPositionType = [ControlPositionType, SetControlPositionType]
 
 export const useMemoizedOnTheScreenPosition = (
@@ -166,7 +166,6 @@ export const useMemoizedOnTheScreenPosition = (
     const [memoizedPosition, setMemoizedPosition] = useState<ControlPositionType>(initialBehavior)
 
     const browserStorageKey = useMemo(() => `${STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION}_${storageSwitchName}`, [storageSwitchName])
-
 
     useEffect(() => {
         const memoizedOnTheScreenPositionValue = getStorageItem(browserStorageKey)
@@ -206,8 +205,15 @@ export const useMemoizedOnTheScreenPosition = (
     }, [memoizedPosition, browserStorageKey])
 
 
+    const onDragStopHandler = (event: DraggableEvent, data: DraggableData): void => {
+        setMemoizedPosition({
+            x: data.x,
+            y: data.y
+        })
+    }
 
-    return [memoizedPosition, setMemoizedPosition]
+
+    return [memoizedPosition, onDragStopHandler]
 }
 
 

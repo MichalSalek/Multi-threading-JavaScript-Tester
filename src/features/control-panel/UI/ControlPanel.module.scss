@@ -1,6 +1,11 @@
 @use '../../../global-styles/variables';
 
 .host {
+  z-index: 1900;
+  position: relative;
+}
+
+.innerHost {
   position: fixed;
   left: 0;
   top: 180px;
@@ -19,17 +24,17 @@
 //
 
 $control-panel-background-color: #0f100f;
+$control-panel-background-color-transparently: #0F100FFA;
 
 $sideButtonWidth: 20px;
 
-%hoverEffectBackgroundColorLighter {
-  &:hover {
-    background-color: lighten($control-panel-background-color, 5%);
-  }
-}
 
 %darkBackgroundColor {
   background-color: $control-panel-background-color;
+}
+
+%darkBackgroundColorTransparently {
+  background-color: $control-panel-background-color-transparently;
 }
 
 %hoverEffectControlChange {
@@ -63,28 +68,31 @@ $sideButtonWidth: 20px;
   --fa-secondary-color: #3d92c7d6;
 }
 
-%buttonMoveHandlerActiveEffect {
+%moveHandlerActiveEffect {
   @extend %colorVariablesAttributesEnabled;
-
-  svg {
-    transform: scale(1.4);
-  }
 }
 
 //
 //
 // STYLING
 //
-.buttonMoveHandler {
-  @extend %darkBackgroundColor;
+.moveHandler {
+  @extend %darkBackgroundColorTransparently;
   @extend %colorVariablesAttributesDisabled;
 
-  height: 30px;
-  width: $sideButtonWidth;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 38px;
+  width: 46px;
 
   border: variables.$masterBorderStyle;
   border-radius: 0 5px 0 0;
   border-width: 2px 2px 0 0;
+
+  position: relative;
+  z-index: 2001;
 
   svg {
     transition: transform 0.08s ease;
@@ -92,23 +100,29 @@ $sideButtonWidth: 20px;
   }
 
   &:hover {
-    @extend %buttonMoveHandlerActiveEffect;
+    @extend %moveHandlerActiveEffect;
   }
 }
 
-.buttonMoveHandlerIsEnabled {
-  @extend %buttonMoveHandlerActiveEffect;
+.moveHandlerIsEnabled {
+  @extend %moveHandlerActiveEffect;
+
+  svg {
+    transform: scale(1.6);
+  }
 }
 
 .controlsList {
-  @extend %darkBackgroundColor;
-  padding: 3px;
-  z-index: 1;
+  @extend %darkBackgroundColorTransparently;
+  padding: 2px;
   transition: transform 0.5s cubic-bezier(0.37, 0.98, 0.63, 0.88);
 
   border: variables.$masterBorderStyle;
-  border-width: 2px 2px 2px 0;
+  border-width: 0 2px 1px 0;
   border-radius: 0 20px 20px 0;
+
+  position: relative;
+  z-index: 2000;
 
   .disabledControl {
     @extend %colorVariablesAttributesDisabled;
@@ -116,6 +130,10 @@ $sideButtonWidth: 20px;
 
   .enabledControl {
     @extend %colorVariablesAttributesEnabled;
+
+    button > span {
+      opacity: 0.8;
+    }
 
     svg {
       @extend %dropShadowLightColor;
@@ -125,9 +143,7 @@ $sideButtonWidth: 20px;
 
 
   .listItem {
-    @extend %hoverEffectBackgroundColorLighter;
-
-    margin: 5px;
+    margin: 5px 0;
 
     > button {
       width: 100%;
@@ -145,9 +161,9 @@ $sideButtonWidth: 20px;
     }
 
     span {
-      font-size: 0.8rem;
-      letter-spacing: 0.2px;
-      font-weight: bold;
+      font-size: 0.77rem;
+      letter-spacing: -0.3px;
+      font-weight: 800;
       padding: 0 0.5rem;
       color: white;
       opacity: 0.7;
@@ -181,11 +197,10 @@ $sideButtonWidth: 20px;
 }
 
 .collapsedControlsList {
-  transform: translateX(-119px);
+  transform: translateX(-112px);
 }
 
-.buttonCollapseHandler {
-  @extend %hoverEffectBackgroundColorLighter;
+.collapseHandler {
   @extend %darkBackgroundColor;
 
   border: variables.$masterBorderStyle;
@@ -193,7 +208,9 @@ $sideButtonWidth: 20px;
 
   padding: 0 4px;
   width: $sideButtonWidth;
-  z-index: 2;
+
+  position: relative;
+  z-index: 2002;
 
   > section {
     display: flex;
@@ -217,7 +234,6 @@ $sideButtonWidth: 20px;
 // KEYFRAMES
 //
 
-
 $svg-animation-scale: 1.04;
 
 @keyframes animate-on-hover-keyframe {
@@ -233,7 +249,7 @@ $svg-animation-scale: 1.04;
 
 @keyframes animate-on-turn-on-keyframe {
   0% {
-    filter: brightness(7) drop-shadow(0 5px 2px rgba(113, 113, 240, 0.7)) sepia(1);
+    filter: brightness(7) drop-shadow(0 5px 2px rgba(113, 113, 240, 0.8)) sepia(1);
   }
 
   30% {
@@ -245,7 +261,7 @@ $svg-animation-scale: 1.04;
   }
 
   100% {
-    filter: brightness(1) drop-shadow(0 5px 2px rgba(113, 113, 240, 0.5));
+    filter: brightness(1) drop-shadow(0 5px 2px rgba(113, 113, 240, 0.6));
   }
 }
 

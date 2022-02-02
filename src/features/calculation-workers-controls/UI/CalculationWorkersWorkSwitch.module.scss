@@ -1,0 +1,23 @@
+.host {
+  display: flex;
+  flex-direction: column;
+
+  height: 62px;
+  margin-bottom: 10px;
+}
+
+.complexityForm {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 6px;
+
+  span {
+    color: gray;
+    pointer-events: none;
+  }
+
+  input {
+    width: 52px;
+  }
+}

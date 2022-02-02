@@ -4,6 +4,7 @@ import CalculationWorkersWorkSwitchMolecule
     from '@/features/calculation-workers-controls/UI/CalculationWorkersWorkSwitch.molecule'
 import { constructWorkerNameByOrderIndex } from '@/features/web-workers-configuration/webWorkers.api'
 import { useAppSelector } from '@/core/store.core'
+import scss from './CalculationsWorkersView.module.scss'
 
 
 
@@ -14,7 +15,7 @@ const CalculationsWorkersViewMolecule = (): JSX.Element => {
     const workersAmountArray = useMemo(() => Array(workerRequestedAmount.amount).fill(undefined), [workerRequestedAmount])
 
 
-    return (<>
+    return (<main className={scss.host}>
         {workersAmountArray.map((_, index) =>
             <CalculationWorkersWorkSwitchMolecule
                 workerKey={{
@@ -23,7 +24,7 @@ const CalculationsWorkersViewMolecule = (): JSX.Element => {
                 }}
                 key={index}
             />)}
-    </>)
+    </main>)
 }
 
 export default CalculationsWorkersViewMolecule

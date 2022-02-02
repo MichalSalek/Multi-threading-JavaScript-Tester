@@ -1,4 +1,4 @@
-import Draggable, { ControlPosition, DraggableData, DraggableEvent } from 'react-draggable'
+import Draggable, { ControlPosition } from 'react-draggable'
 import React, { JSXElementConstructor, ReactElement, useEffect, useState } from 'react'
 import { AppProps } from 'next/app'
 import scss from './DraggableWindow.module.scss'
@@ -53,18 +53,11 @@ export const DraggableWindowComposition = ({
     }, [nodeRef])
 
 
-    const [memoizedOnTheScreenPosition, setMemoizedOnTheScreenPosition] = useMemoizedOnTheScreenPosition(switchVisibilityConfiguration.name, onTheScreenPosition)
+    const [memoizedOnTheScreenPosition, onDragStopHandler] = useMemoizedOnTheScreenPosition(switchVisibilityConfiguration.name, onTheScreenPosition)
 
 
-    const onDragStopHandler = (event: DraggableEvent, data: DraggableData): void => {
-        setMemoizedOnTheScreenPosition({
-            x: data.x,
-            y: data.y
-        })
-    }
 
-
-    return (
+    return (<aside className={scss.host}>
         <Draggable
             nodeRef={nodeRef}
             handle="strong"
@@ -81,6 +74,6 @@ export const DraggableWindowComposition = ({
                 {children}
             </div>
         </Draggable>
-    )
+    </aside>)
 
 }

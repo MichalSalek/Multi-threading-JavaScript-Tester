@@ -2,7 +2,6 @@ import React, { JSXElementConstructor, ReactElement } from 'react'
 import { AppProps } from 'next/app'
 
 import Header from '@/layout/partials/Header'
-import Footer from '@/layout/partials/Footer'
 import scss from './partials/Layout.module.scss'
 import { Container } from '@mui/material'
 
@@ -16,7 +15,7 @@ const LayoutComposition = ({children}: { children: ReactElement<AppProps, JSXEle
             <main className={scss.main}>
                 <Container>{children}</Container>
             </main>
-            <Footer/>
+            {/*<Footer/>*/}
         </main>
     )
 }

@@ -55,63 +55,16 @@ button {
   display: none !important;
 }
 
-
-.turn-on-opacity-animation {
-  @keyframes turn-on-animation-keyframe {
-    0% {
-      opacity: 0
-    }
-
-    50% {
-      opacity: 0.4
-    }
-
-    50% {
-      opacity: 1
-    }
-  }
-  animation: turn-on-animation-keyframe 0.5s cubic-bezier(1, 0, 0, 1) forwards;
+.visibility-hidden {
+  visibility: hidden !important;
 }
+
 
 // Second layer of duo-tone FA icons opacity (increased)
 .svg-inline--fa .fa-secondary {
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 
-.kek {
-  @keyframes kekk {
-    0%, 100% {
-      transform: rotate(0)
-    }
-
-    50% {
-      transform: rotate(360deg)
-    }
-
-  }
-
-  display: inline-block;
-  transform-origin: center;
-  transition: transform 0.2s ease;
-  animation: kekk 0.9s cubic-bezier(1, 0, 0, 1) infinite both;
-}
 
 
-.geg {
-  @keyframes gegg {
-    0%, 100% {
-      transform: scale(1)
-    }
-
-    50% {
-      transform: scale(2)
-    }
-
-  }
-
-  display: inline-block;
-  transform-origin: left;
-  transition: transform 0.5s ease-out;
-  animation: gegg 0.5s cubic-bezier(1, 0, 0, 1) infinite both;
-}

@@ -19,13 +19,12 @@ const SystemComponentVisibilityComposition = ({children, visibilityOfSystemCompo
 
     const systemComponentsVisibilities: ISystemComponentsVisibilities = useAppSelector(selectSystemComponentsVisibilities)
 
-    const getGenericComponentClassName = (): string => `component-visibility component-visibility-${visibilityOfSystemComponentControl}`
-
-    const getVisibilityClassName = (): string => systemComponentsVisibilities[visibilityOfSystemComponentControl] ? '' : 'display-none'
+    const getVisibilityClassName = (): string => systemComponentsVisibilities[visibilityOfSystemComponentControl] ? '' : 'visibility-hidden'
+    
 
     return (
         <aside
-            className={[getGenericComponentClassName(), getVisibilityClassName(), 'turn-on-opacity-animation'].join(' ')}>
+            className={getVisibilityClassName()}>
             {children}
         </aside>
     )

@@ -28,9 +28,6 @@ const ControlPanelMolecule = (): JSX.Element => {
 
     const collapseListHandler = () => setIsListCollapsed((prevVal) => !prevVal)
 
-    const getUIEnabledFeatureClassName = useCallback(
-        (featureVisibilityState: boolean): string => featureVisibilityState ? scss.enabledControl : scss.disabledControl, [])
-
     const [isAlreadyDragged, setIsAlreadyDragged] = useState(false)
 
     const [YAxisPositionOfControlPanel, setYAxisPositionOfControlPanel] = useState(0)
@@ -50,7 +47,11 @@ const ControlPanelMolecule = (): JSX.Element => {
         setStorageItem(Y_AXIS_STORAGE_KEY, String(data.y))
     }
 
-    return (
+    const getUIEnabledFeatureClassName = useCallback(
+        (featureVisibilityState: boolean): string => featureVisibilityState ? scss.enabledControl : scss.disabledControl, [])
+
+
+    return (<aside className={scss.host}>
         <Draggable
             nodeRef={nodeRef}
             handle="#moveHandler"
@@ -60,18 +61,18 @@ const ControlPanelMolecule = (): JSX.Element => {
             onStart={() => setIsAlreadyDragged(true)}
             onStop={onStopDragHandler}
         >
-            <aside ref={nodeRef} className={`${scss.host} turn-on-opacity-animation`}>
+            <aside ref={nodeRef} className={`${scss.innerHost} turn-on-opacity-animation`}>
 
-                <button id={'moveHandler'}
-                    name={'move'}
-                    className={[scss.buttonMoveHandler, 'fa-lg', isAlreadyDragged ? scss.buttonMoveHandlerIsEnabled : ''].join(' ')}>
+                <nav
+                    id={'moveHandler'}
+                    className={[scss.moveHandler, 'fa-lg', 'fa-swap-opacity', isAlreadyDragged ? scss.moveHandlerIsEnabled : ''].join(' ')}>
                     <i className="fad fa-arrows-alt-v"/>
-                </button>
+                </nav>
 
                 <section className={`${scss.hostSection} turn-on-opacity-animation`}>
 
                     <button name={'collapseSwitch'} onClick={collapseListHandler}
-                        className={scss.buttonCollapseHandler}>
+                        className={scss.collapseHandler}>
                         <section className={isListCollapsed ? 'display-none' : ''}>
                             <i className="fad fa-arrow-alt-from-right"/>
                             <i className="fad fa-arrow-alt-from-right"/>
@@ -104,7 +105,7 @@ const ControlPanelMolecule = (): JSX.Element => {
                 </section>
             </aside>
         </Draggable>
-    )
+    </aside>)
 
 }
 
