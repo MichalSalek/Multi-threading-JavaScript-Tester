@@ -6,13 +6,17 @@
   margin-bottom: 10px;
 }
 
+.mainFireButton {
+  color: #08024b;
+}
+
 .complexityForm {
   display: flex;
   justify-content: center;
   align-items: baseline;
   gap: 6px;
 
-  span {
+  .inputLabel {
     color: gray;
     pointer-events: none;
   }

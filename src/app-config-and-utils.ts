@@ -63,6 +63,7 @@ export const WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS = 390
 export const INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES: number | 0 = 0 // 0 means realtime
 
 // Complexity limit. So high values can just crash the browsers (event loop overload)
+export const MIN_WORKER_COMPLEXITY_POSSIBILITY = 2
 export const MAX_WORKER_COMPLEXITY_POSSIBILITY = 200
 
 
