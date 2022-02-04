@@ -16,21 +16,37 @@ import { getStorageItem, setStorageItem } from '@/features/browser-storage/brows
 
 const Y_AXIS_STORAGE_KEY = `${STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION}_controlPanelYAxis`
 
+
 const ControlPanelMolecule = (): JSX.Element => {
 
     const dispatch = useAppDispatch()
 
+
     const nodeRef = React.createRef<HTMLDivElement>()
 
+    
     const systemComponentsVisibilities: ISystemComponentsVisibilities = useAppSelector(selectSystemComponentsVisibilities)
+
 
     const [isListCollapsed, setIsListCollapsed] = useControlPanelCollapseStateStoragePersist(false)
 
     const collapseListHandler = () => setIsListCollapsed((prevVal) => !prevVal)
 
+
     const [isAlreadyDragged, setIsAlreadyDragged] = useState(false)
 
+
     const [YAxisPositionOfControlPanel, setYAxisPositionOfControlPanel] = useState(0)
+
+
+    const [positionFlipped, setPositionFlipped] = useState(false) // @TODO isMobileResolution()
+
+
+    useEffect(() => {
+        setIsListCollapsed(true)
+        return () => undefined
+    }, [positionFlipped, setIsListCollapsed])
+
 
     useEffect(() => {
         const memoizedValue = getStorageItem(Y_AXIS_STORAGE_KEY)
@@ -51,58 +67,80 @@ const ControlPanelMolecule = (): JSX.Element => {
         (featureVisibilityState: boolean): string => featureVisibilityState ? scss.enabledControl : scss.disabledControl, [])
 
 
-    return (<aside className={scss.host}>
+    return (<aside className={[scss.host, (() => positionFlipped ? scss.hostFlipped : '')()].join(' ')}>
         <Draggable
             nodeRef={nodeRef}
             handle="#moveHandler"
             bounds={'body'}
-            axis={'y'}
-            position={{x: 0, y: YAxisPositionOfControlPanel}}
+            axis={positionFlipped ? 'x' : 'y'}
+            position={positionFlipped ? {
+                x: 0,
+                y: 0
+            } : {
+                x: 0,
+                y: YAxisPositionOfControlPanel
+            }}
             onStart={() => setIsAlreadyDragged(true)}
             onStop={onStopDragHandler}
         >
-            <aside ref={nodeRef} className={`${scss.innerHost} turn-on-opacity-animation`}>
+            <aside
+                ref={nodeRef}
+                className={[scss.innerHost, 'turn-on-opacity-animation'].join(' ')}>
+                <section className={[scss.hostSection, 'turn-on-opacity-animation'].join(' ')}>
 
-                <nav
-                    id={'moveHandler'}
-                    className={[scss.moveHandler, 'fa-lg', 'fa-swap-opacity', isAlreadyDragged ? scss.moveHandlerIsEnabled : ''].join(' ')}>
-                    <i className="fad fa-arrows-alt-v"/>
-                </nav>
-
-                <section className={`${scss.hostSection} turn-on-opacity-animation`}>
-
-                    <button name={'collapseSwitch'} onClick={collapseListHandler}
-                        className={scss.collapseHandler}>
+                    <nav id={'collapseSwitch'} onClick={collapseListHandler}
+                        className={[scss.collapseHandler].join(' ')}>
                         <section className={isListCollapsed ? 'display-none' : ''}>
                             <i className="fad fa-arrow-alt-from-right"/>
-                            <i className="fad fa-arrow-alt-from-right"/>
-                            <i className="fad fa-arrow-alt-from-right"/>
                         </section>
 
-                        <section className={!isListCollapsed ? 'display-none' : ''}>
-                            <i className="fad fa-arrow-alt-to-right"/>
-                            <i className="fad fa-arrow-alt-to-right"/>
+                        <section className={isListCollapsed ? '' : 'display-none'}>
                             <i className="fad fa-arrow-alt-to-right"/>
                         </section>
-                    </button>
+                    </nav>
 
 
-                    <ul className={[scss.controlsList, (() => isListCollapsed ? scss.collapsedControlsList : scss.expandedControlsList)()].join(' ')}>
-                        <li className={[scss.listItem, getUIEnabledFeatureClassName(systemComponentsVisibilities.FPSMonitor)].join(' ')}>
-                            <button onClick={() => dispatch(handleControlPanelSwitchVisibility({name: 'FPSMonitor'}))}>
-                                <span>Hide/show FPS MONITOR</span>
-                                <i className="fad fa-tachometer-alt"/>
-                            </button>
-                        </li>
-                        <li className={[scss.listItem, getUIEnabledFeatureClassName(systemComponentsVisibilities.scoreboard)].join(' ')}>
-                            <button onClick={() => dispatch(handleControlPanelSwitchVisibility({name: 'scoreboard'}))}>
-                                <span>Hide/show SCOREBOARD</span>
-                                <i className="fad fa-tasks-alt"/>
-                            </button>
-                        </li>
-                    </ul>
+                    <section
+                        className={[scss.controlsList, (() => isListCollapsed ? scss.collapsedControlsList : scss.expandedControlsList)()].join(' ')}>
+
+
+                        <section className={scss.placementControlsContainer}>
+                            {!positionFlipped &&
+                            <nav
+                                id={'moveHandler'}
+                                className={[scss.moveHandler, 'fa-lg', 'fa-swap-opacity', isAlreadyDragged ? scss.moveHandlerIsEnabled : ''].join(' ')}>
+                                <i className="fad fa-arrows-alt-v"/>
+                            </nav>
+                            }
+
+                            <nav
+                                onClick={() => setPositionFlipped((prevState: boolean) => !prevState)}
+                                className={[scss.changePositionHandler, 'fa-lg', 'fa-swap-opacity'].join(' ')}>
+                                <i className="fad fa-exchange-alt"/>
+                            </nav>
+                        </section>
+
+
+                        <ul>
+                            <li className={[scss.listItem, getUIEnabledFeatureClassName(systemComponentsVisibilities.FPSMonitor)].join(' ')}>
+                                <button
+                                    onClick={() => dispatch(handleControlPanelSwitchVisibility({name: 'FPSMonitor'}))}>
+                                    <span>Hide/show FPS MONITOR</span>
+                                    <i className="fad fa-tachometer-alt"/>
+                                </button>
+                            </li>
+                            <li className={[scss.listItem, getUIEnabledFeatureClassName(systemComponentsVisibilities.scoreboard)].join(' ')}>
+                                <button
+                                    onClick={() => dispatch(handleControlPanelSwitchVisibility({name: 'scoreboard'}))}>
+                                    <span>Hide/show SCOREBOARD</span>
+                                    <i className="fad fa-tasks-alt"/>
+                                </button>
+                            </li>
+                        </ul>
+                    </section>
 
                 </section>
+
             </aside>
         </Draggable>
     </aside>)

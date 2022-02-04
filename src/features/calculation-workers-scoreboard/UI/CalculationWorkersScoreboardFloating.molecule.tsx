@@ -57,6 +57,7 @@ const CalculationWorkersScoreboardFloatingMolecule = (): JSX.Element => {
                 componentUITitleBarName={'Scoreboard'}
                 switchVisibilityConfiguration={{name: 'scoreboard', visibilitySwitchState: false}}
                 onTheScreenPosition={{x: 50, y: 70}}
+                zIndex={1900}
             >
                 <section
                     className={`${scss.host} display-inline-block`}>

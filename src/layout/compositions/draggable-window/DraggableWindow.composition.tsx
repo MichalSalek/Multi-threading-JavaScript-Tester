@@ -16,6 +16,7 @@ interface IProps {
     componentUITitleBarName: string
     switchVisibilityConfiguration: ControlPanelSwitchVisibilityType
     onTheScreenPosition?: ControlPosition
+    zIndex?: number
 }
 
 
@@ -23,7 +24,8 @@ export const DraggableWindowComposition = ({
     children,
     componentUITitleBarName,
     switchVisibilityConfiguration,
-    onTheScreenPosition = {x: 50, y: 50}
+    onTheScreenPosition = {x: 50, y: 50},
+    zIndex = 1900
 }: IProps): JSX.Element => {
 
     const dispatch = useAppDispatch()
@@ -57,7 +59,11 @@ export const DraggableWindowComposition = ({
 
 
 
-    return (<aside className={scss.host}>
+    return (<aside
+        style={{
+            zIndex,
+            position: 'relative'
+        }}>
         <Draggable
             nodeRef={nodeRef}
             handle="strong"

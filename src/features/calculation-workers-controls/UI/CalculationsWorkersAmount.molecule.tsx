@@ -26,12 +26,12 @@ const CalculationsWorkersAmountMolecule = (): JSX.Element => {
         <ButtonGroup>
             <AppButtonAtom
                 disabled={workerRequestedAmount.amount === MAX_WORKERS_LIMIT}
-                onClick={() => dispatch(handleWorkerAmountChange({amountChangeAction: WorkerAmountChangeActionEnum.addOne}))}>
+                onClick={() => dispatch(handleWorkerAmountChange({amountChangeCommand: WorkerAmountChangeActionEnum.addOne}))}>
                 Add new Worker +
             </AppButtonAtom>
             <AppButtonAtom
                 disabled={workerRequestedAmount.amount === 0}
-                onClick={() => dispatch(handleWorkerAmountChange({amountChangeAction: WorkerAmountChangeActionEnum.removeLast}))}>
+                onClick={() => dispatch(handleWorkerAmountChange({amountChangeCommand: WorkerAmountChangeActionEnum.removeLast}))}>
                 Remove last Worker -
             </AppButtonAtom>
         </ButtonGroup>
@@ -48,14 +48,14 @@ const CalculationsWorkersAmountMolecule = (): JSX.Element => {
                 setNewWorkersAmount(getValidatedPassedAmount(e.currentTarget.value, 0, MAX_WORKERS_LIMIT))}
         />
         <AppButtonAtom onClick={() => dispatch(handleWorkerAmountChange({
-            amountChangeAction: WorkerAmountChangeActionEnum.setAmount,
+            amountChangeCommand: WorkerAmountChangeActionEnum.setAmount,
             amount: getValidatedPassedAmount(newWorkersAmount, 0, MAX_WORKERS_LIMIT)
         }))}>
             Set specific Workers amount
         </AppButtonAtom>
         <br/>
         <AppButtonAtom onClick={() => dispatch(handleWorkerAmountChange({
-            amountChangeAction: WorkerAmountChangeActionEnum.setAmount,
+            amountChangeCommand: WorkerAmountChangeActionEnum.setAmount,
             amount: MAX_WORKERS_LIMIT
         }))}>
             Set Workers amount equals to yours CPU cores amount

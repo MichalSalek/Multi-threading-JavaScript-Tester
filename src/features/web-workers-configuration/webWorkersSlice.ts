@@ -52,8 +52,8 @@ export const webWorkersSlice = createSlice({
     initialState,
     reducers: {
 
-        handleWorkerAmountChange: (state, action: PayloadAction<{ amountChangeAction: WorkerAmountChangeActionEnum, amount?: number }>) => {
-            switch (action.payload.amountChangeAction) {
+        handleWorkerAmountChange: (state, action: PayloadAction<{ amountChangeCommand: WorkerAmountChangeActionEnum, amount?: number }>) => {
+            switch (action.payload.amountChangeCommand) {
             case WorkerAmountChangeActionEnum.setAmount:
                 if (typeof action.payload.amount === 'undefined') break
                 state.requestedAmount.amount = getValidatedPassedAmount(action.payload.amount, 0, MAX_WORKERS_LIMIT)

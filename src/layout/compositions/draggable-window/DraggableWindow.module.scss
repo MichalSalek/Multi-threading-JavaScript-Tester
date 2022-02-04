@@ -5,10 +5,6 @@ $borderColor: #0b375b;
 $heightOfBar: 30px;
 $sideBarPadding: 3px;
 
-.host {
-  z-index: 1900;
-  position: relative;
-}
 
 .dragItem {
   border: 2px solid $borderColor;

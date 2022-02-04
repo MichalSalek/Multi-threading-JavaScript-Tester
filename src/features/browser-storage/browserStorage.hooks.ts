@@ -38,7 +38,7 @@ export const useWorkersAmountStoragePersist = (): void => {
         const memorizedStorageWorkersAmountValue = getStorageItem(STORAGE_KEY_WORKERS_AMOUNT)
         const memorizedAmountOfWorkers = memorizedStorageWorkersAmountValue ? Number(memorizedStorageWorkersAmountValue) : 0
         memorizedAmountOfWorkers > 0 && dispatch(handleWorkerAmountChange({
-            amountChangeAction: WorkerAmountChangeActionEnum.setAmount,
+            amountChangeCommand: WorkerAmountChangeActionEnum.setAmount,
             amount: memorizedAmountOfWorkers
         }))
         return () => undefined

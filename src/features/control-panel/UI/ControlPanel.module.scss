@@ -1,35 +1,20 @@
 @use '../../../global-styles/variables';
 
-.host {
-  z-index: 1900;
-  position: relative;
-}
-
-.innerHost {
-  position: fixed;
-  left: 0;
-  top: 180px;
-  width: 1px;
-}
-
-.hostSection {
-  display: flex;
-  color: #d3dedc;
-}
-
 
 //
 //
 // VARS, MIXINS AND PLACEHOLDERS
 //
 
-$control-panel-background-color: #0f100f;
-$control-panel-background-color-transparently: #0F100FFA;
+$control-panel-height: 180px;
 
-$sideButtonWidth: 20px;
+$control-panel-background-color: #3f78ad;
+$control-panel-background-color-transparently: rgba(25, 28, 25, 0.98);
+
+$side-button-width: 16px;
 
 
-%darkBackgroundColor {
+%accentBackgroundColor {
   background-color: $control-panel-background-color;
 }
 
@@ -37,8 +22,8 @@ $sideButtonWidth: 20px;
   background-color: $control-panel-background-color-transparently;
 }
 
-%hoverEffectControlChange {
-  filter: drop-shadow(0 5px 2px rgba(113, 113, 240, 0.9));
+@mixin hoverEffectControlChange($color: rgba(113, 113, 240, 0.9)) {
+  filter: drop-shadow(0 5px 2px $color);
 }
 
 %dropShadowLightColor {
@@ -59,16 +44,16 @@ $sideButtonWidth: 20px;
 // Duo-tone color states
 //
 %colorVariablesAttributesDisabled {
-  --fa-primary-color: #b0b0b0;
-  --fa-secondary-color: gray;
+  --fa-primary-color: #4b4c4d;
+  --fa-secondary-color: #60729f;
 }
 
 %colorVariablesAttributesEnabled {
-  --fa-primary-color: #ff0000;
+  --fa-primary-color: #ccd9e5;
   --fa-secondary-color: #3d92c7d6;
 }
 
-%moveHandlerActiveEffect {
+%activeEffect {
   @extend %colorVariablesAttributesEnabled;
 }
 
@@ -76,8 +61,61 @@ $sideButtonWidth: 20px;
 //
 // STYLING
 //
-.moveHandler {
+.host {
+  z-index: 1900;
+  position: relative;
+  left: 0;
+}
+
+.innerHost {
+  position: fixed;
+  width: fit-content;
+  left: 0;
+}
+
+.hostSection {
+  display: flex;
+  color: #d3dedc;
+  height: $control-panel-height;
+  width: fit-content;
+}
+
+// Flipped version of Control Panel
+//
+.hostFlipped {
+  position: fixed;
+  bottom: $control-panel-height;
+
+
+  > .innerHost {
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 25px) rotate(-90deg) !important;
+  }
+
+  .collapsedControlsList {
+    transform: translateX(-48px);
+  }
+
+  .listItem {
+    transform: rotate(90deg);
+
+    span {
+      display: none;
+    }
+  }
+}
+
+
+.placementControlsContainer {
   @extend %darkBackgroundColorTransparently;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.moveHandler {
   @extend %colorVariablesAttributesDisabled;
 
   display: flex;
@@ -87,9 +125,36 @@ $sideButtonWidth: 20px;
   height: 38px;
   width: 46px;
 
-  border: variables.$masterBorderStyle;
-  border-radius: 0 5px 0 0;
-  border-width: 2px 2px 0 0;
+  position: relative;
+  z-index: 2001;
+
+  svg {
+    transition: transform 0.05s linear;
+    transform: scale(1);
+  }
+
+  &:hover {
+    @extend %activeEffect;
+  }
+}
+
+.moveHandlerIsEnabled {
+  @extend %activeEffect;
+
+  svg {
+    transform: scale(1.5);
+  }
+}
+
+.changePositionHandler {
+  @extend %colorVariablesAttributesDisabled;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 38px;
+  width: 46px;
 
   position: relative;
   z-index: 2001;
@@ -100,29 +165,65 @@ $sideButtonWidth: 20px;
   }
 
   &:hover {
-    @extend %moveHandlerActiveEffect;
+    @extend %activeEffect;
   }
 }
 
-.moveHandlerIsEnabled {
-  @extend %moveHandlerActiveEffect;
+
+.collapseHandler {
+  @extend %accentBackgroundColor;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0 4px;
+  width: $side-button-width;
+
+  position: relative;
+  z-index: 2002;
+
+  border: variables.$masterBorderStyle;
+  border-width: 1px 0 1px 0;
+
+  &:hover {
+
+    svg {
+      color: red;
+    }
+  }
+
+  > section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-evenly;
+  }
 
   svg {
-    transform: scale(1.6);
+    @include svgSize(12px)
+  }
+
+  .turned180Deg {
+    transform: rotate(180deg);
   }
 }
+
 
 .controlsList {
   @extend %darkBackgroundColorTransparently;
+
+  display: flex;
+
   padding: 2px;
   transition: transform 0.5s cubic-bezier(0.37, 0.98, 0.63, 0.88);
 
-  border: variables.$masterBorderStyle;
-  border-width: 0 2px 1px 0;
-  border-radius: 0 20px 20px 0;
-
   position: relative;
   z-index: 2000;
+
+  border: variables.$masterBorderStyle;
+  border-width: 1px 1px 1px 0;
+  border-radius: 0 5px 5px 0;
 
   .disabledControl {
     @extend %colorVariablesAttributesDisabled;
@@ -132,7 +233,7 @@ $sideButtonWidth: 20px;
     @extend %colorVariablesAttributesEnabled;
 
     button > span {
-      opacity: 0.8;
+      opacity: 0.9;
     }
 
     svg {
@@ -143,11 +244,11 @@ $sideButtonWidth: 20px;
 
 
   .listItem {
-    margin: 5px 0;
+    margin: 5px 3px;
 
     > button {
       width: 100%;
-      padding: 15px 5px;
+      padding: 15px 0;
 
 
       display: flex;
@@ -155,23 +256,23 @@ $sideButtonWidth: 20px;
       align-items: center;
 
       > svg {
-        @include svgSize(48px);
+        @include svgSize(58px);
         padding: 0 3px;
       }
     }
 
     span {
-      font-size: 0.77rem;
-      letter-spacing: -0.3px;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
       font-weight: 800;
-      padding: 0 0.5rem;
+      width: 220px;
       color: white;
-      opacity: 0.7;
+      opacity: 0.6;
     }
 
     &:hover {
       span {
-        opacity: 1;
+        opacity: 0.8;
         filter: drop-shadow(0 0 3px black);
       }
 
@@ -197,35 +298,7 @@ $sideButtonWidth: 20px;
 }
 
 .collapsedControlsList {
-  transform: translateX(-112px);
-}
-
-.collapseHandler {
-  @extend %darkBackgroundColor;
-
-  border: variables.$masterBorderStyle;
-  border-width: 0 0 2px 0;
-
-  padding: 0 4px;
-  width: $sideButtonWidth;
-
-  position: relative;
-  z-index: 2002;
-
-  > section {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-evenly;
-  }
-
-  svg {
-    @include svgSize(12px)
-  }
-
-  .turned180Deg {
-    transform: rotate(180deg);
-  }
+  transform: translateX(-266px);
 }
 
 
@@ -234,7 +307,7 @@ $sideButtonWidth: 20px;
 // KEYFRAMES
 //
 
-$svg-animation-scale: 1.04;
+$svg-animation-scale: 1.07;
 
 @keyframes animate-on-hover-keyframe {
   0%, 80%, 100% {

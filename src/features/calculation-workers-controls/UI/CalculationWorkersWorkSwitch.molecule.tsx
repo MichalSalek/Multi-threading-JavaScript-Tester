@@ -11,6 +11,7 @@ import AppInputAtom from '@/app-components/AppInput.atom'
 import { MAX_WORKER_COMPLEXITY_POSSIBILITY, MIN_WORKER_COMPLEXITY_POSSIBILITY } from '@/app-config-and-utils'
 import { Slider, Typography } from '@mui/material'
 import scss from './CalculationWorkersWorkSwitch.module.scss'
+import { randomIntFromNumbersRange } from '@/core/coding-utils/numberOperations'
 
 
 
@@ -31,16 +32,26 @@ const CalculationWorkersWorkSwitchMolecule = ({workerKey}: IProps): JSX.Element 
 
     // Complexity of calculations defined by user
     //
-    const [userInputComplexity, setUserInputComplexity] = useState<number | string>(25)
+    const [userInputComplexity, setUserInputComplexity] = useState<number | string>(randomIntFromNumbersRange(15, 85))
 
 
-    if (!isWorkerReady) return <section><span>Loading {workerKey.workerName}...<br/><br/></span></section>
+    const getIsComplexityValueEdgeCase = (complexity: number | string, edgeDistanceValue = 30): boolean =>
+        complexity > MAX_WORKER_COMPLEXITY_POSSIBILITY - edgeDistanceValue || complexity < MAX_WORKER_COMPLEXITY_POSSIBILITY + edgeDistanceValue
+
+
+    if (!isWorkerReady) return (
+        <section className={scss.host}>
+            <div className={scss.loadingPlaceholder}/>
+        </section>)
+
     return (
         <section className={scss.host}>
             <AppButtonAtom
-                className={scss.mainFireButton}
+                className={[scss.mainFireButton, 'no-transition'].join(' ')}
                 size={'small'}
-                style={{backgroundColor: `hsl(${MAX_WORKER_COMPLEXITY_POSSIBILITY / 2 - Math.floor(Number(userInputComplexity) / 2)}deg, 95%, 50%, 0.2)`}}
+                style={{
+                    backgroundColor: `hsl(${MAX_WORKER_COMPLEXITY_POSSIBILITY / 2 - Math.floor(Number(userInputComplexity) / 2)}deg, 95%, 50%, ${Math.floor(Number(userInputComplexity) / 4 + 30) / 100})`
+                }}
                 onClick={() => {
                     queueWorkerTask(workerKey, !isWorkerWorking ?
                         {
@@ -50,7 +61,10 @@ const CalculationWorkersWorkSwitchMolecule = ({workerKey}: IProps): JSX.Element 
                         : {workerTaskName: WEB_WORKER_TASKS.turnOffCalculations},
                     `Triggering a switch at the "${workerKey.workerName}"`)
                 }}
-            >{workerKey.workerName} {isWorkerWorking ? <strong> ON</strong> : 'OFF'}
+            >
+                <span>
+                    {workerKey.workerName} {isWorkerWorking ? <strong> ON</strong> : 'OFF'}
+                </span>
             </AppButtonAtom>
 
             <section className={scss.complexityForm}>
