@@ -9,7 +9,7 @@
 $control-panel-height: 180px;
 
 $control-panel-background-color: #0264b2;
-$control-panel-background-color-transparently: rgba(25, 28, 25, 0.98);
+$control-panel-background-color-transparently: rgba(25, 28, 25, 0.97);
 
 $side-button-width: 16px;
 
@@ -44,17 +44,45 @@ $side-button-width: 16px;
 // Duo-tone color states
 //
 %colorVariablesAttributesDisabled {
-  --fa-primary-color: #4b4c4d;
+  --fa-primary-color: #dfdfdf;
   --fa-secondary-color: #60729f;
 }
 
 %colorVariablesAttributesEnabled {
-  --fa-primary-color: #ccd9e5;
+  --fa-primary-color: #f8f8f8;
   --fa-secondary-color: #3d92c7d6;
 }
 
 %activeEffect {
   @extend %colorVariablesAttributesEnabled;
+}
+
+@mixin svgShortAnimation($animation-time: 0.15s) {
+
+  $svg-animation-scale: 1.1;
+
+
+  @keyframes animate-on-hover-keyframe {
+    0%, 80%, 100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale($svg-animation-scale);
+    }
+  }
+
+  svg {
+    > g > path {
+      &:first-child {
+        animation: animate-on-hover-keyframe $animation-time cubic-bezier(1, 0, 0, 1) 0s both;
+      }
+
+      &:last-of-type {
+        animation: animate-on-hover-keyframe $animation-time cubic-bezier(1, 0, 0, 1) 0.1s both;
+      }
+    }
+  }
 }
 
 //
@@ -113,32 +141,34 @@ $side-button-width: 16px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
+  > nav {
+    @extend %colorVariablesAttributesDisabled;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 38px;
+    width: 46px;
+
+    position: relative;
+    z-index: 2001;
+
+    flex-grow: 1;
+
+    &:hover {
+      @extend %activeEffect;
+      @include svgShortAnimation(0.2s);
+    }
+
+    svg {
+      transition: transform 0.05s linear;
+      transform: scale(1);
+    }
+  }
 }
 
-.moveHandler {
-  @extend %colorVariablesAttributesDisabled;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 38px;
-  width: 46px;
-
-  position: relative;
-  z-index: 2001;
-
-  flex-grow: 1;
-
-  svg {
-    transition: transform 0.05s linear;
-    transform: scale(1);
-  }
-
-  &:hover {
-    @extend %activeEffect;
-  }
-}
 
 .moveHandlerIsEnabled {
   @extend %activeEffect;
@@ -148,34 +178,9 @@ $side-button-width: 16px;
   }
 }
 
-.changePositionHandler {
-  @extend %colorVariablesAttributesDisabled;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 38px;
-  width: 46px;
-
-  position: relative;
-  z-index: 2001;
-
-  flex-grow: 1;
-
-  svg {
-    transition: transform 0.08s ease;
-    transform: scale(1);
-  }
-
-  &:hover {
-    @extend %activeEffect;
-  }
-}
-
 
 .collapseHandler {
-  @extend %accentBackgroundColor;
+  background-color: black;
 
   display: flex;
   justify-content: center;
@@ -191,6 +196,7 @@ $side-button-width: 16px;
   border-width: 1px 0 1px 0;
 
   &:hover {
+    @extend %accentBackgroundColor;
 
     svg {
       color: white;
@@ -280,19 +286,7 @@ $side-button-width: 16px;
         filter: drop-shadow(0 0 3px black);
       }
 
-      svg {
-        $animation-time: 0.15s;
-
-        > g > path {
-          &:first-child {
-            animation: animate-on-hover-keyframe $animation-time cubic-bezier(1, 0, 0, 1) 0s both;
-          }
-
-          &:last-of-type {
-            animation: animate-on-hover-keyframe $animation-time cubic-bezier(1, 0, 0, 1) 0.1s both;
-          }
-        }
-      }
+      @include svgShortAnimation();
     }
   }
 }
@@ -310,18 +304,6 @@ $side-button-width: 16px;
 //
 // KEYFRAMES
 //
-
-$svg-animation-scale: 1.07;
-
-@keyframes animate-on-hover-keyframe {
-  0%, 80%, 100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale($svg-animation-scale);
-  }
-}
 
 
 @keyframes animate-on-turn-on-keyframe {
