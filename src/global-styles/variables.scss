@@ -1,3 +1,4 @@
-$secondaryBackgroundColor: #1a1c1a;
+$primaryAccentColor: #0264b2;
+$secondaryAccentColor: #2eb202;
 
-$masterBorderStyle: 2px solid #d10000; // @TODO change it to green and when any workers work - red then
+$masterBorderStylePrimary: 1px solid $primaryAccentColor;

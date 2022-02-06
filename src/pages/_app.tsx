@@ -18,6 +18,7 @@ import CalculationWorkersScoreboardFloatingMolecule
     from '@/features/calculation-workers-scoreboard/UI/CalculationWorkersScoreboardFloating.molecule'
 import ControlPanelMolecule from '@/features/control-panel/UI/ControlPanel.molecule'
 import IconPackController from '@/features/icon-pack/IconPack.controller'
+import BorderColorChangeController from '@/features/border-color-change/BorderColorChange.controller'
 
 
 // Main application component.
@@ -38,6 +39,7 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
             <SocketConnectionAndListeningController/>
             <WorkersActiveInstancesAndCommunicationController/>
             <BrowserStoragePersistController/>
+            <BorderColorChangeController/>
 
 
             {/* Whole app runtime components - above all pages during a whole app life. */}

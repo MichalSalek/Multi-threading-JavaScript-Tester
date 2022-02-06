@@ -18,13 +18,14 @@ body {
   min-height: 100%;
 
 
-  background-color: #262626;
+  background-color: #f3f3f3;
 
 
 }
 
 body {
-  border: variables.$masterBorderStyle;
+  border: variables.$masterBorderStylePrimary;
+  border-width: 0 2px;
 }
 
 * {
@@ -68,6 +69,17 @@ button {
 
 .visibility-hidden {
   visibility: hidden !important;
+}
+
+// Add class 'enabled-border-state' to component with border to make it color-controlled
+body {
+  &.enabled-state {
+    border-color: variables.$secondaryAccentColor;
+  }
+
+  &.enabled-state .enabled-border-state {
+    border-color: variables.$secondaryAccentColor;
+  }
 }
 
 

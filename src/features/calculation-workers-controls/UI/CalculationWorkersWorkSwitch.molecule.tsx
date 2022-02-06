@@ -8,10 +8,15 @@ import {
 } from '@/features/calculation-workers-configuration/calculationWorkers.hooks'
 import AppButtonAtom from '@/app-components/AppButton.atom'
 import AppInputAtom from '@/app-components/AppInput.atom'
-import { MAX_WORKER_COMPLEXITY_POSSIBILITY, MIN_WORKER_COMPLEXITY_POSSIBILITY } from '@/app-config-and-utils'
+import {
+    MAIN_THREAD_KEY,
+    MAX_WORKER_COMPLEXITY_POSSIBILITY,
+    MIN_WORKER_COMPLEXITY_POSSIBILITY
+} from '@/app-config-and-utils'
 import { Slider, Typography } from '@mui/material'
 import scss from './CalculationWorkersWorkSwitch.module.scss'
 import { randomIntFromNumbersRange } from '@/core/coding-utils/numberOperations'
+import { useMainThreadCalculations } from '@/features/calculation-workers-controls/calculationWorkersControls.hooks'
 
 
 
@@ -32,40 +37,67 @@ const CalculationWorkersWorkSwitchMolecule = ({workerKey}: IProps): JSX.Element 
 
     // Complexity of calculations defined by user
     //
-    const [userInputComplexity, setUserInputComplexity] = useState<number | string>(randomIntFromNumbersRange(15, 85))
+    const [userInputComplexity, setUserInputComplexity] = useState<number | string>(randomIntFromNumbersRange(15, 120))
 
 
-    const getIsComplexityValueEdgeCase = (complexity: number | string, edgeDistanceValue = 30): boolean =>
-        complexity > MAX_WORKER_COMPLEXITY_POSSIBILITY - edgeDistanceValue || complexity < MAX_WORKER_COMPLEXITY_POSSIBILITY + edgeDistanceValue
+    const [isMainThreadOn, handleMainThreadSwitchChange] =
+        useMainThreadCalculations(120, Number(userInputComplexity), false)
+
+    const isCurrentInstanceAMainThread = (): boolean => workerKey.workerName === MAIN_THREAD_KEY.workerName
+
+    const handleWorkerWorkSwitch = (): void => {
+        queueWorkerTask(workerKey, !isWorkerWorking ?
+            {
+                workerTaskName: WEB_WORKER_TASKS.turnOnCalculations,
+                complexity: getValidatedPassedAmount(userInputComplexity, MIN_WORKER_COMPLEXITY_POSSIBILITY, MAX_WORKER_COMPLEXITY_POSSIBILITY)
+            }
+            : {workerTaskName: WEB_WORKER_TASKS.turnOffCalculations},
+        `Triggering a switch at the "${workerKey.workerName}"`)
+    }
 
 
-    if (!isWorkerReady) return (
+    const getIsComplexityValueEdgeCase = (complexity: number | string, edgeDistanceValue = 20): boolean =>
+        complexity > MAX_WORKER_COMPLEXITY_POSSIBILITY - edgeDistanceValue
+
+
+
+    const getComplexityDependsDynamicBackgroundStyle = (): React.CSSProperties => ({
+        backgroundColor: `hsl(${MAX_WORKER_COMPLEXITY_POSSIBILITY / 2 - Math.floor(Number(userInputComplexity) / 2)}deg, 100%, 60%, ${Math.floor(Number(userInputComplexity) / 4 + 50) / 100})`
+    })
+
+
+    if (!isCurrentInstanceAMainThread() && !isWorkerReady) return (
         <section className={scss.host}>
             <div className={scss.loadingPlaceholder}/>
         </section>)
 
     return (
         <section className={scss.host}>
-            <AppButtonAtom
-                className={[scss.mainFireButton, 'no-transition'].join(' ')}
-                size={'small'}
-                style={{
-                    backgroundColor: `hsl(${MAX_WORKER_COMPLEXITY_POSSIBILITY / 2 - Math.floor(Number(userInputComplexity) / 2)}deg, 95%, 50%, ${Math.floor(Number(userInputComplexity) / 4 + 30) / 100})`
-                }}
-                onClick={() => {
-                    queueWorkerTask(workerKey, !isWorkerWorking ?
-                        {
-                            workerTaskName: WEB_WORKER_TASKS.turnOnCalculations,
-                            complexity: getValidatedPassedAmount(userInputComplexity, MIN_WORKER_COMPLEXITY_POSSIBILITY, MAX_WORKER_COMPLEXITY_POSSIBILITY)
-                        }
-                        : {workerTaskName: WEB_WORKER_TASKS.turnOffCalculations},
-                    `Triggering a switch at the "${workerKey.workerName}"`)
-                }}
-            >
-                <span>
-                    {workerKey.workerName} {isWorkerWorking ? <strong> ON</strong> : 'OFF'}
-                </span>
-            </AppButtonAtom>
+
+            {
+                isCurrentInstanceAMainThread() ?
+                    <AppButtonAtom
+                        className={[scss.mainFireButton, 'no-transition'].join(' ')}
+                        style={getComplexityDependsDynamicBackgroundStyle()}
+                        onClick={handleMainThreadSwitchChange}
+                    >
+                        <span
+                            style={{filter: getIsComplexityValueEdgeCase(userInputComplexity) ? 'invert(0)' : 'invert(1)'}}>
+                            {workerKey.workerName} {isMainThreadOn ? <strong> ON</strong> : 'OFF'}
+                        </span>
+                    </AppButtonAtom>
+                    :
+                    <AppButtonAtom
+                        className={[scss.mainFireButton, 'no-transition'].join(' ')}
+                        style={getComplexityDependsDynamicBackgroundStyle()}
+                        onClick={handleWorkerWorkSwitch}
+                    >
+                        <span
+                            style={{filter: getIsComplexityValueEdgeCase(userInputComplexity) ? 'invert(0)' : 'invert(1)'}}>
+                            {workerKey.workerName} {isWorkerWorking ? <strong> ON</strong> : 'OFF'}
+                        </span>
+                    </AppButtonAtom>
+            }
 
             <section className={scss.complexityForm}>
                 <Typography variant="body2" component="span" className={scss.inputLabel}> complexity: </Typography>

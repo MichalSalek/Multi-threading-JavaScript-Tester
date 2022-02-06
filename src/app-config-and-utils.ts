@@ -24,14 +24,13 @@ export const runInDevEnvOnly = <D>(developmentEnvCallback: UnknownFunctionType<u
 
 // Server Side Rendering guard for browser global objects access while Next.js making a build.
 //
-export const fireJustClientSide = <D>(justClientSideCallback: UnknownFunctionType<undefined, D>, tryingToAdditionalEcho = ''): D | boolean => {
-    tryingToAdditionalEcho && runInDevEnvOnly(() => console.log(`[Trying to -> ${tryingToAdditionalEcho}]`))
+export const fireJustClientSide = <D>(justClientSideCallback: UnknownFunctionType<undefined, D>, loggerAdditionalEcho = ''): D | undefined => {
+    loggerAdditionalEcho && runInDevEnvOnly(() => console.log(`[Trying to -> ${loggerAdditionalEcho}]`))
     if (!(typeof window === 'undefined' && !process.browser)) {
-        const execution = justClientSideCallback()
-        return isUndefinedType(execution) ? true : execution
+        return justClientSideCallback()
     } else {
-        tryingToAdditionalEcho && runInDevEnvOnly(() => console.log(`[Failed -> ${tryingToAdditionalEcho}] - Probably server side.`))
-        return false
+        loggerAdditionalEcho && runInDevEnvOnly(() => console.log(`[Failed -> ${loggerAdditionalEcho}] - Probably server side.`))
+        return void undefined
     }
 }
 

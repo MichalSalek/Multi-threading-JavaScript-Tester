@@ -6,12 +6,14 @@
 // VARS, MIXINS AND PLACEHOLDERS
 //
 
-$control-panel-height: 180px;
+$control-panel-height: 200px;
 
 $control-panel-background-color: #0264b2;
 $control-panel-background-color-transparently: rgba(25, 28, 25, 0.97);
 
 $side-button-width: 16px;
+
+$control-switch-label-min-width: 230px;
 
 
 %accentBackgroundColor {
@@ -37,6 +39,24 @@ $side-button-width: 16px;
 
 
 %animateOnTurnOn {
+  @keyframes animate-on-turn-on-keyframe {
+    0% {
+      filter: brightness(7) drop-shadow(-3px 2px 2px rgba(113, 113, 255, 1)) sepia(1);
+    }
+
+    30% {
+      filter: brightness(6) drop-shadow(-3px 2px 2px rgba(113, 113, 255, 0.4));
+    }
+
+    80% {
+      filter: brightness(1.5) drop-shadow(-3px 2px 2px rgba(113, 113, 255, 0.3));
+    }
+
+    100% {
+      filter: brightness(1) drop-shadow(-3px 2px 2px rgba(113, 113, 255, 0.8));
+    }
+  }
+
   animation: animate-on-turn-on-keyframe 0.6s ease-in 0s forwards;
 }
 
@@ -45,21 +65,17 @@ $side-button-width: 16px;
 //
 %colorVariablesAttributesDisabled {
   --fa-primary-color: #dfdfdf;
-  --fa-secondary-color: #60729f;
+  --fa-secondary-color: #6c7793;
 }
 
 %colorVariablesAttributesEnabled {
   --fa-primary-color: #f8f8f8;
-  --fa-secondary-color: #3d92c7d6;
-}
-
-%activeEffect {
-  @extend %colorVariablesAttributesEnabled;
+  --fa-secondary-color: #059fffe6;
 }
 
 @mixin svgShortAnimation($animation-time: 0.15s) {
 
-  $svg-animation-scale: 1.1;
+  $svg-animation-scale: 1.04;
 
 
   @keyframes animate-on-hover-keyframe {
@@ -98,6 +114,7 @@ $side-button-width: 16px;
 .innerHost {
   position: fixed;
   width: fit-content;
+  pointer-events: none;
   left: 0;
 }
 
@@ -106,6 +123,7 @@ $side-button-width: 16px;
   color: #d3dedc;
   height: $control-panel-height;
   width: fit-content;
+  pointer-events: none;
 }
 
 // Flipped version of Control Panel
@@ -118,7 +136,7 @@ $side-button-width: 16px;
   > .innerHost {
     left: 50%;
     bottom: 0;
-    transform: translate(-50%, 25px) rotate(-90deg) !important;
+    transform: translate(-50%, 35px) rotate(-90deg) !important;
   }
 
   .collapsedControlsList {
@@ -130,6 +148,12 @@ $side-button-width: 16px;
 
     span {
       display: none;
+    }
+  }
+
+  .placementControlsContainer {
+    svg {
+      transform: rotate(90deg);
     }
   }
 }
@@ -157,8 +181,9 @@ $side-button-width: 16px;
 
     flex-grow: 1;
 
+
     &:hover {
-      @extend %activeEffect;
+      @extend %colorVariablesAttributesEnabled;
       @include svgShortAnimation(0.2s);
     }
 
@@ -170,7 +195,7 @@ $side-button-width: 16px;
 
 
 .moveHandlerIsEnabled {
-  @extend %activeEffect;
+  @extend %colorVariablesAttributesEnabled;
 
   svg {
     transform: scale(1.5);
@@ -191,8 +216,10 @@ $side-button-width: 16px;
   position: relative;
   z-index: 2002;
 
-  border: variables.$masterBorderStyle;
-  border-width: 1px 0 1px 0;
+  border: variables.$masterBorderStylePrimary;
+  border-width: 2px 0 2px 0;
+
+  pointer-events: all;
 
   &:hover {
     @extend %accentBackgroundColor;
@@ -219,7 +246,7 @@ $side-button-width: 16px;
 }
 
 
-.controlsList {
+.controlsListContainer {
   @extend %darkBackgroundColorTransparently;
 
   display: flex;
@@ -230,9 +257,11 @@ $side-button-width: 16px;
   position: relative;
   z-index: 2000;
 
-  border: variables.$masterBorderStyle;
-  border-width: 1px 1px 1px 0;
+  border: variables.$masterBorderStylePrimary;
+  border-width: 2px 2px 2px 0;
   border-radius: 0 5px 5px 0;
+
+  pointer-events: all;
 
   .disabledControl {
     @extend %colorVariablesAttributesDisabled;
@@ -251,9 +280,15 @@ $side-button-width: 16px;
     }
   }
 
+  .controlsList {
+    display: flex;
+    flex-direction: column;
+  }
 
   .listItem {
     margin: 5px 3px;
+    display: flex;
+    flex: 1;
 
     > button {
       width: 100%;
@@ -271,12 +306,17 @@ $side-button-width: 16px;
     }
 
     span {
-      font-size: 0.7rem;
       letter-spacing: 1px;
       font-weight: 800;
-      width: 220px;
+      font-size: 0.9rem;
+
       color: white;
       opacity: 0.6;
+
+      min-width: $control-switch-label-min-width;
+      width: 100%;
+
+      padding: 0 0.2rem;
     }
 
     &:hover {
@@ -291,35 +331,11 @@ $side-button-width: 16px;
 }
 
 .expandedControlsList {
-  transform: translateX(0px);
+  transform: translateX(0);
 }
 
 .collapsedControlsList {
-  transform: translateX(-266px);
+  transform: translateX(calc(0px - #{$control-switch-label-min-width} - 46px));
 }
 
-
-//
-//
-// KEYFRAMES
-//
-
-
-@keyframes animate-on-turn-on-keyframe {
-  0% {
-    filter: brightness(7) drop-shadow(0 5px 2px rgba(113, 113, 240, 0.8)) sepia(1);
-  }
-
-  30% {
-    filter: brightness(6) drop-shadow(0 5px 2px rgba(113, 113, 240, 0.3));
-  }
-
-  80% {
-    filter: brightness(1.5) drop-shadow(0 5px 2px rgba(113, 113, 240, 0.3));
-  }
-
-  100% {
-    filter: brightness(1) drop-shadow(0 5px 2px rgba(113, 113, 240, 0.6));
-  }
-}
 

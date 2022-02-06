@@ -1,11 +1,13 @@
 import React from 'react'
 import { NextPage } from 'next'
-import CalculationsWorkersControlsOrganism
-    from '@/features/calculation-workers-controls/UI/CalculationsWorkersControls.organism'
+import dynamic from 'next/dynamic'
 
 
 
 const MainAppScreenPage: NextPage = () => {
+
+    const CalculationsWorkersControlsOrganism = dynamic(() =>
+        import('@/features/calculation-workers-controls/UI/CalculationsWorkersControls.organism'))
 
     return (
         <>

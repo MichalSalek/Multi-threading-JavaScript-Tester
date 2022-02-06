@@ -24,7 +24,7 @@ const ControlPanelMolecule = (): JSX.Element => {
 
     const nodeRef = React.createRef<HTMLDivElement>()
 
-    
+
     const systemComponentsVisibilities: ISystemComponentsVisibilities = useAppSelector(selectSystemComponentsVisibilities)
 
 
@@ -89,7 +89,7 @@ const ControlPanelMolecule = (): JSX.Element => {
                 <section className={[scss.hostSection, 'turn-on-opacity-animation'].join(' ')}>
 
                     <nav id={'collapseSwitch'} onClick={collapseListHandler}
-                        className={[scss.collapseHandler].join(' ')}>
+                        className={[scss.collapseHandler, 'enabled-border-state'].join(' ')}>
                         <section className={isListCollapsed ? 'display-none' : ''}>
                             <i className="fad fa-arrow-alt-from-right"/>
                         </section>
@@ -101,7 +101,11 @@ const ControlPanelMolecule = (): JSX.Element => {
 
 
                     <section
-                        className={[scss.controlsList, (() => isListCollapsed ? scss.collapsedControlsList : scss.expandedControlsList)()].join(' ')}>
+                        className={[
+                            scss.controlsListContainer,
+                            (() => isListCollapsed ? scss.collapsedControlsList : scss.expandedControlsList)(),
+                            'enabled-border-state'
+                        ].join(' ')}>
 
 
                         <section className={scss.placementControlsContainer}>
@@ -121,7 +125,7 @@ const ControlPanelMolecule = (): JSX.Element => {
                         </section>
 
 
-                        <ul>
+                        <ul className={scss.controlsList}>
                             <li className={[scss.listItem, getUIEnabledFeatureClassName(systemComponentsVisibilities.FPSMonitor)].join(' ')}>
                                 <button
                                     onClick={() => dispatch(handleControlPanelSwitchVisibility({name: 'FPSMonitor'}))}>
