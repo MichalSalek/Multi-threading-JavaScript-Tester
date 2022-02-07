@@ -81,6 +81,15 @@ export const queueWorkerTask = (workerKey: WorkerKeyType, workerTask: IWorkerTas
 }
 
 
+export const queueAllWorkersTask = (workerTask: IWorkerTask, msgForDevConsoleLog = ''): void => {
+    const activeWorkersByNow: IWorkerKey[] = getExistingWorkersKeys()
+
+    activeWorkersByNow.forEach((workerKey: IWorkerKey) => {
+        queueWorkerTask(workerKey, workerTask, msgForDevConsoleLog)
+    })
+}
+
+
 export const flagIfWorkerHasError = (workerKey: WorkerKeyType, isError: boolean, error: Error = {
     name: `Default error of ${workerKey.workerName}.`,
     message: 'Please pass a valid error msg.'

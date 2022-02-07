@@ -8,8 +8,8 @@ import scss from './AppComponents.module.scss'
 const AppButtonAtom = (props: ButtonProps): JSX.Element => {
 
     return <Button
-        color={'info'}
-        variant={'outlined'}
+        color={'primary'}
+        variant={'contained'}
         className={scss.button}
 
         {...props}>{props.children}</Button>

@@ -39,8 +39,11 @@ export const connectSocketThunk = createAsyncThunk('connectSocketThunk', async (
                 if (INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES === 0) {
                     store.dispatch(socketSlice.actions.handleNewDataReceiveFromSocket(response.data))
                 } else {
-                    if (!timeoutID) {
+                    if (timeoutID !== 0) {
                         store.dispatch(socketSlice.actions.handleNewDataReceiveFromSocket(response.data))
+
+                        window.clearTimeout(timeoutID)
+
                         timeoutID = window.setTimeout(() => {
 
                             store.dispatch(socketSlice.actions.handleNewDataReceiveFromSocket(response.data))
