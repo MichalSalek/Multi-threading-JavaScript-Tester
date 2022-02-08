@@ -5,9 +5,9 @@ import scss from './DraggableWindow.module.scss'
 import {
     ControlPanelSwitchVisibilityType,
     handleControlPanelSwitchVisibility
-} from '@/features/control-panel/controlPanelSlice'
+} from '@/features/business/control-panel/controlPanelSlice'
 import { useAppDispatch } from '@/core/store.core'
-import { usePersistedPositionByBrowserStorage } from '@/features/browser-storage/browserStorage.hooks'
+import { usePersistedPositionByBrowserStorage } from '@/features/technical/browser-storage/browserStorage.hooks'
 
 
 

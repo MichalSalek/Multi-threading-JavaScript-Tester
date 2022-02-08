@@ -1,10 +1,17 @@
-//@TODO here is a field for create a script in nodejs to keeping these well automatic
-
-// An actual application routes
-// Keep it correct with a real route names
 //
-export const ROUTE_PAGE_CALCULATIONS = '/main-app-screen'
+//
+//
+// Routes keeping in files.
+// Single source of truth for app routing.
+//
+//
+//
+export const ROUTE_MAIN_APP_SCREEN = '/main-app-screen'
 
-// API routes below
+
+// API routes
 //
 export const ROUTE_API_WEB_SOCKET = '/api/_/socket-io-connector'
+
+
+//@TODO here is a field for create a script in nodejs to keeping these well automatic

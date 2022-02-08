@@ -4,7 +4,7 @@ import {
     ISystemComponentsVisibilities,
     selectSystemComponentsVisibilities,
     SystemComponentNameType
-} from '@/features/control-panel/controlPanelSlice'
+} from '@/features/business/control-panel/controlPanelSlice'
 import { useAppSelector } from '@/core/store.core'
 
 
@@ -20,7 +20,7 @@ const SystemComponentVisibilityComposition = ({children, visibilityOfSystemCompo
     const systemComponentsVisibilities: ISystemComponentsVisibilities = useAppSelector(selectSystemComponentsVisibilities)
 
     const getVisibilityClassName = (): string => systemComponentsVisibilities[visibilityOfSystemComponentControl] ? '' : 'visibility-hidden'
-    
+
 
     return (
         <aside
