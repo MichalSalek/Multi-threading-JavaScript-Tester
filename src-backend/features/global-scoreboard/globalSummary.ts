@@ -1,7 +1,7 @@
 import { Socket } from 'socket.io'
 import { IPAddressesData } from '../../runtimeData.api'
-import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/technical/socket-client/socketEventsEntities'
-import { addConsoleVerbose } from '@/features/technical/verbose-logs/verboseLogs.api'
+import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/background/socket-client/socketEventsEntities'
+import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLogs.api'
 
 
 

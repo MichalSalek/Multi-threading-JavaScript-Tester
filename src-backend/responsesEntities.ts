@@ -1,4 +1,4 @@
-import { ISocketToAppCalculationDataDTO } from '@/features/technical/web-workers-configuration/webWorkers.types'
+import { ISocketToAppCalculationDataDTO } from '@/features/background/web-workers-configuration/webWorkers.types'
 import { workersRuntimeData } from './runtimeData.api'
 
 

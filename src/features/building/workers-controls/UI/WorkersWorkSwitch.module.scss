@@ -1,0 +1,193 @@
+.host {
+  display: flex;
+
+  height: 30px;
+}
+
+.loadingPlaceholder {
+  @keyframes placeHolderShimmer {
+    0%, 100% {
+      background-position: -468px 0;
+    }
+    50% {
+      background-position: 468px 0;
+    }
+  }
+
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: placeHolderShimmer;
+  background: linear-gradient(to right, #f5f5f5 8%, #ccc2c2 18%, #f5f5f5 33%);
+  position: relative;
+}
+
+.mainFireButton {
+  color: hsl(120deg 6% 10% / 97%);
+
+  font-weight: 600;
+  font-size: 0.77rem;
+
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 0;
+
+  border-color: rgba(25, 28, 25, 0.97) !important;
+
+  flex: 10;
+
+  &:hover { // Material building overrides:
+    background-color: rgba(25, 28, 25, 0.97);
+    border-width: 2px;
+  }
+}
+
+
+.complexityForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  width: 100%;
+
+  flex: 25;
+
+  .inputLabel {
+    color: gray;
+    pointer-events: none;
+
+    font-size: 0.8rem;
+  }
+
+  input {
+    width: 50px;
+  }
+}
+
+// Button animations for a few cases:
+//
+
+.buttonAnimationSoft {
+
+  $vibration-range: 0.2px;
+
+  @keyframes vibrateSoft {
+    0% {
+      -webkit-transform: translate(0);
+      transform: translate(0);
+    }
+
+    20% {
+      -webkit-transform: translate(-$vibration-range, $vibration-range);
+      transform: translate(-$vibration-range, $vibration-range);
+    }
+
+    40% {
+      -webkit-transform: translate(-$vibration-range, -$vibration-range);
+      transform: translate(-$vibration-range, -$vibration-range);
+    }
+
+    60% {
+      -webkit-transform: translate($vibration-range, $vibration-range);
+      transform: translate($vibration-range, $vibration-range);
+    }
+
+    80% {
+      -webkit-transform: translate($vibration-range, -$vibration-range);
+      transform: translate($vibration-range, -$vibration-range);
+    }
+
+    100% {
+      -webkit-transform: translate(0);
+      transform: translate(0);
+    }
+  }
+
+  animation: vibrateSoft 0.3s linear infinite both;
+}
+
+
+.buttonAnimationMedium {
+
+  $vibration-range: 0.6px;
+
+  @keyframes vibrateMedium {
+    0% {
+      -webkit-transform: translate(0);
+      transform: translate(0);
+    }
+
+    20% {
+      -webkit-transform: translate(-$vibration-range, $vibration-range);
+      transform: translate(-$vibration-range, $vibration-range);
+    }
+
+    40% {
+      -webkit-transform: translate(-$vibration-range, -$vibration-range);
+      transform: translate(-$vibration-range, -$vibration-range);
+    }
+
+    60% {
+      -webkit-transform: translate($vibration-range, $vibration-range);
+      transform: translate($vibration-range, $vibration-range);
+    }
+
+    80% {
+      -webkit-transform: translate($vibration-range, -$vibration-range);
+      transform: translate($vibration-range, -$vibration-range);
+    }
+
+    100% {
+      -webkit-transform: translate(0);
+      transform: translate(0);
+    }
+  }
+
+  animation: vibrateMedium 0.26s linear infinite both;
+
+}
+
+.buttonAnimationHard {
+
+  $vibration-range: 1.3px;
+
+  @keyframes vibrateHard {
+    0% {
+      -webkit-transform: translate(0);
+      transform: translate(0);
+    }
+
+    20% {
+      -webkit-transform: translate(-$vibration-range, $vibration-range);
+      transform: translate(-$vibration-range, $vibration-range);
+    }
+
+    40% {
+      -webkit-transform: translate(-$vibration-range, -$vibration-range);
+      transform: translate(-$vibration-range, -$vibration-range);
+    }
+
+    60% {
+      -webkit-transform: translate($vibration-range, $vibration-range);
+      transform: translate($vibration-range, $vibration-range);
+    }
+
+    80% {
+      -webkit-transform: translate($vibration-range, -$vibration-range);
+      transform: translate($vibration-range, -$vibration-range);
+    }
+
+    100% {
+      -webkit-transform: translate(0);
+      transform: translate(0);
+    }
+  }
+
+  animation: vibrateHard 0.1s linear infinite both;
+
+}

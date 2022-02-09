@@ -1,4 +1,4 @@
-import { IWorkerKey } from '@/features/technical/web-workers-configuration/webWorkers.types'
+import { IWorkerKey } from '@/features/background/web-workers-configuration/webWorkers.types'
 import { fireJustClientSide } from '@/coding-utils/environmentOperations.api'
 
 

@@ -1,8 +1,8 @@
 import { Server } from 'socket.io'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/technical/socket-client/socketEventsEntities'
-import { ISocketDTO, IWorkerDTO, WorkerKeyType } from '@/features/technical/web-workers-configuration/webWorkers.types'
+import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/background/socket-client/socketEventsEntities'
+import { ISocketDTO, IWorkerDTO, WorkerKeyType } from '@/features/background/web-workers-configuration/webWorkers.types'
 
 import { setNewJobDone } from '../../../../src-backend/runtimeData.api'
 import { handleGlobalSummaryBroadcast } from '../../../../src-backend/features/global-scoreboard/globalSummary'

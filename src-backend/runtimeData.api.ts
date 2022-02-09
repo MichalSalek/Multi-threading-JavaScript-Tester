@@ -2,7 +2,7 @@ import {
     IWorkersJobsBody,
     NewWorkerJobType,
     WorkersJobsType
-} from '@/features/technical/web-workers-configuration/webWorkers.types'
+} from '@/features/background/web-workers-configuration/webWorkers.types'
 
 //
 // It's a pseudo-DB for the app presentation

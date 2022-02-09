@@ -4,7 +4,7 @@ import {
     ISystemComponentsVisibilities,
     selectSystemComponentsVisibilities,
     SystemComponentNameType
-} from '@/features/business/control-panel/controlPanelSlice'
+} from '@/features/building/control-panel/controlPanelSlice'
 import { useAppSelector } from '@/core/store.core'
 
 

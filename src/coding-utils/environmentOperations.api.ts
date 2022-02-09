@@ -1,5 +1,5 @@
 import { UnknownFunctionType } from '@/core/types.core'
-import { addConsoleVerbose } from '@/features/technical/verbose-logs/verboseLogs.api'
+import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLogs.api'
 
 
 

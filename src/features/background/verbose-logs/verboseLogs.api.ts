@@ -1,14 +1,14 @@
-import { SERVER_VERBOSE_MODE } from './serverVerboseLogsEntity'
+import { VERBOSE_MODE } from '@/features/background/verbose-logs/verboseLogsEntity'
 
 
 
-export const changeServerVerboseModeFlag = (verboseModeEnableState: 'on' | 'off') => {
+export const changeVerboseModeFlag = (verboseModeEnableState: 'on' | 'off') => {
     switch (verboseModeEnableState) {
     case 'on':
-        SERVER_VERBOSE_MODE.isEnabled = true
+        VERBOSE_MODE.isEnabled = true
         break
     case 'off':
-        SERVER_VERBOSE_MODE.isEnabled = false
+        VERBOSE_MODE.isEnabled = false
     }
 }
 
@@ -18,7 +18,7 @@ export const changeServerVerboseModeFlag = (verboseModeEnableState: 'on' | 'off'
 // Check out how this has already been used by follow the reference...
 // Most commonly use e.g.: CQS commands verbose.
 //
-export const addServerConsoleVerbose = (communicate: string | Error, mode: 'log' | 'warn' | 'error' = 'log'): void => {
+export const addConsoleVerbose = (communicate: string | Error, mode: 'log' | 'warn' | 'error' = 'log'): void => {
 
     const dateNow = new Date()
     const date = dateNow.toLocaleDateString('en-us', {
@@ -33,7 +33,7 @@ export const addServerConsoleVerbose = (communicate: string | Error, mode: 'log'
 
     switch (mode) {
     case 'log':
-        SERVER_VERBOSE_MODE.isEnabled && console.log(dateString, communicate)
+        VERBOSE_MODE.isEnabled && console.log(dateString, communicate)
         break
 
     case 'warn':

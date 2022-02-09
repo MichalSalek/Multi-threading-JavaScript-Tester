@@ -1,8 +1,8 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { webWorkersSlice } from '@/features/technical/web-workers-configuration/webWorkersSlice'
-import { socketSlice } from '@/features/technical/socket-client/socketSlice'
-import { controlPanelSlice } from '@/features/business/control-panel/controlPanelSlice'
+import { webWorkersSlice } from '@/features/background/web-workers-configuration/webWorkersSlice'
+import { socketSlice } from '@/features/background/socket-client/socketSlice'
+import { controlPanelSlice } from '@/features/building/control-panel/controlPanelSlice'
 
 
 

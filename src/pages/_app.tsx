@@ -7,19 +7,19 @@ import '@/global-styles/global-styles.scss'
 import store from '@/core/store.core'
 
 import LayoutComposition from '@/layout/Layout.composition'
-import BrowserStoragePersistController from '@/features/technical/browser-storage/BrowserStoragePersist.controller'
+import BrowserStoragePersistController from '@/features/background/browser-storage/BrowserStoragePersist.controller'
 import SocketConnectionAndListeningController
-    from '@/features/technical/socket-client/SocketConnectionAndListening.controller'
+    from '@/features/background/socket-client/SocketConnectionAndListening.controller'
 import WorkersActiveInstancesAndCommunicationController
-    from '@/features/technical/web-workers-configuration/WorkersActiveInstancesAndCommunication.controller'
+    from '@/features/background/web-workers-configuration/WorkersActiveInstancesAndCommunication.controller'
 import MetaHead from '@/layout/partials/MetaHead'
 import { CssBaseline } from '@mui/material'
-import FPSMonitorFloatingMolecule from '@/features/business/fps-monitor/UI/FPSMonitorFloating.molecule'
+import FPSMonitorFloatingMolecule from '@/features/building/fps-monitor/UI/FPSMonitorFloating.molecule'
 import CalculationWorkersScoreboardFloatingMolecule
-    from '@/features/business/calculation-workers-scoreboard/UI/CalculationWorkersScoreboardFloating.molecule'
-import ControlPanelMolecule from '@/features/business/control-panel/UI/ControlPanel.molecule'
-import IconPackController from '@/features/technical/icon-pack/IconPack.controller'
-import BorderColorChangeController from '@/features/business/border-color-change/BorderColorChange.controller'
+    from '@/features/building/calculation-workers-scoreboard/UI/CalculationWorkersScoreboardFloating.molecule'
+import ControlPanelMolecule from '@/features/building/control-panel/UI/ControlPanel.molecule'
+import IconPackController from '@/features/background/icon-pack/IconPack.controller'
+import BorderColorChangeController from '@/features/background/border-color-change/BorderColorChange.controller'
 
 
 // Main application component.
