@@ -1,14 +1,11 @@
 import React, { useMemo, useState } from 'react'
 import {
-    selectActuallyWorkingWorkersAmount,
+    selectIsAnyWorkerWorking,
+    selectIsNoWorkerActive,
     selectRequestedWorkersAmount
 } from '@/features/background/web-workers-configuration/webWorkersSlice'
-import WorkersWorkSwitchMolecule
-    from '@/features/building/workers-controls/UI/WorkersWorkSwitch.molecule'
-import {
-    constructWorkerNameByOrderIndex,
-    queueAllWorkersTask
-} from '@/features/background/web-workers-configuration/webWorkers.api'
+import WorkersWorkSwitchMolecule from '@/features/building/workers-controls/UI/WorkersWorkSwitch.molecule'
+import { constructWorkerNameByOrderIndex } from '@/features/background/web-workers-configuration/webWorkers.api'
 import { useAppSelector } from '@/core/store.core'
 import scss from './WorkersView.module.scss'
 import { MAX_WORKER_COMPLEXITY_POSSIBILITY, MIN_WORKER_COMPLEXITY_POSSIBILITY } from '@/app-config-constants'
@@ -22,40 +19,28 @@ const WorkersSwitchViewContainerMolecule = (): JSX.Element => {
 
     const workerRequestedAmount = useAppSelector(selectRequestedWorkersAmount)
 
-    const workersAmountArray = useMemo(() => Array(workerRequestedAmount.amount).fill(undefined), [workerRequestedAmount])
 
-
-    const actuallyWorkingWorkers = useAppSelector(selectActuallyWorkingWorkersAmount)
-
-
-    const [sliderRAWValue, setSliderRAWValue] = useState<number | undefined>(undefined)
+    const [sliderValue, setSliderValue] = useState<number | undefined>(undefined)
 
     const [globalComplexityValue, setGlobalComplexityValue] = useState<number | undefined | 'NaN'>(undefined)
 
 
     const handleNewSliderRAWValue = (newValue: number): void => {
-        setSliderRAWValue(newValue)
+        setSliderValue(newValue)
     }
 
 
     const isSliderHasAnInitialStateYet = useMemo<boolean>(() =>
-        typeof sliderRAWValue === 'undefined', [sliderRAWValue])
+        typeof sliderValue === 'undefined', [sliderValue])
 
 
-    const isAnyWorkerWorking = useMemo<boolean>(() =>
-        actuallyWorkingWorkers.amount > 0, [actuallyWorkingWorkers.amount])
+    const isAnyWorkerWorking = useAppSelector(selectIsAnyWorkerWorking)
 
-
-    const isAllOfWorkersWorking = useMemo<boolean>(() =>
-        actuallyWorkingWorkers.amount === workerRequestedAmount.amount, [actuallyWorkingWorkers.amount, workerRequestedAmount.amount])
-
-
-    const isNoWorkerActive = useMemo(() =>
-        workerRequestedAmount.amount === 0, [workerRequestedAmount.amount])
+    const isNoWorkerActive = useAppSelector(selectIsNoWorkerActive)
 
 
     const handleNewGlobalComplexitySet = (): void => {
-        setGlobalComplexityValue(Array.isArray(sliderRAWValue) ? sliderRAWValue[0] : sliderRAWValue)
+        setGlobalComplexityValue(Array.isArray(sliderValue) ? sliderValue[0] : sliderValue)
     }
 
     const handleRefreshUndefinedGlobalComplexityState = (): void => {
@@ -63,6 +48,10 @@ const WorkersSwitchViewContainerMolecule = (): JSX.Element => {
         setGlobalComplexityValue(() => 'NaN')
         fireJustClientSide(() => window.setTimeout(() => setGlobalComplexityValue(undefined), 0))
     }
+
+    const workersAmountArray = useMemo(() => Array(workerRequestedAmount.amount).fill(undefined), [workerRequestedAmount])
+
+
 
     return (<main className={scss.host}>
 
@@ -87,18 +76,6 @@ const WorkersSwitchViewContainerMolecule = (): JSX.Element => {
                 onClick={handleRefreshUndefinedGlobalComplexityState}
                 disabled={isAnyWorkerWorking || isNoWorkerActive}>
                 <span>SET INITIAL</span>
-            </AppButtonAtom>
-
-
-            <AppButtonAtom
-                onClick={() => queueAllWorkersTask({workerTaskName: 'task__calculations_on'})}
-                disabled={isAllOfWorkersWorking}>
-                <span>MAKE THEM ALL WORK</span>
-            </AppButtonAtom>
-            <AppButtonAtom
-                onClick={() => queueAllWorkersTask({workerTaskName: 'task__calculations_off'})}
-                disabled={!isAnyWorkerWorking}>
-                <span>STOP ALL WORKERS</span>
             </AppButtonAtom>
 
 

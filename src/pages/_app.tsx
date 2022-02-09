@@ -15,8 +15,8 @@ import WorkersActiveInstancesAndCommunicationController
 import MetaHead from '@/layout/partials/MetaHead'
 import { CssBaseline } from '@mui/material'
 import FPSMonitorFloatingMolecule from '@/features/building/fps-monitor/UI/FPSMonitorFloating.molecule'
-import CalculationWorkersScoreboardFloatingMolecule
-    from '@/features/building/calculation-workers-scoreboard/UI/CalculationWorkersScoreboardFloating.molecule'
+import WorkersScoreboardFloatingMolecule
+    from '@/features/building/workers-scoreboard/UI/WorkersScoreboardFloating.molecule'
 import ControlPanelMolecule from '@/features/building/control-panel/UI/ControlPanel.molecule'
 import IconPackController from '@/features/background/icon-pack/IconPack.controller'
 import BorderColorChangeController from '@/features/background/border-color-change/BorderColorChange.controller'
@@ -45,7 +45,7 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
 
             {/* Whole app runtime components - above all pages during a whole app life. */}
             <FPSMonitorFloatingMolecule/>
-            <CalculationWorkersScoreboardFloatingMolecule/>
+            <WorkersScoreboardFloatingMolecule/>
 
 
             <ControlPanelMolecule/>

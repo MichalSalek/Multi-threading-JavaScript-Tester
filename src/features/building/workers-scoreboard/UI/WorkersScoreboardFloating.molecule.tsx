@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import scss from './CalculationWorkersScoreboard.module.scss'
+import scss from './WorkersScoreboard.module.scss'
 import {
     NamedWorkerReadyStatusType,
     NamedWorkerWorkStatusType,
@@ -22,7 +22,7 @@ import SystemComponentVisibilityComposition
 
 
 
-const CalculationWorkersScoreboardFloatingMolecule = (): JSX.Element => {
+const WorkersScoreboardFloatingMolecule = (): JSX.Element => {
 
     // Instant get a requested amount of web-workers-configuration
     //
@@ -133,4 +133,4 @@ const CalculationWorkersScoreboardFloatingMolecule = (): JSX.Element => {
     )
 }
 
-export default CalculationWorkersScoreboardFloatingMolecule
+export default WorkersScoreboardFloatingMolecule

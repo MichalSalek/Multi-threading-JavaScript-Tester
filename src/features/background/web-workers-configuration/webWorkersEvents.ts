@@ -1,7 +1,3 @@
-import { CALCULATION_WORKER_TASKS } from '@/features/background/calculation-workers-configuration/calculationWorkersEvents'
-
-
-
 export const WEB_WORKER_TASKS = (() => Object.freeze({
 
     // Core tasks
@@ -9,7 +5,8 @@ export const WEB_WORKER_TASKS = (() => Object.freeze({
     killWorker: 'task__close',
 
     // Other building tasks
-    ...CALCULATION_WORKER_TASKS
+    turnOnCalculations: 'task__calculations_on',
+    turnOffCalculations: 'task__calculations_off'
 
 } as const))()
 

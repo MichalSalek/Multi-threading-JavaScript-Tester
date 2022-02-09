@@ -160,6 +160,7 @@ const controlAmountOfActiveWorkerInstances = (requestedNumberOfWorkers: WorkersA
 
 
 const setReduxDefaultValuesForWorker = (workerKey: WorkerKeyType): void => {
+
     const workersSlice: IWorkersSlice = store.getState().calculationsWorkersSlice
 
     isUndefinedType(workersSlice.readyStatuses[workerKey.workerName]?.ready) && updateWorkerIsReadyState(workerKey)

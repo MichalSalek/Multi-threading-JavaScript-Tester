@@ -117,10 +117,14 @@ export const {
     handleWorkerErrorStateReport
 } = webWorkersSlice.actions
 
-export const selectRequestedWorkersAmount = (state: AppState): WorkersAmountStateType => state.calculationsWorkersSlice.requestedAmount
-export const selectWholeWorkersReadyState = (state: AppState): NamedWorkerReadyStatusType => state.calculationsWorkersSlice.readyStatuses
-export const selectWholeWorkersWorkState = (state: AppState): NamedWorkerWorkStatusType => state.calculationsWorkersSlice.workStatuses
-export const selectActuallyWorkingWorkersAmount = (state: AppState): WorkersAmountStateType => state.calculationsWorkersSlice.actuallyWorks
-export const selectWholeWorkersErrorState = (state: AppState): NamedWorkerErrorStatusType => state.calculationsWorkersSlice.errorStatuses // można zrobić mechanizm randomowych errorów i dodać obsługę błędów workerów
+export const selectRequestedWorkersAmount = ({calculationsWorkersSlice}: AppState): WorkersAmountStateType => calculationsWorkersSlice.requestedAmount
+export const selectWholeWorkersReadyState = ({calculationsWorkersSlice}: AppState): NamedWorkerReadyStatusType => calculationsWorkersSlice.readyStatuses
+export const selectWholeWorkersWorkState = ({calculationsWorkersSlice}: AppState): NamedWorkerWorkStatusType => calculationsWorkersSlice.workStatuses
+export const selectActuallyWorkingWorkersAmount = ({calculationsWorkersSlice}: AppState): WorkersAmountStateType => calculationsWorkersSlice.actuallyWorks
+export const selectWholeWorkersErrorState = ({calculationsWorkersSlice}: AppState): NamedWorkerErrorStatusType => calculationsWorkersSlice.errorStatuses // @TODO worker error handling
+
+export const selectIsAnyWorkerWorking = ({calculationsWorkersSlice}: AppState): boolean => calculationsWorkersSlice.actuallyWorks.amount > 0
+export const selectIsAllOfWorkersWorking = ({calculationsWorkersSlice}: AppState): boolean => calculationsWorkersSlice.actuallyWorks.amount === calculationsWorkersSlice.requestedAmount.amount
+export const selectIsNoWorkerActive = ({calculationsWorkersSlice}: AppState): boolean => calculationsWorkersSlice.requestedAmount.amount === 0
 
 export default webWorkersSlice.reducer

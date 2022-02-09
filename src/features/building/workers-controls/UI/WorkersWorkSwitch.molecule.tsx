@@ -8,7 +8,7 @@ import { WorkerKeyType } from '@/features/background/web-workers-configuration/w
 import {
     useSingleWorkerSpecificStatus,
     UseSpecificWorkerStatusCommandEnum
-} from '@/features/background/calculation-workers-configuration/calculationWorkers.hooks'
+} from '@/features/background/web-workers-configuration/webWorkers.hooks'
 import AppButtonAtom from '@/app-components/AppButton.atom'
 import AppInputAtom from '@/app-components/AppInput.atom'
 import {
