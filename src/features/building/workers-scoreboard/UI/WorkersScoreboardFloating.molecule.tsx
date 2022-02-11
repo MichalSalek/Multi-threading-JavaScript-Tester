@@ -18,7 +18,7 @@ import {
 import { selectLastSocketResponseData } from '@/features/background/socket-client/socketSlice'
 import { MAIN_THREAD_KEY } from '@/app-config-constants'
 import SystemComponentVisibilityComposition
-    from '@/layout/compositions/SystemComponentVisibility/SystemComponentVisibility.composition'
+    from '@/layout/compositions/system-component-visibility/SystemComponentVisibility.composition'
 
 
 

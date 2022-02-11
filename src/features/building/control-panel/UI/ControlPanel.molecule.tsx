@@ -126,18 +126,28 @@ const ControlPanelMolecule = (): JSX.Element => {
 
 
                         <ul className={scss.controlsList}>
+
                             <li className={[scss.listItem, getUIEnabledFeatureClassName(systemComponentsVisibilities.FPSMonitor)].join(' ')}>
                                 <button
                                     onClick={() => dispatch(handleControlPanelSwitchVisibility({name: 'FPSMonitor'}))}>
-                                    <span>Hide/show FPS MONITOR</span>
+                                    <span>FPS MONITOR</span>
                                     <i className="fad fa-tachometer-alt"/>
                                 </button>
                             </li>
+
                             <li className={[scss.listItem, getUIEnabledFeatureClassName(systemComponentsVisibilities.scoreboard)].join(' ')}>
                                 <button
                                     onClick={() => dispatch(handleControlPanelSwitchVisibility({name: 'scoreboard'}))}>
-                                    <span>Hide/show SCOREBOARD</span>
+                                    <span>SCOREBOARD</span>
                                     <i className="fad fa-tasks-alt"/>
+                                </button>
+                            </li>
+
+                            <li className={[scss.listItem, getUIEnabledFeatureClassName(systemComponentsVisibilities.workControl)].join(' ')}>
+                                <button
+                                    onClick={() => dispatch(handleControlPanelSwitchVisibility({name: 'workControl'}))}>
+                                    <span>WORK CONTROL</span>
+                                    <i className="fad fa-tools"/>
                                 </button>
                             </li>
                         </ul>

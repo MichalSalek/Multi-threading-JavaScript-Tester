@@ -3,7 +3,7 @@ import {
     handleWorkerAmountChange,
     selectRequestedWorkersAmount
 } from '@/features/background/web-workers-configuration/webWorkersSlice'
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { getStorageItem, setStorageItem } from '@/features/background/browser-storage/browserStorage.api'
 import {
     STORAGE_KEY_CONTROL_PANEL_COLLAPSE_STATE,
@@ -21,6 +21,7 @@ import {
 } from '@/features/building/control-panel/controlPanelSlice'
 import { ControlPosition, DraggableData, DraggableEvent } from 'react-draggable'
 import { isUndefinedType } from '@/coding-utils/typeOperations.api'
+import { fireJustClientSide } from '@/coding-utils/environmentOperations.api'
 
 
 
@@ -158,59 +159,100 @@ export type UsePersistedPositionByBrowserStorageType = [ControlPositionType, Set
 
 export const usePersistedPositionByBrowserStorage = (
     storageSwitchName: SystemComponentNameType | string,
-    initialBehavior: ControlPositionType
+    initialPosition: ControlPositionType
 ): UsePersistedPositionByBrowserStorageType => {
 
-    const [memoizedPosition, setMemoizedPosition] = useState<ControlPositionType>(initialBehavior)
+    const [consumerPosition, setConsumerPosition] = useState<ControlPositionType>(initialPosition)
 
     const browserStorageKey = useMemo(() => `${STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION}_${storageSwitchName}`, [storageSwitchName])
 
+    // Pass value from storage to consumer on mount.
+    //
     useEffect(() => {
         const memoizedOnTheScreenPositionValue = getStorageItem(browserStorageKey)
 
         if (typeof memoizedOnTheScreenPositionValue === 'string') {
-            // Value is available
+            // Value from storage is available.
             //
-            setMemoizedPosition(JSON.parse(memoizedOnTheScreenPositionValue))
-
+            setConsumerPosition(JSON.parse(memoizedOnTheScreenPositionValue))
         } else {
-
-            // Default behavior
+            // Default behavior.
             //
-            setMemoizedPosition(initialBehavior)
+            setConsumerPosition(initialPosition)
         }
-
-
         return () => undefined
-    }, [initialBehavior, browserStorageKey])
+    }, [initialPosition, browserStorageKey])
 
 
 
-    const validateControlPosition = (position: ControlPositionType): ControlPositionType => (
-        {
-            x: (() => position.x < 0 ? 0 : position.x)(),
-            y: (() => position.y < 0 ? 50 : position.y)()
+    // Set value to storage on new consumer position.
+    //
+    useEffect(() => {
+        if (!isUndefinedType(consumerPosition)) {
+            setStorageItem(browserStorageKey, JSON.stringify(consumerPosition))
+        }
+        return () => undefined
+    }, [consumerPosition, browserStorageKey])
+
+
+
+    const ifSingleAxisRequiresValidation = useCallback(
+        (axisPosition: number, XorY: 'X' | 'Y') => fireJustClientSide<boolean>(() => {
+            switch (XorY) {
+            case 'X':
+                return axisPosition < 0 || axisPosition > window.innerWidth
+            case 'Y':
+                return axisPosition < 0 || axisPosition > window.innerHeight
+            }
+        }) as boolean,
+        [])
+
+    const checkIfTheOffScreenPositionRequireValidation = useCallback((position: ControlPositionType): boolean =>
+        ifSingleAxisRequiresValidation(position.x, 'X')
+            || ifSingleAxisRequiresValidation(position.y, 'Y')
+    , [ifSingleAxisRequiresValidation])
+
+    const validateConsumerPosition = useCallback((position: ControlPositionType): ControlPositionType => ({
+        x: ifSingleAxisRequiresValidation(position.x, 'X') ? 0 : position.x,
+        y: ifSingleAxisRequiresValidation(position.y, 'Y') ? 0 : position.y
+    }), [ifSingleAxisRequiresValidation])
+
+    const checkIfTheOffScreenPositionRequireValidationThenValidate = useCallback((): void => {
+        if (checkIfTheOffScreenPositionRequireValidation(consumerPosition)) {
+            setConsumerPosition(validateConsumerPosition(consumerPosition))
+        }
+    }, [consumerPosition, checkIfTheOffScreenPositionRequireValidation, validateConsumerPosition])
+
+
+    // Validate if consumer position is off-screen,
+    // every position change.
+    //
+    const intervalID = useRef(0)
+    useEffect(() => {
+        fireJustClientSide(() => {
+            window.clearInterval(intervalID.current)
+
+            intervalID.current = window.setInterval(() => {
+                checkIfTheOffScreenPositionRequireValidationThenValidate()
+            }, 3000)
         })
 
-
-    useEffect(() => {
-        if (!isUndefinedType(memoizedPosition)) {
-            const validatedPosition = validateControlPosition(memoizedPosition)
-
-            setStorageItem(browserStorageKey, JSON.stringify(validatedPosition))
+        return () => {
+            fireJustClientSide(() => {
+                window.clearInterval(intervalID.current)
+            })
         }
-        return () => undefined
-    }, [memoizedPosition, browserStorageKey])
+    }, [checkIfTheOffScreenPositionRequireValidationThenValidate])
+
 
 
     const onDragStopHandler = (event: DraggableEvent, data: DraggableData): void => {
-        setMemoizedPosition({
+        setConsumerPosition({
             x: data.x,
             y: data.y
         })
     }
 
 
-    return [memoizedPosition, onDragStopHandler]
+    return [consumerPosition, onDragStopHandler]
 }
-

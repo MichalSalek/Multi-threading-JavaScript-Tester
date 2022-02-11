@@ -6,6 +6,7 @@ import { AppState } from '@/core/store.core'
 export interface ISystemComponentsVisibilities {
     FPSMonitor: boolean
     scoreboard: boolean
+    workControl: boolean
 }
 
 
@@ -17,7 +18,8 @@ interface IControlPanelState {
 const initialState: IControlPanelState = {
     visibilitySwitches: {
         FPSMonitor: true,
-        scoreboard: true
+        scoreboard: true,
+        workControl: true
     }
 } as const
 

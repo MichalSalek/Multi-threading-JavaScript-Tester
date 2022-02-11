@@ -19,6 +19,10 @@ const WorkersSwitchViewContainerMolecule = (): JSX.Element => {
 
     const workerRequestedAmount = useAppSelector(selectRequestedWorkersAmount)
 
+    const isAnyWorkerWorking = useAppSelector(selectIsAnyWorkerWorking)
+
+    const isNoWorkerActive = useAppSelector(selectIsNoWorkerActive)
+
 
     const [sliderValue, setSliderValue] = useState<number | undefined>(undefined)
 
@@ -34,22 +38,17 @@ const WorkersSwitchViewContainerMolecule = (): JSX.Element => {
         typeof sliderValue === 'undefined', [sliderValue])
 
 
-    const isAnyWorkerWorking = useAppSelector(selectIsAnyWorkerWorking)
-
-    const isNoWorkerActive = useAppSelector(selectIsNoWorkerActive)
-
-
     const handleNewGlobalComplexitySet = (): void => {
         setGlobalComplexityValue(Array.isArray(sliderValue) ? sliderValue[0] : sliderValue)
     }
 
     const handleRefreshUndefinedGlobalComplexityState = (): void => {
-
         setGlobalComplexityValue(() => 'NaN')
         fireJustClientSide(() => window.setTimeout(() => setGlobalComplexityValue(undefined), 0))
     }
 
-    const workersAmountArray = useMemo(() => Array(workerRequestedAmount.amount).fill(undefined), [workerRequestedAmount])
+    const workersAmountArray = useMemo(() =>
+        Array(workerRequestedAmount.amount).fill(undefined), [workerRequestedAmount])
 
 
 

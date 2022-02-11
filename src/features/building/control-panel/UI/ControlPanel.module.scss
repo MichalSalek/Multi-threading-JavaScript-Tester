@@ -6,7 +6,7 @@
 // VARS, MIXINS AND PLACEHOLDERS
 //
 
-$control-panel-height: 200px;
+$control-panel-height: 280px;
 
 $control-panel-background-color: #0264b2;
 $control-panel-background-color-transparently: rgba(25, 28, 25, 0.97);
@@ -109,22 +109,23 @@ $control-switch-label-min-width: 230px;
   z-index: 1900;
   position: relative;
   left: 0;
+
+  .innerHost {
+    position: fixed;
+    width: fit-content;
+    pointer-events: none;
+    left: 0;
+  }
+
+  .hostSection {
+    display: flex;
+    color: #d3dedc;
+    height: $control-panel-height;
+    width: fit-content;
+    pointer-events: none;
+  }
 }
 
-.innerHost {
-  position: fixed;
-  width: fit-content;
-  pointer-events: none;
-  left: 0;
-}
-
-.hostSection {
-  display: flex;
-  color: #d3dedc;
-  height: $control-panel-height;
-  width: fit-content;
-  pointer-events: none;
-}
 
 // Flipped version of Control Panel
 //
@@ -137,10 +138,14 @@ $control-switch-label-min-width: 230px;
     left: 50%;
     bottom: 0;
     transform: translate(-50%, 35px) rotate(-90deg) !important;
+
+    > .hostSection {
+      transform: translateX(-32px);
+    }
   }
 
   .collapsedControlsList {
-    transform: translateX(-48px);
+    transform: translateX(-53px);
   }
 
   .listItem {
@@ -292,7 +297,7 @@ $control-switch-label-min-width: 230px;
 
     > button {
       width: 100%;
-      padding: 15px 0;
+      padding: 15px 7px;
 
 
       display: flex;
@@ -300,7 +305,7 @@ $control-switch-label-min-width: 230px;
       align-items: center;
 
       > svg {
-        @include svgSize(58px);
+        @include svgSize(52px);
         padding: 0 3px;
       }
     }
@@ -316,7 +321,7 @@ $control-switch-label-min-width: 230px;
       min-width: $control-switch-label-min-width;
       width: 100%;
 
-      padding: 0 0.2rem;
+      padding: 0 1rem;
     }
 
     &:hover {
@@ -335,7 +340,7 @@ $control-switch-label-min-width: 230px;
 }
 
 .collapsedControlsList {
-  transform: translateX(calc(0px - #{$control-switch-label-min-width} - 46px));
+  transform: translateX(calc(0px - #{$control-switch-label-min-width} - 48px));
 }
 
 

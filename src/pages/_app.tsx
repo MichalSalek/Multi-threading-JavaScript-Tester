@@ -13,20 +13,34 @@ import SocketConnectionAndListeningController
 import WorkersActiveInstancesAndCommunicationController
     from '@/features/background/web-workers-configuration/WorkersActiveInstancesAndCommunication.controller'
 import MetaHead from '@/layout/partials/MetaHead'
-import { CssBaseline } from '@mui/material'
+import { CssBaseline, ThemeProvider } from '@mui/material'
 import FPSMonitorFloatingMolecule from '@/features/building/fps-monitor/UI/FPSMonitorFloating.molecule'
 import WorkersScoreboardFloatingMolecule
     from '@/features/building/workers-scoreboard/UI/WorkersScoreboardFloating.molecule'
 import ControlPanelMolecule from '@/features/building/control-panel/UI/ControlPanel.molecule'
 import IconPackController from '@/features/background/icon-pack/IconPack.controller'
 import BorderColorChangeController from '@/features/background/border-color-change/BorderColorChange.controller'
+import WorkersGlobalWorkControlFloatingMolecule
+    from '@/features/building/workers-global-work-control/UI/WorkersGlobalWorkControlFloating.molecule'
+
+import { createTheme } from '@mui/material/styles'
+import { grey } from '@mui/material/colors'
 
 
 // Main application component.
 // Includes app layout as well as realtime controllers
 //
 export default function ApplicationComposition({Component, pageProps}: AppProps) {
-    return (<>
+
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: grey[900]
+            }
+        }
+    })
+
+    return (<ThemeProvider theme={theme}>
 
         <MetaHead/>
 
@@ -46,7 +60,7 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
             {/* Whole app runtime components - above all pages during a whole app life. */}
             <FPSMonitorFloatingMolecule/>
             <WorkersScoreboardFloatingMolecule/>
-
+            <WorkersGlobalWorkControlFloatingMolecule/>
 
             <ControlPanelMolecule/>
 
@@ -56,6 +70,6 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
             </LayoutComposition>
 
         </Provider>
-    </>)
+    </ThemeProvider>)
 }
 

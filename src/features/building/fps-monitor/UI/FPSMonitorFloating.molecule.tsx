@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react'
 import scss from './FPSMonitor.module.scss'
 import { DraggableWindowComposition } from '@/layout/compositions/draggable-window/DraggableWindow.composition'
 import SystemComponentVisibilityComposition
-    from '@/layout/compositions/SystemComponentVisibility/SystemComponentVisibility.composition'
+    from '@/layout/compositions/system-component-visibility/SystemComponentVisibility.composition'
 
 
 
@@ -39,7 +39,7 @@ const FPSMonitorFloatingMolecule = (): JSX.Element => {
                 componentUITitleBarName={'FPS monitor'}
                 switchVisibilityConfiguration={{name: 'FPSMonitor', visibilitySwitchState: false}}
                 onTheScreenPosition={{x: 50, y: 10}}
-                zIndex={1901}
+                zIndex={1920}
             >
                 <article
                     ref={FPSMonitorRef}
