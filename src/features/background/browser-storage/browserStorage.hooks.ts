@@ -25,7 +25,7 @@ import { fireJustClientSide } from '@/coding-utils/environmentOperations.api'
 
 
 
-// WORKERS AMOUNT STORAGE PERSIST
+// WORKERS AMOUNT STATE STORAGE PERSIST
 //
 export const useWorkersAmountStoragePersist = (): void => {
 
@@ -55,7 +55,7 @@ export const useWorkersAmountStoragePersist = (): void => {
 
 
 
-// CONTROL PANEL SWITCHES STORAGE PERSIST
+// CONTROL PANEL SWITCHES STATE STORAGE PERSIST
 //
 export const useControlPanelSwitchesStoragePersist = (): void => {
 
@@ -98,18 +98,17 @@ export const useControlPanelSwitchesStoragePersist = (): void => {
 
 
 
-// CONTROL PANEL COLLAPSE STATE STORAGE PERSIST
-//
-type IsListCollapsedType = boolean
-type SetIsListCollapsedType = Dispatch<SetStateAction<boolean>>
-export type UseControlPanelCollapseStateStoragePersistType = [IsListCollapsedType, SetIsListCollapsedType]
-
-
 export enum UseControlPanelCollapseStateStoragePersistEnum {
     'true' = 'true',
     'false' = 'false'
 }
 
+
+// CONTROL PANEL COLLAPSE STATE STORAGE PERSIST
+//
+type IsListCollapsedType = boolean
+type SetIsListCollapsedType = Dispatch<SetStateAction<boolean>>
+export type UseControlPanelCollapseStateStoragePersistType = [IsListCollapsedType, SetIsListCollapsedType]
 
 export const useControlPanelCollapseStateStoragePersist = (initialBehavior: boolean): UseControlPanelCollapseStateStoragePersistType => {
 
@@ -151,7 +150,7 @@ export const useControlPanelCollapseStateStoragePersist = (initialBehavior: bool
 }
 
 
-// CONTROL PANEL COLLAPSE STATE STORAGE PERSIST
+// DRAGGABLE INSTANCES STATE STORAGE PERSIST
 //
 type ControlPositionType = ControlPosition
 type SetControlPositionType = (event: DraggableEvent, data: DraggableData) => void
@@ -256,3 +255,4 @@ export const usePersistedPositionByBrowserStorage = (
 
     return [consumerPosition, onDragStopHandler]
 }
+

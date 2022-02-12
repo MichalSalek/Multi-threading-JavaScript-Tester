@@ -1,11 +1,11 @@
 import { MAX_WORKERS_LIMIT } from '@/app-config-constants'
 import {
-    ISocketDTO,
     IWorkerKey,
     IWorkerTask,
     IWorkerWorkState,
     WorkerKeyType,
-    WorkerNameType
+    WorkerNameType,
+    WorkerToSocketDTO
 } from '@/features/background/web-workers-configuration/webWorkers.types'
 import store from '@/core/store.core'
 import {
@@ -15,6 +15,7 @@ import {
 } from '@/features/background/web-workers-configuration/webWorkersSlice'
 import { workersKeysNames } from '@/features/background/web-workers-configuration/add-new-physical-worker-here'
 import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLogs.api'
+import { AppToSocketDTO } from '@/features/background/socket-client/socket.types'
 
 
 
@@ -31,9 +32,13 @@ export const constructCalculationWorkerKeyByName = (workerName: string): IWorker
 })
 
 
-export const constructWorkerJobSocketDTO = <T>(event: MessageEvent<T>, workerKey: WorkerKeyType): ISocketDTO<T> => ({
-    keyNames: workerKey,
-    unknownData: event.data
+export const constructWorkerJobToSocketDTO = <T>(event: MessageEvent<T>, workerKey: WorkerKeyType): AppToSocketDTO<WorkerToSocketDTO<T>> => ({
+    data: {
+        keyNames: workerKey,
+        unknownData: event.data
+    },
+    status: 201,
+    userAgent: navigator.userAgent
 })
 
 
@@ -75,7 +80,7 @@ export const queueWorkerTask = (workerKey: WorkerKeyType, workerTask: IWorkerTas
 
     if (!workerWindowInstance) addConsoleVerbose(`[Bug detector]: Instance of ${workerKey.workerName} is ${typeof workerWindowInstance}`, 'error')
 
-    const workerData: ISocketDTO<IWorkerTask> = {keyNames: workerKey, unknownData: workerTask}
+    const workerData: WorkerToSocketDTO<IWorkerTask> = {keyNames: workerKey, unknownData: workerTask}
     workerWindowInstance.postMessage(workerData)
     addConsoleVerbose(`Worker command queued: [ ${workerTask.workerTaskName} ]. ${msgForDevConsoleLog ? msgForDevConsoleLog : ''}`, 'log')
 }

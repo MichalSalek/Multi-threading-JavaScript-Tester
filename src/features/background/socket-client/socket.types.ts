@@ -1,18 +1,26 @@
 import { WebSocketEventTriggersType } from '@/features/background/socket-client/socketEventsEntities'
-import { ISocketDTO, IWorkerDTO } from '@/features/background/web-workers-configuration/webWorkers.types'
 
 
 
-export type SocketResponseType<T> = {
-    status: number;
+export type SocketResponseStatusesType = 201 // || xx...
+
+export type ClientBrowserIDType = string
+
+export type UserAgentType = string
+
+
+export interface AppToSocketDTO<T> {
+    status: SocketResponseStatusesType
     data: T
+    userAgent: UserAgentType
 }
 
 
-export interface ISocketEmitEvent<T = unknown> {
-    eventName: WebSocketEventTriggersType,
-    dataToSend: T
+export interface SocketToAppDTO<T> {
+    status: SocketResponseStatusesType
+    data: T
+    clientBrowserID: ClientBrowserIDType
 }
 
 
-export type SocketEmitType = (eventName: WebSocketEventTriggersType, dataToSend: ISocketDTO<IWorkerDTO> | undefined) => void
+export type AppToSocketEmitDTO = <T>(eventName: WebSocketEventTriggersType, dataToSend: AppToSocketDTO<T>) => void

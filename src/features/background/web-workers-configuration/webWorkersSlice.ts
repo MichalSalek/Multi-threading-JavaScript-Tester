@@ -25,7 +25,7 @@ export const dispatchActuallyWorkingWorkersAmount = (workerSlice: WritableDraft<
 }
 
 
-export interface IWorkersSlice {
+export type IWorkersSlice = {
     requestedAmount: WorkersAmountStateType
     actuallyWorks: WorkersAmountStateType
     readyStatuses: NamedWorkerReadyStatusType

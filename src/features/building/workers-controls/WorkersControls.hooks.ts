@@ -41,12 +41,16 @@ export const useMainThreadCalculations = <D>(CALCULATION_INTERVAL_TIMING_IN_MS =
         if (typeof lastMadeCalculation === 'undefined') return () => undefined
 
         sendTriggerMessageToSocket(WEB_SOCKET_EVENTS_TRIGGERS.reportJobDone, {
-            keyNames: MAIN_THREAD_KEY,
-            unknownData: {
-                working: isMainThreadOn,
-                lastCalculations: lastMadeCalculation,
-                timestamp: Date.now()
-            }
+            data: {
+                keyNames: MAIN_THREAD_KEY,
+                unknownData: {
+                    working: isMainThreadOn,
+                    lastCalculations: lastMadeCalculation,
+                    timestamp: Date.now()
+                }
+            },
+            status: 201,
+            userAgent: navigator.userAgent
         })
 
         return () => undefined

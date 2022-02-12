@@ -43,7 +43,7 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
     const [isWorkerWorking] = useSingleWorkerSpecificStatus(UseSpecificWorkerStatusCommandEnum.working, workerKey)
 
 
-    const randomizedNumber = useMemo(() => randomIntFromNumbersRange(15, 120), [])
+    const randomizedNumber = useMemo(() => randomIntFromNumbersRange(15, 80), [])
 
     // Complexity of calculations defined by user
     //

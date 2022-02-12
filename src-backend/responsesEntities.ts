@@ -1,9 +1,6 @@
-import { ISocketToAppCalculationDataDTO } from '@/features/background/web-workers-configuration/webWorkers.types'
+import { WorkerJobsByClientBrowserIDTypeDTO } from '@/features/background/web-workers-configuration/webWorkers.types'
 import { workersRuntimeData } from './runtimeData.api'
 
 
 
-export const wholeDataResponse: ISocketToAppCalculationDataDTO = {
-    data: workersRuntimeData,
-    status: 201
-}
+export const wholeDataResponse: WorkerJobsByClientBrowserIDTypeDTO = workersRuntimeData

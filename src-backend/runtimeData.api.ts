@@ -1,7 +1,7 @@
 import {
-    IWorkersJobsBody,
-    NewWorkerJobType,
-    WorkersJobsType
+    NewWorkersJobByIPType,
+    WorkerJobsByClientBrowserIDTypeDTO,
+    WorkersJobBodyType
 } from '@/features/background/web-workers-configuration/webWorkers.types'
 
 //
@@ -12,59 +12,60 @@ import {
 
 
 //////////////////////////////////////////////////////////////////
-// Runtime data                                                 //
-// { worker1: 0, worker2: 37, worker3: 560, worker4: 717 }      //
-//                                                              //
-export const workersRuntimeData: WorkersJobsType = {}           //
-//                                                              //
-//                                                              //
-export const IPAddressesData: string[] = []                     //
-//                                                              //
+// Runtime data
+// 'some-id': { worker1: 0, worker2: 37, worker3: 560, worker4: 717 }
+//
+export const workersRuntimeData: WorkerJobsByClientBrowserIDTypeDTO = {}
+//
+//
 //////////////////////////////////////////////////////////////////
 
-
-const returnNewKeyBodyWithDefaultValues = (): IWorkersJobsBody => ({
-    results: [],
-    amount: 0
-})
-
-
-const checkAndCreateNotExistingWorkerKey = (name: string): true => {
-    typeof workersRuntimeData[name] === 'undefined' && (() => workersRuntimeData[name] = returnNewKeyBodyWithDefaultValues())()
-    return true
-}
 
 
 const roundDecimalCalculationResultToInt = (number: number): number => Math.round(number * 1000000000000)
 
 
-const setNewValuesToWorkerKey = ({workerName, lastCalculations}: NewWorkerJobType): true => {
-    workersRuntimeData[workerName].results.push(roundDecimalCalculationResultToInt(lastCalculations))
-    workersRuntimeData[workerName].amount = workersRuntimeData[workerName].results.length
-    return true
+const setNewValuesToWorkerKey = ({clientBrowserID, data}: NewWorkersJobByIPType): void => {
+    const {workerName, lastCalculations} = data
+
+    workersRuntimeData[clientBrowserID][workerName].results.push(roundDecimalCalculationResultToInt(lastCalculations))
+    workersRuntimeData[clientBrowserID][workerName].amount = workersRuntimeData[clientBrowserID][workerName].results.length
 }
+
+
+const returnDefaultWorkerJobBody = (): WorkersJobBodyType => ({
+    results: [],
+    amount: 0
+})
+
+
+
+const checkAndCreateNotExistingWorkerSchema = ({clientBrowserID, data}: NewWorkersJobByIPType): void => {
+
+    typeof workersRuntimeData[clientBrowserID] === 'undefined' && (() => workersRuntimeData[clientBrowserID] = {})()
+    typeof workersRuntimeData[clientBrowserID][data.workerName] === 'undefined' && (() => workersRuntimeData[clientBrowserID][data.workerName] = returnDefaultWorkerJobBody())()
+
+}
+
 
 
 // Data receive handler
 //
-export const setNewJobDone = ({workerName, lastCalculations}: NewWorkerJobType): true => {
-    checkAndCreateNotExistingWorkerKey(workerName) && setNewValuesToWorkerKey({
-        workerName,
-        lastCalculations
-    })
-    return true // TODO: In the future, here we can handle any validations etc.
+export const setNewJobDone = (newWorkersJobByIP: NewWorkersJobByIPType): void => {
+
+    checkAndCreateNotExistingWorkerSchema(newWorkersJobByIP)
+    setNewValuesToWorkerKey(newWorkersJobByIP)
 }
 
 
 // Return current state of all jobs done by all threads
 //
-export const getAllJobsDone = (): WorkersJobsType => workersRuntimeData
+export const getAllJobsDone = (): WorkerJobsByClientBrowserIDTypeDTO => workersRuntimeData
 
 
 // Clear data
 //
-export const setClearRuntimeData = (): true => {
+export const setClearRuntimeData = (): void => {
     const keys: string[] = Object.keys(workersRuntimeData)
     keys.forEach((key) => delete workersRuntimeData[key])
-    return true
 }

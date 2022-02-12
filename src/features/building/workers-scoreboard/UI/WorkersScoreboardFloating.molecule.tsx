@@ -3,9 +3,9 @@ import scss from './WorkersScoreboard.module.scss'
 import {
     NamedWorkerReadyStatusType,
     NamedWorkerWorkStatusType,
+    WorkerJobsTypeDTO,
     WorkerNameType,
-    WorkersAmountStateType,
-    WorkersJobsType
+    WorkersAmountStateType
 } from '@/features/background/web-workers-configuration/webWorkers.types'
 import { DraggableWindowComposition } from '@/layout/compositions/draggable-window/DraggableWindow.composition'
 import { useAppSelector } from '@/core/store.core'
@@ -15,7 +15,7 @@ import {
     selectWholeWorkersReadyState,
     selectWholeWorkersWorkState
 } from '@/features/background/web-workers-configuration/webWorkersSlice'
-import { selectLastSocketResponseData } from '@/features/background/socket-client/socketSlice'
+import { selectLastReceivedClientBrowserWorkerJobsData } from '@/features/background/socket-client/socketSlice'
 import { MAIN_THREAD_KEY } from '@/app-config-constants'
 import SystemComponentVisibilityComposition
     from '@/layout/compositions/system-component-visibility/SystemComponentVisibility.composition'
@@ -42,7 +42,7 @@ const WorkersScoreboardFloatingMolecule = (): JSX.Element => {
 
     // Listening to messages stream from a Socket
     //
-    const receivedSocketResponse: WorkersJobsType = useAppSelector(selectLastSocketResponseData)
+    const receivedSocketResponse: WorkerJobsTypeDTO = useAppSelector(selectLastReceivedClientBrowserWorkerJobsData)
 
 
     const [shouldShowDeactivated, setShouldShowDeactivated] = useState(false)
@@ -106,7 +106,7 @@ const WorkersScoreboardFloatingMolecule = (): JSX.Element => {
                                     </span>
 
 
-                                    <ul className={scss.listReset}>
+                                    <ul>
                                         <li className={(() => allWorkersWorkStatuses[workerName]?.working ? '' : scss.labelInfo)()}>
 
                                             {workerHasResponseData(workerName) &&

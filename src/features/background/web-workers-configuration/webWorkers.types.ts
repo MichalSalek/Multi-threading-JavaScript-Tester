@@ -1,7 +1,7 @@
 import { WEB_WORKER_TASKS } from '@/features/background/web-workers-configuration/webWorkersEvents'
-import { UnknownFunctionType } from '@/core/types.core'
 import { workersKeysNames } from '@/features/background/web-workers-configuration/add-new-physical-worker-here'
 import { MAIN_THREAD_KEY } from '@/app-config-constants'
+import { ClientBrowserIDType } from '@/features/background/socket-client/socket.types'
 
 
 
@@ -20,7 +20,7 @@ export type WorkerTasksName = typeof WEB_WORKER_TASKS[Keys]
 
 // Types of Workers utils
 //
-export interface IWorkerTask {
+export type IWorkerTask = {
     workerTaskName: WorkerTasksName
     complexity?: number
 }
@@ -31,10 +31,18 @@ export type WorkerNameType = string
 export type WorkerCalculationType = number
 
 
-export type NewWorkerJobType = { workerName: WorkerNameType, lastCalculations: WorkerCalculationType }
+export type NewWorkersJobType = {
+    workerName: WorkerNameType,
+    lastCalculations: WorkerCalculationType
+}
+
+export type NewWorkersJobByIPType = {
+    clientBrowserID: ClientBrowserIDType,
+    data: NewWorkersJobType
+}
 
 
-export interface IWorkerKey {
+export type IWorkerKey = {
     fileName?: string,
     workerName: WorkerNameType
 }
@@ -44,19 +52,27 @@ type KeyOfWorkersKeysNamesType = keyof typeof workersKeysNames
 export type WorkerKeyType = typeof workersKeysNames[KeyOfWorkersKeysNamesType] | IWorkerKey
 
 
-export interface IWorkersJobsBody {
+export type WorkersJobBodyType = {
     results: number[]
     amount: number
 }
 
 
-// Workers job object types, eg:
+// eg:
 // { worker1: {
 // 	results: [235452,253234,523434]
 // 	amount: 3
 // },... }
 //
-export type WorkersJobsType = Record<WorkerNameType, IWorkersJobsBody>
+export type WorkerJobsTypeDTO = Record<WorkerNameType, WorkersJobBodyType>
+
+// eg:
+// { '192.168.1.100': { worker1: {
+// 	results: [235452,253234,523434]
+// 	amount: 3
+// },... }}
+//
+export type WorkerJobsByClientBrowserIDTypeDTO = Record<ClientBrowserIDType, WorkerJobsTypeDTO>
 
 
 export interface IWorkerReadyState {
@@ -80,6 +96,12 @@ export interface IWorkerLastCalculation {
 }
 
 
+export interface WorkerToSocketDTO<T> {
+    keyNames: WorkerKeyType | typeof MAIN_THREAD_KEY
+    unknownData: T
+}
+
+
 export interface IWorkerDTO extends IWorkerWorkState, IWorkerLastCalculation {
     timestamp: number
 }
@@ -89,19 +111,22 @@ export interface IWorkerWorkStateReport extends IWorkerWorkState, IWorkerKey {
 }
 
 
+export type NamedWorkerWorkStatusType = Record<WorkerNameType, IWorkerWorkState>
+
+
 export interface IWorkerReadyStateReport extends IWorkerReadyState, IWorkerKey {
 }
+
+
+export type NamedWorkerReadyStatusType = Record<WorkerNameType, IWorkerReadyState>
 
 
 export interface IWorkerErrorStateReport extends IWorkerErrorState, IWorkerKey {
 }
 
 
-export type NamedWorkerWorkStatusType = Record<WorkerNameType, IWorkerWorkState>
-
-export type NamedWorkerReadyStatusType = Record<WorkerNameType, IWorkerReadyState>
-
 export type NamedWorkerErrorStatusType = Record<WorkerNameType, IWorkerErrorState>
+
 
 export type WorkersAmountStateType = {
     amount: number
@@ -126,20 +151,3 @@ export enum WorkerTriggerMessageCommandEnum {
     'kill' = 'kill'
 }
 
-
-export type SocketResponseStatusesType = 201
-
-
-export interface ISocketToAppCalculationDataDTO {
-    data: WorkersJobsType
-    status: SocketResponseStatusesType
-}
-
-
-export interface ISocketDTO<T> {
-    keyNames: WorkerKeyType | typeof MAIN_THREAD_KEY
-    unknownData: T
-}
-
-
-export type UnsubscribeFunctionType = UnknownFunctionType

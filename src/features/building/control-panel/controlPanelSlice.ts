@@ -3,14 +3,14 @@ import { AppState } from '@/core/store.core'
 
 
 
-export interface ISystemComponentsVisibilities {
+export type ISystemComponentsVisibilities = {
     FPSMonitor: boolean
     scoreboard: boolean
     workControl: boolean
 }
 
 
-interface IControlPanelState {
+type IControlPanelState = {
     visibilitySwitches: ISystemComponentsVisibilities
 }
 

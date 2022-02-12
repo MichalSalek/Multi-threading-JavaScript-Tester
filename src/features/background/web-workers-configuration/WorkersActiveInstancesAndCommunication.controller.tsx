@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import {
     constructCalculationWorkerKeyByName,
-    constructWorkerJobSocketDTO,
+    constructWorkerJobToSocketDTO,
     constructWorkerNameByOrderIndex,
     flagIfWorkerHasError,
     flagIfWorkerIsWorking,
@@ -12,13 +12,13 @@ import {
     updateWorkerIsReadyState
 } from '@/features/background/web-workers-configuration/webWorkers.api'
 import {
-    ISocketDTO,
     IWorkerDTO,
     IWorkerKey,
     WorkerKeyType,
     WorkerLifeSwitchCommandEnum,
     WorkerNameType,
     WorkersAmountStateType,
+    WorkerToSocketDTO,
     WorkerTriggerMessageCommandEnum
 } from '@/features/background/web-workers-configuration/webWorkers.types'
 import { MAX_WORKERS_LIMIT, WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS } from '@/app-config-constants'
@@ -34,13 +34,15 @@ import { fireJustClientSide } from '@/coding-utils/environmentOperations.api'
 import { isUndefinedType } from '@/coding-utils/typeOperations.api'
 import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLogs.api'
 import { sendTriggerMessageToSocket } from '@/features/background/socket-client/socket.api'
+import { AppToSocketDTO } from '@/features/background/socket-client/socket.types'
 
 
 
 const captureAndProcessPureWorkerMessage = (event: MessageEvent<IWorkerDTO>, workerKey: WorkerKeyType) => {
     flagIfWorkerIsWorking(workerKey, event.data.working)
 
-    const dataToEmit: ISocketDTO<IWorkerDTO> = constructWorkerJobSocketDTO<IWorkerDTO>(event, workerKey)
+    const dataToEmit: AppToSocketDTO<WorkerToSocketDTO<IWorkerDTO>> = constructWorkerJobToSocketDTO<IWorkerDTO>(event, workerKey)
+
     sendTriggerMessageToSocket(WEB_SOCKET_EVENTS_TRIGGERS.reportJobDone, dataToEmit)
 }
 
