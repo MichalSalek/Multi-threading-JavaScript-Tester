@@ -11,7 +11,8 @@ const roundDecimalCalculationResultToInt = (number: number): number => Math.roun
 
 
 const cleanupWorkerResultsArray = (clientBrowserID: string, workerName: string): void => {
-    workersRuntimeData[clientBrowserID][workerName].results.length = 200
+    workersRuntimeData[clientBrowserID][workerName].results.length > 200
+    && (() => workersRuntimeData[clientBrowserID][workerName].results.length = 200)()
 }
 
 
@@ -19,7 +20,7 @@ const setNewValuesToWorkerKey = ({clientBrowserID, data}: NewWorkersJobByIPType)
     const {workerName, lastCalculations} = data
 
     workersRuntimeData[clientBrowserID][workerName].results.unshift(roundDecimalCalculationResultToInt(lastCalculations))
-    workersRuntimeData[clientBrowserID][workerName].amount = workersRuntimeData[clientBrowserID][workerName].results.length
+    workersRuntimeData[clientBrowserID][workerName].amount += 1
 }
 
 
