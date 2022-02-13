@@ -1,4 +1,8 @@
+import 'winston-daily-rotate-file'
+
+
 import { SERVER_VERBOSE_MODE } from './serverVerboseLogsEntity'
+import { logToFile } from './serverVerboseLogsToFile'
 
 
 
@@ -34,16 +38,22 @@ export const addServerConsoleVerbose = (communicate: string | Error, mode: 'log'
     switch (mode) {
     case 'log':
         SERVER_VERBOSE_MODE.isEnabled && console.log(dateString, communicate)
+        logToFile(`[log] ${dateString} ${communicate}`, 'warn')
         break
 
     case 'warn':
         console.warn(dateString, communicate)
+        logToFile(`${dateString} ${communicate}`, 'warn')
         break
 
     case 'error':
         console.error(dateString, communicate)
+        logToFile(`${dateString} ${communicate}`, 'error')
+
         //
         // Here we can also send the errors to an any error-tracking app
         //
     }
 }
+
+

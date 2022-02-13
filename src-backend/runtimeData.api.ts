@@ -58,7 +58,7 @@ export const setNewJobDone = (newWorkersJobByIP: NewWorkersJobByIPType): void =>
 export const getAllJobsDone = (): WorkerJobsByClientBrowserIDTypeDTO => workersRuntimeData
 
 
-// Clear data
+// Clear _ALL_ data
 //
 export const setClearRuntimeData = (): void => {
     const keys: string[] = Object.keys(workersRuntimeData)

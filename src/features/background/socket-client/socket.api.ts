@@ -25,14 +25,7 @@ export const listenToSocketEventWithDebounce = <T>(
 
     let timeoutID = 0
 
-
-    console.log('socketEventName:')
-    console.log(socketEventName)
-
     socketClient.on(socketEventName, (response: SocketToAppDTO<T>) => {
-
-        console.log('response:')
-        console.log(response)
 
         if (response.status !== 200) addConsoleVerbose('Response status is different than 200.', 'warn')
 

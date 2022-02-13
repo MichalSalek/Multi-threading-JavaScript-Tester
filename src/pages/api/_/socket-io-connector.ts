@@ -32,7 +32,7 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponse & any) => {
         const io: Server = new Server(res.socket.server)
         io.on('connection', serverSocketClient => {
 
-
+            addServerConsoleVerbose(`New IO connection from ${clientIP}`)
 
             //
             // WRITE
@@ -46,6 +46,7 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponse & any) => {
                         + workerKey.workerName + new Date(workerWorkAndCalculationData.timestamp), 'log')
                     return void undefined
                 }
+
 
                 setNewJobDone({
                     clientBrowserID: getSecuredClientBrowserID(request.userAgent, clientIP),
@@ -61,7 +62,7 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponse & any) => {
                 serverSocketClient.emit(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserIDJobsDone, getClientBrowserIDJobsDoneResponse(request, clientIP))
             })
 
-            
+
 
             //
             // READ
