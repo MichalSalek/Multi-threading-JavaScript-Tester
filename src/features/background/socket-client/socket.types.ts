@@ -2,7 +2,7 @@ import { WebSocketEventTriggersType } from '@/features/background/socket-client/
 
 
 
-export type SocketResponseStatusesType = 201 // || xx...
+export type SocketResponseStatusesType = 200 // 200 | xx...
 
 export type ClientBrowserIDType = string
 

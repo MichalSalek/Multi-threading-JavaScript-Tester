@@ -1,14 +1,16 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { io } from 'socket.io-client'
 import store, { AppState } from '@/core/store.core'
-import { INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES } from '@/app-config-constants'
 import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/background/socket-client/socketEventsEntities'
-import { ClientBrowserIDType, SocketToAppDTO } from '@/features/background/socket-client/socket.types'
+import { ClientBrowserIDType } from '@/features/background/socket-client/socket.types'
 import {
     WorkerJobsByClientBrowserIDTypeDTO,
     WorkerJobsTypeDTO
 } from '@/features/background/web-workers-configuration/webWorkers.types'
-import { sendTriggerMessageToSocket } from '@/features/background/socket-client/socket.api'
+import {
+    listenToSocketEventWithDebounce,
+    sendTriggerMessageToSocket
+} from '@/features/background/socket-client/socket.api'
 import { ROUTE_API_WEB_SOCKET } from '@/core/routes.core'
 import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLogs.api'
 
@@ -35,75 +37,48 @@ export const connectSocketThunk = createAsyncThunk('connectSocketThunk', async (
             window.clientSocket = ioSocket
 
 
-            // Enable listening and passing the last data with all calculation jobs done from Socket to Redux store
+
             //
-            let timeoutID1 = 0
-            ioSocket.on(WEB_SOCKET_EVENTS_TRIGGERS.getAllJobsDone, (request: SocketToAppDTO<WorkerJobsByClientBrowserIDTypeDTO>) => {
-                console.log(request)
-                if (INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES === 0) {
-                    store.dispatch(socketSlice.actions.handleNewAnyWorkersJobDataReceiveFromSocket(request.data))
-                } else {
-                    if (timeoutID1 !== 0) {
-                        store.dispatch(socketSlice.actions.handleNewAnyWorkersJobDataReceiveFromSocket(request.data))
-
-                        window.clearTimeout(timeoutID1)
-
-                        timeoutID1 = window.setTimeout(() => {
-
-                            store.dispatch(socketSlice.actions.handleNewAnyWorkersJobDataReceiveFromSocket(request.data))
-                            timeoutID1 = 0
-
-                        }, INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES)
-                    }
-                }
-            })
-
-
-            // Enable listening and passing the last data with just client's browser calculation jobs done from Socket to Redux store
             //
-            let timeoutID2 = 0
-            ioSocket.on(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserIDJobsDone, (request: SocketToAppDTO<WorkerJobsTypeDTO>) => {
-
-                console.log(request)
-                if (INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES === 0) {
-                    store.dispatch(socketSlice.actions.handleNewClientBrowserWorkersJobDataReceiveFromSocket(request.data))
-                } else {
-                    if (timeoutID2 !== 0) {
-                        store.dispatch(socketSlice.actions.handleNewClientBrowserWorkersJobDataReceiveFromSocket(request.data))
-
-                        window.clearTimeout(timeoutID2)
-
-                        timeoutID2 = window.setTimeout(() => {
-
-                            store.dispatch(socketSlice.actions.handleNewClientBrowserWorkersJobDataReceiveFromSocket(request.data))
-                            timeoutID2 = 0
-
-                        }, INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES)
-                    }
-                }
-            })
+            // Enable listening and passing the last data:
+            //
 
 
-            ioSocket.on(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserID, (request: SocketToAppDTO<ClientBrowserIDType>) => {
-                store.dispatch(socketSlice.actions.handleNewClientBrowserID(request.clientBrowserID))
-            })
+            // with all calculation jobs done
+            //
+            listenToSocketEventWithDebounce(ioSocket, WEB_SOCKET_EVENTS_TRIGGERS.getAllJobsDone,
+                (response: WorkerJobsByClientBrowserIDTypeDTO) => {
+                    store.dispatch(socketSlice.actions.handleNewAnyWorkersJobDataReceiveFromSocket(response))
+                })
 
-            // When listening is enabled - trigger Socket to send last Server data
+
+            // with just client's browser calculation jobs done only
+            //
+            listenToSocketEventWithDebounce(ioSocket, WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserIDJobsDone,
+                (response: WorkerJobsTypeDTO) => {
+                    store.dispatch(socketSlice.actions.handleNewClientBrowserWorkersJobDataReceiveFromSocket(response))
+                })
+
+
+            // with client's browser ID
+            //
+            listenToSocketEventWithDebounce(ioSocket, WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserID,
+                (response: ClientBrowserIDType) => {
+                    store.dispatch(socketSlice.actions.handleNewClientBrowserID(response))
+                })
+
+
+            // When listening is enabled - trigger Socket to send current browser client ID
             //
             sendTriggerMessageToSocket(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserID, {
                 data: undefined,
                 userAgent: navigator.userAgent,
-                status: 201
+                status: 200
             })
 
 
-            // @TODO table handling
-            // ioSocket.on(WEB_SOCKET_EVENTS_TRIGGERS.wholeSummaryGetOnly, (response: SocketToAppDTO<string[]>) => {
-            //     console.log(response)
-            //     console.table(response)
-            // })
-
-
+            // The end of thunk
+            //
             resolve({isSocketActive: true})
         })
     })
@@ -137,7 +112,6 @@ export const socketSlice = createSlice({
             state.lastReceivedClientBrowserWorkerJobsData = action.payload
         },
         handleNewClientBrowserID: (state, action: PayloadAction<ClientBrowserIDType>) => {
-            console.log(action.payload)
             if (typeof state.clientBrowserID === 'string') return void undefined
 
             state.clientBrowserID = action.payload

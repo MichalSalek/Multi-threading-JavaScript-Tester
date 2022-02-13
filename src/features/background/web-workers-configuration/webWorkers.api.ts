@@ -37,7 +37,7 @@ export const constructWorkerJobToSocketDTO = <T>(event: MessageEvent<T>, workerK
         keyNames: workerKey,
         unknownData: event.data
     },
-    status: 201,
+    status: 200,
     userAgent: navigator.userAgent
 })
 

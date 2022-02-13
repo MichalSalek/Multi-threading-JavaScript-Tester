@@ -3,32 +3,22 @@ import {
     WorkerJobsByClientBrowserIDTypeDTO,
     WorkersJobBodyType
 } from '@/features/background/web-workers-configuration/webWorkers.types'
-
-//
-// It's a pseudo-DB for the app presentation
-// instead of real DB
-// to avoid a boilerplate code overhead with additional configurations.
-//
-
-
-//////////////////////////////////////////////////////////////////
-// Runtime data
-// 'some-id': { worker1: 0, worker2: 37, worker3: 560, worker4: 717 }
-//
-export const workersRuntimeData: WorkerJobsByClientBrowserIDTypeDTO = {}
-//
-//
-//////////////////////////////////////////////////////////////////
+import { workersRuntimeData } from './runtimeData'
 
 
 
 const roundDecimalCalculationResultToInt = (number: number): number => Math.round(number * 1000000000000)
 
 
+const cleanupWorkerResultsArray = (clientBrowserID: string, workerName: string): void => {
+    workersRuntimeData[clientBrowserID][workerName].results.length = 200
+}
+
+
 const setNewValuesToWorkerKey = ({clientBrowserID, data}: NewWorkersJobByIPType): void => {
     const {workerName, lastCalculations} = data
 
-    workersRuntimeData[clientBrowserID][workerName].results.push(roundDecimalCalculationResultToInt(lastCalculations))
+    workersRuntimeData[clientBrowserID][workerName].results.unshift(roundDecimalCalculationResultToInt(lastCalculations))
     workersRuntimeData[clientBrowserID][workerName].amount = workersRuntimeData[clientBrowserID][workerName].results.length
 }
 
@@ -42,9 +32,11 @@ const returnDefaultWorkerJobBody = (): WorkersJobBodyType => ({
 
 const checkAndCreateNotExistingWorkerSchema = ({clientBrowserID, data}: NewWorkersJobByIPType): void => {
 
-    typeof workersRuntimeData[clientBrowserID] === 'undefined' && (() => workersRuntimeData[clientBrowserID] = {})()
-    typeof workersRuntimeData[clientBrowserID][data.workerName] === 'undefined' && (() => workersRuntimeData[clientBrowserID][data.workerName] = returnDefaultWorkerJobBody())()
+    typeof workersRuntimeData[clientBrowserID] === 'undefined'
+    && (() => workersRuntimeData[clientBrowserID] = {})()
 
+    typeof workersRuntimeData[clientBrowserID][data.workerName] === 'undefined'
+    && (() => workersRuntimeData[clientBrowserID][data.workerName] = returnDefaultWorkerJobBody())()
 }
 
 
@@ -54,7 +46,10 @@ const checkAndCreateNotExistingWorkerSchema = ({clientBrowserID, data}: NewWorke
 export const setNewJobDone = (newWorkersJobByIP: NewWorkersJobByIPType): void => {
 
     checkAndCreateNotExistingWorkerSchema(newWorkersJobByIP)
+
     setNewValuesToWorkerKey(newWorkersJobByIP)
+
+    cleanupWorkerResultsArray(newWorkersJobByIP.clientBrowserID, newWorkersJobByIP.data.workerName)
 }
 
 

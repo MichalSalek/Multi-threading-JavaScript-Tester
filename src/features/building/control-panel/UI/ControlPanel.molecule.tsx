@@ -36,7 +36,7 @@ const ControlPanelMolecule = (): JSX.Element => {
     const [isAlreadyDragged, setIsAlreadyDragged] = useState(false)
 
 
-    const [YAxisPositionOfControlPanel, setYAxisPositionOfControlPanel] = useState(0)
+    const [YAxisPositionOfControlPanel, setYAxisPositionOfControlPanel] = useState(30)
 
 
     const [positionFlipped, setPositionFlipped] = useState(false) // @TODO isMobileResolution()

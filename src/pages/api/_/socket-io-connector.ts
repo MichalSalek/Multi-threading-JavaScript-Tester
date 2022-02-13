@@ -5,32 +5,35 @@ import requestedIP from 'request-ip'
 import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/background/socket-client/socketEventsEntities'
 import {
     IWorkerDTO,
-    WorkerJobsByClientBrowserIDTypeDTO,
-    WorkerJobsTypeDTO,
     WorkerKeyType,
     WorkerToSocketDTO
 } from '@/features/background/web-workers-configuration/webWorkers.types'
 
 import { setNewJobDone } from '../../../../src-backend/runtimeData.api'
-import { wholeDataResponse } from '../../../../src-backend/responsesEntities'
+import {
+    getAllJobsDoneResponse,
+    getClientBrowserIDJobsDoneResponse,
+    getClientBrowserIDResponse
+} from '../../../../src-backend/responsesEntities'
 import { addServerConsoleVerbose } from '../../../../src-backend/features/server-verbose-logs/serverVerboseLogs.api'
-import { AppToSocketDTO, SocketToAppDTO } from '@/features/background/socket-client/socket.types'
+import { AppToSocketDTO } from '@/features/background/socket-client/socket.types'
+import { getSecuredClientBrowserID } from '../../../../src-backend/features/client-browser-id/clientBrowserID.api'
 
 
 
 const ioHandler = (req: NextApiRequest, res: NextApiResponse & any) => {
 
-    const clientIP: string = requestedIP.getClientIp(req) ?? '0.0.0.0'
 
-    const getClientBrowserID = (userAgent: string): string => userAgent + clientIP
+    const clientIP: string = requestedIP.getClientIp(req) ?? '0.0.0.0'
+    addServerConsoleVerbose(`New IP connected: ${clientIP}`)
+
 
     if (!(res?.socket?.server?.io) && res?.socket?.server) {
         const io: Server = new Server(res.socket.server)
         io.on('connection', serverSocketClient => {
 
 
-            //
-            // Socket event handlers below:
+
             //
             // WRITE
             //
@@ -39,13 +42,13 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponse & any) => {
                 const workerWorkAndCalculationData: IWorkerDTO = request.data.unknownData
 
                 if (!workerWorkAndCalculationData.lastCalculations) {
-                    addServerConsoleVerbose('The message just came in, but with no calculation data: ' + workerKey.workerName + new Date(workerWorkAndCalculationData.timestamp), 'log')
+                    addServerConsoleVerbose('The message just came in, but with no calculation data: '
+                        + workerKey.workerName + new Date(workerWorkAndCalculationData.timestamp), 'log')
                     return void undefined
                 }
 
-
                 setNewJobDone({
-                    clientBrowserID: getClientBrowserID(request.userAgent),
+                    clientBrowserID: getSecuredClientBrowserID(request.userAgent, clientIP),
                     data: {
                         workerName: workerKey.workerName,
                         lastCalculations: workerWorkAndCalculationData.lastCalculations
@@ -53,55 +56,22 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponse & any) => {
 
                 })
 
-                const responseAll: SocketToAppDTO<WorkerJobsByClientBrowserIDTypeDTO> = {
-                    data: wholeDataResponse,
-                    status: 201,
-                    clientBrowserID: getClientBrowserID(request.userAgent)
-
-                }
-
-
-                const clientBrowserDataOnly: WorkerJobsTypeDTO = wholeDataResponse[getClientBrowserID(request.userAgent)]
-
-                const responseClientBrowser: SocketToAppDTO<WorkerJobsTypeDTO> = {
-                    data: clientBrowserDataOnly ?? {},
-                    status: 201,
-                    clientBrowserID: getClientBrowserID(request.userAgent)
-
-                }
-
-                serverSocketClient.broadcast.emit(WEB_SOCKET_EVENTS_TRIGGERS.getAllJobsDone, responseAll)
-                serverSocketClient.emit(WEB_SOCKET_EVENTS_TRIGGERS.getAllJobsDone, responseAll)
-                serverSocketClient.emit(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserIDJobsDone, responseClientBrowser)
-
-                // @TODO
-                //  code down funciton to checking a setNewJobDone transaction. When false, then log:
-                // addServerConsoleVerbose('New data wasn\'t saved: ' + request.data, 'error')
+                serverSocketClient.broadcast.emit(WEB_SOCKET_EVENTS_TRIGGERS.getAllJobsDone, getAllJobsDoneResponse(request, clientIP))
+                serverSocketClient.emit(WEB_SOCKET_EVENTS_TRIGGERS.getAllJobsDone, getAllJobsDoneResponse(request, clientIP))
+                serverSocketClient.emit(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserIDJobsDone, getClientBrowserIDJobsDoneResponse(request, clientIP))
             })
 
-
+            
 
             //
             // READ
             //
             serverSocketClient.on(WEB_SOCKET_EVENTS_TRIGGERS.getAllJobsDone, (request: AppToSocketDTO<null>) => {
-
-                const response: SocketToAppDTO<WorkerJobsByClientBrowserIDTypeDTO> = {
-                    data: wholeDataResponse,
-                    status: 201,
-                    clientBrowserID: getClientBrowserID(request.userAgent)
-                }
-                serverSocketClient.emit(WEB_SOCKET_EVENTS_TRIGGERS.getAllJobsDone, response)
+                serverSocketClient.emit(WEB_SOCKET_EVENTS_TRIGGERS.getAllJobsDone, getAllJobsDoneResponse(request, clientIP))
             })
 
             serverSocketClient.on(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserID, (request: AppToSocketDTO<null>) => {
-
-                const response: SocketToAppDTO<null> = {
-                    data: null,
-                    status: 201,
-                    clientBrowserID: getClientBrowserID(request.userAgent)
-                }
-                serverSocketClient.emit(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserID, response)
+                serverSocketClient.emit(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserID, getClientBrowserIDResponse(request, clientIP))
             })
 
 

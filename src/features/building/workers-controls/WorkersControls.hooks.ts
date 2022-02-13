@@ -49,7 +49,7 @@ export const useMainThreadCalculations = <D>(CALCULATION_INTERVAL_TIMING_IN_MS =
                     timestamp: Date.now()
                 }
             },
-            status: 201,
+            status: 200,
             userAgent: navigator.userAgent
         })
 

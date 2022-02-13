@@ -28,8 +28,8 @@ declare global {
 
 }
 
-// Just unknown function  without parameters.
-// Use it with generics
+// Function type created to type unknown functions e.g. from 3rd libraries.
+// Use it with generics to define the type, or leave unknown (not recommended).
 //
 export type UnknownFunctionType<T = undefined, D = unknown> = ((arg0?: T) => D)
 
