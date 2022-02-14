@@ -2,7 +2,8 @@ export const WEB_SOCKET_EVENTS_TRIGGERS = (() => Object.freeze({
     reportJobDone: 'report-job-done',
     getAllJobsDone: 'get-all-jobs-done',
     getClientBrowserIDJobsDone: 'get-client-browser-id-jobs-done',
-    getClientBrowserID: 'get-client-browser-id'
+    getClientBrowserID: 'get-client-browser-id',
+    reportNewLog: 'report-new-log'
 } as const))()
 
 // Types for events

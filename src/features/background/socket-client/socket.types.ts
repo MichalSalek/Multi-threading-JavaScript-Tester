@@ -23,4 +23,4 @@ export interface SocketToAppDTO<T> {
 }
 
 
-export type AppToSocketEmitDTO = <T>(eventName: WebSocketEventTriggersType, dataToSend: AppToSocketDTO<T>) => void
+export type AppToSocketEmitDTO = <T>(eventName: WebSocketEventTriggersType, dataToSend: T) => void

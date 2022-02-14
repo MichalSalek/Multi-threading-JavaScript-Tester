@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { doCalculations } from '@/features/building/workers-controls/doCalculations'
 import { MAIN_THREAD_KEY } from '@/app-config-constants'
-import { sendTriggerMessageToSocket } from '@/features/background/socket-client/socket.api'
+import { sendCommandMessageToSocket } from '@/features/background/socket-client/socket.api'
 import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/background/socket-client/socketEventsEntities'
 
 
@@ -40,17 +40,13 @@ export const useMainThreadCalculations = <D>(CALCULATION_INTERVAL_TIMING_IN_MS =
     useEffect(() => {
         if (typeof lastMadeCalculation === 'undefined') return () => undefined
 
-        sendTriggerMessageToSocket(WEB_SOCKET_EVENTS_TRIGGERS.reportJobDone, {
-            data: {
-                keyNames: MAIN_THREAD_KEY,
-                unknownData: {
-                    working: isMainThreadOn,
-                    lastCalculations: lastMadeCalculation,
-                    timestamp: Date.now()
-                }
-            },
-            status: 200,
-            userAgent: navigator.userAgent
+        sendCommandMessageToSocket(WEB_SOCKET_EVENTS_TRIGGERS.reportJobDone, {
+            keyNames: MAIN_THREAD_KEY,
+            unknownData: {
+                working: isMainThreadOn,
+                lastCalculations: lastMadeCalculation,
+                timestamp: Date.now()
+            }
         })
 
         return () => undefined

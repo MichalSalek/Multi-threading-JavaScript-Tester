@@ -15,7 +15,6 @@ import {
 } from '@/features/background/web-workers-configuration/webWorkersSlice'
 import { workersKeysNames } from '@/features/background/web-workers-configuration/add-new-physical-worker-here'
 import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLogs.api'
-import { AppToSocketDTO } from '@/features/background/socket-client/socket.types'
 
 
 
@@ -32,13 +31,9 @@ export const constructCalculationWorkerKeyByName = (workerName: string): IWorker
 })
 
 
-export const constructWorkerJobToSocketDTO = <T>(event: MessageEvent<T>, workerKey: WorkerKeyType): AppToSocketDTO<WorkerToSocketDTO<T>> => ({
-    data: {
-        keyNames: workerKey,
-        unknownData: event.data
-    },
-    status: 200,
-    userAgent: navigator.userAgent
+export const constructWorkerJobToSocketDTO = <T>(event: MessageEvent<T>, workerKey: WorkerKeyType): WorkerToSocketDTO<T> => ({
+    keyNames: workerKey,
+    unknownData: event.data
 })
 
 

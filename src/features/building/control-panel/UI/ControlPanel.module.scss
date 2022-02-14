@@ -145,7 +145,7 @@ $control-switch-label-min-width: 230px;
   }
 
   .collapsedControlsList {
-    transform: translateX(-62px);
+    transform: translateX(-58px);
   }
 
   .listItem {
@@ -179,7 +179,7 @@ $control-switch-label-min-width: 230px;
     align-items: center;
 
     height: 38px;
-    width: 46px;
+    width: 40px;
 
     position: relative;
     z-index: 2001;
@@ -347,7 +347,7 @@ $control-switch-label-min-width: 230px;
 }
 
 .collapsedControlsList {
-  transform: translateX(calc(0px - #{$control-switch-label-min-width} - 62px));
+  transform: translateX(calc(0px - #{$control-switch-label-min-width} - 55px));
   opacity: 0.9;
 }
 

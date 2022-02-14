@@ -33,17 +33,16 @@ import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/background/socket-client/
 import { fireJustClientSide } from '@/coding-utils/environmentOperations.api'
 import { isUndefinedType } from '@/coding-utils/typeOperations.api'
 import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLogs.api'
-import { sendTriggerMessageToSocket } from '@/features/background/socket-client/socket.api'
-import { AppToSocketDTO } from '@/features/background/socket-client/socket.types'
+import { sendCommandMessageToSocket } from '@/features/background/socket-client/socket.api'
 
 
 
 const captureAndProcessPureWorkerMessage = (event: MessageEvent<IWorkerDTO>, workerKey: WorkerKeyType) => {
     flagIfWorkerIsWorking(workerKey, event.data.working)
 
-    const dataToEmit: AppToSocketDTO<WorkerToSocketDTO<IWorkerDTO>> = constructWorkerJobToSocketDTO<IWorkerDTO>(event, workerKey)
+    const dataToEmit: WorkerToSocketDTO<IWorkerDTO> = constructWorkerJobToSocketDTO<IWorkerDTO>(event, workerKey)
 
-    sendTriggerMessageToSocket(WEB_SOCKET_EVENTS_TRIGGERS.reportJobDone, dataToEmit)
+    sendCommandMessageToSocket(WEB_SOCKET_EVENTS_TRIGGERS.reportJobDone, dataToEmit)
 }
 
 

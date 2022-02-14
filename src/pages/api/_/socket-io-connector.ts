@@ -18,6 +18,7 @@ import {
 import { addServerConsoleVerbose } from '../../../../src-backend/features/server-verbose-logs/serverVerboseLogs.api'
 import { AppToSocketDTO } from '@/features/background/socket-client/socket.types'
 import { getSecuredClientBrowserID } from '../../../../src-backend/features/client-browser-id/clientBrowserID.api'
+import { logToFile } from '../../../../src-backend/features/server-verbose-logs/serverVerboseLogsToFile'
 
 
 
@@ -42,8 +43,7 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponse & any) => {
                 const workerWorkAndCalculationData: IWorkerDTO = request.data.unknownData
 
                 if (!workerWorkAndCalculationData.lastCalculations) {
-                    addServerConsoleVerbose('The message just came in, but with no calculation data: '
-                        + workerKey.workerName + new Date(workerWorkAndCalculationData.timestamp), 'log')
+                    addServerConsoleVerbose(`The message just came in, but with no calculation data: ${workerKey.workerName} ${new Date(workerWorkAndCalculationData.timestamp)}`, 'log')
                     return void undefined
                 }
 
@@ -60,6 +60,10 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponse & any) => {
                 serverSocketClient.broadcast.emit(WEB_SOCKET_EVENTS_TRIGGERS.getAllJobsDone, getAllJobsDoneResponse(request, clientIP))
                 serverSocketClient.emit(WEB_SOCKET_EVENTS_TRIGGERS.getAllJobsDone, getAllJobsDoneResponse(request, clientIP))
                 serverSocketClient.emit(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserIDJobsDone, getClientBrowserIDJobsDoneResponse(request, clientIP))
+            })
+
+            serverSocketClient.on(WEB_SOCKET_EVENTS_TRIGGERS.reportNewLog, (request: AppToSocketDTO<string>) => {
+                logToFile(`[${clientIP}] ${request.data}`, 'warn')
             })
 
 

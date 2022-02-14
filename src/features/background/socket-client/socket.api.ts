@@ -10,8 +10,13 @@ export const getSocketInstanceAbsolutely = () => window.clientSocket as Socket
 
 
 
-export const sendTriggerMessageToSocket: AppToSocketEmitDTO = <T>(eventName: WebSocketEventTriggersType, data: AppToSocketDTO<T> | undefined): void => {
-    getSocketInstanceAbsolutely().emit(eventName, data)
+export const sendCommandMessageToSocket: AppToSocketEmitDTO = <T>(eventName: WebSocketEventTriggersType, data: T): void => {
+    const dataToSend: AppToSocketDTO<T> = {
+        status: 200,
+        data,
+        userAgent: navigator.userAgent
+    }
+    getSocketInstanceAbsolutely().emit(eventName, dataToSend)
 }
 
 

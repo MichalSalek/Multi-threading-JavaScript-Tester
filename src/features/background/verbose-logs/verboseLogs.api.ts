@@ -1,4 +1,6 @@
-import { VERBOSE_MODE } from '@/features/background/verbose-logs/verboseLogsEntity'
+import { VERBOSE_MODE } from '@/features/background/verbose-logs/verboseLogsConfig'
+import { sendCommandMessageToSocket } from '@/features/background/socket-client/socket.api'
+import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/background/socket-client/socketEventsEntities'
 
 
 
@@ -10,6 +12,11 @@ export const changeVerboseModeFlag = (verboseModeEnableState: 'on' | 'off') => {
     case 'off':
         VERBOSE_MODE.isEnabled = false
     }
+}
+
+
+const emitLogToServer = (communicate: string): void => {
+    sendCommandMessageToSocket(WEB_SOCKET_EVENTS_TRIGGERS.reportNewLog, communicate)
 }
 
 
@@ -46,4 +53,6 @@ export const addConsoleVerbose = (communicate: string | Error, mode: 'log' | 'wa
         // Here we can also send the errors to an any error-tracking app
         //
     }
+
+    emitLogToServer(`${dateString}, ${communicate}, ${mode}`)
 }

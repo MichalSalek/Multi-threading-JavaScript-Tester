@@ -9,7 +9,7 @@ import {
 } from '@/features/background/web-workers-configuration/webWorkers.types'
 import {
     listenToSocketEventWithDebounce,
-    sendTriggerMessageToSocket
+    sendCommandMessageToSocket
 } from '@/features/background/socket-client/socket.api'
 import { ROUTE_API_WEB_SOCKET } from '@/core/routes.core'
 import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLogs.api'
@@ -70,11 +70,7 @@ export const connectSocketThunk = createAsyncThunk('connectSocketThunk', async (
 
             // When listening is enabled - trigger Socket to send current browser client ID
             //
-            sendTriggerMessageToSocket(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserID, {
-                data: undefined,
-                userAgent: navigator.userAgent,
-                status: 200
-            })
+            sendCommandMessageToSocket(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserID, undefined)
 
 
             // The end of thunk
