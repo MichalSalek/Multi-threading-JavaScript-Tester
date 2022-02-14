@@ -111,7 +111,7 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
                 {
                     isCurrentInstanceAMainThread() ?
                         <AppButtonAtom
-                            className={[scss.mainFireButton, (() => isWorkerWorking ? getDynamicClassNameByComplexityEdgeCase(userInputComplexity) : '')()].join(' ')}
+                            className={[scss.mainFireButton, (() => isMainThreadOn ? getDynamicClassNameByComplexityEdgeCase(userInputComplexity) : '')()].join(' ')}
                             style={getDynamicColorByComplexity('backgroundColor')}
 
                             onClick={handleMainThreadSwitchChange}
