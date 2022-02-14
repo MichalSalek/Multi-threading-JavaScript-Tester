@@ -17,6 +17,7 @@ interface IProps {
     switchVisibilityConfiguration: ControlPanelSwitchVisibilityType
     onTheScreenPosition?: ControlPosition
     zIndex?: number
+    isComponentVisible?: boolean
 }
 
 
@@ -25,7 +26,8 @@ export const DraggableWindowComposition = ({
     componentUITitleBarName,
     switchVisibilityConfiguration,
     onTheScreenPosition = {x: 50, y: 50},
-    zIndex = 1900
+    zIndex = 1900,
+    isComponentVisible
 }: IProps): JSX.Element => {
 
     const dispatch = useAppDispatch()
@@ -38,7 +40,7 @@ export const DraggableWindowComposition = ({
     }
 
 
-    const [clickedOutsideThisWindow, setClickedOutsideThisWindow] = useState(true)
+    const [clickedOutsideThisWindow, setClickedOutsideThisWindow] = useState(false)
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -58,6 +60,13 @@ export const DraggableWindowComposition = ({
     const [memoizedOnTheScreenPosition, onDragStopHandler] = usePersistedPositionByBrowserStorage(switchVisibilityConfiguration.name, onTheScreenPosition)
 
 
+    // Handling isComponentVisible optional prop from SystemComponentVisibility.
+    // Enter in "active" visual mode on visibility on.
+    //
+    useEffect(() => {
+        setClickedOutsideThisWindow(!isComponentVisible)
+    }, [isComponentVisible])
+
 
     return (<aside
         style={{
@@ -74,7 +83,7 @@ export const DraggableWindowComposition = ({
             <div ref={nodeRef} className={scss.dragItem}>
                 <strong className={clickedOutsideThisWindow ? scss.inactive : scss.active}>
                     <span>{componentUITitleBarName}</span>
-                    <button onClick={handleCloseWindow} className={scss.closeButton}
+                    <p onClick={handleCloseWindow} className={scss.closeButton}
                         data-description={'close-window-button'}/>
                 </strong>
                 {children}

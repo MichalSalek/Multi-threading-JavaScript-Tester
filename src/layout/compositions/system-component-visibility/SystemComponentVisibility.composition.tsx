@@ -1,4 +1,4 @@
-import React, { JSXElementConstructor, ReactElement } from 'react'
+import React, { JSXElementConstructor, ReactElement, useMemo } from 'react'
 import { AppProps } from 'next/app'
 import {
     ISystemComponentsVisibilities,
@@ -10,7 +10,7 @@ import { useAppSelector } from '@/core/store.core'
 
 
 interface IProps {
-    children: ReactElement<AppProps, JSXElementConstructor<unknown>>
+    children: ReactElement<AppProps & { isComponentVisible: boolean }, JSXElementConstructor<unknown>>
     visibilityOfSystemComponentControl: SystemComponentNameType
 }
 
@@ -19,13 +19,16 @@ const SystemComponentVisibilityComposition = ({children, visibilityOfSystemCompo
 
     const systemComponentsVisibilities: ISystemComponentsVisibilities = useAppSelector(selectSystemComponentsVisibilities)
 
-    const getVisibilityClassName = (): string => systemComponentsVisibilities[visibilityOfSystemComponentControl] ? '' : 'visibility-hidden'
+    const isComponentVisible = useMemo(() => systemComponentsVisibilities[visibilityOfSystemComponentControl],
+        [systemComponentsVisibilities, visibilityOfSystemComponentControl])
+
+    const getVisibilityClassName = (): string => isComponentVisible ? '' : 'visibility-hidden'
 
 
     return (
         <aside
             className={getVisibilityClassName()}>
-            {children}
+            {React.cloneElement(children, {isComponentVisible})}
         </aside>
     )
 }

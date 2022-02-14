@@ -12,11 +12,11 @@ export const MAIN_THREAD_KEY: IWorkerKey = {workerName: 'mainThread'}
 // Debounce freeze time for bundle actions. Check the usage to know more.
 export const WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS = 390
 
-// Debounce - Optimal for CPU usage
-// Realtime - The most accurate way to receive data over time (expert mode)
+// Debounce - Optimal for CPU usage.
+// Realtime - The most accurate way to receive data over time (expert mode).
 export const INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES: number | 0 = 0 // 0 means realtime
 
-// Complexity limit. So high values can just crash the browsers (event loop overload)
+// Complexity limit. So high values can just crash the browsers (event loop overload).
 export const MIN_WORKER_COMPLEXITY_POSSIBILITY = 2
 export const MAX_WORKER_COMPLEXITY_POSSIBILITY = 200
 
@@ -27,3 +27,8 @@ export const STORAGE_KEY_WORKERS_AMOUNT = 'workersAmount'
 export const STORAGE_KEY_CONTROL_PANEL_COLLAPSE_STATE = 'controlPanelCollapsedState'
 export const STORAGE_KEY_CONTROL_PANEL_SWITCHES = 'controlPanelSwitches'
 export const STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION = 'onTheScreenPosition'
+
+
+// Mobile:
+//
+export const MIN_DESKTOP_INNER_WIDTH_MEDIA_QUERY = '(min-width:600px)'

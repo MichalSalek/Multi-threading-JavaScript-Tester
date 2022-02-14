@@ -9,9 +9,9 @@
 $control-panel-height: 280px;
 
 $control-panel-background-color: #0264b2;
-$control-panel-background-color-transparently: rgba(25, 28, 25, 0.97);
+$control-panel-background-color-transparently: rgba(16, 16, 20, 0.98);
 
-$side-button-width: 16px;
+$side-button-width: 30px;
 
 $control-switch-label-min-width: 230px;
 
@@ -145,7 +145,7 @@ $control-switch-label-min-width: 230px;
   }
 
   .collapsedControlsList {
-    transform: translateX(-53px);
+    transform: translateX(-62px);
   }
 
   .listItem {
@@ -212,11 +212,13 @@ $control-switch-label-min-width: 230px;
   background-color: black;
 
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 
   padding: 0 4px;
   width: $side-button-width;
+
+  transform: translateX(-12px);
 
   position: relative;
   z-index: 2002;
@@ -257,7 +259,7 @@ $control-switch-label-min-width: 230px;
   display: flex;
 
   padding: 2px;
-  transition: transform 0.5s cubic-bezier(0.37, 0.98, 0.63, 0.88);
+  transition: transform 0.5s cubic-bezier(0.37, 0.98, 0.63, 0.88), opacity 0.5s cubic-bezier(0.37, 0.98, 0.63, 0.88);
 
   position: relative;
   z-index: 2000;
@@ -291,7 +293,7 @@ $control-switch-label-min-width: 230px;
   }
 
   .listItem {
-    margin: 5px 3px;
+    margin: 5px 0;
     display: flex;
     flex: 1;
 
@@ -305,7 +307,7 @@ $control-switch-label-min-width: 230px;
       align-items: center;
 
       > svg {
-        @include svgSize(52px);
+        @include svgSize(48px);
         padding: 0 3px;
       }
     }
@@ -316,17 +318,21 @@ $control-switch-label-min-width: 230px;
       font-size: 0.9rem;
 
       color: white;
-      opacity: 0.6;
+      opacity: 0.7;
 
       min-width: $control-switch-label-min-width;
       width: 100%;
 
       padding: 0 1rem;
+
+      &::selection {
+        background: transparent;
+      }
     }
 
     &:hover {
       span {
-        opacity: 0.8;
+        opacity: 1;
         filter: drop-shadow(0 0 3px black);
       }
 
@@ -336,11 +342,13 @@ $control-switch-label-min-width: 230px;
 }
 
 .expandedControlsList {
-  transform: translateX(0);
+  transform: translateX(-15px);
+  opacity: 1;
 }
 
 .collapsedControlsList {
-  transform: translateX(calc(0px - #{$control-switch-label-min-width} - 48px));
+  transform: translateX(calc(0px - #{$control-switch-label-min-width} - 62px));
+  opacity: 0.9;
 }
 
 

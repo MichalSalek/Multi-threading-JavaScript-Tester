@@ -17,7 +17,6 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import FPSMonitorFloatingMolecule from '@/features/building/fps-monitor/UI/FPSMonitorFloating.molecule'
 import WorkersScoreboardFloatingMolecule
     from '@/features/building/workers-scoreboard/UI/WorkersScoreboardFloating.molecule'
-import ControlPanelMolecule from '@/features/building/control-panel/UI/ControlPanel.molecule'
 import IconPackController from '@/features/background/icon-pack/IconPack.controller'
 import BorderColorChangeController from '@/features/background/border-color-change/BorderColorChange.controller'
 import WorkersGlobalWorkControlFloatingMolecule
@@ -25,6 +24,13 @@ import WorkersGlobalWorkControlFloatingMolecule
 
 import { createTheme } from '@mui/material/styles'
 import { grey } from '@mui/material/colors'
+import dynamic from 'next/dynamic'
+
+
+
+const ControlPanelMoleculeClientSideOnly = dynamic(() =>
+    import('@/features/building/control-panel/UI/ControlPanel.molecule'), {ssr: false})
+
 
 
 // Main application component.
@@ -62,7 +68,7 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
             <WorkersScoreboardFloatingMolecule/>
             <WorkersGlobalWorkControlFloatingMolecule/>
 
-            <ControlPanelMolecule/>
+            <ControlPanelMoleculeClientSideOnly/>
 
 
             <LayoutComposition>

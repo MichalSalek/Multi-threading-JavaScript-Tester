@@ -9,8 +9,12 @@ import {
 } from '@/features/building/control-panel/controlPanelSlice'
 import { useControlPanelCollapseStateStoragePersist } from '@/features/background/browser-storage/browserStorage.hooks'
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable'
-import { STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION } from '@/app-config-constants'
+import {
+    MIN_DESKTOP_INNER_WIDTH_MEDIA_QUERY,
+    STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION
+} from '@/app-config-constants'
 import { getStorageItem, setStorageItem } from '@/features/background/browser-storage/browserStorage.api'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 
 
@@ -38,8 +42,14 @@ const ControlPanelMolecule = (): JSX.Element => {
 
     const [YAxisPositionOfControlPanel, setYAxisPositionOfControlPanel] = useState(30)
 
+    const isDesktopResolution = useMediaQuery(MIN_DESKTOP_INNER_WIDTH_MEDIA_QUERY)
 
-    const [positionFlipped, setPositionFlipped] = useState(false) // @TODO isMobileResolution()
+    const [positionFlipped, setPositionFlipped] = useState(isDesktopResolution)
+
+    useEffect(() => {
+        setPositionFlipped(!isDesktopResolution)
+        return () => undefined
+    }, [isDesktopResolution])
 
 
     useEffect(() => {

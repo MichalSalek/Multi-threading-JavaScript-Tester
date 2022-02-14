@@ -43,6 +43,10 @@ ul {
   margin: 0;
 }
 
+p {
+  margin: unset;
+}
+
 button {
   padding: 0;
   background: none;
@@ -85,7 +89,7 @@ body {
 
 // Second layer of duo-tone FA icons opacity (increased)
 .svg-inline--fa .fa-secondary {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 

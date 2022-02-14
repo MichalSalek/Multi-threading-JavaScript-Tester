@@ -61,12 +61,14 @@ const WorkersScoreboardFloatingMolecule = (): JSX.Element => {
             >
                 <section
                     className={`${scss.host} display-inline-block`}>
-                    <h4>Calculation results:</h4> <span>Show all, even currently deactivated: </span><input
+                    <p>Calculation results:</p>
+
+                    <span>Show all, even currently deactivated: </span><input
                         type={'checkbox'} checked={shouldShowDeactivated}
                         onChange={(event => setShouldShowDeactivated(event.currentTarget.checked))}/>
 
 
-                    <p className={scss.mainThread}>
+                    <p>
                         <span>{MAIN_THREAD_KEY.workerName}:</span>
 
                         <span>{
@@ -77,9 +79,9 @@ const WorkersScoreboardFloatingMolecule = (): JSX.Element => {
 
                     </p>
 
-                    <h3>Required number of workers: {workerRequestedAmount.amount}</h3>
+                    <p>Required number of workers: {workerRequestedAmount.amount}</p>
 
-                    <h5>Workers who actually work: {allActuallyWorkWorkersAmount.amount}</h5>
+                    <p>Workers who actually work: {allActuallyWorkWorkersAmount.amount}</p>
 
                     <ol className={[scss.listGrid, (() => (shouldShowDeactivated || workerRequestedAmount.amount > 0) ? '' : 'display-none')()].join(' ')}>
 

@@ -2,7 +2,12 @@
   display: flex;
 
   height: 30px;
+  width: 100%;
+  max-width: 680px;
+
+  margin: auto;
 }
+
 
 .loadingPlaceholder {
   @keyframes placeHolderShimmer {
@@ -31,14 +36,15 @@
 
   font-weight: 600;
   font-size: 0.77rem;
+  text-transform: unset;
 
   border-style: solid;
   border-width: 2px;
   border-radius: 0;
 
-  border-color: rgba(25, 28, 25, 0.97) !important;
-
-  flex: 10;
+  border-color: rgba(25, 28, 25, 0.07) !important;
+  flex: 10 1;
+  min-width: 200px;
 
   &:hover { // Material building overrides:
     background-color: rgba(25, 28, 25, 0.97);
@@ -62,10 +68,11 @@
     pointer-events: none;
 
     font-size: 0.8rem;
+    letter-spacing: -0.3px;
   }
 
   input {
-    width: 50px;
+    width: 45px;
   }
 }
 

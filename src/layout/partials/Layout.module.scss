@@ -12,3 +12,9 @@
 .header, .main, .footer {
   flex-shrink: 0;
 }
+
+.globalContainer {
+  @media (min-width: 600px) {
+    padding: 0 92px !important;
+  }
+}

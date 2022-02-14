@@ -50,10 +50,9 @@ $sideBarPadding: 3px;
 }
 
 .closeButton {
-  position: relative;
   width: 50px;
   height: 29px;
-  z-index: 1001;
+  z-index: 3000;
 
   &:hover, &:active {
     background-color: #e62223;

@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 const MainAppScreenPage: NextPage = () => {
 
     const CalculationsWorkersControlsOrganism = dynamic(() =>
-        import('@/features/building/workers-controls/UI/WorkersControls.organism'))
+        import('@/features/building/workers-controls/UI/WorkersControls.organism'), {ssr: false})
 
     return (
         <>

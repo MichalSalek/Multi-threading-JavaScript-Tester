@@ -13,7 +13,7 @@ const LayoutComposition = ({children}: { children: ReactElement<AppProps, JSXEle
         <main className={scss.hostMain}>
             <Header/>
             <main className={scss.main}>
-                <Container maxWidth={'xl'}>{children}</Container>
+                <Container className={scss.globalContainer} maxWidth={'xl'}>{children}</Container>
             </main>
             {/*<Footer/>*/}
         </main>
