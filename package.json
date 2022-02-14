@@ -3,6 +3,9 @@
   "name": "multi-threading-javascript-tester",
   "Author": "Michał Sałek",
   "license": "All Right Reserved",
+  "cacheDirectories": [
+    ".next/cache"
+  ],
   "scripts": {
     "unsafe-dev": "next dev",
     "dev": "npm run lint && npm run unsafe-dev",
