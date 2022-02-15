@@ -20,6 +20,8 @@ import { Slider, Typography } from '@mui/material'
 import scss from './WorkersWorkSwitch.module.scss'
 import { randomIntFromNumbersRange } from '@/coding-utils/numberOperations.api'
 import { useMainThreadCalculations } from '@/features/building/workers-controls/WorkersControls.hooks'
+import { useAppDispatch } from '@/core/store.core'
+import { handleWorkerComplexityStateReport } from '@/features/background/web-workers-configuration/webWorkersSlice'
 
 
 
@@ -33,6 +35,9 @@ interface IProps {
 
 
 const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): JSX.Element => {
+
+    const dispatch = useAppDispatch()
+
 
     // Listening to worker's ready state
     //
@@ -50,6 +55,8 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
     const [userInputComplexity, setUserInputComplexity] = useState<ComplexityValueType>(randomizedNumber)
 
 
+    // Set global complexity from props to component state
+    //
     useEffect(() => {
         if (typeof globalComplexityValue !== 'number') {
             setUserInputComplexity(randomizedNumber)
@@ -60,11 +67,25 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
     }, [globalComplexityValue, randomizedNumber])
 
 
-
+    // Switch on Main thread calculations
     const [isMainThreadOn, handleMainThreadSwitchChange] =
         useMainThreadCalculations(120, Number(userInputComplexity), false)
 
+
     const isCurrentInstanceAMainThread = (): boolean => workerKey.workerName === MAIN_THREAD_KEY.workerName
+
+
+    // Set new complexity state report on component complexity change
+    //
+    useEffect(() => {
+        dispatch(handleWorkerComplexityStateReport({
+            workerName: workerKey.workerName,
+            complexity: Number(userInputComplexity)
+        }))
+
+        return () => undefined
+    }, [dispatch, userInputComplexity, workerKey.workerName])
+
 
     const handleWorkerWorkSwitch = (): void => {
         queueWorkerTask(workerKey, !isWorkerWorking ?

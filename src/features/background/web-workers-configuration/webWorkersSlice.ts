@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { WritableDraft } from 'immer/dist/types/types-external'
 import { AppState } from '@/core/store.core'
 import {
+    IWorkerComplexityStateReport,
     IWorkerErrorStateReport,
     IWorkerReadyStateReport,
     IWorkerWorkState,
     IWorkerWorkStateReport,
+    NamedWorkerComplexityStatusType,
     NamedWorkerErrorStatusType,
     NamedWorkerReadyStatusType,
     NamedWorkerWorkStatusType,
@@ -31,6 +33,7 @@ export type IWorkersSlice = {
     readyStatuses: NamedWorkerReadyStatusType
     workStatuses: NamedWorkerWorkStatusType
     errorStatuses: NamedWorkerErrorStatusType
+    complexityStatuses: NamedWorkerComplexityStatusType
 }
 
 
@@ -43,7 +46,8 @@ const initialState: IWorkersSlice = {
     },
     readyStatuses: {},
     workStatuses: {},
-    errorStatuses: {}
+    errorStatuses: {},
+    complexityStatuses: {}
 }
 
 
@@ -69,27 +73,27 @@ export const webWorkersSlice = createSlice({
         handleWorkerReadyStateReport: (state, action: PayloadAction<IWorkerReadyStateReport>) => {
             const {workerName, ready} = action.payload
 
-            const namedWorkerReadyStatus: NamedWorkerReadyStatusType = {
+            const namedWorkerStatus: NamedWorkerReadyStatusType = {
                 [workerName]: {ready}
             }
 
             if (state.readyStatuses[workerName]) {
                 state.readyStatuses[workerName].ready = ready
             } else {
-                state.readyStatuses = {...state.readyStatuses, ...namedWorkerReadyStatus}
+                state.readyStatuses = {...state.readyStatuses, ...namedWorkerStatus}
             }
         },
 
         handleWorkerWorkStateReport: (state, action: PayloadAction<IWorkerWorkStateReport>) => {
             const {workerName, working} = action.payload
 
-            const namedWorkerWorkStatus: NamedWorkerWorkStatusType = {
+            const namedWorkerStatus: NamedWorkerWorkStatusType = {
                 [workerName]: {working}
             }
             if (state.workStatuses[workerName]) {
                 state.workStatuses[workerName].working = working
             } else {
-                state.workStatuses = {...state.workStatuses, ...namedWorkerWorkStatus}
+                state.workStatuses = {...state.workStatuses, ...namedWorkerStatus}
             }
 
             dispatchActuallyWorkingWorkersAmount(state)
@@ -98,13 +102,26 @@ export const webWorkersSlice = createSlice({
         handleWorkerErrorStateReport: (state, action: PayloadAction<IWorkerErrorStateReport>) => {
             const {workerName, error} = action.payload
 
-            const namedWorkerErrorStatus: NamedWorkerErrorStatusType = {
+            const namedWorkerStatus: NamedWorkerErrorStatusType = {
                 [workerName]: {error}
             }
             if (state.errorStatuses[workerName]) {
                 state.errorStatuses[workerName].error = error
             } else {
-                state.errorStatuses = {...state.errorStatuses, ...namedWorkerErrorStatus}
+                state.errorStatuses = {...state.errorStatuses, ...namedWorkerStatus}
+            }
+        },
+
+        handleWorkerComplexityStateReport: (state, action: PayloadAction<IWorkerComplexityStateReport>) => {
+            const {workerName, complexity} = action.payload
+
+            const namedWorkerStatus: NamedWorkerComplexityStatusType = {
+                [workerName]: {complexity}
+            }
+            if (state.complexityStatuses[workerName]) {
+                state.complexityStatuses[workerName].complexity = complexity
+            } else {
+                state.complexityStatuses = {...state.complexityStatuses, ...namedWorkerStatus}
             }
         }
     }
@@ -114,7 +131,8 @@ export const {
     handleWorkerAmountChange,
     handleWorkerReadyStateReport,
     handleWorkerWorkStateReport,
-    handleWorkerErrorStateReport
+    handleWorkerErrorStateReport,
+    handleWorkerComplexityStateReport
 } = webWorkersSlice.actions
 
 export const selectRequestedWorkersAmount = ({calculationsWorkersSlice}: AppState): WorkersAmountStateType => calculationsWorkersSlice.requestedAmount
@@ -122,6 +140,7 @@ export const selectWholeWorkersReadyState = ({calculationsWorkersSlice}: AppStat
 export const selectWholeWorkersWorkState = ({calculationsWorkersSlice}: AppState): NamedWorkerWorkStatusType => calculationsWorkersSlice.workStatuses
 export const selectActuallyWorkingWorkersAmount = ({calculationsWorkersSlice}: AppState): WorkersAmountStateType => calculationsWorkersSlice.actuallyWorks
 export const selectWholeWorkersErrorState = ({calculationsWorkersSlice}: AppState): NamedWorkerErrorStatusType => calculationsWorkersSlice.errorStatuses // @TODO worker error handling
+export const selectWholeWorkersComplexityState = ({calculationsWorkersSlice}: AppState): NamedWorkerComplexityStatusType => calculationsWorkersSlice.complexityStatuses
 
 export const selectIsAnyWorkerWorking = ({calculationsWorkersSlice}: AppState): boolean => calculationsWorkersSlice.actuallyWorks.amount > 0
 export const selectIsAllOfWorkersWorking = ({calculationsWorkersSlice}: AppState): boolean => calculationsWorkersSlice.actuallyWorks.amount === calculationsWorkersSlice.requestedAmount.amount

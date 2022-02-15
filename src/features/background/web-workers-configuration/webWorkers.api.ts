@@ -3,6 +3,7 @@ import {
     IWorkerKey,
     IWorkerTask,
     IWorkerWorkState,
+    WorkerFilenameType,
     WorkerKeyType,
     WorkerNameType,
     WorkerToSocketDTO
@@ -81,7 +82,7 @@ export const queueWorkerTask = (workerKey: WorkerKeyType, workerTask: IWorkerTas
 }
 
 
-export const queueAllWorkersTask = (workerTask: IWorkerTask, msgForDevConsoleLog = ''): void => {
+export const queueAllWorkersTask = (workerFilename: WorkerFilenameType, workerTask: IWorkerTask, msgForDevConsoleLog = ''): void => {
     const activeWorkersByNow: IWorkerKey[] = getExistingWorkersKeys()
 
     activeWorkersByNow.forEach((workerKey: IWorkerKey) => {

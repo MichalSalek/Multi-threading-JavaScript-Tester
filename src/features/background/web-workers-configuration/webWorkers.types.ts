@@ -27,6 +27,7 @@ export type IWorkerTask = {
 
 
 export type WorkerNameType = string
+export type WorkerFilenameType = string
 
 export type WorkerCalculationType = number
 
@@ -37,14 +38,14 @@ export type NewWorkersJobType = {
 }
 
 export type NewWorkersJobByIPType = {
-    clientBrowserID: ClientBrowserIDType,
+    clientBrowserID: ClientBrowserIDType
     data: NewWorkersJobType
 }
 
 
 export type IWorkerKey = {
-    fileName?: string,
     workerName: WorkerNameType
+    fileName?: WorkerFilenameType
 }
 
 
@@ -91,6 +92,11 @@ export interface IWorkerWorkState {
 }
 
 
+export interface IWorkerComplexityState {
+    complexity: number
+}
+
+
 export interface IWorkerLastCalculation {
     lastCalculations: WorkerCalculationType | null
 }
@@ -114,6 +120,7 @@ export interface IWorkerWorkStateReport extends IWorkerWorkState, IWorkerKey {
 export type NamedWorkerWorkStatusType = Record<WorkerNameType, IWorkerWorkState>
 
 
+
 export interface IWorkerReadyStateReport extends IWorkerReadyState, IWorkerKey {
 }
 
@@ -121,11 +128,21 @@ export interface IWorkerReadyStateReport extends IWorkerReadyState, IWorkerKey {
 export type NamedWorkerReadyStatusType = Record<WorkerNameType, IWorkerReadyState>
 
 
+
 export interface IWorkerErrorStateReport extends IWorkerErrorState, IWorkerKey {
 }
 
 
 export type NamedWorkerErrorStatusType = Record<WorkerNameType, IWorkerErrorState>
+
+
+
+export interface IWorkerComplexityStateReport extends IWorkerComplexityState, IWorkerKey {
+}
+
+
+export type NamedWorkerComplexityStatusType = Record<WorkerNameType, IWorkerComplexityState>
+
 
 
 export type WorkersAmountStateType = {
