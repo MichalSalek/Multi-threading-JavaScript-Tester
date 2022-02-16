@@ -10,7 +10,7 @@
     "unsafe-dev": "next dev",
     "dev": "npm run lint && npm run unsafe-dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3999",
     "type-check": "tsc",
     "test": "jest",
     "lint": "next lint --fix && npm run type-check"

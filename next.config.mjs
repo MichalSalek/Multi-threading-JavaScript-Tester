@@ -14,6 +14,5 @@ export default {
     i18n: {
         locales: ["en"],
         defaultLocale: "en",
-    },
-    swcMinify: false // error - Failed to load SWC binary for freebsd/x64, see more info here: https://nextjs.org/docs/messages/failed-loading-swc
+    }
 }
