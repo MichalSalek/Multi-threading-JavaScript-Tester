@@ -1,4 +1,4 @@
-@use 'variables';
+@import 'variables-and-mixins';
 
 //
 //
@@ -24,7 +24,7 @@ body {
 }
 
 body {
-  border: variables.$masterBorderStylePrimary;
+  border: $masterBorderStylePrimary;
   border-width: 0 2px;
 }
 
@@ -78,11 +78,11 @@ button {
 // Add class 'enabled-border-state' to component with border to make it color-controlled
 body {
   &.enabled-state {
-    border-color: variables.$secondaryAccentColor;
+    border-color: $secondaryAccentColor;
   }
 
   &.enabled-state .enabled-border-state {
-    border-color: variables.$secondaryAccentColor;
+    border-color: $secondaryAccentColor;
   }
 }
 

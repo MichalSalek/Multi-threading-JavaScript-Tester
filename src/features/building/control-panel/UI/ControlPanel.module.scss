@@ -1,4 +1,4 @@
-@use '../../../../global-styles/variables';
+@import '../../../../global-styles/variables-and-mixins';
 
 
 //
@@ -30,11 +30,6 @@ $control-switch-label-min-width: 230px;
 
 %dropShadowLightColor {
   filter: drop-shadow(0 5px 3px #FFFFFF22);
-}
-
-@mixin svgSize($width: 32px) {
-  height: auto;
-  width: $width;
 }
 
 
@@ -223,7 +218,7 @@ $control-switch-label-min-width: 230px;
   position: relative;
   z-index: 2002;
 
-  border: variables.$masterBorderStylePrimary;
+  border: $masterBorderStylePrimary;
   border-width: 2px 0 2px 0;
 
   pointer-events: all;
@@ -264,7 +259,7 @@ $control-switch-label-min-width: 230px;
   position: relative;
   z-index: 2000;
 
-  border: variables.$masterBorderStylePrimary;
+  border: $masterBorderStylePrimary;
   border-width: 2px 2px 2px 0;
   border-radius: 0 5px 5px 0;
 

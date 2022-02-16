@@ -5,3 +5,9 @@ $masterBorderStylePrimary: 1px solid $primaryAccentColor;
 
 
 $primaryMaterialUI: rgba(48, 54, 48, 0.97);
+
+
+@mixin svgSize($width: 32px) {
+  height: auto;
+  width: $width !important;
+}

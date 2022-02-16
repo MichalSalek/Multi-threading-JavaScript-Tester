@@ -1,37 +1,35 @@
-@keyframes move-it {
-  0%,
-  100% {
-    transform: translateX(0%);
-    transform-origin: 50% 50%;
-  }
+@import '../../global-styles/variables-and-mixins';
 
-  50% {
-    transform: translateX(200px);
-  }
-}
 
-.text {
-  animation: move-it 3s linear infinite both;
-  font-size: 15px;
-  width: fit-content;
+$translateXAmount: 300px;
+
+
+.host {
+  display: flex;
+  justify-content: center;
+  margin: 5px 0;
+  transform: translateX(calc(#{- $translateXAmount} / 2));
 }
 
 
-@keyframes move-it-2 {
-  0%,
-  100% {
-    left: 0;
+.animateIcons {
+  @keyframes loopedMove {
+    0%,
+    100% {
+      transform: translateX(0);
+      transform-origin: 50% 50%;
+    }
+
+    50% {
+      transform: translateX($translateXAmount);
+    }
   }
 
-  50% {
-    left: 200px;
+  display: inline-block;
+  animation: loopedMove 3s linear infinite both;
+
+
+  > svg {
+    @include svgSize(24px);
   }
-}
-
-
-.text2 {
-  animation: move-it-2 3s linear infinite both;
-  font-size: 18px;
-  width: fit-content;
-  position: relative;
 }
