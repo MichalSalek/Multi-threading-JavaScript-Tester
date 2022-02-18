@@ -6,7 +6,8 @@
 //
 //
 //
-export const ROUTE_MAIN_APP_SCREEN = '/main-app-screen'
+export const ROUTE_MAIN_APP_SCREEN = '/'
+export const ROUTE_START_PAGE_SCREEN = '/start'
 
 
 // API routes

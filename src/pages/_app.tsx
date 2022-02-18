@@ -14,21 +14,22 @@ import WorkersActiveInstancesAndCommunicationController
     from '@/features/background/web-workers-configuration/WorkersActiveInstancesAndCommunication.controller'
 import MetaHead from '@/layout/partials/MetaHead'
 import { CssBaseline, ThemeProvider } from '@mui/material'
-import FPSMonitorFloatingMolecule from '@/features/building/fps-monitor/UI/FPSMonitorFloating.molecule'
-import WorkersScoreboardFloatingMolecule
-    from '@/features/building/workers-scoreboard/UI/WorkersScoreboardFloating.molecule'
+import FPSMonitorWindowMolecule from '@/features/building/fps-monitor/UI/FPSMonitorWindow.molecule'
 import IconPackController from '@/features/background/icon-pack/IconPack.controller'
 import BorderColorChangeController from '@/features/background/border-color-change/BorderColorChange.controller'
-import WorkersGlobalWorkControlFloatingMolecule
-    from '@/features/building/workers-global-work-control/UI/WorkersGlobalWorkControlFloating.molecule'
 
 import { createTheme } from '@mui/material/styles'
 import { grey } from '@mui/material/colors'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
+import { ROUTE_START_PAGE_SCREEN } from '@/core/routes.core'
+import WorkersScoreboardWindowMolecule from '@/features/building/workers-scoreboard/UI/WorkersScoreboardWindow.molecule'
+import WorkersGlobalWorkControlWindowMolecule
+    from '@/features/building/workers-global-work-control/UI/WorkersGlobalWorkControlWindow.molecule'
 
 
 
-const ControlPanelMoleculeClientSideOnly = dynamic(() =>
+const ControlPanelMolecule = dynamic(() =>
     import('@/features/building/control-panel/UI/ControlPanel.molecule'), {ssr: false})
 
 
@@ -37,6 +38,11 @@ const ControlPanelMoleculeClientSideOnly = dynamic(() =>
 // Includes app layout as well as realtime controllers
 //
 export default function ApplicationComposition({Component, pageProps}: AppProps) {
+
+    const router = useRouter()
+
+
+    const isTheStartPageActually = (): boolean => router.route === ROUTE_START_PAGE_SCREEN
 
     const theme = createTheme({
         palette: {
@@ -64,11 +70,12 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
 
 
             {/* Whole app runtime components - above all pages during a whole app life. */}
-            <FPSMonitorFloatingMolecule/>
-            <WorkersScoreboardFloatingMolecule/>
-            <WorkersGlobalWorkControlFloatingMolecule/>
-
-            <ControlPanelMoleculeClientSideOnly/>
+            {isTheStartPageActually() ? <></> : (<>
+                <FPSMonitorWindowMolecule/>
+                <WorkersScoreboardWindowMolecule/>
+                <WorkersGlobalWorkControlWindowMolecule/>
+                <ControlPanelMolecule/>
+            </>)}
 
 
             <LayoutComposition>

@@ -20,7 +20,7 @@ import { IWorkerKey } from '@/features/background/web-workers-configuration/webW
 
 
 
-const WorkersGlobalWorkControlFloatingMolecule = (): JSX.Element => {
+const WorkersGlobalWorkControlWindowMolecule = (): JSX.Element => {
 
     const workersComplexity = useAppSelector(selectWholeWorkersComplexityState)
 
@@ -71,4 +71,4 @@ const WorkersGlobalWorkControlFloatingMolecule = (): JSX.Element => {
     )
 }
 
-export default WorkersGlobalWorkControlFloatingMolecule
+export default WorkersGlobalWorkControlWindowMolecule

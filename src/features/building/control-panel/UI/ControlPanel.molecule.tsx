@@ -122,7 +122,7 @@ const ControlPanelMolecule = (): JSX.Element => {
                             {!positionFlipped &&
                             <nav
                                 id={'moveHandler'}
-                                className={[scss.moveHandler, 'fa-lg', 'fa-swap-opacity', isAlreadyDragged ? scss.moveHandlerIsEnabled : ''].join(' ')}>
+                                className={[scss.moveHandler, 'fa-2x', 'fa-swap-opacity', isAlreadyDragged ? scss.moveHandlerIsEnabled : ''].join(' ')}>
                                 <i className="fad fa-arrows-alt-v"/>
                             </nav>
                             }

@@ -22,7 +22,7 @@ import SystemComponentVisibilityComposition
 
 
 
-const WorkersScoreboardFloatingMolecule = (): JSX.Element => {
+const WorkersScoreboardWindowMolecule = (): JSX.Element => {
 
     // Instant get a requested amount of web-workers-configuration
     //
@@ -135,4 +135,4 @@ const WorkersScoreboardFloatingMolecule = (): JSX.Element => {
     )
 }
 
-export default WorkersScoreboardFloatingMolecule
+export default WorkersScoreboardWindowMolecule

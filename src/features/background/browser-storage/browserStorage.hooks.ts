@@ -9,7 +9,8 @@ import {
     STORAGE_KEY_CONTROL_PANEL_COLLAPSE_STATE,
     STORAGE_KEY_CONTROL_PANEL_SWITCHES,
     STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION,
-    STORAGE_KEY_WORKERS_AMOUNT
+    STORAGE_KEY_WORKERS_AMOUNT,
+    StorageKeyControlPanelCollapseStateEnum
 } from '@/app-config-constants'
 import { WorkerAmountChangeActionEnum } from '@/features/background/web-workers-configuration/webWorkers.types'
 import {
@@ -34,8 +35,8 @@ export const useWorkersAmountStoragePersist = (): void => {
     const workerRequestedAmount = useAppSelector(selectRequestedWorkersAmount)
 
     useEffect(() => {
-        const memorizedStorageWorkersAmountValue = getStorageItem(STORAGE_KEY_WORKERS_AMOUNT)
-        const memorizedAmountOfWorkers = memorizedStorageWorkersAmountValue ? Number(memorizedStorageWorkersAmountValue) : 0
+        const memorizedValue = getStorageItem(STORAGE_KEY_WORKERS_AMOUNT)
+        const memorizedAmountOfWorkers = memorizedValue ? Number(memorizedValue) : 0
         memorizedAmountOfWorkers > 0 && dispatch(handleWorkerAmountChange({
             amountChangeCommand: WorkerAmountChangeActionEnum.setAmount,
             amount: memorizedAmountOfWorkers
@@ -64,11 +65,11 @@ export const useControlPanelSwitchesStoragePersist = (): void => {
     const systemComponentsVisibilities: ISystemComponentsVisibilities = useAppSelector(selectSystemComponentsVisibilities)
 
     useEffect(() => {
-        const memorizedStorageControlPanelSwitchesValue = getStorageItem(STORAGE_KEY_CONTROL_PANEL_SWITCHES)
+        const memorizedValue = getStorageItem(STORAGE_KEY_CONTROL_PANEL_SWITCHES)
 
-        if (typeof memorizedStorageControlPanelSwitchesValue === 'string') {
+        if (typeof memorizedValue === 'string') {
 
-            const memorizedStorageControlPanelSwitches: ISystemComponentsVisibilities = JSON.parse(memorizedStorageControlPanelSwitchesValue)
+            const memorizedStorageControlPanelSwitches: ISystemComponentsVisibilities = JSON.parse(memorizedValue)
 
             Object.keys(memorizedStorageControlPanelSwitches).forEach((memorizedName: string) => {
                 possibleControlPanelSwitchesNames.forEach((actualComponentName: SystemComponentNameType) => {
@@ -98,12 +99,6 @@ export const useControlPanelSwitchesStoragePersist = (): void => {
 
 
 
-export enum UseControlPanelCollapseStateStoragePersistEnum {
-    'true' = 'true',
-    'false' = 'false'
-}
-
-
 // CONTROL PANEL COLLAPSE STATE STORAGE PERSIST
 //
 type IsListCollapsedType = boolean
@@ -115,15 +110,15 @@ export const useControlPanelCollapseStateStoragePersist = (initialBehavior: bool
     const [isListCollapsed, setIsListCollapsed] = useState<boolean>(initialBehavior)
 
     useEffect(() => {
-        const memorizedStorageCollapseStateValue = getStorageItem(STORAGE_KEY_CONTROL_PANEL_COLLAPSE_STATE)
+        const memorizedValue = getStorageItem(STORAGE_KEY_CONTROL_PANEL_COLLAPSE_STATE)
 
-        if (typeof memorizedStorageCollapseStateValue === 'string') {
+        if (typeof memorizedValue === 'string') {
 
-            switch (memorizedStorageCollapseStateValue) {
-            case UseControlPanelCollapseStateStoragePersistEnum.false:
+            switch (memorizedValue) {
+            case StorageKeyControlPanelCollapseStateEnum.false:
                 setIsListCollapsed(false)
                 break
-            case UseControlPanelCollapseStateStoragePersistEnum.true:
+            case StorageKeyControlPanelCollapseStateEnum.true:
                 setIsListCollapsed(true)
                 break
             }
@@ -168,12 +163,12 @@ export const usePersistedPositionByBrowserStorage = (
     // Pass value from storage to consumer on mount.
     //
     useEffect(() => {
-        const memoizedOnTheScreenPositionValue = getStorageItem(browserStorageKey)
+        const memorizedValue = getStorageItem(browserStorageKey)
 
-        if (typeof memoizedOnTheScreenPositionValue === 'string') {
+        if (typeof memorizedValue === 'string') {
             // Value from storage is available.
             //
-            setConsumerPosition(JSON.parse(memoizedOnTheScreenPositionValue))
+            setConsumerPosition(JSON.parse(memorizedValue))
         } else {
             // Default behavior.
             //
@@ -181,7 +176,6 @@ export const usePersistedPositionByBrowserStorage = (
         }
         return () => undefined
     }, [initialPosition, browserStorageKey])
-
 
 
     // Set value to storage on new consumer position.

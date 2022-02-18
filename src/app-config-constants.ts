@@ -23,9 +23,28 @@ export const MAX_WORKER_COMPLEXITY_POSSIBILITY = 200
 
 // Browser storage:
 //
+export const STORAGE_KEY_START_PAGE_SEEN = 'startPageSeen'
+
+
+export enum StorageKeyStartPageEnum {
+    'true' = 'true',
+    'false' = 'false'
+}
+
+
 export const STORAGE_KEY_WORKERS_AMOUNT = 'workersAmount'
+
 export const STORAGE_KEY_CONTROL_PANEL_COLLAPSE_STATE = 'controlPanelCollapsedState'
+
+
+export enum StorageKeyControlPanelCollapseStateEnum {
+    'true' = 'true',
+    'false' = 'false'
+}
+
+
 export const STORAGE_KEY_CONTROL_PANEL_SWITCHES = 'controlPanelSwitches'
+
 export const STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION = 'onTheScreenPosition'
 
 
