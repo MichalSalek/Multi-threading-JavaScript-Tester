@@ -2,32 +2,27 @@
 
 contact@michalsalek.pl
 
-#### App inspired by DDD, CQS and Event Sourcing methodologies
+##### App inspired by DDD, CQS and Event Sourcing methodologies
 
 ###### Driven by Developer Experience for fast UI develop and debugging
 
-#         
+##         
 
-# What does it do?
+### What does it do?
 
-##### This tool can overload your CPU by doing no-sense calculations - through the browser's main thread or other CPU threads - through WebWorkers.
+##### This tool can overload your CPU by doing no-sense calculations - through the browser's main thread or other CPU threads - through the WebWorkers.
 
 ##### As a user, you can set the complexity of the calculations and observe sample animation and your CPU threads usage.
 
-#         
+###        
 
-##### The AMD Ryzen 9 5959X 16 x 4 GHz processor is over 80% loaded by Javascript interpretations:
+###### The AMD Ryzen 9 5959X 16 x 4 GHz processor is over 80% loaded by Javascript interpretations:
 
 ![performance](https://michalsalek.pl/public_files/performance.png)
 
-#         
-
-#         
-
-#         
-
-## Characteristics
-
+###         
+### Characteristics of the App:
+###         
 - WebSocket communication
 - WebWorkers activity simulation
 - Architecture designed by Commands and Queries Separation
@@ -36,17 +31,21 @@ contact@michalsalek.pl
 - Forced TS typing to keep app data with no leaks and exceptions
 - Optimized for nice performance with ESLint React strict rules with no bypassing
 - Keeping UX in well collaboration with an user
+###    
 
-#         
+### Fundamental instance state is reactive boardcasting by Redux to UI consumers
 
-## More technical
+![redux](https://michalsalek.pl/public_files/reduxdev.png)
+        
+###   
+### More technical stuff:
 
-> Next.js
-> TypeScript strict mode
-> React strict mode
-> Redux toolkit with thunk
-> Node.js with TypeScript
-> socket.io
+> Next.js  
+> TypeScript strict mode  
+> React strict mode  
+> Redux toolkit with thunk  
+> Node.js with TypeScript  
+> socket.io  
 
 - `App components` - generic UI atoms to keep uniformity
 - `Redux Slices` - each per subdomain
@@ -58,16 +57,8 @@ contact@michalsalek.pl
 
 ![structure](https://michalsalek.pl/public_files/struktura.png)
 
-#         
 
-#         
-
-#         
-
-## Fundamental instance state is reactive boardcasting by Redux
-
-![redux](https://michalsalek.pl/public_files/reduxdev.png)
 
 ```sh
-echo
+echo contact@michalsalek.pl
 ```
