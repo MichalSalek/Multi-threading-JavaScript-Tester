@@ -12,6 +12,8 @@ const BorderColorChangeController = (): JSX.Element => {
 
     const allActuallyWorkWorkersAmount: WorkersAmountStateType = useAppSelector(selectActuallyWorkingWorkersAmount)
 
+
+    // @TODO przerobić na react refa tego queryselectora
     const bodyElement: HTMLBodyElement | undefined | null = useMemo(
         () => fireJustClientSide<HTMLBodyElement | null>(() => document.querySelector('body')), [])
 

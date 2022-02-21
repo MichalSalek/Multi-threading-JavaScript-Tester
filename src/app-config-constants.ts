@@ -13,7 +13,7 @@ export const MAIN_THREAD_KEY: IWorkerKey = {workerName: 'mainThread'}
 export const WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS = 390
 
 // Debounce - Optimal for CPU usage.
-// Realtime - The most accurate way to receive data over time (expert mode).
+// Realtime - The most accurate way to receive data over time.
 export const INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES: number | 0 = 0 // 0 means realtime
 
 // Complexity limit. So high values can just crash the browsers (event loop overload).

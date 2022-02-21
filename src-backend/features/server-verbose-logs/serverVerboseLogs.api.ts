@@ -20,7 +20,7 @@ export const changeServerVerboseModeFlag = (verboseModeEnableState: 'on' | 'off'
 // This little shell allows handle app logs.
 // Feel free to add a new one - in critical-looks-like areas.
 // Check out how this has already been used by follow the reference...
-// Most commonly use e.g.: CQS commands verbose.
+// Most commonly use e.g.: event commands verbose.
 //
 export const addServerConsoleVerbose = (communicate: string | Error, mode: 'log' | 'warn' | 'error' = 'log'): void => {
 
