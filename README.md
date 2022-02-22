@@ -6,7 +6,21 @@ contact@michalsalek.pl
 
 ###### Driven by Developer Experience for fast UI develop and debugging
 
-#         
+###             
+
+###             
+
+###             
+
+* [Chapter one](#what-does-it-do?)
+* [Chapter two](#chapter-two)
+    * [Chapter two dot one](#chapter-two-dot-one)
+    * [Chapter two dot three](#chapter-two-dot-three)
+        * [Chapter two dot three dot one](#chapter-two-dot-three-dot-one)
+* [Chapter three](#chapter-three)
+* [Chapter four](#chapter-four)
+
+###             
 
 # What does it do?
 
@@ -14,17 +28,17 @@ contact@michalsalek.pl
 
 ##### As a user, you can set the complexity of the calculations and observe sample animation and your CPU threads usage.
 
-#         
+#             
 
-##### The AMD Ryzen 9 5959X 16 x 4 GHz processor is over 80% loaded by Javascript interpretations:
+##### The AMD Ryzen 9 5950X 16x4.0GHz processor is over 80% loaded by Javascript interpretations:
 
 ![performance](https://michalsalek.pl/public_files/performance.png)
 
-#         
+###             
 
-#         
+###             
 
-#         
+###               
 
 ## Characteristics
 
@@ -35,9 +49,13 @@ contact@michalsalek.pl
 - Each Function has its own functional and declarative API
 - Forced TS typing to keep app data with no leaks and exceptions
 - Optimized for nice performance with ESLint React strict rules with no bypassing
-- Keeping UX in well collaboration with an user
+- Keeping UX in well collaboration with a user
 
-#         
+###             
+
+###             
+
+###             
 
 ## More technical
 
@@ -58,11 +76,11 @@ contact@michalsalek.pl
 
 ![structure](https://michalsalek.pl/public_files/struktura.png)
 
-#         
+###             
 
-#         
+###             
 
-#         
+###             
 
 ## Fundamental instance state is reactive boardcasting by Redux
 

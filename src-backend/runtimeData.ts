@@ -1,4 +1,4 @@
-import { WorkerJobsByClientBrowserIDTypeDTO } from '@/features/background/web-workers-configuration/webWorkers.types'
+import { WorkerJobsByClientBrowserIDTypeDTO } from '@/features/background/web-workers/webWorkers.types'
 
 //
 // It's a pseudo-DB for the app presentation and fast start dev env.

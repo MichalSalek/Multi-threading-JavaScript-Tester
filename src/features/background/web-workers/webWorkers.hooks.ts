@@ -5,12 +5,12 @@ import {
     NamedWorkerReadyStatusType,
     NamedWorkerWorkStatusType,
     WorkerKeyType
-} from '@/features/background/web-workers-configuration/webWorkers.types'
+} from '@/features/background/web-workers/webWorkers.types'
 import { useAppSelector } from '@/core/store.core'
 import {
     selectWholeWorkersReadyState,
     selectWholeWorkersWorkState
-} from '@/features/background/web-workers-configuration/webWorkersSlice'
+} from '@/features/background/web-workers/webWorkersSlice'
 
 
 

@@ -6,7 +6,7 @@ import {
     selectIsAllOfWorkersWorking,
     selectIsAnyWorkerWorking,
     selectWholeWorkersComplexityState
-} from '@/features/background/web-workers-configuration/webWorkersSlice'
+} from '@/features/background/web-workers/webWorkersSlice'
 import SystemComponentVisibilityComposition
     from '@/layout/compositions/system-component-visibility/SystemComponentVisibility.composition'
 import AppButtonAtom from '@/app-components/AppButton.atom'
@@ -14,9 +14,9 @@ import {
     getExistingWorkersKeys,
     queueAllWorkersTask,
     queueWorkerTask
-} from '@/features/background/web-workers-configuration/webWorkers.api'
+} from '@/features/background/web-workers/webWorkers.api'
 import { ButtonGroup } from '@mui/material'
-import { IWorkerKey } from '@/features/background/web-workers-configuration/webWorkers.types'
+import { IWorkerKey } from '@/features/background/web-workers/webWorkers.types'
 
 
 

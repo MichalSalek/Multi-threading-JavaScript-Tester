@@ -13,8 +13,8 @@ import {
     NamedWorkerWorkStatusType,
     WorkerAmountChangeActionEnum,
     WorkersAmountStateType
-} from '@/features/background/web-workers-configuration/webWorkers.types'
-import { getValidatedPassedAmount } from '@/features/background/web-workers-configuration/webWorkers.api'
+} from '@/features/background/web-workers/webWorkers.types'
+import { getValidatedPassedAmount } from '@/features/background/web-workers/webWorkers.api'
 import { MAX_WORKERS_LIMIT } from '@/app-config-constants'
 
 

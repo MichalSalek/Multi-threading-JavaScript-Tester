@@ -3,9 +3,9 @@ import {
     selectIsAnyWorkerWorking,
     selectIsNoWorkerActive,
     selectRequestedWorkersAmount
-} from '@/features/background/web-workers-configuration/webWorkersSlice'
+} from '@/features/background/web-workers/webWorkersSlice'
 import WorkersWorkSwitchMolecule from '@/features/building/workers-controls/UI/WorkersWorkSwitch.molecule'
-import { constructWorkerNameByOrderIndex } from '@/features/background/web-workers-configuration/webWorkers.api'
+import { constructWorkerNameByOrderIndex } from '@/features/background/web-workers/webWorkers.api'
 import { useAppSelector } from '@/core/store.core'
 import scss from './WorkersView.module.scss'
 import { MAX_WORKER_COMPLEXITY_POSSIBILITY, MIN_WORKER_COMPLEXITY_POSSIBILITY } from '@/app-config-constants'

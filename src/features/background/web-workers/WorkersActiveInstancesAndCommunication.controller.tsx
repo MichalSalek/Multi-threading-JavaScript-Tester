@@ -10,7 +10,7 @@ import {
     getWorkerRealActivityStatus,
     queueWorkerTask,
     updateWorkerIsReadyState
-} from '@/features/background/web-workers-configuration/webWorkers.api'
+} from '@/features/background/web-workers/webWorkers.api'
 import {
     IWorkerDTO,
     IWorkerKey,
@@ -20,14 +20,14 @@ import {
     WorkersAmountStateType,
     WorkerToSocketDTO,
     WorkerTriggerMessageCommandEnum
-} from '@/features/background/web-workers-configuration/webWorkers.types'
+} from '@/features/background/web-workers/webWorkers.types'
 import { MAX_WORKERS_LIMIT, WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS } from '@/app-config-constants'
 import store, { useAppSelector } from '@/core/store.core'
 import {
     IWorkersSlice,
     selectRequestedWorkersAmount
-} from '@/features/background/web-workers-configuration/webWorkersSlice'
-import { WEB_WORKER_TASKS } from '@/features/background/web-workers-configuration/webWorkersEvents'
+} from '@/features/background/web-workers/webWorkersSlice'
+import { WEB_WORKER_TASKS } from '@/features/background/web-workers/webWorkersEvents'
 import { selectSocketIsActive } from '@/features/background/socket-client/socketSlice'
 import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/background/socket-client/socketEventsEntities'
 import { fireJustClientSide } from '@/coding-utils/environmentOperations.api'
@@ -121,10 +121,10 @@ const controlAmountOfActiveWorkerInstances = (requestedNumberOfWorkers: WorkersA
     const existingWorkersKeyNames: IWorkerKey[] = getExistingWorkersKeys()
 
 
-    // If requested web-workers-configuration amount:
+    // If requested web-workers amount:
     //
     if (requestedNumberOfWorkers.amount > existingWorkersKeyNames.length) {
-        // ...is higher - increase a real web-workers-configuration amount by adding more instances.
+        // ...is higher - increase a real web-workers amount by adding more instances.
 
         for (let index = 0; index < requestedNumberOfWorkers.amount; index++) {
             const workerKeyOfRequestedWorker = constructCalculationWorkerKeyByName(constructWorkerNameByOrderIndex(index + 1))
@@ -179,7 +179,7 @@ const WorkersActiveInstancesAndCommunicationController = (): JSX.Element => {
     //
     const isSocketActive: boolean = useAppSelector(selectSocketIsActive)
 
-    // Requested from building, a number of web-workers-configuration
+    // Requested from building, a number of web-workers
     //
     const requestedNumberOfWorkers: WorkersAmountStateType = useAppSelector(selectRequestedWorkersAmount)
 

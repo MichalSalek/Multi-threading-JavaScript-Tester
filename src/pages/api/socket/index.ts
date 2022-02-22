@@ -7,7 +7,7 @@ import {
     IWorkerDTO,
     WorkerKeyType,
     WorkerToSocketDTO
-} from '@/features/background/web-workers-configuration/webWorkers.types'
+} from '@/features/background/web-workers/webWorkers.types'
 
 import { setNewJobDone } from '../../../../src-backend/runtimeData.api'
 import {

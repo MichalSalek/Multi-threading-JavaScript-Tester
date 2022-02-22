@@ -6,7 +6,7 @@ import { ClientBrowserIDType } from '@/features/background/socket-client/socket.
 import {
     WorkerJobsByClientBrowserIDTypeDTO,
     WorkerJobsTypeDTO
-} from '@/features/background/web-workers-configuration/webWorkers.types'
+} from '@/features/background/web-workers/webWorkers.types'
 import {
     listenToSocketEventWithDebounce,
     sendCommandMessageToSocket

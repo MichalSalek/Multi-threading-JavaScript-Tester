@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from 'react'
-import { WorkersAmountStateType } from '@/features/background/web-workers-configuration/webWorkers.types'
+import { WorkersAmountStateType } from '@/features/background/web-workers/webWorkers.types'
 import { useAppSelector } from '@/core/store.core'
-import { selectActuallyWorkingWorkersAmount } from '@/features/background/web-workers-configuration/webWorkersSlice'
+import { selectActuallyWorkingWorkersAmount } from '@/features/background/web-workers/webWorkersSlice'
 import { fireJustClientSide } from '@/coding-utils/environmentOperations.api'
 
 

@@ -2,13 +2,13 @@ import React, { FormEvent, useEffect, useMemo, useState } from 'react'
 import {
     getValidatedPassedAmount,
     queueWorkerTask
-} from '@/features/background/web-workers-configuration/webWorkers.api'
-import { WEB_WORKER_TASKS } from '@/features/background/web-workers-configuration/webWorkersEvents'
-import { WorkerKeyType } from '@/features/background/web-workers-configuration/webWorkers.types'
+} from '@/features/background/web-workers/webWorkers.api'
+import { WEB_WORKER_TASKS } from '@/features/background/web-workers/webWorkersEvents'
+import { WorkerKeyType } from '@/features/background/web-workers/webWorkers.types'
 import {
     useSingleWorkerSpecificStatus,
     UseSpecificWorkerStatusCommandEnum
-} from '@/features/background/web-workers-configuration/webWorkers.hooks'
+} from '@/features/background/web-workers/webWorkers.hooks'
 import AppButtonAtom from '@/app-components/AppButton.atom'
 import AppInputAtom from '@/app-components/AppInput.atom'
 import {
@@ -21,7 +21,7 @@ import scss from './WorkersWorkSwitch.module.scss'
 import { randomIntFromNumbersRange } from '@/coding-utils/numberOperations.api'
 import { useMainThreadCalculations } from '@/features/building/workers-controls/WorkersControls.hooks'
 import { useAppDispatch } from '@/core/store.core'
-import { handleWorkerComplexityStateReport } from '@/features/background/web-workers-configuration/webWorkersSlice'
+import { handleWorkerComplexityStateReport } from '@/features/background/web-workers/webWorkersSlice'
 
 
 

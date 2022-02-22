@@ -5,9 +5,9 @@ import Zoom from '@mui/material/Zoom'
 import {
     handleWorkerAmountChange,
     selectRequestedWorkersAmount
-} from '@/features/background/web-workers-configuration/webWorkersSlice'
-import { WorkerAmountChangeActionEnum } from '@/features/background/web-workers-configuration/webWorkers.types'
-import { getValidatedPassedAmount } from '@/features/background/web-workers-configuration/webWorkers.api'
+} from '@/features/background/web-workers/webWorkersSlice'
+import { WorkerAmountChangeActionEnum } from '@/features/background/web-workers/webWorkers.types'
+import { getValidatedPassedAmount } from '@/features/background/web-workers/webWorkers.api'
 import { useAppDispatch, useAppSelector } from '@/core/store.core'
 import { MAX_WORKERS_LIMIT } from '@/app-config-constants'
 

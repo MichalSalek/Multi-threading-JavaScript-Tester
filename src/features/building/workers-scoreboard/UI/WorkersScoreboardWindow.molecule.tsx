@@ -6,7 +6,7 @@ import {
     WorkerJobsTypeDTO,
     WorkerNameType,
     WorkersAmountStateType
-} from '@/features/background/web-workers-configuration/webWorkers.types'
+} from '@/features/background/web-workers/webWorkers.types'
 import { DraggableWindowComposition } from '@/layout/compositions/draggable-window/DraggableWindow.composition'
 import { useAppSelector } from '@/core/store.core'
 import {
@@ -14,7 +14,7 @@ import {
     selectRequestedWorkersAmount,
     selectWholeWorkersReadyState,
     selectWholeWorkersWorkState
-} from '@/features/background/web-workers-configuration/webWorkersSlice'
+} from '@/features/background/web-workers/webWorkersSlice'
 import { selectLastReceivedClientBrowserWorkerJobsData } from '@/features/background/socket-client/socketSlice'
 import { MAIN_THREAD_KEY } from '@/app-config-constants'
 import SystemComponentVisibilityComposition
@@ -24,7 +24,7 @@ import SystemComponentVisibilityComposition
 
 const WorkersScoreboardWindowMolecule = (): JSX.Element => {
 
-    // Instant get a requested amount of web-workers-configuration
+    // Instant get a requested amount of web-workers
     //
     const workerRequestedAmount: WorkersAmountStateType = useAppSelector(selectRequestedWorkersAmount)
 

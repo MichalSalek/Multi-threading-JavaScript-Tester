@@ -11,7 +11,7 @@ import BrowserStoragePersistController from '@/features/background/browser-stora
 import SocketConnectionAndListeningController
     from '@/features/background/socket-client/SocketConnectionAndListening.controller'
 import WorkersActiveInstancesAndCommunicationController
-    from '@/features/background/web-workers-configuration/WorkersActiveInstancesAndCommunication.controller'
+    from '@/features/background/web-workers/WorkersActiveInstancesAndCommunication.controller'
 import MetaHead from '@/layout/partials/MetaHead'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import FPSMonitorWindowMolecule from '@/features/building/fps-monitor/UI/FPSMonitorWindow.molecule'

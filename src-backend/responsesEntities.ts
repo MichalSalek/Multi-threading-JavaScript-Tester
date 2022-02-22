@@ -1,7 +1,7 @@
 import {
     WorkerJobsByClientBrowserIDTypeDTO,
     WorkerJobsTypeDTO
-} from '@/features/background/web-workers-configuration/webWorkers.types'
+} from '@/features/background/web-workers/webWorkers.types'
 import { workersRuntimeData } from './runtimeData'
 import { AppToSocketDTO, SocketToAppDTO } from '@/features/background/socket-client/socket.types'
 import { getSecuredClientBrowserID } from './features/client-browser-id/clientBrowserID.api'

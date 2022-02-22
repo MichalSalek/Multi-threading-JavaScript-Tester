@@ -7,14 +7,14 @@ import {
     WorkerKeyType,
     WorkerNameType,
     WorkerToSocketDTO
-} from '@/features/background/web-workers-configuration/webWorkers.types'
+} from '@/features/background/web-workers/webWorkers.types'
 import store from '@/core/store.core'
 import {
     handleWorkerErrorStateReport,
     handleWorkerReadyStateReport,
     handleWorkerWorkStateReport
-} from '@/features/background/web-workers-configuration/webWorkersSlice'
-import { workersKeysNames } from '@/features/background/web-workers-configuration/add-new-physical-worker-here'
+} from '@/features/background/web-workers/webWorkersSlice'
+import { workersKeysNames } from '@/features/background/web-workers/add-new-physical-worker-here'
 import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLogs.api'
 
 
@@ -51,7 +51,7 @@ export const getWorkerRealActivityStatus = (workerName: WorkerNameType): boolean
 
 export const getExistingWorkersKeys = (): IWorkerKey[] => {
 
-    // Maybe-worker array of the maximum number of web-workers-configuration:
+    // Maybe-worker array of the maximum number of web-workers:
     // [Worker, undefined, Worker, Worker, undefined, ...].length === MAX_WORKERS_LIMIT
     //
     const allWorkersPossibilities = Array(MAX_WORKERS_LIMIT as number).fill(undefined)

@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/core/store.core'
 import {
     handleWorkerAmountChange,
     selectRequestedWorkersAmount
-} from '@/features/background/web-workers-configuration/webWorkersSlice'
+} from '@/features/background/web-workers/webWorkersSlice'
 import { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { getStorageItem, setStorageItem } from '@/features/background/browser-storage/browserStorage.api'
 import {
@@ -12,7 +12,7 @@ import {
     STORAGE_KEY_WORKERS_AMOUNT,
     StorageKeyControlPanelCollapseStateEnum
 } from '@/app-config-constants'
-import { WorkerAmountChangeActionEnum } from '@/features/background/web-workers-configuration/webWorkers.types'
+import { WorkerAmountChangeActionEnum } from '@/features/background/web-workers/webWorkers.types'
 import {
     handleControlPanelSwitchVisibility,
     ISystemComponentsVisibilities,
