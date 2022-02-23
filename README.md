@@ -91,6 +91,10 @@ The AMD Ryzen 9 5950X 16 x 4.0GHz processor is loaded over 80% by JavaScript int
 
 ### TASKS TODO:
 
+
+[Issues](https://github.com/MichalSalek/Multithreading-JavaScript-Tester)
+
+
 - Implement i18n for the whole hard-typed text content.
 - Implement error handling for WebWorkers. Now all errors are collected with no action at the Redux store.
 - Implement network error detector and add a spin-loader into each organism component.
