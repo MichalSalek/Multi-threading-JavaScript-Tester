@@ -1,91 +1,105 @@
-# Multithreading Javascript Tester Application
+## Multithreading JavaScript Tester Application
+
+###                    
 
 contact@michalsalek.pl
 
-#### App inspired by DDD, CQS and Event Sourcing methodologies
+###                    
+
+##### App inspired by DDD, CQS and Event Sourcing methodologies
 
 ###### Driven by Developer Experience for fast UI develop and debugging
 
-###             
+###                               
 
-###             
+## What does it do?
 
-###             
+This tool can overload your CPU by doing a no-sense calculations - through the browser's main thread or an other CPU
+threads - through the WebWorkers.
 
-* [Chapter one](#what-does-it-do?)
-* [Chapter two](#chapter-two)
-    * [Chapter two dot one](#chapter-two-dot-one)
-    * [Chapter two dot three](#chapter-two-dot-three)
-        * [Chapter two dot three dot one](#chapter-two-dot-three-dot-one)
-* [Chapter three](#chapter-three)
-* [Chapter four](#chapter-four)
+As a user, you can set the complexity of the calculations and observe smoothness of a sample animation. You should
+monitor yours CPU threads usage also.
 
-###             
+###                          
 
-# What does it do?
-
-##### This tool can overload your CPU by doing no-sense calculations - through the browser's main thread or other CPU threads - through WebWorkers.
-
-##### As a user, you can set the complexity of the calculations and observe sample animation and your CPU threads usage.
-
-#             
-
-##### The AMD Ryzen 9 5950X 16x4.0GHz processor is over 80% loaded by Javascript interpretations:
+The AMD Ryzen 9 5950X 16 x 4.0GHz processor is loaded over 80% by JavaScript interpretations:
 
 ![performance](https://michalsalek.pl/public_files/performance.png)
 
-###             
+###                           
 
-###             
+### Characteristics of the App:
 
-###               
+###                           
 
-## Characteristics
-
-- WebSocket communication
+- WebSocket realtime communication by events
 - WebWorkers activity simulation
 - Architecture designed by Commands and Queries Separation
-- Structure focused on business Features as subdomains living in the App to force development processes
-- Each Function has its own functional and declarative API
-- Forced TS typing to keep app data with no leaks and exceptions
-- Optimized for nice performance with ESLint React strict rules with no bypassing
+- Structure focused on business Features as subdomains living in the App - to force development processes
+- Most of the Features has its own functional and declarative API
+- Forced TS typing keeps the App data with no leaks and exceptions
+- Optimized for nice performance with ESLint React strict rules with //no-bypassing
 - Keeping UX in well collaboration with a user
 
-###             
+###                      
 
-###             
-
-###             
-
-## More technical
-
-> Next.js
-> TypeScript strict mode
-> React strict mode
-> Redux toolkit with thunk
-> Node.js with TypeScript
-> socket.io
-
-- `App components` - generic UI atoms to keep uniformity
-- `Redux Slices` - each per subdomain
-- `Features` - divided by:
-    - `Background` with no UI components like local storage handling WebWorkers config
-    - `Building` with UI directories. Organisms, molecules and atoms subdomain pleace
-- `React JSX compositions` in the layout dir - to extend components with another common features
-- `Simply backend` in this case has a very simillar structure
-
-![structure](https://michalsalek.pl/public_files/struktura.png)
-
-###             
-
-###             
-
-###             
-
-## Fundamental instance state is reactive boardcasting by Redux
+### Fundamental instance state is reactive boardcasting by Redux to consumers to the UI
 
 ![redux](https://michalsalek.pl/public_files/reduxdev.png)
 
+###                     
+
+## More technical stuff:
+
+###### Technologies stack
+
+> Next.js  
+> TypeScript strict mode  
+> React strict mode  
+> ESLint strict mode  
+> Redux toolkit (with a thunk also)  
+> Node.js with TypeScript  
+> socket.io
+
+###### Project structure
+
+- `App components` - generic UI atoms to keep uniformity.
+- `Redux Slices` - each per subdomain.
+- `Features` - divided by:
+    - `Background` the code without UI JSX like: local storage handling or the WebWorkers config.
+    - `Building` the code with UI directories filled with atomic design components. Organisms, molecules and atoms
+      place.
+- `React JSX compositions` inside the layout dir - to extend components functionality with an another common features.
+- `Simply backend` in this case has a very similar structure.
+
+![structure](https://michalsalek.pl/public_files/struktura.png)
+
+###                               
+
+###         
+
+###### Avoid these empty words with no value in yours var names:
+
+- User
+- Manager
+- Common
+- Service
+- Util
+- Helper
+
+###                     
+
+### TASKS TODO:
+
+- Implement i18n for the whole hard-typed text content.
+- Implement error handling for WebWorkers. Now all errors are collected with no action at the Redux store.
+- Implement network error detector and add a spin-loader into each organism component.
+- Implement tests for App Features.
+
+###                               
+
+###              
+
 ```sh
-echo
+echo contact@michalsalek.pl
 ```
