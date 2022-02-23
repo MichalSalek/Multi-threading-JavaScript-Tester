@@ -74,25 +74,11 @@ The AMD Ryzen 9 5950X 16 x 4.0GHz processor is loaded over 80% by JavaScript int
 
 ![structure](https://michalsalek.pl/public_files/struktura.png)
 
-###                               
-
-###         
-
-###### Avoid these empty words with no value in yours var names:
-
-- User
-- Manager
-- Common
-- Service
-- Util
-- Helper
+###                                
 
 ###                     
 
 ### TASKS TODO:
-
-
-[Issues](https://github.com/MichalSalek/Multithreading-JavaScript-Tester)
 
 
 - Implement i18n for the whole hard-typed text content.
@@ -102,7 +88,22 @@ The AMD Ryzen 9 5950X 16 x 4.0GHz processor is loaded over 80% by JavaScript int
 
 ###                               
 
-###              
+###      
+
+###### Avoid these empty words with no value in yours var names:
+
+> Generic  
+> Common  
+> Manager  
+> Service   
+> Util  
+> Helper  
+> ...
+
+[Issues](https://github.com/MichalSalek/Multithreading-JavaScript-Tester)
+
+###       
+
 
 ```sh
 echo contact@michalsalek.pl
