@@ -76,7 +76,7 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
                 <WorkersGlobalWorkControlWindowMolecule/>
                 <ControlPanelMolecule/>
             </>)}
-            -
+
 
             <LayoutComposition>
                 <Component {...pageProps} />

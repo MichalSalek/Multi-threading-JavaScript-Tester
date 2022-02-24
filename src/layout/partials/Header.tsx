@@ -7,7 +7,6 @@ const Header = () => {
 
     return (
         <header className={scss.header}>
-            <br/>
         </header>
     )
 }

@@ -18,7 +18,7 @@ $sideBarPadding: 3px;
   }
 
   %activeWindow {
-    background-color: #0264b2;
+    background-color: $primaryAccentColor;
   }
 
   > strong {

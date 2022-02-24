@@ -5,8 +5,8 @@ import { useRouter } from 'next/router'
 import { ROUTE_START_PAGE_SCREEN } from '@/core/routes.core'
 import { getStorageItem } from '@/features/background/browser-storage/browserStorage.api'
 import { STORAGE_KEY_START_PAGE_SEEN, StorageKeyStartPageEnum } from '@/app-config-constants'
-import { useAppDispatch } from '@/core/store.core'
 import PreviewAnimationMolecule from '@/features/building/preview-animation/UI/previewAnimation.molecule'
+import NavLinksMolecule from '@/features/building/nav-links/UI/NavLinks.molecule'
 
 
 
@@ -14,8 +14,6 @@ const MainAppScreenPage: NextPage = () => {
 
     const CalculationsWorkersControlsOrganism = dynamic(() =>
         import('@/features/building/workers-controls/UI/WorkersControls.organism'), {ssr: false})
-
-    const dispatch = useAppDispatch()
 
     const router = useRouter()
 
@@ -38,6 +36,9 @@ const MainAppScreenPage: NextPage = () => {
     return (
         <>
             <PreviewAnimationMolecule/>
+
+            <NavLinksMolecule/>
+
             <CalculationsWorkersControlsOrganism/>
         </>
     )
