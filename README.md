@@ -99,7 +99,7 @@ The AMD Ryzen 9 5950X 16 x 4.0GHz processor can be loaded even over 80% by JavaS
 > Helper  
 > ...
 
-[Issues](https://github.com/MichalSalek/Multithreading-JavaScript-Tester/issues)
+[Issues](https://github.com/MichalSalek/multithreading/issues)
 
 ###          
 
