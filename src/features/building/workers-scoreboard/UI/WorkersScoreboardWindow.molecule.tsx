@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import scss from './WorkersScoreboard.module.scss'
 import {
     NamedWorkerReadyStatusType,
@@ -51,12 +51,14 @@ const WorkersScoreboardWindowMolecule = (): JSX.Element => {
     const workerHasResponseData = (workerName: WorkerNameType) => receivedSocketResponse && receivedSocketResponse[workerName]
 
 
+    const defaultOnTheScreenPosition = useMemo(() => ({x: 50, y: 160}), [])
+
     return (
         <SystemComponentVisibilityComposition visibilityOfSystemComponentControl={'scoreboard'}>
             <DraggableWindowComposition
                 componentUITitleBarName={'Scoreboard'}
                 switchVisibilityConfiguration={{name: 'scoreboard', visibilitySwitchState: false}}
-                onTheScreenPosition={{x: 50, y: 70}}
+                onTheScreenPosition={defaultOnTheScreenPosition}
                 zIndex={1900}
             >
                 <section

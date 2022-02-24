@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import scss from './WorkersGlobalWorkControl.module.scss'
 import { DraggableWindowComposition } from '@/layout/compositions/draggable-window/DraggableWindow.composition'
 import { useAppSelector } from '@/core/store.core'
@@ -32,21 +32,24 @@ const WorkersGlobalWorkControlWindowMolecule = (): JSX.Element => {
     const handleAllWorkersWorkCommand = useCallback(() => {
         const activeWorkersByNow: IWorkerKey[] = getExistingWorkersKeys()
 
-
         activeWorkersByNow.forEach((workerKey: IWorkerKey) => {
             queueWorkerTask(workerKey, {
                 workerTaskName: 'task__calculations_on',
                 complexity: workersComplexity[workerKey.workerName].complexity
             }, `Turning on a work switch at the "${workerKey.workerName}"`)
         })
+
     }, [workersComplexity])
+
+
+    const defaultOnTheScreenPosition = useMemo(() => ({x: 50, y: 70}), [])
 
     return (
         <SystemComponentVisibilityComposition visibilityOfSystemComponentControl={'workControl'}>
             <DraggableWindowComposition
                 componentUITitleBarName={'All workers control'}
                 switchVisibilityConfiguration={{name: 'workControl', visibilitySwitchState: false}}
-                onTheScreenPosition={{x: 50, y: 70}}
+                onTheScreenPosition={defaultOnTheScreenPosition}
                 zIndex={1900}
             >
                 <section

@@ -31,7 +31,7 @@ const FPSMonitorWindowMolecule = (): JSX.Element => {
 
         return () => undefined
     }, [])
-
+    
 
     return (
         <SystemComponentVisibilityComposition visibilityOfSystemComponentControl={'FPSMonitor'}>
