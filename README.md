@@ -43,7 +43,7 @@ The AMD Ryzen 9 5950X 16 x 4.0GHz processor can be loaded even over 80% by JavaS
 
 ###                         
 
-### Fundamental instance state is reactive broadcasting by Redux to consumers to the UI
+### Fundamental instance state is reactive broadcasting by Redux to the UI consumers
 
 ![redux](https://michalsalek.pl/public_files/reduxdev.png)
 
@@ -99,7 +99,7 @@ The AMD Ryzen 9 5950X 16 x 4.0GHz processor can be loaded even over 80% by JavaS
 > Helper  
 > ...
 
-[Issues](https://github.com/MichalSalek/Multithreading-JavaScript-Tester)
+[Issues](https://github.com/MichalSalek/Multithreading-JavaScript-Tester/issues)
 
 ###          
 
