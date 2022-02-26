@@ -48,7 +48,8 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
         palette: {
             primary: {
                 main: grey[900]
-            }
+            },
+            mode: 'dark'
         }
     })
 

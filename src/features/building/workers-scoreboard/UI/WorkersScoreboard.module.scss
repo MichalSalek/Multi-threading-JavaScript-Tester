@@ -1,6 +1,8 @@
+@import "../../../../global-styles/variables-and-mixins";
+
+
 .host {
-  background-color: #191938;
-  color: #19ffff;
+  color: $mainContent;
   padding: 0.5rem;
 }
 

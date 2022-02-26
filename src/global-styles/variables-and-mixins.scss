@@ -3,8 +3,9 @@ $secondaryAccentColor: #2eb202;
 
 $masterBorderStylePrimary: 1px solid $primaryAccentColor;
 
-
-$primaryMaterialUI: rgba(48, 54, 48, 0.97);
+$mainBackground: #080808;
+$mainContent: #f5f5f5;
+$backgroundDark: rgba(16, 16, 20, 0.98);
 
 
 @mixin svgSize($width: 32px) {

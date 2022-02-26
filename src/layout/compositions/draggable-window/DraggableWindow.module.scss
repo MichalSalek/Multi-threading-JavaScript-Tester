@@ -12,9 +12,11 @@ $sideBarPadding: 3px;
   display: flex;
   flex-direction: column;
   width: fit-content;
+  box-shadow: 0 0 1rem 0 rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.9);
 
   %inactiveWindow {
-    background-color: black;
+    background-color: $backgroundDark;
   }
 
   %activeWindow {
@@ -32,7 +34,7 @@ $sideBarPadding: 3px;
 
     > span {
       display: inline-block;
-      color: white;
+      color: $mainContent;
       font-weight: 300;
       font-size: 0.78rem;
 

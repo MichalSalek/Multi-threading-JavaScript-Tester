@@ -1,8 +1,5 @@
 import React, { FormEvent, useEffect, useMemo, useState } from 'react'
-import {
-    getValidatedPassedAmount,
-    queueWorkerTask
-} from '@/features/background/web-workers/webWorkers.api'
+import { getValidatedPassedAmount, queueWorkerTask } from '@/features/background/web-workers/webWorkers.api'
 import { WEB_WORKER_TASKS } from '@/features/background/web-workers/webWorkersEvents'
 import { WorkerKeyType } from '@/features/background/web-workers/webWorkers.types'
 import {
@@ -16,7 +13,7 @@ import {
     MAX_WORKER_COMPLEXITY_POSSIBILITY,
     MIN_WORKER_COMPLEXITY_POSSIBILITY
 } from '@/app-config-constants'
-import { Slider, Typography } from '@mui/material'
+import { Slider } from '@mui/material'
 import scss from './WorkersWorkSwitch.module.scss'
 import { randomIntFromNumbersRange } from '@/coding-utils/numberOperations.api'
 import { useMainThreadCalculations } from '@/features/building/workers-controls/WorkersControls.hooks'
@@ -154,14 +151,16 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
                         >
                             <span
                                 style={getDynamicColorStyleByComplexityEdgeCase(userInputComplexity)}>
-                                {workerKey.workerName} {isWorkerWorking ? <strong> ON</strong> : 'OFF'}
+                                {workerKey.workerName.slice(18)}
+                                {/*{workerKey.workerName}*/}
+                                {isWorkerWorking ? <strong> ON</strong> : ' OFF'}
                             </span>
                         </AppButtonAtom>
                 }
             </>
 
             <section className={scss.complexityForm}>
-                <Typography variant="body2" component="span" className={scss.inputLabel}> complexity: </Typography>
+                {/*<Typography variant="body2" component="span" className={scss.inputLabel}> complexity: </Typography>*/}
 
                 <AppInputAtom
                     disabled={isWorkerWorking}
@@ -181,6 +180,7 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
                     aria-labelledby="input-slider"
                     min={MIN_WORKER_COMPLEXITY_POSSIBILITY}
                     max={MAX_WORKER_COMPLEXITY_POSSIBILITY}
+                    style={getDynamicColorByComplexity('color')}
                 />
             </section>
 

@@ -1,3 +1,6 @@
+@import "../../../../global-styles/variables-and-mixins";
+
+
 .host {
   display: flex;
 
@@ -27,14 +30,14 @@
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   animation-name: placeHolderShimmer;
-  background: linear-gradient(to right, #f5f5f5 8%, #ccc2c2 18%, #f5f5f5 33%);
+  background: linear-gradient(to right, $mainBackground 8%, $primaryAccentColor 18%, $mainBackground 33%);
   position: relative;
 }
 
 .mainFireButton {
-  color: hsl(120deg 6% 10% / 97%);
+  color: $mainBackground;
 
-  font-weight: 600;
+  font-weight: 800;
   font-size: 0.77rem;
   text-transform: unset;
 

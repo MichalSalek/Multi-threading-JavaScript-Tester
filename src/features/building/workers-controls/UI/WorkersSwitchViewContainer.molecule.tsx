@@ -80,7 +80,9 @@ const WorkersSwitchViewContainerMolecule = (): JSX.Element => {
 
         </section>
 
+
         <section className={scss.workersContainer}>
+
             {workersAmountArray.map((_, index) =>
 
                 <WorkersWorkSwitchMolecule

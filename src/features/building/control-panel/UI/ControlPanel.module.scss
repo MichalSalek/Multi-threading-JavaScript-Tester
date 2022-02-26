@@ -8,8 +8,6 @@
 
 $control-panel-height: 280px;
 
-$control-panel-background-color: #0264b2;
-$control-panel-background-color-transparently: rgba(16, 16, 20, 0.98);
 
 $side-button-width: 30px;
 
@@ -17,11 +15,11 @@ $control-switch-label-min-width: 230px;
 
 
 %accentBackgroundColor {
-  background-color: $control-panel-background-color;
+  background-color: $primaryAccentColor;
 }
 
 %darkBackgroundColorTransparently {
-  background-color: $control-panel-background-color-transparently;
+  background-color: $backgroundDark;
 }
 
 @mixin hoverEffectControlChange($color: rgba(113, 113, 240, 0.9)) {
@@ -182,7 +180,7 @@ $control-switch-label-min-width: 230px;
     @extend %accentBackgroundColor;
 
     svg {
-      color: white;
+      color: $mainContent;
     }
   }
 
@@ -309,7 +307,7 @@ $control-switch-label-min-width: 230px;
       font-weight: 800;
       font-size: 0.9rem;
 
-      color: white;
+      color: $mainContent;
       opacity: 0.7;
 
       min-width: $control-switch-label-min-width;
