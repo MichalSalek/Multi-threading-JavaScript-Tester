@@ -1,0 +1,17 @@
+{
+  "_app.tsx -> @/features/building/control-panel/UI/ControlPanel.molecule": {
+    "id": 4571,
+    "files": [
+      "static/css/b41cf71d9512b6c2.css",
+      "static/chunks/571.3a0d030bb6bb9ee7.js"
+    ]
+  },
+  "index.tsx -> @/features/building/workers-controls/UI/WorkersControls.organism": {
+    "id": 6150,
+    "files": [
+      "static/chunks/336.f40d80365545fc71.js",
+      "static/css/fe640f40eb6f696e.css",
+      "static/chunks/150.b090ba8cbe7de757.js"
+    ]
+  }
+}
