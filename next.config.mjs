@@ -1,14 +1,8 @@
 /** @type {import('next').NextConfig} */
 import path from 'path'
-import withPWA from 'next-pwa'
-import runtimeCaching from 'next-pwa/cache.js'
 
 
-export default withPWA({
-    pwa: {
-        dest: 'public',
-        runtimeCaching,
-    },
+export default {
     reactStrictMode: true,
     sassOptions: {
         includePaths: [path.join(path.dirname('./src'), 'styles')]
@@ -17,4 +11,4 @@ export default withPWA({
         locales: ["en"],
         defaultLocale: "en",
     }
-})
+}
