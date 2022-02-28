@@ -9,13 +9,14 @@ import { constructWorkerNameByOrderIndex } from '@/features/background/web-worke
 import { useAppSelector } from '@/core/store.core'
 import scss from './WorkersView.module.scss'
 import { MAX_WORKER_COMPLEXITY_POSSIBILITY, MIN_WORKER_COMPLEXITY_POSSIBILITY } from '@/app-config-constants'
-import { Slider, Typography } from '@mui/material'
+import { Slider } from '@mui/material'
 import AppButtonAtom from '@/app-components/AppButton.atom'
 import { fireJustClientSide } from '@/coding-utils/environmentOperations.api'
+import { PopoverTitleMolecule } from '@/features/building/popover-title/UI/PopoverTitle.molecule'
 
 
 
-const WorkersSwitchViewContainerMolecule = (): JSX.Element => {
+const WorkersSwitchesViewContainerMolecule = (): JSX.Element => {
 
     const workerRequestedAmount = useAppSelector(selectRequestedWorkersAmount)
 
@@ -54,11 +55,12 @@ const WorkersSwitchViewContainerMolecule = (): JSX.Element => {
 
     return (<main className={scss.host}>
 
-        <section>
+        <section className={scss.marginBottom}>
 
-            <Typography variant="h6" component={'h2'}>Global complexity controls</Typography>
-            <Typography variant="body2">It can be useful if you have many active Workers.</Typography>
-
+            <PopoverTitleMolecule
+                popoverTextContent={'It can be useful if you have many active Workers.'}
+                titleTextContent={'Global complexity controls'}
+            />
 
             <Slider
                 color={'secondary'}
@@ -86,10 +88,11 @@ const WorkersSwitchViewContainerMolecule = (): JSX.Element => {
 
         </section>
 
-
-        <Typography variant="h6" component={'h2'}>Worker switch and calculations complexity set</Typography>
-        <Typography variant="body2">Start carefully with low values and monitor the CPU load on your own - it's depends
-            of yours device.</Typography>
+        <PopoverTitleMolecule
+            popoverTextContent={'Worker switch and calculations complexity set'}
+            titleTextContent={'Start carefully with low values and monitor the CPU load on your own - it depends on\n' +
+            '            yours device.'}
+        />
 
         <section className={scss.workersContainer}>
             {workersAmountArray.map((_, index) =>
@@ -107,4 +110,4 @@ const WorkersSwitchViewContainerMolecule = (): JSX.Element => {
     </main>)
 }
 
-export default WorkersSwitchViewContainerMolecule
+export default WorkersSwitchesViewContainerMolecule

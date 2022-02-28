@@ -90,6 +90,24 @@ body {
 // STYLING
 //
 //
+
+html {
+  ::-webkit-scrollbar-track {
+    background-color: #000000;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    background-color: #f5f5f5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border: 1px solid #a3a3a3;
+  }
+}
+
+
 body {
   @keyframes opacity-entrance {
     0% {

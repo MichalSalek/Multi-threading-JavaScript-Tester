@@ -11,8 +11,7 @@ const AppButtonAtom = (props: ButtonProps): JSX.Element => {
         color={'primary'}
         variant={'contained'}
         className={scss.button}
-
-        {...props}>{props.children}</Button>
+        {...props} />
 }
 
 export default AppButtonAtom

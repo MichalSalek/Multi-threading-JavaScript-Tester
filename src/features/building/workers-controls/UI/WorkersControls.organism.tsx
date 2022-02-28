@@ -1,18 +1,21 @@
 import React from 'react'
-import WorkersSwitchViewContainerMolecule
-    from '@/features/building/workers-controls/UI/WorkersSwitchViewContainer.molecule'
+import WorkersSwitchesViewContainerMolecule
+    from '@/features/building/workers-controls/UI/WorkersSwitchesViewContainer.molecule'
 import WorkersAmountMolecule from '@/features/building/workers-controls/UI/WorkersAmount.molecule'
-import WorkersWorkSwitchMolecule
-    from '@/features/building/workers-controls/UI/WorkersWorkSwitch.molecule'
-import { MAIN_THREAD_KEY } from '@/app-config-constants'
+import MainThreadSwitchMolecule from '@/features/building/main-thread-switch/UI/MainThreadSwitch.molecule'
 
 
 
 const WorkersControlsOrganism = (): JSX.Element => {
+
     return (<>
-        <WorkersWorkSwitchMolecule workerKey={MAIN_THREAD_KEY}/>
+
+        <MainThreadSwitchMolecule/>
+
         <WorkersAmountMolecule/>
-        <WorkersSwitchViewContainerMolecule/>
+
+        <WorkersSwitchesViewContainerMolecule/>
+
     </>)
 }
 

@@ -14,6 +14,7 @@ import { MAX_WORKERS_LIMIT } from '@/app-config-constants'
 
 import AppButtonAtom from '@/app-components/AppButton.atom'
 import AppInputAtom from '@/app-components/AppInput.atom'
+import { PopoverTitleMolecule } from '@/features/building/popover-title/UI/PopoverTitle.molecule'
 
 
 
@@ -28,6 +29,12 @@ const WorkersAmountMolecule = (): JSX.Element => {
 
     return (
         <section className={scss.host}>
+
+            <PopoverTitleMolecule
+                popoverTextContent={'Add some new Workers to increase multithreading effect. Distribute the load\n evenly. Max number depends on your CPU cores amount.'}
+                titleTextContent={'Worker amount controls'}
+            />
+
             <span>0 - <Tooltip
                 placement={'top-start'}
                 title="Number depends of your CPU cores amount"
@@ -49,6 +56,8 @@ const WorkersAmountMolecule = (): JSX.Element => {
             }))}>
                 Set specific Workers amount
             </AppButtonAtom>
+
+
             <br/>
             <br/>
 

@@ -1,19 +1,38 @@
+import React, { useState } from 'react'
 import { ROUTE_MAIN_APP_SCREEN, ROUTE_START_PAGE_SCREEN } from '@/core/routes.core'
 import AppButtonAtom from '@/app-components/AppButton.atom'
-import Link from 'next/link'
-import React from 'react'
+import { useRouter } from 'next/router'
+import { ButtonGroup } from '@mui/material'
+import scss from './NavLinks.module.scss'
 
 
 
 const NavLinksMolecule = (): JSX.Element => {
 
-    return <nav>
-        <Link passHref href={ROUTE_START_PAGE_SCREEN}>
-            <AppButtonAtom>go to {ROUTE_START_PAGE_SCREEN} page...</AppButtonAtom>
-        </Link>
-        <Link passHref href={ROUTE_MAIN_APP_SCREEN}>
-            <AppButtonAtom>go to {ROUTE_MAIN_APP_SCREEN} page...</AppButtonAtom>
-        </Link>
+    const router = useRouter()
+
+    const [disableButtons, setDisableButtons] = useState(false)
+
+    const handleClick = (appRoute: string): void => {
+        setDisableButtons(true)
+        router.push(appRoute)
+    }
+
+
+
+    return <nav className={scss.host}>
+
+        <ButtonGroup>
+            <AppButtonAtom
+                disabled={disableButtons || router.pathname === ROUTE_START_PAGE_SCREEN}
+                onClick={() => handleClick(ROUTE_START_PAGE_SCREEN)}
+            >Welcome screen</AppButtonAtom>
+
+            <AppButtonAtom
+                disabled={disableButtons || router.pathname === ROUTE_MAIN_APP_SCREEN}
+                onClick={() => handleClick(ROUTE_MAIN_APP_SCREEN)}
+            >Main app page</AppButtonAtom>
+        </ButtonGroup>
     </nav>
 }
 

@@ -1,0 +1,19 @@
+@import "../../../global-styles/variables-and-mixins";
+
+
+%colorVariables {
+  --fa-primary-color: #027bde;
+  --fa-secondary-color: white;
+}
+
+
+.host {
+
+  svg {
+    @extend %colorVariables;
+  }
+}
+
+
+
+

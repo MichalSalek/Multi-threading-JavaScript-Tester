@@ -12,7 +12,6 @@ import SocketConnectionAndListeningController
     from '@/features/background/socket-client/SocketConnectionAndListening.controller'
 import WorkersActiveInstancesAndCommunicationController
     from '@/features/background/web-workers/WorkersActiveInstancesAndCommunication.controller'
-import MetaHead from '@/layout/partials/MetaHead'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import FPSMonitorWindowMolecule from '@/features/building/fps-monitor/UI/FPSMonitorWindow.molecule'
 import IconPackController from '@/features/background/icon-pack/IconPack.controller'
@@ -50,12 +49,26 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
                 main: grey[900]
             },
             mode: 'dark'
+        },
+
+        components: {
+            MuiPopover: {
+                styleOverrides: {
+                    paper: {
+                        maxWidth: '590px',
+                        width: '100%',
+                        boxShadow: '0 0 1rem 0 rgba(255, 255, 255, 0.1)',
+                        backgroundColor: '#027bde', //@TODO replace with a variable
+                        color: 'white'
+                    }
+                }
+            }
         }
     })
 
     return (<ThemeProvider theme={theme}>
 
-        <MetaHead/>
+        {/*<MetaHead/>*/}
 
         <CssBaseline/>
 

@@ -1,11 +1,15 @@
 .host {
+  margin-bottom: 3rem;
+}
 
+.marginBottom {
+  margin-bottom: 3rem;
 }
 
 .workersContainer {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(455px, 1fr));
-  grid-gap: 15px 20px;
+  grid-gap: 53px 20px;
 
   padding: 2rem 0;
 }

@@ -37,21 +37,23 @@
 .mainFireButton {
   color: $mainBackground;
 
-  font-weight: 800;
+  max-width: 80px;
+  height: 80px;
+
+  font-weight: bolder;
   font-size: 0.77rem;
   text-transform: unset;
 
   border-style: solid;
-  border-width: 2px;
+  border-width: 1px;
   border-radius: 0;
 
-  border-color: rgba(25, 28, 25, 0.07) !important;
+  border-color: rgb(255, 255, 255, 0.17) !important;
   flex: 10 1;
-  min-width: 200px;
 
-  &:hover { // Material building overrides:
-    background-color: rgba(25, 28, 25, 0.97);
-    border-width: 2px;
+  &:hover { // Material UI overrides:
+    background-color: rgba(255, 255, 255, 0.17);
+    border-width: 1px;
   }
 }
 
@@ -66,14 +68,6 @@
 
   flex: 25;
 
-  .inputLabel {
-    color: gray;
-    pointer-events: none;
-
-    font-size: 0.8rem;
-    letter-spacing: -0.3px;
-  }
-
   input {
     width: 45px;
   }
@@ -84,9 +78,9 @@
 
 .buttonAnimationSoft {
 
-  $vibration-range: 0.2px;
+  $vibration-range: 0.3px;
 
-  @keyframes vibrateSoft {
+  @keyframes vibrate1 {
     0% {
       -webkit-transform: translate(0);
       transform: translate(0);
@@ -118,7 +112,7 @@
     }
   }
 
-  animation: vibrateSoft 0.3s linear infinite both;
+  animation: vibrate1 0.3s linear infinite both;
 }
 
 
@@ -126,7 +120,7 @@
 
   $vibration-range: 0.6px;
 
-  @keyframes vibrateMedium {
+  @keyframes vibrate2 {
     0% {
       -webkit-transform: translate(0);
       transform: translate(0);
@@ -158,15 +152,15 @@
     }
   }
 
-  animation: vibrateMedium 0.26s linear infinite both;
+  animation: vibrate2 0.26s linear infinite both;
 
 }
 
 .buttonAnimationHard {
 
-  $vibration-range: 1.3px;
+  $vibration-range: 0.8px;
 
-  @keyframes vibrateHard {
+  @keyframes vibrate3 {
     0% {
       -webkit-transform: translate(0);
       transform: translate(0);
@@ -198,6 +192,46 @@
     }
   }
 
-  animation: vibrateHard 0.1s linear infinite both;
+  animation: vibrate3 0.2s linear infinite both;
 
+}
+
+
+.buttonAnimationExtreme {
+
+  $vibration-range: 1.6px;
+
+  @keyframes vibrate4 {
+    0% {
+      -webkit-transform: translate(0);
+      transform: translate(0);
+    }
+
+    20% {
+      -webkit-transform: translate(-$vibration-range, $vibration-range);
+      transform: translate(-$vibration-range, $vibration-range);
+    }
+
+    40% {
+      -webkit-transform: translate(-$vibration-range, -$vibration-range);
+      transform: translate(-$vibration-range, -$vibration-range);
+    }
+
+    60% {
+      -webkit-transform: translate($vibration-range, $vibration-range);
+      transform: translate($vibration-range, $vibration-range);
+    }
+
+    80% {
+      -webkit-transform: translate($vibration-range, -$vibration-range);
+      transform: translate($vibration-range, -$vibration-range);
+    }
+
+    100% {
+      -webkit-transform: translate(0);
+      transform: translate(0);
+    }
+  }
+
+  animation: vibrate4 0.1s linear infinite both;
 }

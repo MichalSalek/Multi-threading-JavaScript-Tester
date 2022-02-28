@@ -16,13 +16,18 @@ import {
 import { Slider } from '@mui/material'
 import scss from './WorkersWorkSwitch.module.scss'
 import { randomIntFromNumbersRange } from '@/coding-utils/numberOperations.api'
-import { useMainThreadCalculations } from '@/features/building/workers-controls/WorkersControls.hooks'
+import { useMainThreadCalculations } from '@/features/building/workers-controls/workersControls.hooks'
 import { useAppDispatch } from '@/core/store.core'
 import { handleWorkerComplexityStateReport } from '@/features/background/web-workers/webWorkersSlice'
+import {
+    getDynamicAnimationClassNameByComplexity,
+    getDynamicColorByComplexity,
+    getDynamicColorStyleByComplexityEdgeCase
+} from '@/features/building/workers-controls/workersViewOperation'
 
 
 
-type ComplexityValueType = number | string
+export type ComplexityValueType = number | string
 
 
 interface IProps {
@@ -66,7 +71,7 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
 
     // Switch on Main thread calculations
     const [isMainThreadOn, handleMainThreadSwitchChange] =
-        useMainThreadCalculations(120, Number(userInputComplexity), false)
+        useMainThreadCalculations(100, Number(userInputComplexity), false)
 
 
     const isCurrentInstanceAMainThread = (): boolean => workerKey.workerName === MAIN_THREAD_KEY.workerName
@@ -95,26 +100,6 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
     }
 
 
-    const getDynamicColorStyleByComplexityEdgeCase = (complexity: ComplexityValueType, edgeDistanceValue = 40): React.CSSProperties => ({
-        color: complexity > MAX_WORKER_COMPLEXITY_POSSIBILITY - edgeDistanceValue ? 'hsl(0,100%,97%)' : 'inherit'
-    })
-
-    const getDynamicClassNameByComplexityEdgeCase = (complexity: ComplexityValueType, edgeDistanceValue = 40): string => {
-        if (complexity < edgeDistanceValue) {
-            return scss.buttonAnimationSoft
-        } else if (complexity > MAX_WORKER_COMPLEXITY_POSSIBILITY - edgeDistanceValue) {
-            return scss.buttonAnimationHard
-        } else {
-            return scss.buttonAnimationMedium
-        }
-    }
-
-    const getDynamicColorByComplexity = (stylePropertyKey: string): React.CSSProperties => ({
-        [stylePropertyKey]: `hsl(${MAX_WORKER_COMPLEXITY_POSSIBILITY / 2 - Math.floor(Number(userInputComplexity) / 2 + 9)}deg, 100%, 60%, ${Math.floor(Number(userInputComplexity) / 4 + 50) / 100})`
-    })
-
-
-
     if (!isCurrentInstanceAMainThread() && !isWorkerReady) return (
         <section className={scss.host}>
             <div className={scss.loadingPlaceholder}/>
@@ -125,43 +110,39 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
     return (
         <section className={scss.host}>
 
-            <>
-                {
-                    isCurrentInstanceAMainThread() ?
-                        <AppButtonAtom
-                            className={[scss.mainFireButton, (() => isMainThreadOn ? getDynamicClassNameByComplexityEdgeCase(userInputComplexity) : '')()].join(' ')}
-                            style={getDynamicColorByComplexity('backgroundColor')}
+            {
+                isCurrentInstanceAMainThread() ?
 
-                            onClick={handleMainThreadSwitchChange}
-                        >
-                            <span
-                                style={getDynamicColorStyleByComplexityEdgeCase(userInputComplexity)}>
-                                {workerKey.workerName} {isMainThreadOn ? <strong> ON</strong> : 'OFF'}
-                            </span>
-                        </AppButtonAtom>
+                    <AppButtonAtom
+                        className={[scss.mainFireButton, (() => isMainThreadOn ? getDynamicAnimationClassNameByComplexity(userInputComplexity) : '')()].join(' ')}
+                        style={getDynamicColorByComplexity(userInputComplexity, 'backgroundColor')}
+                        onClick={handleMainThreadSwitchChange}>
 
-                        :
+                        <span
+                            style={getDynamicColorStyleByComplexityEdgeCase(userInputComplexity)}>
+                            {workerKey.workerName} {isMainThreadOn ? <strong> ON</strong> : 'OFF'}
+                        </span>
 
-                        <AppButtonAtom
-                            className={[scss.mainFireButton, (() => isWorkerWorking ? getDynamicClassNameByComplexityEdgeCase(userInputComplexity) : '')()].join(' ')}
-                            style={getDynamicColorByComplexity('backgroundColor')}
+                    </AppButtonAtom>
 
-                            onClick={handleWorkerWorkSwitch}
+                    :
 
-                        >
-                            <span
-                                style={getDynamicColorStyleByComplexityEdgeCase(userInputComplexity)}>
-                                {workerKey.workerName.slice(18)}
-                                {/*{workerKey.workerName}*/}
-                                {isWorkerWorking ? <strong> ON</strong> : ' OFF'}
-                            </span>
-                        </AppButtonAtom>
-                }
-            </>
+                    <AppButtonAtom
+                        className={[scss.mainFireButton, (() => isWorkerWorking ? getDynamicAnimationClassNameByComplexity(userInputComplexity) : '')()].join(' ')}
+                        style={getDynamicColorByComplexity(userInputComplexity, 'backgroundColor')}
+                        onClick={handleWorkerWorkSwitch}>
+
+                        <span
+                            style={getDynamicColorStyleByComplexityEdgeCase(userInputComplexity)}>
+                            {workerKey.workerName.slice(18)}
+                            {/*{workerKey.workerName}*/}
+                            {isWorkerWorking ? <strong> ON</strong> : ' OFF'}
+                        </span>
+
+                    </AppButtonAtom>
+            }
 
             <section className={scss.complexityForm}>
-                {/*<Typography variant="body2" component="span" className={scss.inputLabel}> complexity: </Typography>*/}
-
                 <AppInputAtom
                     disabled={isWorkerWorking}
                     value={userInputComplexity}
@@ -180,7 +161,7 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
                     aria-labelledby="input-slider"
                     min={MIN_WORKER_COMPLEXITY_POSSIBILITY}
                     max={MAX_WORKER_COMPLEXITY_POSSIBILITY}
-                    style={getDynamicColorByComplexity('color')}
+                    style={getDynamicColorByComplexity(userInputComplexity, 'color')}
                 />
             </section>
 
