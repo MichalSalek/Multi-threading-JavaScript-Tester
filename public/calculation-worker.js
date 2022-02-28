@@ -6,7 +6,7 @@ const IS_ENABLED_DEV_CONSOLE_LOGS = false
 
 // Be gently with it and control CPU cores usage.
 //
-const CALCULATION_INTERVAL_TIMING_IN_MS = 200
+const CALCULATION_INTERVAL_TIMING_IN_MS = 250
 
 //
 // End of the Settings.
