@@ -1,5 +1,4 @@
 /** @type {import('next').NextConfig} */
-import path from 'path'
 import withPWA from 'next-pwa'
 import runtimeCaching from 'next-pwa/cache.js'
 
@@ -7,7 +6,7 @@ import runtimeCaching from 'next-pwa/cache.js'
 const NextJSAppSettings = {
     reactStrictMode: true,
     sassOptions: {
-        includePaths: [path.join(path.dirname('./src'), 'styles')]
+        includePaths: ['./src/global-styles']
     },
     i18n: {
         locales: ["en"],
