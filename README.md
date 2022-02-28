@@ -84,6 +84,7 @@ The AMD Ryzen 9 5950X 16 x 4.0GHz processor can be loaded even over 80% by JavaS
 - Implement error handling for WebWorkers. Now all errors are collected with no action at the Redux store.
 - Implement network error detector and add a spin-loader into each organism component.
 - Implement tests for App Features.
+- others...
 
 ###                                  
 
