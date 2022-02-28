@@ -2,16 +2,16 @@
   "_app.tsx -> @/features/building/control-panel/UI/ControlPanel.molecule": {
     "id": 4571,
     "files": [
-      "static/css/b41cf71d9512b6c2.css",
+      "static/css/be7d0d257626c4d4.css",
       "static/chunks/571.3a0d030bb6bb9ee7.js"
     ]
   },
   "index.tsx -> @/features/building/workers-controls/UI/WorkersControls.organism": {
-    "id": 6150,
+    "id": 8099,
     "files": [
-      "static/chunks/336.738c46888521331f.js",
-      "static/css/fe640f40eb6f696e.css",
-      "static/chunks/150.b090ba8cbe7de757.js"
+      "static/chunks/992.704e6ef1f3b241d4.js",
+      "static/css/e48b2c44437e2467.css",
+      "static/chunks/99.6f699b382993f370.js"
     ]
   }
 }

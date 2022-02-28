@@ -105,8 +105,7 @@ const AppButtonAtom = (props)=>{
         color: 'primary',
         variant: 'contained',
         className: (_AppComponents_module_scss__WEBPACK_IMPORTED_MODULE_3___default().button),
-        ...props,
-        children: props.children
+        ...props
     }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AppButtonAtom);
@@ -1820,49 +1819,6 @@ __webpack_async_result__();
 
 /***/ }),
 
-/***/ 2698:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  "Z": () => (/* binding */ partials_MetaHead)
-});
-
-// EXTERNAL MODULE: external "react/jsx-runtime"
-var jsx_runtime_ = __webpack_require__(997);
-// EXTERNAL MODULE: external "react"
-var external_react_ = __webpack_require__(6689);
-;// CONCATENATED MODULE: external "next/head"
-const head_namespaceObject = require("next/head");
-var head_default = /*#__PURE__*/__webpack_require__.n(head_namespaceObject);
-;// CONCATENATED MODULE: ./src/layout/partials/MetaHead.tsx
-
-
-
-const MetaHead = ()=>{
-    return(/*#__PURE__*/ (0,jsx_runtime_.jsxs)((head_default()), {
-        children: [
-            /*#__PURE__*/ jsx_runtime_.jsx("title", {
-                children: "Title from MetaHead component"
-            }),
-            /*#__PURE__*/ jsx_runtime_.jsx("meta", {
-                name: "viewport",
-                content: "initial-scale=1.0, width=device-width"
-            }),
-            /*#__PURE__*/ jsx_runtime_.jsx("link", {
-                rel: "stylesheet",
-                href: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-            })
-        ]
-    }));
-};
-/* harmony default export */ const partials_MetaHead = (MetaHead);
-
-
-/***/ }),
-
 /***/ 2957:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -1883,24 +1839,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _features_background_browser_storage_BrowserStoragePersist_controller__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6295);
 /* harmony import */ var _features_background_socket_client_SocketConnectionAndListening_controller__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(3997);
 /* harmony import */ var _features_background_web_workers_WorkersActiveInstancesAndCommunication_controller__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(6629);
-/* harmony import */ var _layout_partials_MetaHead__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(2698);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(5692);
-/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _features_building_fps_monitor_UI_FPSMonitorWindow_molecule__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(5285);
-/* harmony import */ var _features_background_icon_pack_IconPack_controller__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(2884);
-/* harmony import */ var _features_background_border_color_change_BorderColorChange_controller__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(3536);
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(8442);
-/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_mui_material_styles__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(5574);
-/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_mui_material_colors__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var next_dynamic__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(5152);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(1853);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _core_routes_core__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(872);
-/* harmony import */ var _features_building_workers_scoreboard_UI_WorkersScoreboardWindow_molecule__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(1242);
-/* harmony import */ var _features_building_workers_global_work_control_UI_WorkersGlobalWorkControlWindow_molecule__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(8211);
-var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_core_store_core__WEBPACK_IMPORTED_MODULE_3__, _features_background_browser_storage_BrowserStoragePersist_controller__WEBPACK_IMPORTED_MODULE_5__, _features_background_socket_client_SocketConnectionAndListening_controller__WEBPACK_IMPORTED_MODULE_6__, _features_background_web_workers_WorkersActiveInstancesAndCommunication_controller__WEBPACK_IMPORTED_MODULE_7__, _features_building_fps_monitor_UI_FPSMonitorWindow_molecule__WEBPACK_IMPORTED_MODULE_10__, _features_background_border_color_change_BorderColorChange_controller__WEBPACK_IMPORTED_MODULE_12__, _features_building_workers_scoreboard_UI_WorkersScoreboardWindow_molecule__WEBPACK_IMPORTED_MODULE_17__, _features_building_workers_global_work_control_UI_WorkersGlobalWorkControlWindow_molecule__WEBPACK_IMPORTED_MODULE_18__]);
-([_core_store_core__WEBPACK_IMPORTED_MODULE_3__, _features_background_browser_storage_BrowserStoragePersist_controller__WEBPACK_IMPORTED_MODULE_5__, _features_background_socket_client_SocketConnectionAndListening_controller__WEBPACK_IMPORTED_MODULE_6__, _features_background_web_workers_WorkersActiveInstancesAndCommunication_controller__WEBPACK_IMPORTED_MODULE_7__, _features_building_fps_monitor_UI_FPSMonitorWindow_molecule__WEBPACK_IMPORTED_MODULE_10__, _features_background_border_color_change_BorderColorChange_controller__WEBPACK_IMPORTED_MODULE_12__, _features_building_workers_scoreboard_UI_WorkersScoreboardWindow_molecule__WEBPACK_IMPORTED_MODULE_17__, _features_building_workers_global_work_control_UI_WorkersGlobalWorkControlWindow_molecule__WEBPACK_IMPORTED_MODULE_18__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(5692);
+/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_mui_material__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _features_building_fps_monitor_UI_FPSMonitorWindow_molecule__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(5285);
+/* harmony import */ var _features_background_icon_pack_IconPack_controller__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(2884);
+/* harmony import */ var _features_background_border_color_change_BorderColorChange_controller__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(3536);
+/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(8442);
+/* harmony import */ var _mui_material_styles__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_mui_material_styles__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(5574);
+/* harmony import */ var _mui_material_colors__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_mui_material_colors__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var next_dynamic__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(5152);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(1853);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _core_routes_core__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(872);
+/* harmony import */ var _features_building_workers_scoreboard_UI_WorkersScoreboardWindow_molecule__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(1242);
+/* harmony import */ var _features_building_workers_global_work_control_UI_WorkersGlobalWorkControlWindow_molecule__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(8211);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_core_store_core__WEBPACK_IMPORTED_MODULE_3__, _features_background_browser_storage_BrowserStoragePersist_controller__WEBPACK_IMPORTED_MODULE_5__, _features_background_socket_client_SocketConnectionAndListening_controller__WEBPACK_IMPORTED_MODULE_6__, _features_background_web_workers_WorkersActiveInstancesAndCommunication_controller__WEBPACK_IMPORTED_MODULE_7__, _features_building_fps_monitor_UI_FPSMonitorWindow_molecule__WEBPACK_IMPORTED_MODULE_9__, _features_background_border_color_change_BorderColorChange_controller__WEBPACK_IMPORTED_MODULE_11__, _features_building_workers_scoreboard_UI_WorkersScoreboardWindow_molecule__WEBPACK_IMPORTED_MODULE_16__, _features_building_workers_global_work_control_UI_WorkersGlobalWorkControlWindow_molecule__WEBPACK_IMPORTED_MODULE_17__]);
+([_core_store_core__WEBPACK_IMPORTED_MODULE_3__, _features_background_browser_storage_BrowserStoragePersist_controller__WEBPACK_IMPORTED_MODULE_5__, _features_background_socket_client_SocketConnectionAndListening_controller__WEBPACK_IMPORTED_MODULE_6__, _features_background_web_workers_WorkersActiveInstancesAndCommunication_controller__WEBPACK_IMPORTED_MODULE_7__, _features_building_fps_monitor_UI_FPSMonitorWindow_molecule__WEBPACK_IMPORTED_MODULE_9__, _features_background_border_color_change_BorderColorChange_controller__WEBPACK_IMPORTED_MODULE_11__, _features_building_workers_scoreboard_UI_WorkersScoreboardWindow_molecule__WEBPACK_IMPORTED_MODULE_16__, _features_building_workers_global_work_control_UI_WorkersGlobalWorkControlWindow_molecule__WEBPACK_IMPORTED_MODULE_17__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
 
 
 
@@ -1921,8 +1876,7 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_cor
 
 
 
-
-const ControlPanelMolecule = (0,next_dynamic__WEBPACK_IMPORTED_MODULE_15__["default"])(null, {
+const ControlPanelMolecule = (0,next_dynamic__WEBPACK_IMPORTED_MODULE_14__["default"])(null, {
     loadableGenerated: {
         modules: [
             "_app.tsx -> " + "@/features/building/control-panel/UI/ControlPanel.molecule"
@@ -1934,35 +1888,47 @@ const ControlPanelMolecule = (0,next_dynamic__WEBPACK_IMPORTED_MODULE_15__["defa
 // Includes app layout as well as realtime controllers
 //
 function ApplicationComposition({ Component , pageProps  }) {
-    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_16__.useRouter)();
-    const isTheStartPageActually = ()=>router.route === _core_routes_core__WEBPACK_IMPORTED_MODULE_19__/* .ROUTE_START_PAGE_SCREEN */ .tL
+    const router = (0,next_router__WEBPACK_IMPORTED_MODULE_15__.useRouter)();
+    const isTheStartPageActually = ()=>router.route === _core_routes_core__WEBPACK_IMPORTED_MODULE_18__/* .ROUTE_START_PAGE_SCREEN */ .tL
     ;
-    const theme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_13__.createTheme)({
+    const theme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_12__.createTheme)({
         palette: {
             primary: {
-                main: _mui_material_colors__WEBPACK_IMPORTED_MODULE_14__.grey[900]
+                main: _mui_material_colors__WEBPACK_IMPORTED_MODULE_13__.grey[900]
             },
             mode: 'dark'
+        },
+        components: {
+            MuiPopover: {
+                styleOverrides: {
+                    paper: {
+                        maxWidth: '590px',
+                        width: '100%',
+                        boxShadow: '0 0 1rem 0 rgba(255, 255, 255, 0.2)',
+                        backgroundColor: '#027bde',
+                        color: 'white'
+                    }
+                }
+            }
         }
     });
-    return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_9__.ThemeProvider, {
+    return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_8__.ThemeProvider, {
         theme: theme,
         children: [
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_layout_partials_MetaHead__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z, {}),
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_9__.CssBaseline, {}),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_8__.CssBaseline, {}),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
                 store: _core_store_core__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .ZP,
                 children: [
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_features_background_icon_pack_IconPack_controller__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z, {}),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_features_background_icon_pack_IconPack_controller__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z, {}),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_features_background_socket_client_SocketConnectionAndListening_controller__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z, {}),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_features_background_web_workers_WorkersActiveInstancesAndCommunication_controller__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z, {}),
                     /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_features_background_browser_storage_BrowserStoragePersist_controller__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z, {}),
-                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_features_background_border_color_change_BorderColorChange_controller__WEBPACK_IMPORTED_MODULE_12__/* ["default"] */ .Z, {}),
+                    /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_features_background_border_color_change_BorderColorChange_controller__WEBPACK_IMPORTED_MODULE_11__/* ["default"] */ .Z, {}),
                     isTheStartPageActually() ? /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {}) : /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
                         children: [
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_features_building_fps_monitor_UI_FPSMonitorWindow_molecule__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z, {}),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_features_building_workers_scoreboard_UI_WorkersScoreboardWindow_molecule__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z, {}),
-                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_features_building_workers_global_work_control_UI_WorkersGlobalWorkControlWindow_molecule__WEBPACK_IMPORTED_MODULE_18__/* ["default"] */ .Z, {}),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_features_building_fps_monitor_UI_FPSMonitorWindow_molecule__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z, {}),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_features_building_workers_scoreboard_UI_WorkersScoreboardWindow_molecule__WEBPACK_IMPORTED_MODULE_16__/* ["default"] */ .Z, {}),
+                            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_features_building_workers_global_work_control_UI_WorkersGlobalWorkControlWindow_molecule__WEBPACK_IMPORTED_MODULE_17__/* ["default"] */ .Z, {}),
                             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(ControlPanelMolecule, {})
                         ]
                     }),
