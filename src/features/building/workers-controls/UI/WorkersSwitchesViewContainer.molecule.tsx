@@ -9,7 +9,7 @@ import { constructWorkerNameByOrderIndex } from '@/features/background/web-worke
 import { useAppSelector } from '@/core/store.core'
 import scss from './WorkersView.module.scss'
 import { MAX_WORKER_COMPLEXITY_POSSIBILITY, MIN_WORKER_COMPLEXITY_POSSIBILITY } from '@/app-config-constants'
-import { Slider } from '@mui/material'
+import { Slider, Typography } from '@mui/material'
 import AppButtonAtom from '@/app-components/AppButton.atom'
 import { fireJustClientSide } from '@/coding-utils/environmentOperations.api'
 
@@ -55,7 +55,13 @@ const WorkersSwitchViewContainerMolecule = (): JSX.Element => {
     return (<main className={scss.host}>
 
         <section>
+
+            <Typography variant="h6" component={'h2'}>Global complexity controls</Typography>
+            <Typography variant="body2">It can be useful if you have many active Workers.</Typography>
+
+
             <Slider
+                color={'secondary'}
                 valueLabelDisplay="auto"
                 disabled={isAnyWorkerWorking}
                 aria-labelledby="input-slider"
@@ -69,20 +75,23 @@ const WorkersSwitchViewContainerMolecule = (): JSX.Element => {
             <AppButtonAtom
                 disabled={isSliderHasAnInitialStateYet || isAnyWorkerWorking || isNoWorkerActive}
                 onClick={handleNewGlobalComplexitySet}>
-                <span>SET</span>
+                <span>Set to all workers</span>
             </AppButtonAtom>
             <AppButtonAtom
                 onClick={handleRefreshUndefinedGlobalComplexityState}
                 disabled={isAnyWorkerWorking || isNoWorkerActive}>
-                <span>SET INITIAL</span>
+                <span>Come back to initial setting</span>
             </AppButtonAtom>
 
 
         </section>
 
 
-        <section className={scss.workersContainer}>
+        <Typography variant="h6" component={'h2'}>Worker switch and calculations complexity set</Typography>
+        <Typography variant="body2">Start carefully with low values and monitor the CPU load on your own - it's depends
+            of yours device.</Typography>
 
+        <section className={scss.workersContainer}>
             {workersAmountArray.map((_, index) =>
 
                 <WorkersWorkSwitchMolecule
