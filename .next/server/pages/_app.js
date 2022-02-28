@@ -1092,7 +1092,7 @@ __webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony export */   "Hc": () => (/* binding */ selectIsAnyWorkerWorking),
 /* harmony export */   "M3": () => (/* binding */ selectIsAllOfWorkersWorking)
 /* harmony export */ });
-/* unused harmony exports dispatchActuallyWorkingWorkersAmount, handleWorkerComplexityStateReport, selectWholeWorkersErrorState, selectIsNoWorkerActive */
+/* unused harmony exports handleGlobalComplexityChange, handleWorkerComplexityStateReport, selectWholeWorkersErrorState, selectGlobalComplexityAmount, selectIsNoWorkerActive */
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5184);
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _features_background_web_workers_webWorkers_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7257);
@@ -1104,18 +1104,15 @@ _features_background_web_workers_webWorkers_api__WEBPACK_IMPORTED_MODULE_2__ = (
 
 
 
-const dispatchActuallyWorkingWorkersAmount = (workerSlice)=>{
-    workerSlice.actuallyWorks = {
-        amount: Object.values(workerSlice.workStatuses).filter((someWorkerWorkState)=>someWorkerWorkState.working
-        ).length
-    };
-};
 const initialState = {
     requestedAmount: {
         amount: 0
     },
     actuallyWorks: {
         amount: 0
+    },
+    globalComplexity: {
+        amount: undefined
     },
     readyStatuses: {},
     workStatuses: {},
@@ -1155,6 +1152,9 @@ const webWorkersSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createS
                 };
             }
         },
+        handleGlobalComplexityChange: (state, action)=>{
+            state.globalComplexity.amount = action.payload.amount;
+        },
         handleWorkerWorkStateReport: (state, action)=>{
             const { workerName , working  } = action.payload;
             const namedWorkerStatus = {
@@ -1170,7 +1170,10 @@ const webWorkersSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createS
                     ...namedWorkerStatus
                 };
             }
-            dispatchActuallyWorkingWorkersAmount(state);
+            state.actuallyWorks = {
+                amount: Object.values(state.workStatuses).filter((someWorkerWorkState)=>someWorkerWorkState.working
+                ).length
+            };
         },
         handleWorkerErrorStateReport: (state, action)=>{
             const { workerName , error  } = action.payload;
@@ -1206,7 +1209,7 @@ const webWorkersSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createS
         }
     }
 });
-const { handleWorkerAmountChange , handleWorkerReadyStateReport , handleWorkerWorkStateReport , handleWorkerErrorStateReport , handleWorkerComplexityStateReport  } = webWorkersSlice.actions;
+const { handleWorkerAmountChange , handleWorkerReadyStateReport , handleGlobalComplexityChange , handleWorkerWorkStateReport , handleWorkerErrorStateReport , handleWorkerComplexityStateReport  } = webWorkersSlice.actions;
 const selectRequestedWorkersAmount = ({ calculationsWorkersSlice  })=>calculationsWorkersSlice.requestedAmount
 ;
 const selectWholeWorkersReadyState = ({ calculationsWorkersSlice  })=>calculationsWorkersSlice.readyStatuses
@@ -1218,6 +1221,8 @@ const selectActuallyWorkingWorkersAmount = ({ calculationsWorkersSlice  })=>calc
 const selectWholeWorkersErrorState = ({ calculationsWorkersSlice  })=>calculationsWorkersSlice.errorStatuses // @TODO worker error handling
 ;
 const selectWholeWorkersComplexityState = ({ calculationsWorkersSlice  })=>calculationsWorkersSlice.complexityStatuses
+;
+const selectGlobalComplexityAmount = ({ calculationsWorkersSlice  })=>calculationsWorkersSlice.globalComplexity
 ;
 const selectIsAnyWorkerWorking = ({ calculationsWorkersSlice  })=>calculationsWorkersSlice.actuallyWorks.amount > 0
 ;
@@ -1819,6 +1824,49 @@ __webpack_async_result__();
 
 /***/ }),
 
+/***/ 2698:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ partials_MetaHead)
+});
+
+// EXTERNAL MODULE: external "react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__(997);
+// EXTERNAL MODULE: external "react"
+var external_react_ = __webpack_require__(6689);
+;// CONCATENATED MODULE: external "next/head"
+const head_namespaceObject = require("next/head");
+var head_default = /*#__PURE__*/__webpack_require__.n(head_namespaceObject);
+;// CONCATENATED MODULE: ./src/layout/partials/MetaHead.tsx
+
+
+
+const MetaHead = ()=>{
+    return(/*#__PURE__*/ (0,jsx_runtime_.jsxs)((head_default()), {
+        children: [
+            /*#__PURE__*/ jsx_runtime_.jsx("title", {
+                children: "Multithreading JS"
+            }),
+            /*#__PURE__*/ jsx_runtime_.jsx("meta", {
+                name: "viewport",
+                content: "initial-scale=1.0, width=device-width"
+            }),
+            /*#__PURE__*/ jsx_runtime_.jsx("link", {
+                rel: "stylesheet",
+                href: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            })
+        ]
+    }));
+};
+/* harmony default export */ const partials_MetaHead = (MetaHead);
+
+
+/***/ }),
+
 /***/ 2957:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -1851,11 +1899,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_dynamic__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(5152);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(1853);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _core_routes_core__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(872);
+/* harmony import */ var _core_routes_core__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(872);
 /* harmony import */ var _features_building_workers_scoreboard_UI_WorkersScoreboardWindow_molecule__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(1242);
 /* harmony import */ var _features_building_workers_global_work_control_UI_WorkersGlobalWorkControlWindow_molecule__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(8211);
+/* harmony import */ var _layout_partials_MetaHead__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(2698);
 var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_core_store_core__WEBPACK_IMPORTED_MODULE_3__, _features_background_browser_storage_BrowserStoragePersist_controller__WEBPACK_IMPORTED_MODULE_5__, _features_background_socket_client_SocketConnectionAndListening_controller__WEBPACK_IMPORTED_MODULE_6__, _features_background_web_workers_WorkersActiveInstancesAndCommunication_controller__WEBPACK_IMPORTED_MODULE_7__, _features_building_fps_monitor_UI_FPSMonitorWindow_molecule__WEBPACK_IMPORTED_MODULE_9__, _features_background_border_color_change_BorderColorChange_controller__WEBPACK_IMPORTED_MODULE_11__, _features_building_workers_scoreboard_UI_WorkersScoreboardWindow_molecule__WEBPACK_IMPORTED_MODULE_16__, _features_building_workers_global_work_control_UI_WorkersGlobalWorkControlWindow_molecule__WEBPACK_IMPORTED_MODULE_17__]);
 ([_core_store_core__WEBPACK_IMPORTED_MODULE_3__, _features_background_browser_storage_BrowserStoragePersist_controller__WEBPACK_IMPORTED_MODULE_5__, _features_background_socket_client_SocketConnectionAndListening_controller__WEBPACK_IMPORTED_MODULE_6__, _features_background_web_workers_WorkersActiveInstancesAndCommunication_controller__WEBPACK_IMPORTED_MODULE_7__, _features_building_fps_monitor_UI_FPSMonitorWindow_molecule__WEBPACK_IMPORTED_MODULE_9__, _features_background_border_color_change_BorderColorChange_controller__WEBPACK_IMPORTED_MODULE_11__, _features_building_workers_scoreboard_UI_WorkersScoreboardWindow_molecule__WEBPACK_IMPORTED_MODULE_16__, _features_building_workers_global_work_control_UI_WorkersGlobalWorkControlWindow_molecule__WEBPACK_IMPORTED_MODULE_17__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);
+
 
 
 
@@ -1889,7 +1939,7 @@ const ControlPanelMolecule = (0,next_dynamic__WEBPACK_IMPORTED_MODULE_14__["defa
 //
 function ApplicationComposition({ Component , pageProps  }) {
     const router = (0,next_router__WEBPACK_IMPORTED_MODULE_15__.useRouter)();
-    const isTheStartPageActually = ()=>router.route === _core_routes_core__WEBPACK_IMPORTED_MODULE_18__/* .ROUTE_START_PAGE_SCREEN */ .tL
+    const isTheStartPageActually = ()=>router.route === _core_routes_core__WEBPACK_IMPORTED_MODULE_19__/* .ROUTE_START_PAGE_SCREEN */ .tL
     ;
     const theme = (0,_mui_material_styles__WEBPACK_IMPORTED_MODULE_12__.createTheme)({
         palette: {
@@ -1909,12 +1959,20 @@ function ApplicationComposition({ Component , pageProps  }) {
                         color: 'white'
                     }
                 }
+            },
+            MuiButton: {
+                styleOverrides: {
+                    root: {
+                        color: '#e0e0e0'
+                    }
+                }
             }
         }
     });
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_8__.ThemeProvider, {
         theme: theme,
         children: [
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_layout_partials_MetaHead__WEBPACK_IMPORTED_MODULE_18__/* ["default"] */ .Z, {}),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_8__.CssBaseline, {}),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
                 store: _core_store_core__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .ZP,

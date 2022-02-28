@@ -94,12 +94,14 @@ const NavLinksMolecule = ()=>{
         children: /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_4__.ButtonGroup, {
             children: [
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_app_components_AppButton_atom__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {
+                    size: 'small',
                     disabled: disableButtons || router.pathname === _core_routes_core__WEBPACK_IMPORTED_MODULE_6__/* .ROUTE_START_PAGE_SCREEN */ .tL,
                     onClick: ()=>handleClick(_core_routes_core__WEBPACK_IMPORTED_MODULE_6__/* .ROUTE_START_PAGE_SCREEN */ .tL)
                     ,
                     children: "Welcome screen"
                 }),
                 /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_app_components_AppButton_atom__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z, {
+                    size: 'small',
                     disabled: disableButtons || router.pathname === _core_routes_core__WEBPACK_IMPORTED_MODULE_6__/* .ROUTE_MAIN_APP_SCREEN */ .Z9,
                     onClick: ()=>handleClick(_core_routes_core__WEBPACK_IMPORTED_MODULE_6__/* .ROUTE_MAIN_APP_SCREEN */ .Z9)
                     ,

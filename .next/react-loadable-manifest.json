@@ -1,4 +1,12 @@
 {
+  "..\\features\\building\\main-thread-switch\\UI\\MainThreadSwitch.molecule.tsx -> @/features/building/workers-controls/UI/WorkersWorkSwitch.molecule": {
+    "id": 9770,
+    "files": [
+      "static/chunks/581.a84ced5fa416123d.js",
+      "static/chunks/770.404db58c95417f94.js",
+      "static/css/81f0f0c31d5f2711.css"
+    ]
+  },
   "_app.tsx -> @/features/building/control-panel/UI/ControlPanel.molecule": {
     "id": 4571,
     "files": [
@@ -7,11 +15,13 @@
     ]
   },
   "index.tsx -> @/features/building/workers-controls/UI/WorkersControls.organism": {
-    "id": 8099,
+    "id": 8345,
     "files": [
-      "static/chunks/992.704e6ef1f3b241d4.js",
-      "static/css/e48b2c44437e2467.css",
-      "static/chunks/99.6f699b382993f370.js"
+      "static/chunks/581.a84ced5fa416123d.js",
+      "static/chunks/915.81bf31816db63843.js",
+      "static/chunks/770.404db58c95417f94.js",
+      "static/css/1802a4c3a4ebc6d4.css",
+      "static/chunks/428.23db9f8111925b58.js"
     ]
   }
 }
