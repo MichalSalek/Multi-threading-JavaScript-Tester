@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { WritableDraft } from 'immer/dist/types/types-external'
 import { AppState } from '@/core/store.core'
 import {
     IWorkerComplexityStateReport,
@@ -12,24 +11,18 @@ import {
     NamedWorkerReadyStatusType,
     NamedWorkerWorkStatusType,
     WorkerAmountChangeActionEnum,
-    WorkersAmountStateType
+    WorkersAmountStateType,
+    WorkersGlobalComplexityType
 } from '@/features/background/web-workers/webWorkers.types'
 import { getValidatedPassedAmount } from '@/features/background/web-workers/webWorkers.api'
 import { MAX_WORKERS_LIMIT } from '@/app-config-constants'
 
 
 
-export const dispatchActuallyWorkingWorkersAmount = (workerSlice: WritableDraft<IWorkersSlice>): void => {
-    workerSlice.actuallyWorks = {
-        amount: Object.values(workerSlice.workStatuses)
-            .filter((someWorkerWorkState: IWorkerWorkState) => someWorkerWorkState.working).length
-    }
-}
-
-
 export type IWorkersSlice = {
     requestedAmount: WorkersAmountStateType
     actuallyWorks: WorkersAmountStateType
+    globalComplexity: WorkersGlobalComplexityType
     readyStatuses: NamedWorkerReadyStatusType
     workStatuses: NamedWorkerWorkStatusType
     errorStatuses: NamedWorkerErrorStatusType
@@ -43,6 +36,9 @@ const initialState: IWorkersSlice = {
     },
     actuallyWorks: {
         amount: 0
+    },
+    globalComplexity: {
+        amount: undefined
     },
     readyStatuses: {},
     workStatuses: {},
@@ -84,6 +80,10 @@ export const webWorkersSlice = createSlice({
             }
         },
 
+        handleGlobalComplexityChange: (state, action: PayloadAction<WorkersGlobalComplexityType>) => {
+            state.globalComplexity.amount = action.payload.amount
+        },
+
         handleWorkerWorkStateReport: (state, action: PayloadAction<IWorkerWorkStateReport>) => {
             const {workerName, working} = action.payload
 
@@ -96,7 +96,10 @@ export const webWorkersSlice = createSlice({
                 state.workStatuses = {...state.workStatuses, ...namedWorkerStatus}
             }
 
-            dispatchActuallyWorkingWorkersAmount(state)
+            state.actuallyWorks = {
+                amount: Object.values(state.workStatuses)
+                    .filter((someWorkerWorkState: IWorkerWorkState) => someWorkerWorkState.working).length
+            }
         },
 
         handleWorkerErrorStateReport: (state, action: PayloadAction<IWorkerErrorStateReport>) => {
@@ -130,6 +133,7 @@ export const webWorkersSlice = createSlice({
 export const {
     handleWorkerAmountChange,
     handleWorkerReadyStateReport,
+    handleGlobalComplexityChange,
     handleWorkerWorkStateReport,
     handleWorkerErrorStateReport,
     handleWorkerComplexityStateReport
@@ -141,6 +145,7 @@ export const selectWholeWorkersWorkState = ({calculationsWorkersSlice}: AppState
 export const selectActuallyWorkingWorkersAmount = ({calculationsWorkersSlice}: AppState): WorkersAmountStateType => calculationsWorkersSlice.actuallyWorks
 export const selectWholeWorkersErrorState = ({calculationsWorkersSlice}: AppState): NamedWorkerErrorStatusType => calculationsWorkersSlice.errorStatuses // @TODO worker error handling
 export const selectWholeWorkersComplexityState = ({calculationsWorkersSlice}: AppState): NamedWorkerComplexityStatusType => calculationsWorkersSlice.complexityStatuses
+export const selectGlobalComplexityAmount = ({calculationsWorkersSlice}: AppState): WorkersGlobalComplexityType => calculationsWorkersSlice.globalComplexity
 
 export const selectIsAnyWorkerWorking = ({calculationsWorkersSlice}: AppState): boolean => calculationsWorkersSlice.actuallyWorks.amount > 0
 export const selectIsAllOfWorkersWorking = ({calculationsWorkersSlice}: AppState): boolean => calculationsWorkersSlice.actuallyWorks.amount === calculationsWorkersSlice.requestedAmount.amount

@@ -120,7 +120,7 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
 
                         <span
                             style={getDynamicColorStyleByComplexityEdgeCase(userInputComplexity)}>
-                            {workerKey.workerName} {isMainThreadOn ? <strong> ON</strong> : 'OFF'}
+                            MAIN THREAD: {isMainThreadOn ? <u>ON</u> : 'OFF'}
                         </span>
 
                     </AppButtonAtom>
@@ -134,9 +134,12 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
 
                         <span
                             style={getDynamicColorStyleByComplexityEdgeCase(userInputComplexity)}>
-                            {workerKey.workerName.slice(18)}
-                            {/*{workerKey.workerName}*/}
-                            {isWorkerWorking ? <strong> ON</strong> : ' OFF'}
+
+                            <strong>{workerKey.workerName.slice(18) // cutting 'calculationWorker' before it's number
+                            }</strong>
+
+                            <p>{isWorkerWorking ? <u>ON</u> : ' OFF'}</p>
+
                         </span>
 
                     </AppButtonAtom>
@@ -161,7 +164,12 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
                     aria-labelledby="input-slider"
                     min={MIN_WORKER_COMPLEXITY_POSSIBILITY}
                     max={MAX_WORKER_COMPLEXITY_POSSIBILITY}
-                    style={getDynamicColorByComplexity(userInputComplexity, 'color')}
+
+                    style={{
+                        ...getDynamicColorByComplexity(userInputComplexity, 'color'),
+                        ...getDynamicColorByComplexity(userInputComplexity, isWorkerWorking ? 'backgroundColor' : '', 1)
+                    }}
+
                 />
             </section>
 

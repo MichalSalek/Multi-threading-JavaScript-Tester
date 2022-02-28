@@ -2,24 +2,32 @@ import { Typography } from '@mui/material'
 import { PopoverComposition } from '@/layout/compositions/popover/Popover.composition'
 import React from 'react'
 import scss from './PopoverTitle.module.scss'
+import { OverridableStringUnion } from '@mui/types'
+import { Variant } from '@mui/material/styles/createTypography'
+import { TypographyPropsVariantOverrides } from '@mui/material/Typography/Typography'
 
 
 
 interface IProps {
     popoverTextContent: string
     titleTextContent: string
+    titleVariant?: OverridableStringUnion<Variant | 'inherit', TypographyPropsVariantOverrides>
 }
 
 
-export const PopoverTitleMolecule = ({popoverTextContent, titleTextContent}: IProps): JSX.Element => {
+export const PopoverTitleMolecule = ({
+    popoverTextContent,
+    titleTextContent,
+    titleVariant = 'h6'
+}: IProps): JSX.Element => {
 
     return (
         <Typography
-            variant="h6" component={'h3'}>
+            variant={titleVariant} component={'h2'} className={scss.host}>
 
             <PopoverComposition
                 textContent={popoverTextContent}>
-                <i className="fad fa-info-circle fa-sm"/>
+                <i className={['fad fa-info-circle fa-sm', scss.icon].join(' ')}/>
             </PopoverComposition>
 
             <span className={scss.title}>{titleTextContent}</span>

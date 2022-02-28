@@ -4,9 +4,8 @@
 .host {
   display: flex;
 
-  height: 30px;
   width: 100%;
-  max-width: 680px;
+  max-width: 600px;
 
   margin: auto;
 }
@@ -51,6 +50,10 @@
   border-color: rgb(255, 255, 255, 0.17) !important;
   flex: 10 1;
 
+  strong {
+    font-size: 1rem;
+  }
+
   &:hover { // Material UI overrides:
     background-color: rgba(255, 255, 255, 0.17);
     border-width: 1px;
@@ -63,7 +66,7 @@
   justify-content: center;
   align-items: center;
   gap: 6px;
-  padding: 7px 10px;
+  padding: 0 20px;
   width: 100%;
 
   flex: 25;

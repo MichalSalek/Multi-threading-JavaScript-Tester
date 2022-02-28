@@ -25,6 +25,7 @@ import { ROUTE_START_PAGE_SCREEN } from '@/core/routes.core'
 import WorkersScoreboardWindowMolecule from '@/features/building/workers-scoreboard/UI/WorkersScoreboardWindow.molecule'
 import WorkersGlobalWorkControlWindowMolecule
     from '@/features/building/workers-global-work-control/UI/WorkersGlobalWorkControlWindow.molecule'
+import MetaHead from '@/layout/partials/MetaHead'
 
 
 
@@ -58,8 +59,15 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
                         maxWidth: '590px',
                         width: '100%',
                         boxShadow: '0 0 1rem 0 rgba(255, 255, 255, 0.2)',
-                        backgroundColor: '#027bde', //@TODO replace with a variable
+                        backgroundColor: '#027bde',
                         color: 'white'
+                    }
+                }
+            },
+            MuiButton: {
+                styleOverrides: {
+                    root: {
+                        color: '#e0e0e0'
                     }
                 }
             }
@@ -68,7 +76,7 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
 
     return (<ThemeProvider theme={theme}>
 
-        {/*<MetaHead/>*/}
+        <MetaHead/>
 
         <CssBaseline/>
 

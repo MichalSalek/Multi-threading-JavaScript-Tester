@@ -7,6 +7,8 @@ import { getStorageItem } from '@/features/background/browser-storage/browserSto
 import { STORAGE_KEY_START_PAGE_SEEN, StorageKeyStartPageEnum } from '@/app-config-constants'
 import PreviewAnimationMolecule from '@/features/building/preview-animation/UI/previewAnimation.molecule'
 import NavLinksMolecule from '@/features/building/nav-links/UI/NavLinks.molecule'
+import scss from './index.module.scss'
+import MainThreadSwitchMolecule from '@/features/building/main-thread-switch/UI/MainThreadSwitch.molecule'
 
 
 
@@ -20,27 +22,24 @@ const MainAppScreenPage: NextPage = () => {
     useEffect(() => {
         const memorizedValue = getStorageItem(STORAGE_KEY_START_PAGE_SEEN)
         if (typeof memorizedValue === 'string') {
-            if (memorizedValue === StorageKeyStartPageEnum.false) router.push(ROUTE_START_PAGE_SCREEN)
+            if (memorizedValue !== StorageKeyStartPageEnum.true) router.push(ROUTE_START_PAGE_SCREEN)
         } else {
             router.push(ROUTE_START_PAGE_SCREEN)
         }
         return () => undefined
     }, [router])
 
-    useEffect(() => {
-
-        return () => undefined
-    }, [])
-
 
     return (
-        <>
+        <main>
             <PreviewAnimationMolecule/>
 
-            <NavLinksMolecule/>
+            <nav className={scss.navigationButtons}><NavLinksMolecule/></nav>
+
+            <div className={scss.mainThread}><MainThreadSwitchMolecule/></div>
 
             <CalculationsWorkersControlsOrganism/>
-        </>
+        </main>
     )
 }
 

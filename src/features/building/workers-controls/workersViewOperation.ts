@@ -5,8 +5,12 @@ import scss from '@/features/building/workers-controls/UI/WorkersWorkSwitch.modu
 
 
 
-export const getDynamicColorByComplexity = (complexity: ComplexityValueType, stylePropertyKey: string): React.CSSProperties => ({
-    [stylePropertyKey]: `hsl(${MAX_WORKER_COMPLEXITY_POSSIBILITY / 2 - Math.floor(Number(complexity) / 2 + 5)}deg, 100%, 60%, ${Math.floor(Number(complexity) / 4 + 55) / 100})`
+export const getDynamicColorByComplexity = (
+    complexity: ComplexityValueType,
+    stylePropertyKey: string,
+    opacityLevel: 1 | 50 = 50
+): React.CSSProperties => ({
+    [stylePropertyKey]: `hsl(${MAX_WORKER_COMPLEXITY_POSSIBILITY / 2 - Math.floor(Number(complexity) / 2 + 2)}deg, 100%, 60%, ${Math.floor(Number(complexity) / 4 + opacityLevel) / 100})`
 })
 
 

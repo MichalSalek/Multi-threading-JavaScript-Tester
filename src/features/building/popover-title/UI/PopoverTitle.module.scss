@@ -1,3 +1,16 @@
+.host {
+  margin-bottom: 1rem;
+}
+
 .title {
   margin-left: 0.5rem;
+}
+
+.icon {
+  transition: transform 0.07s ease-out;
+  transform: scale(1);
+
+  &:hover {
+    transform: scale(1.2);
+  }
 }

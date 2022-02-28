@@ -1,14 +1,40 @@
 @import '../../../../global-styles/variables-and-mixins';
 
 
-$translateXAmount: 300px;
+$translateXAmount: 230px;
+$edgeBorderDistanceAmount: 70px;
 
 
 .host {
   display: flex;
   justify-content: center;
-  margin: 15px 0;
-  transform: translateX(calc(#{- $translateXAmount} / 2));
+  margin: 15px auto;
+}
+
+.iconSection {
+  width: 360px;
+  position: relative;
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    z-index: 0;
+  }
+
+  &::before {
+    left: $edgeBorderDistanceAmount;
+    background-color: $mainContent;
+    opacity: 0.8;
+  }
+
+  &::after {
+    right: $edgeBorderDistanceAmount;
+    opacity: 1;
+    background-color: $primaryAccentColor;
+  }
 }
 
 
@@ -20,16 +46,24 @@ $translateXAmount: 300px;
       transform-origin: 50% 50%;
     }
 
+    15%, 70% {
+      transform: translateX(calc(#{$translateXAmount} / 2));
+    }
+
     50% {
       transform: translateX($translateXAmount);
     }
   }
 
   display: inline-block;
-  animation: loopedMove 3s linear infinite both;
+  position: relative;
+  z-index: 2;
+  animation: loopedMove 4s linear infinite both;
 
 
   > svg {
-    @include svgSize(24px);
+    @include svgSize(32px);
+
+    padding: 0 3px;
   }
 }

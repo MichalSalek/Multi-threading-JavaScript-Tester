@@ -24,11 +24,13 @@ const NavLinksMolecule = (): JSX.Element => {
 
         <ButtonGroup>
             <AppButtonAtom
+                size={'small'}
                 disabled={disableButtons || router.pathname === ROUTE_START_PAGE_SCREEN}
                 onClick={() => handleClick(ROUTE_START_PAGE_SCREEN)}
             >Welcome screen</AppButtonAtom>
 
             <AppButtonAtom
+                size={'small'}
                 disabled={disableButtons || router.pathname === ROUTE_MAIN_APP_SCREEN}
                 onClick={() => handleClick(ROUTE_MAIN_APP_SCREEN)}
             >Main app page</AppButtonAtom>

@@ -143,7 +143,7 @@ export interface IWorkerComplexityStateReport extends IWorkerComplexityState, IW
 
 export type NamedWorkerComplexityStatusType = Record<WorkerNameType, IWorkerComplexityState>
 
-
+export type WorkersGlobalComplexityType = { amount: number | undefined | 'NaN' }
 
 export type WorkersAmountStateType = {
     amount: number

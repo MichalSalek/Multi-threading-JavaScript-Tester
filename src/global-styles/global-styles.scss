@@ -124,8 +124,12 @@ body {
 
 body {
   border: $masterBorderStylePrimary;
-  border-width: 0 2px;
+  border-width: 0 0 0 2px;
 
   color: $mainContent;
   background-color: $mainBackground;
+}
+
+*::selection {
+  background-color: hsl(15deg 75% 30%);
 }
