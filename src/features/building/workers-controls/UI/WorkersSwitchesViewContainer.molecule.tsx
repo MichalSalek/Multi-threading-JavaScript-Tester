@@ -89,7 +89,7 @@ const WorkersSwitchesViewContainerMolecule = (): JSX.Element => {
         </section>
 
         <PopoverTitleMolecule
-            popoverTextContent={'Worker switch and calculations complexity set'}
+            popoverTextContent={'Worker switch and calculations complexity set.'}
             titleTextContent={'Start carefully with low values and monitor the CPU load on your own - it depends on\n' +
             '            yours device.'}
         />

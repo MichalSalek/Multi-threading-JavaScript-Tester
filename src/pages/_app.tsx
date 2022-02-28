@@ -57,7 +57,7 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
                     paper: {
                         maxWidth: '590px',
                         width: '100%',
-                        boxShadow: '0 0 1rem 0 rgba(255, 255, 255, 0.1)',
+                        boxShadow: '0 0 1rem 0 rgba(255, 255, 255, 0.2)',
                         backgroundColor: '#027bde', //@TODO replace with a variable
                         color: 'white'
                     }
