@@ -6,14 +6,14 @@
   "_app.tsx -> @/features/building/control-panel/UI/ControlPanel.molecule": {
     "id": 4571,
     "files": [
-      "static/css/5c627aacacce5e9e.css",
-      "static/chunks/571.720db3db8d918dd1.js"
+      "static/css/341244714c89ea30.css",
+      "static/chunks/571.6cb209c637550ae6.js"
     ]
   },
   "index.tsx -> @/features/building/workers-controls/UI/WorkersControls.organism": {
     "id": 5616,
     "files": [
-      "static/css/2f0ddee0dade37b8.css",
+      "static/css/c94bb06249850088.css",
       "static/chunks/616.c45012ff5914cb6d.js"
     ]
   }
