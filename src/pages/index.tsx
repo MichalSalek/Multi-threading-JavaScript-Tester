@@ -43,7 +43,7 @@ const MainAppScreenPage: NextPage = () => {
             <CalculationsWorkersControlsOrganism/>
 
             <WorkersSwitchesViewContainerMolecule/>
-            
+
         </main>
     )
 }

@@ -1,11 +1,7 @@
 import React from 'react'
 import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
-
-import '@/global-styles/global-styles.scss'
-
 import store from '@/core/store.core'
-
 import LayoutComposition from '@/layout/Layout.composition'
 import BrowserStoragePersistController from '@/features/background/browser-storage/BrowserStoragePersist.controller'
 import SocketConnectionAndListeningController
@@ -16,7 +12,6 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import FPSMonitorWindowMolecule from '@/features/building/fps-monitor/UI/FPSMonitorWindow.molecule'
 import IconPackController from '@/features/background/icon-pack/IconPack.controller'
 import BorderColorChangeController from '@/features/background/border-color-change/BorderColorChange.controller'
-
 import { createTheme } from '@mui/material/styles'
 import { grey, lightBlue } from '@mui/material/colors'
 import dynamic from 'next/dynamic'
@@ -26,6 +21,8 @@ import WorkersScoreboardWindowMolecule from '@/features/building/workers-scorebo
 import WorkersGlobalWorkControlWindowMolecule
     from '@/features/building/workers-global-work-control/UI/WorkersGlobalWorkControlWindow.molecule'
 import MetaHead from '@/layout/partials/MetaHead'
+import '@/global-styles/variables-and-mixins.scss'
+import '@/global-styles/global-styles.scss'
 
 
 
@@ -63,7 +60,7 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
                     root: {
                         boxShadow: '0 0 1rem 0 rgba(204, 204, 204, 0.3)',
                         borderWidth: '1px',
-                        borderColor: 'rgba(153, 153, 153,0.7)',
+                        borderColor: 'rgba(153, 153, 153, 0.7)',
                         borderStyle: 'solid'
                     }
                 }
@@ -106,9 +103,10 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
 
     return (<ThemeProvider theme={theme}>
 
+        <CssBaseline/>
+
         <MetaHead/>
 
-        <CssBaseline/>
 
         <Provider store={store}>
 
@@ -135,6 +133,7 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
             </LayoutComposition>
 
         </Provider>
+
     </ThemeProvider>)
 }
 

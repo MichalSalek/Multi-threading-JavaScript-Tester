@@ -21,9 +21,9 @@ export const PopoverTitleMolecule = ({
     titleVariant = 'h6'
 }: IProps): JSX.Element => {
 
-    return (
+    return (<article className={scss.host}>
         <Typography
-            variant={titleVariant} component={'h2'} className={scss.host}>
+            variant={titleVariant} component={'h2'} className={scss.textContent}>
 
             <PopoverComposition
                 textContent={popoverTextContent}>
@@ -33,5 +33,5 @@ export const PopoverTitleMolecule = ({
             <span className={scss.title}>{titleTextContent}</span>
 
         </Typography>
-    )
+    </article>)
 }

@@ -29,7 +29,7 @@ const WorkersAmountMolecule = (): JSX.Element => {
 
     const StyledBadge = useMemo(() => styled(Badge)<BadgeProps>(() => ({
         '& .MuiBadge-badge': {
-            right: -5
+            right: -22
         }
     })), [])
 
