@@ -5,47 +5,47 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/HfbhRHsA4NyUTrrT5FXrx/_buildManifest.js",
-    "static/HfbhRHsA4NyUTrrT5FXrx/_ssgManifest.js",
-    "static/HfbhRHsA4NyUTrrT5FXrx/_middlewareManifest.js"
+    "static/TxOAMi4iPCyG3OfR7uVOY/_buildManifest.js",
+    "static/TxOAMi4iPCyG3OfR7uVOY/_ssgManifest.js",
+    "static/TxOAMi4iPCyG3OfR7uVOY/_middlewareManifest.js"
   ],
   "pages": {
     "/": [
-      "static/chunks/webpack-5ca4d54d2721ea42.js",
+      "static/chunks/webpack-637235ea3a4c6cd7.js",
       "static/chunks/framework-5f4595e5518b5600.js",
       "static/chunks/main-b60b6a7cb73ef310.js",
       "static/chunks/828-89805806d7d92a03.js",
       "static/chunks/796-2733ef042a0756ab.js",
-      "static/css/81eaaaf708858203.css",
-      "static/chunks/pages/index-f478cf5e486d6a00.js"
+      "static/css/310a5c94d94449f7.css",
+      "static/chunks/pages/index-fd0cac7f1db2bdd8.js"
     ],
     "/404": [
-      "static/chunks/webpack-5ca4d54d2721ea42.js",
+      "static/chunks/webpack-637235ea3a4c6cd7.js",
       "static/chunks/framework-5f4595e5518b5600.js",
       "static/chunks/main-b60b6a7cb73ef310.js",
       "static/chunks/pages/404-f2ea95f8d81b9465.js"
     ],
     "/_app": [
-      "static/chunks/webpack-5ca4d54d2721ea42.js",
+      "static/chunks/webpack-637235ea3a4c6cd7.js",
       "static/chunks/framework-5f4595e5518b5600.js",
       "static/chunks/main-b60b6a7cb73ef310.js",
-      "static/css/45b8b05fac4e0964.css",
-      "static/chunks/pages/_app-95a84344904dcd99.js"
+      "static/css/c52d3319cfde74a6.css",
+      "static/chunks/pages/_app-d57daf1c7d97d57b.js"
     ],
     "/_error": [
-      "static/chunks/webpack-5ca4d54d2721ea42.js",
+      "static/chunks/webpack-637235ea3a4c6cd7.js",
       "static/chunks/framework-5f4595e5518b5600.js",
       "static/chunks/main-b60b6a7cb73ef310.js",
       "static/chunks/pages/_error-2280fa386d040b66.js"
     ],
     "/scoreboard": [
-      "static/chunks/webpack-5ca4d54d2721ea42.js",
+      "static/chunks/webpack-637235ea3a4c6cd7.js",
       "static/chunks/framework-5f4595e5518b5600.js",
       "static/chunks/main-b60b6a7cb73ef310.js",
       "static/chunks/pages/scoreboard-685ce224a90af322.js"
     ],
     "/start": [
-      "static/chunks/webpack-5ca4d54d2721ea42.js",
+      "static/chunks/webpack-637235ea3a4c6cd7.js",
       "static/chunks/framework-5f4595e5518b5600.js",
       "static/chunks/main-b60b6a7cb73ef310.js",
       "static/chunks/828-89805806d7d92a03.js",

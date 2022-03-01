@@ -1352,7 +1352,7 @@ function ApplicationComposition({ Component , pageProps  }) {
                     root: {
                         boxShadow: '0 0 1rem 0 rgba(204, 204, 204, 0.3)',
                         borderWidth: '1px',
-                        borderColor: 'rgba(153, 153, 153,0.7)',
+                        borderColor: 'rgba(153, 153, 153, 0.7)',
                         borderStyle: 'solid'
                     }
                 }
@@ -1395,8 +1395,8 @@ function ApplicationComposition({ Component , pageProps  }) {
     return(/*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_mui_material__WEBPACK_IMPORTED_MODULE_8__.ThemeProvider, {
         theme: theme,
         children: [
-            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_layout_partials_MetaHead__WEBPACK_IMPORTED_MODULE_18__/* ["default"] */ .Z, {}),
             /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_mui_material__WEBPACK_IMPORTED_MODULE_8__.CssBaseline, {}),
+            /*#__PURE__*/ react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_layout_partials_MetaHead__WEBPACK_IMPORTED_MODULE_18__/* ["default"] */ .Z, {}),
             /*#__PURE__*/ (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
                 store: _core_store_core__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .ZP,
                 children: [
