@@ -11,13 +11,15 @@ exports.modules = {
 /* harmony export */   "Nc": () => (/* binding */ MAIN_THREAD_KEY),
 /* harmony export */   "_x": () => (/* binding */ WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS),
 /* harmony export */   "pc": () => (/* binding */ INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES),
+/* harmony export */   "$Z": () => (/* binding */ MIN_WORKER_COMPLEXITY_POSSIBILITY),
+/* harmony export */   "Ek": () => (/* binding */ MAX_WORKER_COMPLEXITY_POSSIBILITY),
 /* harmony export */   "wk": () => (/* binding */ STORAGE_KEY_START_PAGE_SEEN),
 /* harmony export */   "Gp": () => (/* binding */ StorageKeyStartPageEnum),
 /* harmony export */   "Oe": () => (/* binding */ STORAGE_KEY_WORKERS_AMOUNT),
 /* harmony export */   "LJ": () => (/* binding */ STORAGE_KEY_CONTROL_PANEL_SWITCHES),
 /* harmony export */   "j_": () => (/* binding */ STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION)
 /* harmony export */ });
-/* unused harmony exports MIN_WORKER_COMPLEXITY_POSSIBILITY, MAX_WORKER_COMPLEXITY_POSSIBILITY, STORAGE_KEY_CONTROL_PANEL_COLLAPSE_STATE, StorageKeyControlPanelCollapseStateEnum, MIN_DESKTOP_INNER_WIDTH_MEDIA_QUERY */
+/* unused harmony exports STORAGE_KEY_CONTROL_PANEL_COLLAPSE_STATE, StorageKeyControlPanelCollapseStateEnum, MIN_DESKTOP_INNER_WIDTH_MEDIA_QUERY */
 /* harmony import */ var _coding_utils_environmentOperations_api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4353);
 
 // Worker limit. Automatic set - window.navigator.hardwareConcurrency
