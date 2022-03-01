@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import { PopoverComposition } from '@/layout/compositions/popover/Popover.composition'
 import React from 'react'
-import scss from './PopoverTitle.module.scss'
+import scss from './popoverTitle.module.scss'
 import { OverridableStringUnion } from '@mui/types'
 import { Variant } from '@mui/material/styles/createTypography'
 import { TypographyPropsVariantOverrides } from '@mui/material/Typography/Typography'

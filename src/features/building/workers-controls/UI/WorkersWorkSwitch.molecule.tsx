@@ -14,7 +14,7 @@ import {
     MIN_WORKER_COMPLEXITY_POSSIBILITY
 } from '@/app-config-constants'
 import { Slider } from '@mui/material'
-import scss from './WorkersWorkSwitch.module.scss'
+import scss from './workersWorkSwitch.module.scss'
 import { randomIntFromNumbersRange } from '@/coding-utils/numberOperations.api'
 import { useMainThreadCalculations } from '@/features/building/workers-controls/workersControls.hooks'
 import { useAppDispatch } from '@/core/store.core'
@@ -134,10 +134,8 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
 
                         <span
                             style={getDynamicColorStyleByComplexityEdgeCase(userInputComplexity)}>
-
                             <strong>{workerKey.workerName.slice(18) // cutting 'calculationWorker' before it's number
                             }</strong>
-
                             <p>{isWorkerWorking ? <u>ON</u> : ' OFF'}</p>
 
                         </span>

@@ -3,7 +3,7 @@ import { ROUTE_MAIN_APP_SCREEN, ROUTE_START_PAGE_SCREEN } from '@/core/routes.co
 import AppButtonAtom from '@/app-components/AppButton.atom'
 import { useRouter } from 'next/router'
 import { ButtonGroup } from '@mui/material'
-import scss from './NavLinks.module.scss'
+import scss from './navLinks.module.scss'
 
 
 

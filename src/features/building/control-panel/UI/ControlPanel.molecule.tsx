@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
-import scss from './ControlPanel.module.scss'
+import scss from './controlPanel.module.scss'
 import { useAppDispatch, useAppSelector } from '@/core/store.core'
 import {
     handleControlPanelSwitchVisibility,

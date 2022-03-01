@@ -1,7 +1,7 @@
 import React from 'react'
 import { MAX_WORKER_COMPLEXITY_POSSIBILITY } from '@/app-config-constants'
 import { ComplexityValueType } from '@/features/building/workers-controls/UI/WorkersWorkSwitch.molecule'
-import scss from '@/features/building/workers-controls/UI/WorkersWorkSwitch.module.scss'
+import scss from '@/features/building/workers-controls/UI/workersWorkSwitch.module.scss'
 
 
 

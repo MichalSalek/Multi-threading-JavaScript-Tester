@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react'
-import scss from './WorkersScoreboard.module.scss'
+import scss from './workersScoreboard.module.scss'
 import {
     NamedWorkerReadyStatusType,
     NamedWorkerWorkStatusType,

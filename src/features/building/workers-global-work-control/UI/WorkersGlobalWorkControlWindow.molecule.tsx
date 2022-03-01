@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react'
-import scss from './WorkersGlobalWorkControl.module.scss'
+import scss from './workersGlobalWorkControl.module.scss'
 import { DraggableWindowComposition } from '@/layout/compositions/draggable-window/DraggableWindow.composition'
 import { useAppSelector } from '@/core/store.core'
 import {

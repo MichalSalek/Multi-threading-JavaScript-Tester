@@ -1,0 +1,19 @@
+.host {
+  margin-bottom: 3rem;
+}
+
+.controlButtonGroup {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  button {
+    width: 90px;
+    height: 85px;
+  }
+}
+
+.amountSetGroup {
+
+}

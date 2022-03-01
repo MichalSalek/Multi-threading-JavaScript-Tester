@@ -2,8 +2,13 @@
   margin-bottom: 3rem;
 }
 
-.marginBottom {
+.controlsContainer {
   margin-bottom: 3rem;
+  display: flex;
+
+  > section {
+    flex: 1;
+  }
 }
 
 .workersContainer {
@@ -11,5 +16,5 @@
   grid-template-columns: repeat(auto-fill, minmax(355px, 1fr));
   grid-gap: 53px 90px;
 
-  padding: 2rem 0;
+  margin-bottom: 2rem;
 }

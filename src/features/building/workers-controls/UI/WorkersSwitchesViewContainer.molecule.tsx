@@ -6,7 +6,7 @@ import {
 import WorkersWorkSwitchMolecule from '@/features/building/workers-controls/UI/WorkersWorkSwitch.molecule'
 import { constructWorkerNameByOrderIndex } from '@/features/background/web-workers/webWorkers.api'
 import { useAppSelector } from '@/core/store.core'
-import scss from './WorkersView.module.scss'
+import scss from './workersView.module.scss'
 import { PopoverTitleMolecule } from '@/features/building/popover-title/UI/PopoverTitle.molecule'
 
 

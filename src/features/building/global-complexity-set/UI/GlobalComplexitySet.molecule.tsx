@@ -3,7 +3,7 @@ import React, { useMemo, useState } from 'react'
 import { PopoverTitleMolecule } from '@/features/building/popover-title/UI/PopoverTitle.molecule'
 import { MAX_WORKER_COMPLEXITY_POSSIBILITY, MIN_WORKER_COMPLEXITY_POSSIBILITY } from '@/app-config-constants'
 import AppButtonAtom from '@/app-components/AppButton.atom'
-import scss from './GlobalComplexitySet.module.scss'
+import scss from './globalComplexitySet.module.scss'
 import { useAppDispatch, useAppSelector } from '@/core/store.core'
 import {
     handleGlobalComplexityChange,

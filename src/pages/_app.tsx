@@ -53,12 +53,21 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
         },
 
         components: {
+            MuiPaper: {
+                styleOverrides: {
+                    root: {
+                        boxShadow: '0 0 1rem 0 rgba(204, 204, 204, 0.3)',
+                        borderWidth: '1px',
+                        borderColor: 'rgba(153, 153, 153,0.7)',
+                        borderStyle: 'solid'
+                    }
+                }
+            },
             MuiPopover: {
                 styleOverrides: {
                     paper: {
                         maxWidth: '590px',
                         width: '100%',
-                        boxShadow: '0 0 1rem 0 rgba(255, 255, 255, 0.2)',
                         backgroundColor: '#027bde',
                         color: 'white'
                     }

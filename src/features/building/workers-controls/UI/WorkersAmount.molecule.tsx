@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from 'react'
 import { ButtonGroup, Tooltip } from '@mui/material'
 import Zoom from '@mui/material/Zoom'
-import scss from './WorkersAmount.module.scss'
+import scss from './workersAmount.module.scss'
 
 import {
     handleWorkerAmountChange,
@@ -35,60 +35,65 @@ const WorkersAmountMolecule = (): JSX.Element => {
                 titleTextContent={'Worker amount controls'}
             />
 
-            <span>0 - <Tooltip
-                placement={'top-start'}
-                title="Number depends of your CPU cores amount"
-                TransitionComponent={Zoom}
-                arrow
-            ><strong>{MAX_WORKERS_LIMIT}</strong></Tooltip> </span>
-            <AppInputAtom
-                type={'number'}
-                value={newWorkersAmount}
-                aria-label={'Expected Workers amount'}
-                placeholder={`0 - ${MAX_WORKERS_LIMIT}`}
-                onChange={(e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => setNewWorkersAmount(e.currentTarget.value)}
-                onBlur={(e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-                    setNewWorkersAmount(getValidatedPassedAmount(e.currentTarget.value, 0, MAX_WORKERS_LIMIT))}
-            />
-            <AppButtonAtom onClick={() => dispatch(handleWorkerAmountChange({
-                amountChangeCommand: WorkerAmountChangeActionEnum.setAmount,
-                amount: getValidatedPassedAmount(newWorkersAmount, 0, MAX_WORKERS_LIMIT)
-            }))}>
-                Set specific Workers amount
-            </AppButtonAtom>
 
-
-            <br/>
-            <br/>
-
-            <ButtonGroup className={scss.controlButtonGroup}>
+            <section className={scss.amountSetGroup}>
+                <span>0 - <Tooltip
+                    placement={'top-start'}
+                    title="Number depends of your CPU cores amount"
+                    TransitionComponent={Zoom}
+                    arrow
+                ><strong>{MAX_WORKERS_LIMIT}</strong></Tooltip> </span>
+                <AppInputAtom
+                    type={'number'}
+                    value={newWorkersAmount}
+                    aria-label={'Expected Workers amount'}
+                    placeholder={`0 - ${MAX_WORKERS_LIMIT}`}
+                    onChange={(e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => setNewWorkersAmount(e.currentTarget.value)}
+                    onBlur={(e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+                        setNewWorkersAmount(getValidatedPassedAmount(e.currentTarget.value, 0, MAX_WORKERS_LIMIT))}
+                />
                 <AppButtonAtom onClick={() => dispatch(handleWorkerAmountChange({
                     amountChangeCommand: WorkerAmountChangeActionEnum.setAmount,
-                    amount: MAX_WORKERS_LIMIT
+                    amount: getValidatedPassedAmount(newWorkersAmount, 0, MAX_WORKERS_LIMIT)
                 }))}>
-                    Set Workers amount equals to yours CPU cores amount
+                    Set specific Workers amount
                 </AppButtonAtom>
-                <AppButtonAtom
-                    disabled={workerRequestedAmount.amount === MAX_WORKERS_LIMIT}
-                    onClick={() => dispatch(handleWorkerAmountChange({amountChangeCommand: WorkerAmountChangeActionEnum.addOne}))}>
-                    Add new Worker +
-                </AppButtonAtom>
-                <AppButtonAtom
-                    disabled={workerRequestedAmount.amount === 0}
-                    onClick={() => dispatch(handleWorkerAmountChange({amountChangeCommand: WorkerAmountChangeActionEnum.removeLast}))}>
-                    Remove last Worker -
-                </AppButtonAtom>
-                <AppButtonAtom
-                    disabled={workerRequestedAmount.amount === 0}
-                    onClick={() => dispatch(handleWorkerAmountChange({
-                        amountChangeCommand: WorkerAmountChangeActionEnum.setAmount,
-                        amount: 0
-                    }))}>
-                    Remove all Workers --
-                </AppButtonAtom>
-            </ButtonGroup>
+            </section>
 
-            <br/><br/>
+            <section className={scss.controlButtonGroup}>
+                <ButtonGroup>
+                    <AppButtonAtom
+                        disabled={workerRequestedAmount.amount === MAX_WORKERS_LIMIT}
+                        onClick={() => dispatch(handleWorkerAmountChange({
+                            amountChangeCommand: WorkerAmountChangeActionEnum.setAmount,
+                            amount: MAX_WORKERS_LIMIT
+                        }))}>
+                        Fill whole slots
+                    </AppButtonAtom>
+                    <AppButtonAtom
+                        disabled={workerRequestedAmount.amount === 0}
+                        onClick={() => dispatch(handleWorkerAmountChange({
+                            amountChangeCommand: WorkerAmountChangeActionEnum.setAmount,
+                            amount: 0
+                        }))}>
+                        Remove all
+                    </AppButtonAtom>
+                </ButtonGroup>
+
+                <ButtonGroup>
+                    <AppButtonAtom
+                        disabled={workerRequestedAmount.amount === MAX_WORKERS_LIMIT}
+                        onClick={() => dispatch(handleWorkerAmountChange({amountChangeCommand: WorkerAmountChangeActionEnum.addOne}))}>
+                        Add new +
+                    </AppButtonAtom>
+                    <AppButtonAtom
+                        disabled={workerRequestedAmount.amount === 0}
+                        onClick={() => dispatch(handleWorkerAmountChange({amountChangeCommand: WorkerAmountChangeActionEnum.removeLast}))}>
+                        Remove last -
+                    </AppButtonAtom>
+                </ButtonGroup>
+            </section>
+
         </section>
     )
 }

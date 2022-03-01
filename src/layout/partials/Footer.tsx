@@ -1,26 +1,14 @@
-import React, { useCallback } from 'react'
-import { useRouter } from 'next/router'
+import React from 'react'
 import scss from './Layout.module.scss'
-import { Button } from '@mui/material'
+import { Typography } from '@mui/material'
 
 
 
 const Footer = () => {
 
-    const router = useRouter()
-
-    const getBackInBrowserHistory = useCallback(
-        () => router.back(),
-        [router]
-    )
-
     return (
         <footer className={scss.footer}>
-            <hr/>
-            <span>I&apos;m footer.</span>
-            <br/>
-            <Button onClick={getBackInBrowserHistory}>Go back</Button>
-            <hr/>
+            <Typography variant={'body2'}>build version 0.8</Typography>
         </footer>
     )
 }
