@@ -56,6 +56,7 @@ export const GlobalComplexitySetMolecule = (): JSX.Element => {
         />
 
         <Slider
+            className={scss.slider}
             color={'secondary'}
             valueLabelDisplay="auto"
             disabled={isAnyWorkerWorking}
@@ -67,15 +68,17 @@ export const GlobalComplexitySetMolecule = (): JSX.Element => {
             })}
         />
 
-        <AppButtonAtom
-            disabled={isSliderHasAnInitialStateYet || isAnyWorkerWorking || isNoWorkerActive}
-            onClick={handleNewGlobalComplexitySet}>
-            <span>Set to all workers</span>
-        </AppButtonAtom>
-        <AppButtonAtom
-            onClick={handleRefreshUndefinedGlobalComplexityState}
-            disabled={isAnyWorkerWorking || isNoWorkerActive}>
-            <span>Come back to initial setting</span>
-        </AppButtonAtom>
+        <section className={scss.buttons}>
+            <AppButtonAtom
+                disabled={isSliderHasAnInitialStateYet || isAnyWorkerWorking || isNoWorkerActive}
+                onClick={handleNewGlobalComplexitySet}>
+                <span>Set to all workers</span>
+            </AppButtonAtom>
+            <AppButtonAtom
+                onClick={handleRefreshUndefinedGlobalComplexityState}
+                disabled={isAnyWorkerWorking || isNoWorkerActive}>
+                <span>Come back to initial setting</span>
+            </AppButtonAtom>
+        </section>
     </section>)
 }

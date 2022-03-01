@@ -18,7 +18,7 @@ import IconPackController from '@/features/background/icon-pack/IconPack.control
 import BorderColorChangeController from '@/features/background/border-color-change/BorderColorChange.controller'
 
 import { createTheme } from '@mui/material/styles'
-import { grey } from '@mui/material/colors'
+import { grey, lightBlue } from '@mui/material/colors'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { ROUTE_START_PAGE_SCREEN } from '@/core/routes.core'
@@ -49,6 +49,11 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
             primary: {
                 main: grey[900]
             },
+            secondary: {
+                main: lightBlue[800],
+                contrastText: lightBlue[100]
+
+            },
             mode: 'dark'
         },
 
@@ -77,6 +82,22 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
                 styleOverrides: {
                     root: {
                         color: '#e0e0e0'
+                    }
+                }
+            },
+            MuiButtonGroup: {
+                styleOverrides: {
+                    root: {
+                        borderColor: '#027bde',
+                        borderWidth: '1px',
+                        borderStyle: 'solid'
+                    }
+                }
+            },
+            MuiBadge: {
+                styleOverrides: {
+                    badge: {
+                        pointerEvents: 'all'
                     }
                 }
             }

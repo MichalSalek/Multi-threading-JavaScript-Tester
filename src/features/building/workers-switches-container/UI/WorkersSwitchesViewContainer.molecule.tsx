@@ -3,10 +3,10 @@ import {
     selectGlobalComplexityAmount,
     selectRequestedWorkersAmount
 } from '@/features/background/web-workers/webWorkersSlice'
-import WorkersWorkSwitchMolecule from '@/features/building/workers-controls/UI/WorkersWorkSwitch.molecule'
+import WorkersWorkSwitchMolecule from '@/features/building/workers-work-switch/UI/WorkersWorkSwitch.molecule'
 import { constructWorkerNameByOrderIndex } from '@/features/background/web-workers/webWorkers.api'
 import { useAppSelector } from '@/core/store.core'
-import scss from './workersView.module.scss'
+import scss from './workersSwitchesViewContainer.module.scss'
 import { PopoverTitleMolecule } from '@/features/building/popover-title/UI/PopoverTitle.molecule'
 
 
@@ -41,8 +41,11 @@ const WorkersSwitchesViewContainerMolecule = (): JSX.Element => {
                     }}
                     key={index}
                 />)}
-
         </section>
+
+        {workerRequestedAmount.amount === 0 ?
+            <strong className={'lower-opacity'}>No Workers added yet.</strong>
+            : null}
     </main>)
 }
 

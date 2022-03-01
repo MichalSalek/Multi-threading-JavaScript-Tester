@@ -9,6 +9,8 @@ import PreviewAnimationMolecule from '@/features/building/preview-animation/UI/P
 import NavLinksMolecule from '@/features/building/nav-links/UI/NavLinks.molecule'
 import scss from './index.module.scss'
 import MainThreadSwitchMolecule from '@/features/building/main-thread-switch/UI/MainThreadSwitch.molecule'
+import WorkersSwitchesViewContainerMolecule
+    from '@/features/building/workers-switches-container/UI/WorkersSwitchesViewContainer.molecule'
 
 
 
@@ -34,11 +36,14 @@ const MainAppScreenPage: NextPage = () => {
         <main>
             <PreviewAnimationMolecule/>
 
-            <nav className={scss.navigationButtons}><NavLinksMolecule/></nav>
+            <nav className={scss.textCenter}><NavLinksMolecule/></nav>
 
-            <div className={scss.mainThread}><MainThreadSwitchMolecule/></div>
+            <div className={scss.textCenter}><MainThreadSwitchMolecule/></div>
 
             <CalculationsWorkersControlsOrganism/>
+
+            <WorkersSwitchesViewContainerMolecule/>
+            
         </main>
     )
 }

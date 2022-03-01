@@ -16,14 +16,14 @@ import {
 import { Slider } from '@mui/material'
 import scss from './workersWorkSwitch.module.scss'
 import { randomIntFromNumbersRange } from '@/coding-utils/numberOperations.api'
-import { useMainThreadCalculations } from '@/features/building/workers-controls/workersControls.hooks'
+import { useMainThreadCalculations } from '@/features/building/workers-work-switch/workersWork.hooks'
 import { useAppDispatch } from '@/core/store.core'
 import { handleWorkerComplexityStateReport } from '@/features/background/web-workers/webWorkersSlice'
 import {
     getDynamicAnimationClassNameByComplexity,
     getDynamicColorByComplexity,
     getDynamicColorStyleByComplexityEdgeCase
-} from '@/features/building/workers-controls/workersViewOperation'
+} from '@/features/building/workers-work-switch/workersUIOperations'
 
 
 
@@ -41,20 +41,29 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
     const dispatch = useAppDispatch()
 
 
+    // Random range of the initial complexity
+    //
+    const randomizedNumber = useMemo(() => randomIntFromNumbersRange(10, 120), [])
+
+    // Complexity of calculations defined by user
+    //
+    const [userInputComplexity, setUserInputComplexity] = useState<ComplexityValueType>(randomizedNumber)
+
+
     // Listening to worker's ready state
     //
     const [isWorkerReady] = useSingleWorkerSpecificStatus(UseSpecificWorkerStatusCommandEnum.ready, workerKey)
+
 
     // Listening to worker's work state
     //
     const [isWorkerWorking] = useSingleWorkerSpecificStatus(UseSpecificWorkerStatusCommandEnum.working, workerKey)
 
-
-    const randomizedNumber = useMemo(() => randomIntFromNumbersRange(15, 80), [])
-
-    // Complexity of calculations defined by user
+    // Switch on Main thread calculations
     //
-    const [userInputComplexity, setUserInputComplexity] = useState<ComplexityValueType>(randomizedNumber)
+    const [isMainThreadOn, handleMainThreadSwitchChange] =
+        useMainThreadCalculations(100, Number(userInputComplexity), false)
+
 
 
     // Set global complexity from props to component state
@@ -68,10 +77,6 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
         return () => undefined
     }, [globalComplexityValue, randomizedNumber])
 
-
-    // Switch on Main thread calculations
-    const [isMainThreadOn, handleMainThreadSwitchChange] =
-        useMainThreadCalculations(100, Number(userInputComplexity), false)
 
 
     const isCurrentInstanceAMainThread = (): boolean => workerKey.workerName === MAIN_THREAD_KEY.workerName
@@ -165,7 +170,8 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
 
                     style={{
                         ...getDynamicColorByComplexity(userInputComplexity, 'color'),
-                        ...getDynamicColorByComplexity(userInputComplexity, isWorkerWorking ? 'backgroundColor' : '', 1)
+                        ...getDynamicColorByComplexity(userInputComplexity, isWorkerWorking ? 'backgroundColor' : '', 1),
+                        ...{[isWorkerWorking ? 'filter' : '']: 'saturate(1.5)'}
                     }}
 
                 />

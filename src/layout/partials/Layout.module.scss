@@ -7,7 +7,6 @@
 
 .main {
   flex-grow: 1;
-  flex: 1;
 }
 
 .header, .main, .footer {
@@ -18,14 +17,11 @@
   display: flex;
   justify-content: flex-end;
   opacity: 0.5;
-  padding: 5rem 1rem 0.5rem 0;
+  padding: 0 1rem 1rem 0;
   overflow: hidden;
 
   > p {
     writing-mode: vertical-lr;
-    right: 12px;
-    position: absolute;
-    height: 140px;
     letter-spacing: 1px;
   }
 }

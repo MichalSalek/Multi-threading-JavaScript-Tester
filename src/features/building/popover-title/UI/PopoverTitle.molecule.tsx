@@ -27,7 +27,7 @@ export const PopoverTitleMolecule = ({
 
             <PopoverComposition
                 textContent={popoverTextContent}>
-                <i className={['fad fa-info-circle fa-sm', scss.icon].join(' ')}/>
+                <i className={['fad fa-info-circle', scss.icon].join(' ')}/>
             </PopoverComposition>
 
             <span className={scss.title}>{titleTextContent}</span>

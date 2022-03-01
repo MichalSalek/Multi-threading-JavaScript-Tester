@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 
 
 const WorkersWorkSwitchMolecule = dynamic(() =>
-    import('@/features/building/workers-controls/UI/WorkersWorkSwitch.molecule'), {ssr: false})
+    import('@/features/building/workers-work-switch/UI/WorkersWorkSwitch.molecule'), {ssr: false})
 
 
 const MainThreadSwitchMolecule = (): JSX.Element => {
