@@ -4,17 +4,18 @@
     margin-top: 1rem;
     margin-bottom: 3rem;
   }
-}
 
-.title {
-  margin-left: 0.5rem;
-}
 
-.icon {
-  transition: transform 0.07s ease-out;
-  transform: scale(1.2);
+  .title {
+    margin-left: 0.5rem;
+  }
 
-  &:hover {
-    transform: scale(1.4);
+  .icon {
+    transition: transform 0.07s ease-out;
+    transform: scale(1.2);
+
+    &:hover {
+      transform: scale(1.4);
+    }
   }
 }

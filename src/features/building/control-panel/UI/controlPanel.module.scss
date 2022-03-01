@@ -116,8 +116,192 @@ $control-switch-label-min-width: 230px;
     width: fit-content;
     pointer-events: none;
   }
-}
 
+  .collapseHandler {
+    background-color: black;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    padding: 0 4px;
+    width: $side-button-width;
+
+    transform: translateX(-12px);
+
+    position: relative;
+    z-index: 2002;
+
+    border: $masterBorderStylePrimary;
+    border-width: 2px 0 2px 0;
+
+    pointer-events: all;
+
+    &:hover {
+      @extend %accentBackgroundColor;
+
+      svg {
+        color: $mainContent;
+      }
+    }
+
+    > section {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-evenly;
+    }
+
+    svg {
+      @include svgSize(12px)
+    }
+
+    .turned180Deg {
+      transform: rotate(180deg);
+    }
+  }
+
+
+  .placementControlsContainer {
+    @extend %darkBackgroundColorTransparently;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    > nav {
+      @extend %colorVariablesAttributesEnabled;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      height: 38px;
+      width: 40px;
+
+      position: relative;
+      z-index: 2001;
+
+      flex-grow: 1;
+
+
+      &:hover {
+        @extend %accentBackgroundColor;
+      }
+
+      svg {
+        transition: transform 0.03s ease-out;
+      }
+    }
+  }
+
+
+  .moveHandlerIsEnabled {
+    @extend %accentBackgroundColor;
+
+    svg {
+      transform: scale(0.85);
+    }
+  }
+
+
+  .controlsListContainer {
+    @extend %darkBackgroundColorTransparently;
+
+    display: flex;
+
+    transition: transform 0.5s cubic-bezier(0.37, 0.98, 0.63, 0.88), opacity 0.5s cubic-bezier(0.37, 0.98, 0.63, 0.88);
+
+    position: relative;
+    z-index: 2000;
+
+    border: $masterBorderStylePrimary;
+    border-width: 2px 2px 2px 0;
+    border-radius: 0 5px 5px 0;
+
+    pointer-events: all;
+
+    .disabledControl {
+      @extend %colorVariablesAttributesDisabled;
+    }
+
+    .enabledControl {
+      @extend %colorVariablesAttributesEnabled;
+
+      button > span {
+        opacity: 0.9;
+      }
+
+      svg {
+        @extend %dropShadowLightColor;
+        @extend %animateOnTurnOn;
+      }
+    }
+
+    .controlsList {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .listItem {
+      margin: 5px 0;
+      display: flex;
+      flex: 1;
+
+      > button {
+        width: 100%;
+        padding: 15px 7px;
+
+
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        > svg {
+          @include svgSize(48px);
+          padding: 0 3px;
+        }
+      }
+
+      span {
+        letter-spacing: 1px;
+        font-weight: 800;
+        font-size: 0.9rem;
+
+        color: $mainContent;
+        opacity: 0.7;
+
+        min-width: $control-switch-label-min-width;
+        width: 100%;
+
+        padding: 0 1rem;
+
+        &::selection {
+          background: transparent;
+        }
+      }
+
+      &:hover {
+        span {
+          opacity: 1;
+          filter: drop-shadow(0 0 3px black);
+        }
+
+        @include svgShortAnimation();
+      }
+    }
+  }
+
+  .expandedControlsList {
+    transform: translateX(-15px);
+    opacity: 1;
+  }
+
+  .collapsedControlsList {
+    transform: translateX(calc(0px - #{$control-switch-label-min-width} - 55px));
+    opacity: 0.9;
+  }
+}
 
 // Flipped version of Control Panel
 //
@@ -154,191 +338,3 @@ $control-switch-label-min-width: 230px;
     }
   }
 }
-
-
-.collapseHandler {
-  background-color: black;
-
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
-  padding: 0 4px;
-  width: $side-button-width;
-
-  transform: translateX(-12px);
-
-  position: relative;
-  z-index: 2002;
-
-  border: $masterBorderStylePrimary;
-  border-width: 2px 0 2px 0;
-
-  pointer-events: all;
-
-  &:hover {
-    @extend %accentBackgroundColor;
-
-    svg {
-      color: $mainContent;
-    }
-  }
-
-  > section {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-evenly;
-  }
-
-  svg {
-    @include svgSize(12px)
-  }
-
-  .turned180Deg {
-    transform: rotate(180deg);
-  }
-}
-
-
-.placementControlsContainer {
-  @extend %darkBackgroundColorTransparently;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-
-  > nav {
-    @extend %colorVariablesAttributesEnabled;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    height: 38px;
-    width: 40px;
-
-    position: relative;
-    z-index: 2001;
-
-    flex-grow: 1;
-
-
-    &:hover {
-      @extend %accentBackgroundColor;
-    }
-
-    svg {
-      transition: transform 0.03s ease-out;
-    }
-  }
-}
-
-
-.moveHandlerIsEnabled {
-  @extend %accentBackgroundColor;
-
-  svg {
-    transform: scale(0.85);
-  }
-}
-
-
-.controlsListContainer {
-  @extend %darkBackgroundColorTransparently;
-
-  display: flex;
-
-  transition: transform 0.5s cubic-bezier(0.37, 0.98, 0.63, 0.88), opacity 0.5s cubic-bezier(0.37, 0.98, 0.63, 0.88);
-
-  position: relative;
-  z-index: 2000;
-
-  border: $masterBorderStylePrimary;
-  border-width: 2px 2px 2px 0;
-  border-radius: 0 5px 5px 0;
-
-  pointer-events: all;
-
-  .disabledControl {
-    @extend %colorVariablesAttributesDisabled;
-  }
-
-  .enabledControl {
-    @extend %colorVariablesAttributesEnabled;
-
-    button > span {
-      opacity: 0.9;
-    }
-
-    svg {
-      @extend %dropShadowLightColor;
-      @extend %animateOnTurnOn;
-    }
-  }
-
-  .controlsList {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .listItem {
-    margin: 5px 0;
-    display: flex;
-    flex: 1;
-
-    > button {
-      width: 100%;
-      padding: 15px 7px;
-
-
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-
-      > svg {
-        @include svgSize(48px);
-        padding: 0 3px;
-      }
-    }
-
-    span {
-      letter-spacing: 1px;
-      font-weight: 800;
-      font-size: 0.9rem;
-
-      color: $mainContent;
-      opacity: 0.7;
-
-      min-width: $control-switch-label-min-width;
-      width: 100%;
-
-      padding: 0 1rem;
-
-      &::selection {
-        background: transparent;
-      }
-    }
-
-    &:hover {
-      span {
-        opacity: 1;
-        filter: drop-shadow(0 0 3px black);
-      }
-
-      @include svgShortAnimation();
-    }
-  }
-}
-
-.expandedControlsList {
-  transform: translateX(-15px);
-  opacity: 1;
-}
-
-.collapsedControlsList {
-  transform: translateX(calc(0px - #{$control-switch-label-min-width} - 55px));
-  opacity: 0.9;
-}
-
-

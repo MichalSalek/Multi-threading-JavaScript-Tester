@@ -1,16 +1,17 @@
 .host {
   min-width: 270px;
   margin-bottom: 2rem;
-}
 
-.buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
 
-.slider {
-  max-width: 300px;
-  display: block;
-  margin: 10px auto;
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .slider {
+    max-width: 300px;
+    display: block;
+    margin: 10px auto;
+  }
 }

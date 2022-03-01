@@ -1,14 +1,14 @@
 .host {
-  
+
   > section {
     flex: 1;
   }
-}
 
-.workersContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(355px, 1fr));
-  grid-gap: 53px 90px;
+  .workersContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(355px, 1fr));
+    grid-gap: 53px 90px;
 
-  margin-bottom: 2rem;
+    margin-bottom: 2rem;
+  }
 }

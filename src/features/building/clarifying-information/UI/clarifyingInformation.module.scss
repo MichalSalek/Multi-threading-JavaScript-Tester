@@ -1,28 +1,27 @@
 .host {
   margin-top: 1rem;
-}
 
 
-%colorVariables {
-  --fa-primary-color: #027bde;
-  --fa-secondary-color: white;
-}
-
-.textBlock {
-  margin-bottom: 3rem;
-
-
-  strong {
-    font-weight: bolder;
-    font-size: 0.77rem;
-    vertical-align: middle;
-    padding: 0 0.3rem;
+  %colorVariables {
+    --fa-primary-color: #027bde;
+    --fa-secondary-color: white;
   }
 
-  svg {
-    @extend %colorVariables;
-    margin-left: 10px;
+  .textBlock {
+    margin-bottom: 3rem;
+
+
+    strong {
+      font-weight: bolder;
+      font-size: 0.77rem;
+      vertical-align: middle;
+      padding: 0 0.3rem;
+    }
+
+    svg {
+      @extend %colorVariables;
+      margin-left: 10px;
+    }
   }
+
 }
-
-

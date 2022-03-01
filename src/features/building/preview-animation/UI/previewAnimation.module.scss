@@ -9,61 +9,62 @@ $edgeBorderDistanceAmount: 70px;
   display: flex;
   justify-content: center;
   margin: 15px auto;
-}
-
-.iconSection {
-  width: 360px;
-  position: relative;
-
-  &::before, &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    height: 100%;
-    width: 2px;
-    z-index: 0;
-  }
-
-  &::before {
-    left: $edgeBorderDistanceAmount;
-    background-color: $mainContent;
-    opacity: 0.8;
-  }
-
-  &::after {
-    right: $edgeBorderDistanceAmount;
-    opacity: 1;
-    background-color: $primaryAccentColor;
-  }
-}
 
 
-.animateIcons {
-  @keyframes loopedMove {
-    0%,
-    100% {
-      transform: translateX(0);
-      transform-origin: 50% 50%;
+  .iconSection {
+    width: 360px;
+    position: relative;
+
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 2px;
+      z-index: 0;
     }
 
-    15%, 70% {
-      transform: translateX(calc(#{$translateXAmount} / 2));
+    &::before {
+      left: $edgeBorderDistanceAmount;
+      background-color: $mainContent;
+      opacity: 0.8;
     }
 
-    50% {
-      transform: translateX($translateXAmount);
+    &::after {
+      right: $edgeBorderDistanceAmount;
+      opacity: 1;
+      background-color: $primaryAccentColor;
     }
   }
 
-  display: inline-block;
-  position: relative;
-  z-index: 2;
-  animation: loopedMove 4s linear infinite both;
+
+  .animateIcons {
+    @keyframes loopedMove {
+      0%,
+      100% {
+        transform: translateX(0);
+        transform-origin: 50% 50%;
+      }
+
+      15%, 70% {
+        transform: translateX(calc(#{$translateXAmount} / 2));
+      }
+
+      50% {
+        transform: translateX($translateXAmount);
+      }
+    }
+
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    animation: loopedMove 4s linear infinite both;
 
 
-  > svg {
-    @include svgSize(32px);
+    > svg {
+      @include svgSize(32px);
 
-    padding: 0 3px;
+      padding: 0 3px;
+    }
   }
 }

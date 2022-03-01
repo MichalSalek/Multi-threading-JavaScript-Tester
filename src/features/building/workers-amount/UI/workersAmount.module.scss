@@ -1,43 +1,42 @@
 .host {
   margin-bottom: 2rem;
-}
 
-.amountControlsMainContainer {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-
-  > section {
-    flex: 1;
-
+  .amountControlsMainContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+
+    > section {
+      flex: 1;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .controlButtonGroup {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    button {
+      width: 110px;
+    }
+  }
+
+  .amountSetGroup {
+    min-width: 300px;
+    width: 100%;
+    margin-bottom: 1rem;
+
+    .amountInput {
+      margin-bottom: 5px;
+    }
+  }
+
+  .weakWeight {
+    font-weight: lighter;
   }
 }
-
-.controlButtonGroup {
-  display: flex;
-  flex-direction: column;
-
-  gap: 10px;
-
-  button {
-    width: 110px;
-  }
-}
-
-.amountSetGroup {
-  min-width: 300px;
-  width: 100%;
-  margin-bottom: 1rem;
-
-  .amountInput {
-    margin-bottom: 5px;
-  }
-}
-
-.weakWeight {
-  font-weight: lighter;
-}
-

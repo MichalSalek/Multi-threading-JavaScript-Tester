@@ -33,7 +33,7 @@ const MainAppScreenPage: NextPage = () => {
 
 
     return (
-        <main>
+        <main className={scss.host}>
             <PreviewAnimationMolecule/>
 
             <nav className={scss.textCenter}><NavLinksMolecule/></nav>
