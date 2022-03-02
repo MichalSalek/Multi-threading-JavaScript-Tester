@@ -1,5 +1,7 @@
 ## Multithreading JavaScript Tester Application
 ### TypeScript with Next.js and node.js with ES modules
+### Main purposes: Real-time, 
+### Really ease UI development (no prop drilling and data passing). Fork and check it.
 
 ###                       
 
