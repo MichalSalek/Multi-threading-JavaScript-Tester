@@ -14,6 +14,33 @@
     transition: transform 0.07s ease-out;
     transform: scale(1.2);
 
+
+    @keyframes heartbeat {
+      from {
+        opacity: 1;
+        animation-timing-function: ease-out;
+      }
+      10% {
+        opacity: 0.91;
+        animation-timing-function: ease-in;
+      }
+      17% {
+        opacity: 0.98;
+        animation-timing-function: ease-out;
+      }
+      33% {
+        opacity: 0.87;
+        animation-timing-function: ease-in;
+      }
+      45% {
+        opacity: 1;
+        animation-timing-function: ease-out;
+      }
+    }
+
+    animation: heartbeat 1.5s ease-in-out infinite both;
+
+
     &:hover {
       transform: scale(1.4);
     }
