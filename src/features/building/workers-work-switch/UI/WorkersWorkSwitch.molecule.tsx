@@ -13,7 +13,7 @@ import {
     MAX_WORKER_COMPLEXITY_POSSIBILITY,
     MIN_WORKER_COMPLEXITY_POSSIBILITY
 } from '@/app-config-constants'
-import { Slider } from '@mui/material'
+import { Slider, Typography } from '@mui/material'
 import scss from './workersWorkSwitch.module.scss'
 import { randomIntFromNumbersRange } from '@/coding-utils/numberOperations.api'
 import { useMainThreadCalculations } from '@/features/building/workers-work-switch/workersWork.hooks'
@@ -176,6 +176,13 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
 
                 />
             </section>
+
+            {isMainThreadOn ?
+                <Typography variant={'body2'} component={'aside'}
+                    className={[scss.asideText, 'lower-opacity'].join(' ')}>
+                    Move the slider and watch the animation.
+                </Typography>
+                : null}
 
         </section>
     )

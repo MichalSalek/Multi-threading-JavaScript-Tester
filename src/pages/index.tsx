@@ -34,11 +34,14 @@ const MainAppScreenPage: NextPage = () => {
 
     return (
         <main className={scss.host}>
+
             <PreviewAnimationMolecule/>
 
             <nav className={scss.textCenter}><NavLinksMolecule/></nav>
 
+
             <div className={scss.textCenter}><MainThreadSwitchMolecule/></div>
+
 
             <CalculationsWorkersControlsOrganism/>
 

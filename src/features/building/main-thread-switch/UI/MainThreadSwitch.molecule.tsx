@@ -26,7 +26,6 @@ const MainThreadSwitchMolecule = (): JSX.Element => {
                 titleTextContent={'The main thread of the browser'}
                 titleVariant={'h5'}
             />
-
             <WorkersWorkSwitchMolecule workerKey={MAIN_THREAD_KEY}/>
         </section>
     )
