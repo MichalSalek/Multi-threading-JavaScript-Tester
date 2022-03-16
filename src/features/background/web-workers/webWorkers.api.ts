@@ -38,7 +38,7 @@ export const constructWorkerJobToSocketDTO = <T>(event: MessageEvent<T>, workerK
 })
 
 
-export const getWorkerInstanceAbsolutely = (workerKey: WorkerKeyType) => window[workerKey.workerName] as Worker
+export const getWorkerInstanceAbsolutely = (workerKey: WorkerKeyType): Worker => window[workerKey.workerName] as Worker
 
 
 // Strict, in-action check of worker activity
@@ -156,3 +156,4 @@ export const getValidatedPassedAmount = (requestedAmount: number | string, minVa
     // Validation passed, return actual value
     return newAmountValue
 }
+
