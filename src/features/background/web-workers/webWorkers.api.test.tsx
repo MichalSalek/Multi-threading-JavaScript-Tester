@@ -16,6 +16,10 @@ describe('webWorkers.api', () => {
         expect(getValidatedPassedAmount(100, 2, 32)).toBe(32)
     })
 
+    test('getValidatedPassedAmount - empty string', () => {
+        expect(getValidatedPassedAmount('', 2, 32)).toBe(2)
+    })
+
 })
 
 export default {}

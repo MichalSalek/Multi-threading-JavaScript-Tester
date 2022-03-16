@@ -143,7 +143,7 @@ export const flagIfWorkerIsWorking = (workerKey: WorkerKeyType, workingNewFlag: 
 export const getValidatedPassedAmount = (requestedAmount: number | string, minValue: number, maxValue: number): number => {
 
     // Usually: a whitespace or nothing. (probably user removes everything from input by a backspace)
-    if (!requestedAmount) return 0
+    if (!requestedAmount) return minValue
 
     // IF fulfilled, when number has more than x digits, where x is amount of digits in the passed number.
     if (typeof requestedAmount === 'string' && requestedAmount.length > String(maxValue).length) return maxValue
