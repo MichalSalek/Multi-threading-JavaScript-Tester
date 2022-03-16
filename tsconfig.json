@@ -7,11 +7,9 @@
       "esnext",
       "ES2019"
     ],
-    "baseUrl": "./.",
+    "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
     "allowJs": true,
     "strict": true,

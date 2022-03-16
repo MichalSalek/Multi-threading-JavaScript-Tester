@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { loadEnvConfig } from '@next/env'
+import '@testing-library/jest-dom/extend-expect'
 
 
 
