@@ -27,7 +27,7 @@ export const PopoverComposition = ({children, textContent}: IProps): JSX.Element
 
     return (
         <span className={scss.host}>
-            <span aria-describedby={id} onClick={handleClick}>{children}</span>
+            <button aria-describedby={id} onClick={handleClick}>{children}</button>
             <Popover
                 id={id}
                 open={open}

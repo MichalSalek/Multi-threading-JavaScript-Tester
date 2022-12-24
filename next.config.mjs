@@ -1,24 +1,24 @@
 /** @type {import('next').NextConfig} */
-import withPWA from 'next-pwa'
-import runtimeCaching from 'next-pwa/cache.js'
+import withNextPWA from 'next-pwa'
 
 const NextJSAppSettings = {
-    reactStrictMode: true,
+  reactStrictMode: true,
 
-    i18n: {
-        locales: ["en"],
-        defaultLocale: "en",
-    }
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en",
+  },
+
 }
 
-// Thanks to that, PWA will not run during the development process.
-export default (() => process.env.NODE_ENV === 'development' ? NextJSAppSettings :
-    withPWA({
-        ...NextJSAppSettings,
-        ...{
-            pwa: {
-                dest: 'public',
-                runtimeCaching
-            }
-        }
-    }))()
+
+const withPWA = withNextPWA({
+  dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
+  register: true,
+  sw: 'sw.js',
+})
+
+export default withPWA({
+  ...NextJSAppSettings
+})

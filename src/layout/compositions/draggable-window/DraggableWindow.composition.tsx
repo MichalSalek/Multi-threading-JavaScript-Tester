@@ -83,7 +83,7 @@ export const DraggableWindowComposition = ({
             <div ref={nodeRef} className={scss.dragItem}>
                 <strong className={clickedOutsideThisWindow ? scss.inactive : scss.active}>
                     <span>{componentUITitleBarName}</span>
-                    <p onClick={handleCloseWindow} className={scss.closeButton}
+                    <button onClick={handleCloseWindow} className={scss.closeButton}
                         data-description={'close-window-button'}/>
                 </strong>
                 {children}

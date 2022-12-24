@@ -105,8 +105,7 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
 
         <CssBaseline/>
 
-        <MetaHead/>
-
+        {/*<MetaHead/> @TODO stworzyć _document */}
 
         <Provider store={store}>
 

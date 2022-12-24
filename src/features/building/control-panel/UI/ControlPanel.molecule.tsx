@@ -77,7 +77,9 @@ const ControlPanelMolecule = (): JSX.Element => {
         (featureVisibilityState: boolean): string => featureVisibilityState ? scss.enabledControl : scss.disabledControl, [])
 
 
+
     return (<aside className={[scss.host, (() => positionFlipped ? scss.hostFlipped : '')()].join(' ')}>
+
         <Draggable
             nodeRef={nodeRef}
             handle="#moveHandler"
@@ -98,7 +100,7 @@ const ControlPanelMolecule = (): JSX.Element => {
                 className={[scss.innerHost, 'turn-on-opacity-animation'].join(' ')}>
                 <section className={[scss.hostSection, 'turn-on-opacity-animation'].join(' ')}>
 
-                    <nav id={'collapseSwitch'} onClick={collapseListHandler}
+                    <button id={'collapseSwitch'} onClick={collapseListHandler}
                         className={[scss.collapseHandler, 'enabled-border-state'].join(' ')}>
                         <section className={isListCollapsed ? 'display-none' : ''}>
                             <i className="fad fa-arrow-alt-from-right"/>
@@ -107,7 +109,7 @@ const ControlPanelMolecule = (): JSX.Element => {
                         <section className={isListCollapsed ? '' : 'display-none'}>
                             <i className="fad fa-arrow-alt-to-right"/>
                         </section>
-                    </nav>
+                    </button>
 
 
                     <section
@@ -127,11 +129,11 @@ const ControlPanelMolecule = (): JSX.Element => {
                             </nav>
                             }
 
-                            <nav
+                            <button
                                 onClick={() => setPositionFlipped((prevState: boolean) => !prevState)}
                                 className={[scss.changePositionHandler, 'fa-lg', 'fa-swap-opacity'].join(' ')}>
                                 <i className="fad fa-exchange-alt"/>
-                            </nav>
+                            </button>
                         </section>
 
 
