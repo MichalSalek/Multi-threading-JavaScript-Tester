@@ -1,10 +1,10 @@
-## Multithreading JavaScript Tester Application
+## Multithread JavaScript Tester Application
 
-##### Live: https://multithread.michalsalek.pl/
+Live: https://multithread.michalsalek.pl/
 
-### TypeScript with Next.js and node.js with ES modules
-### Main purposes: Real-time, 
-### Really ease UI development (no prop drilling and data passing). Fork and check it.
+TypeScript with Next.js and node.js with ES modules  
+Main goal: Real time and high reactivity.  
+Really ease UI development (no prop drilling and data passing).  
 
 ###                       
 
@@ -12,21 +12,22 @@ contact@michalsalek.pl
 
 ###                       
 
-##### App inspired by DDD, CQS and Event Sourcing methodologies
-
-###### Driven by Developer Experience for fast UI develop and debugging
+##### App inspired by DDD, CQRS and Event Sourcing methodologies
 
 ###                                  
 
-## What does it do?
+### What does it do?
 
-This tool can overload your CPU by doing a no-sense calculations - through the browser's main thread or another CPU
-threads - through the WebWorkers.
+This tool can overload your CPU by doing a no-sense calculations:
+- through the JS compiler main thread, or
+- another CPU threads in one time, through the WebWorkers.
 
-As a user, you can set the complexity of the calculations and observe smoothness of a sample animation. You should
-monitor yours CPU threads usage also.
+As a user, you can set the complexity of the calculations and observe smoothness changing of a sample animation. 
+To get the best results you should monitor yours CPU threads usage also.
 
 ###                             
+
+### Example test on higher complexity:
 
 The AMD Ryzen 9 5950X 16 x 4.0GHz processor can be loaded even over 80% by JavaScript interpretations:
 
@@ -40,12 +41,12 @@ The AMD Ryzen 9 5950X 16 x 4.0GHz processor can be loaded even over 80% by JavaS
 
 - WebSocket realtime communication by events
 - WebWorkers activity simulation
-- Architecture designed by Commands and Queries Separation
+- The architecture was designed following the DDD, CQRS and Event Sourcing models.
 - Structure focused on business Features as subdomains living in the App - to force development processes
 - Most of the Features has its own functional and declarative API
 - Forced TS typing keeps the App data with no leaks and exceptions
-- Optimized for nice performance with ESLint React strict rules with //no-bypassing
-- Keeping UX in well collaboration with a user
+- Optimized for nice performance 
+- Coded with ESLint React strict rules with //no-bypassing
 
 ###                         
 
@@ -62,8 +63,8 @@ The AMD Ryzen 9 5950X 16 x 4.0GHz processor can be loaded even over 80% by JavaS
 > Next.js  
 > TypeScript strict mode  
 > React strict mode  
-> ESLint strict mode  
-> Redux toolkit (with a thunk also)  
+> ESLint strict plugins  
+> Redux toolkit (thunk used)  
 > Node.js with TypeScript  
 > socket.io
 
