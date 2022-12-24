@@ -12,7 +12,7 @@ import Draggable, { DraggableData, DraggableEvent } from 'react-draggable'
 import {
     MIN_DESKTOP_INNER_WIDTH_MEDIA_QUERY,
     STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION
-} from '@/app-config-constants'
+} from '@/core/constants.core'
 import { getStorageItem, setStorageItem } from '@/features/background/browser-storage/browserStorage.api'
 import useMediaQuery from '@mui/material/useMediaQuery'
 
@@ -22,17 +22,14 @@ const Y_AXIS_STORAGE_KEY = `${STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSIT
 
 
 const ControlPanelMolecule = (): JSX.Element => {
-
     const dispatch = useAppDispatch()
-
-
-    const nodeRef = React.createRef<HTMLDivElement>()
 
 
     const systemComponentsVisibilities: ISystemComponentsVisibilities = useAppSelector(selectSystemComponentsVisibilities)
 
 
     const [isListCollapsed, setIsListCollapsed] = useControlPanelCollapseStateStoragePersist(false)
+
 
     const collapseListHandler = () => setIsListCollapsed((prevVal) => !prevVal)
 
@@ -77,11 +74,13 @@ const ControlPanelMolecule = (): JSX.Element => {
         (featureVisibilityState: boolean): string => featureVisibilityState ? scss.enabledControl : scss.disabledControl, [])
 
 
+    const nodeRefDraggableHelper = React.createRef<HTMLDivElement>()
+
 
     return (<aside className={[scss.host, (() => positionFlipped ? scss.hostFlipped : '')()].join(' ')}>
 
         <Draggable
-            nodeRef={nodeRef}
+            nodeRef={nodeRefDraggableHelper}
             handle="#moveHandler"
             bounds={'body'}
             axis={positionFlipped ? 'x' : 'y'}
@@ -96,21 +95,9 @@ const ControlPanelMolecule = (): JSX.Element => {
             onStop={onStopDragHandler}
         >
             <aside
-                ref={nodeRef}
+                ref={nodeRefDraggableHelper}
                 className={[scss.innerHost, 'turn-on-opacity-animation'].join(' ')}>
                 <section className={[scss.hostSection, 'turn-on-opacity-animation'].join(' ')}>
-
-                    <button id={'collapseSwitch'} onClick={collapseListHandler}
-                        className={[scss.collapseHandler, 'enabled-border-state'].join(' ')}>
-                        <section className={isListCollapsed ? 'display-none' : ''}>
-                            <i className="fad fa-arrow-alt-from-right"/>
-                        </section>
-
-                        <section className={isListCollapsed ? '' : 'display-none'}>
-                            <i className="fad fa-arrow-alt-to-right"/>
-                        </section>
-                    </button>
-
 
                     <section
                         className={[
@@ -122,11 +109,11 @@ const ControlPanelMolecule = (): JSX.Element => {
 
                         <section className={scss.placementControlsContainer}>
                             {!positionFlipped &&
-                            <nav
+                            <button
                                 id={'moveHandler'}
-                                className={[scss.moveHandler, 'fa-2x', 'fa-swap-opacity', isAlreadyDragged ? scss.moveHandlerIsEnabled : ''].join(' ')}>
+                                className={[scss.moveHandler, 'fa-lg', 'fa-swap-opacity', isAlreadyDragged ? scss.moveHandlerIsEnabled : ''].join(' ')}>
                                 <i className="fad fa-arrows-alt-v"/>
-                            </nav>
+                            </button>
                             }
 
                             <button
@@ -163,6 +150,18 @@ const ControlPanelMolecule = (): JSX.Element => {
                                 </button>
                             </li>
                         </ul>
+
+                        <button id={'collapseSwitch'} onClick={collapseListHandler}
+                            className={[scss.collapseHandler, 'enabled-border-state'].join(' ')}>
+                            <section className={isListCollapsed ? 'display-none' : ''}>
+                                <i className="fad fa-arrow-alt-from-right"/>
+                            </section>
+
+                            <section className={isListCollapsed ? '' : 'display-none'}>
+                                <i className="fad fa-arrow-alt-to-right"/>
+                            </section>
+                        </button>
+                        
                     </section>
 
                 </section>

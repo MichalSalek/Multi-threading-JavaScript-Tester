@@ -16,7 +16,7 @@ import {
     selectWholeWorkersWorkState
 } from '@/features/background/web-workers/webWorkersSlice'
 import { selectLastReceivedClientBrowserWorkerJobsData } from '@/features/background/socket-client/socketSlice'
-import { MAIN_THREAD_KEY } from '@/app-config-constants'
+import { MAIN_THREAD_KEY } from '@/core/constants.core'
 import SystemComponentVisibilityComposition
     from '@/layout/compositions/system-component-visibility/SystemComponentVisibility.composition'
 

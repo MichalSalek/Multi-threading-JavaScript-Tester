@@ -43,10 +43,11 @@ The AMD Ryzen 9 5950X 16 x 4.0GHz processor can be loaded even over 80% by JavaS
 - WebWorkers activity simulation
 - The architecture was designed following the DDD, CQRS and Event Sourcing models.
 - Structure focused on business Features as subdomains living in the App - to force development processes
-- Most of the Features has its own functional and declarative API
+- Most of the features has its own functional and declarative API
 - Forced TS typing keeps the App data with no leaks and exceptions
 - Optimized for nice performance 
 - Coded with ESLint React strict rules with //no-bypassing
+- Collecting logs with events included to files
 
 ###                         
 

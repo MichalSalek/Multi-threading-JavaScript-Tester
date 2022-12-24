@@ -1,57 +1,13 @@
-@import '../../../../global-styles/variables-and-mixins';
+@import '../../../../global-styles/variables-and-functions';
 
 
+// VARS
 //
-//
-// VARS, MIXINS AND PLACEHOLDERS
-//
-
 $control-panel-height: 280px;
 
+$side-button-width: 26px;
 
-$side-button-width: 30px;
-
-$control-switch-label-min-width: 230px;
-
-
-%accentBackgroundColor {
-  background-color: $primaryAccentColor;
-}
-
-%darkBackgroundColorTransparently {
-  background-color: $backgroundDark;
-}
-
-@mixin hoverEffectControlChange($color: rgba(113, 113, 240, 0.9)) {
-  filter: drop-shadow(0 5px 2px $color);
-}
-
-%dropShadowLightColor {
-  filter: drop-shadow(0 5px 3px #FFFFFF22);
-}
-
-
-%animateOnTurnOn {
-  @keyframes animate-on-turn-on-keyframe {
-    0% {
-      filter: brightness(7) drop-shadow(-3px 2px 2px rgba(113, 113, 255, 1)) sepia(1);
-    }
-
-    30% {
-      filter: brightness(6) drop-shadow(-3px 2px 2px rgba(113, 113, 255, 0.4));
-    }
-
-    80% {
-      filter: brightness(1.5) drop-shadow(-3px 2px 2px rgba(113, 113, 255, 0.3));
-    }
-
-    100% {
-      filter: brightness(1) drop-shadow(-3px 2px 2px rgba(113, 113, 255, 0.8));
-    }
-  }
-
-  animation: animate-on-turn-on-keyframe 0.6s ease-in 0s forwards;
-}
+$control-switch-label-min-width: 192px;
 
 
 // Duo-tone color states
@@ -66,35 +22,7 @@ $control-switch-label-min-width: 230px;
   --fa-secondary-color: #059fffe6;
 }
 
-@mixin svgShortAnimation($animation-time: 0.15s) {
 
-  $svg-animation-scale: 1.04;
-
-  @keyframes animate-on-hover-keyframe {
-    0%, 80%, 100% {
-      transform: scale(1);
-    }
-
-    60% {
-      transform: scale($svg-animation-scale);
-    }
-  }
-
-  svg {
-    > g > path {
-      &:first-child {
-        animation: animate-on-hover-keyframe $animation-time cubic-bezier(1, 0, 0, 1) 0s both;
-      }
-
-      &:last-of-type {
-        animation: animate-on-hover-keyframe $animation-time cubic-bezier(1, 0, 0, 1) 0.1s both;
-      }
-    }
-  }
-}
-
-//
-//
 // STYLING
 //
 .host {
@@ -127,13 +55,14 @@ $control-switch-label-min-width: 230px;
     padding: 0 4px;
     width: $side-button-width;
 
-    transform: translateX(-12px);
+    transform: translateX(2px);
 
     position: relative;
     z-index: 2002;
 
     border: $masterBorderStylePrimary;
-    border-width: 2px 0 2px 0;
+    border-width: 0 2px 0 1px;
+    border-radius: 0 5px 5px 0;
 
     pointer-events: all;
 
@@ -169,21 +98,18 @@ $control-switch-label-min-width: 230px;
     flex-direction: column;
     justify-content: space-around;
 
-    > nav {
+    > .moveHandler,
+    > .changePositionHandler {
       @extend %colorVariablesAttributesEnabled;
 
       display: flex;
       justify-content: center;
       align-items: center;
 
-      height: 38px;
       width: 40px;
 
       position: relative;
       z-index: 2001;
-
-      flex-grow: 1;
-
 
       &:hover {
         @extend %accentBackgroundColor;
@@ -192,6 +118,14 @@ $control-switch-label-min-width: 230px;
       svg {
         transition: transform 0.03s ease-out;
       }
+    }
+
+    > .moveHandler {
+      flex: 2;
+    }
+
+    > .changePositionHandler {
+      flex: 1;
     }
   }
 
@@ -241,6 +175,8 @@ $control-switch-label-min-width: 230px;
     .controlsList {
       display: flex;
       flex-direction: column;
+      border: $masterBorderStylePrimary;
+      border-width: 0 0 0 1px;
     }
 
     .listItem {
@@ -282,6 +218,8 @@ $control-switch-label-min-width: 230px;
       }
 
       &:hover {
+        @extend %animateReadyState;
+
         span {
           opacity: 1;
           filter: drop-shadow(0 0 3px black);
@@ -293,12 +231,12 @@ $control-switch-label-min-width: 230px;
   }
 
   .expandedControlsList {
-    transform: translateX(-15px);
+    transform: translateX(0);
     opacity: 1;
   }
 
   .collapsedControlsList {
-    transform: translateX(calc(0px - #{$control-switch-label-min-width} - 55px));
+    transform: translateX(calc(0px - #{$control-switch-label-min-width} - 42px));
     opacity: 0.9;
   }
 }
@@ -316,12 +254,12 @@ $control-switch-label-min-width: 230px;
     transform: translate(-50%, 35px) rotate(-90deg) !important;
 
     > .hostSection {
-      transform: translateX(-32px);
+      transform: translateX(-40px);
     }
   }
 
   .collapsedControlsList {
-    transform: translateX(-58px);
+    transform: translateX(-46px);
   }
 
   .listItem {

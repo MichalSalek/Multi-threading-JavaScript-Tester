@@ -21,7 +21,7 @@ import {
     WorkerToSocketDTO,
     WorkerTriggerMessageCommandEnum
 } from '@/features/background/web-workers/webWorkers.types'
-import { MAX_WORKERS_LIMIT, WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS } from '@/app-config-constants'
+import { MAX_WORKERS_LIMIT, WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS } from '@/core/constants.core'
 import store, { useAppSelector } from '@/core/store.core'
 import {
     IWorkersSlice,
@@ -30,7 +30,7 @@ import {
 import { WEB_WORKER_TASKS } from '@/features/background/web-workers/webWorkersEvents'
 import { selectSocketIsActive } from '@/features/background/socket-client/socketSlice'
 import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/background/socket-client/socketEventsEntities'
-import { fireJustClientSide } from '@/coding-utils/environmentOperations.api'
+import { fireClientSide } from '@/coding-utils/environmentOperations.api'
 import { isUndefinedType } from '@/coding-utils/typeOperations.api'
 import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLogs.api'
 import { sendCommandMessageToSocket } from '@/features/background/socket-client/socket.api'
@@ -191,7 +191,7 @@ const WorkersActiveInstancesAndCommunicationController = (): JSX.Element => {
     useEffect(() => {
         if (!isSocketActive) return () => undefined
 
-        fireJustClientSide(() => {
+        fireClientSide(() => {
 
             window.clearTimeout(intervalID.current)
             intervalID.current = window.setTimeout(() =>

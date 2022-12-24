@@ -1,7 +1,7 @@
 import { Slider } from '@mui/material'
 import React, { useMemo, useState } from 'react'
 import { PopoverTitleMolecule } from '@/features/building/popover-title/UI/PopoverTitle.molecule'
-import { MAX_WORKER_COMPLEXITY_POSSIBILITY, MIN_WORKER_COMPLEXITY_POSSIBILITY } from '@/app-config-constants'
+import { MAX_WORKER_COMPLEXITY_POSSIBILITY, MIN_WORKER_COMPLEXITY_POSSIBILITY } from '@/core/constants.core'
 import AppButtonAtom from '@/app-components/AppButton.atom'
 import scss from './globalComplexitySet.module.scss'
 import { useAppDispatch, useAppSelector } from '@/core/store.core'
@@ -10,7 +10,9 @@ import {
     selectIsAnyWorkerWorking,
     selectIsNoWorkerActive
 } from '@/features/background/web-workers/webWorkersSlice'
-import { fireJustClientSide } from '@/coding-utils/environmentOperations.api'
+import { fireClientSide } from '@/coding-utils/environmentOperations.api'
+import {useSliderRAWValueHandler} from '@/features/building/global-complexity-set/useSliderRAWValueHandler'
+import {handleNewGlobalComplexitySet} from '@/features/building/global-complexity-set/global-complexity-set.api'
 
 
 
@@ -22,31 +24,18 @@ export const GlobalComplexitySetMolecule = (): JSX.Element => {
 
     const isNoWorkerActive = useAppSelector(selectIsNoWorkerActive)
 
-
-
-    const [sliderValue, setSliderValue] = useState<number | undefined>(undefined)
-
-
-    const handleNewSliderRAWValue = (newValue: number): void => {
-        setSliderValue(newValue)
-    }
-
+    const [sliderValue, handleSliderRAWValue] = useSliderRAWValueHandler()
 
     const isSliderHasAnInitialStateYet = useMemo<boolean>(() =>
         typeof sliderValue === 'undefined', [sliderValue])
 
 
-    const handleNewGlobalComplexitySet = (): void => {
-        dispatch(handleGlobalComplexityChange({amount: Array.isArray(sliderValue) ? sliderValue[0] : sliderValue}))
-    }
-
     const handleRefreshUndefinedGlobalComplexityState = (): void => {
         dispatch(handleGlobalComplexityChange({amount: 'NaN'}))
-        fireJustClientSide(() => window.setTimeout(() =>
+        fireClientSide(() => window.setTimeout(() =>
             dispatch(handleGlobalComplexityChange({amount: undefined}))
         , 0))
     }
-
 
 
     return (<section className={scss.host}>
@@ -64,14 +53,14 @@ export const GlobalComplexitySetMolecule = (): JSX.Element => {
             min={MIN_WORKER_COMPLEXITY_POSSIBILITY}
             max={MAX_WORKER_COMPLEXITY_POSSIBILITY}
             onChangeCommitted={((_, newValue: number | number[]) => {
-                handleNewSliderRAWValue(Array.isArray(newValue) ? newValue[0] : newValue)
+                handleSliderRAWValue(Array.isArray(newValue) ? newValue[0] : newValue)
             })}
         />
 
         <section className={scss.buttons}>
             <AppButtonAtom
                 disabled={isSliderHasAnInitialStateYet || isAnyWorkerWorking || isNoWorkerActive}
-                onClick={handleNewGlobalComplexitySet}>
+                onClick={() => handleNewGlobalComplexitySet(sliderValue)}>
                 <span>Set to all workers</span>
             </AppButtonAtom>
             <AppButtonAtom

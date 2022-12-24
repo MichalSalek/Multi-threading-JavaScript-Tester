@@ -1,8 +1,8 @@
-@import "../../../global-styles/variables-and-mixins";
+@import "../../../global-styles/variables-and-functions";
 
 
 $borderColor: #0b375b;
-$heightOfBar: 30px;
+$heightOfBar: 27px;
 $sideBarPadding: 3px;
 
 
@@ -64,7 +64,6 @@ $sideBarPadding: 3px;
     content: '';
     position: absolute;
     display: block;
-    top: 15px;
     right: 18px;
     width: 13px;
     height: 1px;

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { doCalculations } from '@/features/building/workers-work-switch/doCalculations'
-import { MAIN_THREAD_KEY } from '@/app-config-constants'
+import { MAIN_THREAD_KEY } from '@/core/constants.core'
 import { sendCommandMessageToSocket } from '@/features/background/socket-client/socket.api'
 import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/background/socket-client/socketEventsEntities'
 

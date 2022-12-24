@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react'
 import { WorkersAmountStateType } from '@/features/background/web-workers/webWorkers.types'
 import { useAppSelector } from '@/core/store.core'
 import { selectActuallyWorkingWorkersAmount } from '@/features/background/web-workers/webWorkersSlice'
-import { fireJustClientSide } from '@/coding-utils/environmentOperations.api'
+import { fireClientSide } from '@/coding-utils/environmentOperations.api'
 
 
 
@@ -14,7 +14,7 @@ const BorderColorChangeController = (): JSX.Element => {
 
 
     const bodyElement: HTMLBodyElement | undefined | null = useMemo(
-        () => fireJustClientSide<HTMLBodyElement | null>(() => document.querySelector('body')), [])
+        () => fireClientSide<HTMLBodyElement | null>(() => document.querySelector('body')), [])
 
 
     useEffect(() => {

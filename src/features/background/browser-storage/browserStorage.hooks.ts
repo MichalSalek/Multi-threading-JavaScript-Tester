@@ -11,7 +11,7 @@ import {
     STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION,
     STORAGE_KEY_WORKERS_AMOUNT,
     StorageKeyControlPanelCollapseStateEnum
-} from '@/app-config-constants'
+} from '@/core/constants.core'
 import { WorkerAmountChangeActionEnum } from '@/features/background/web-workers/webWorkers.types'
 import {
     handleControlPanelSwitchVisibility,
@@ -22,7 +22,7 @@ import {
 } from '@/features/building/control-panel/controlPanelSlice'
 import { ControlPosition, DraggableData, DraggableEvent } from 'react-draggable'
 import { isUndefinedType } from '@/coding-utils/typeOperations.api'
-import { fireJustClientSide } from '@/coding-utils/environmentOperations.api'
+import { fireClientSide } from '@/coding-utils/environmentOperations.api'
 
 
 
@@ -190,7 +190,7 @@ export const usePersistedPositionByBrowserStorage = (
 
 
     const ifSingleAxisRequiresValidation = useCallback(
-        (axisPosition: number, XorY: 'X' | 'Y') => fireJustClientSide<boolean>(() => {
+        (axisPosition: number, XorY: 'X' | 'Y') => fireClientSide<boolean>(() => {
             switch (XorY) {
             case 'X':
                 return axisPosition < 0 || axisPosition > window.innerWidth
@@ -222,7 +222,7 @@ export const usePersistedPositionByBrowserStorage = (
     //
     const intervalID = useRef(0)
     useEffect(() => {
-        fireJustClientSide(() => {
+        fireClientSide(() => {
             window.clearInterval(intervalID.current)
 
             intervalID.current = window.setInterval(() => {
@@ -231,7 +231,7 @@ export const usePersistedPositionByBrowserStorage = (
         })
 
         return () => {
-            fireJustClientSide(() => {
+            fireClientSide(() => {
                 window.clearInterval(intervalID.current)
             })
         }

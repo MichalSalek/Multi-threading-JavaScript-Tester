@@ -1,4 +1,4 @@
-import { MAX_WORKERS_LIMIT } from '@/app-config-constants'
+import { MAX_WORKERS_LIMIT } from '@/core/constants.core'
 import {
     IWorkerKey,
     IWorkerTask,

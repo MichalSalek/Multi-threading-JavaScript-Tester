@@ -1,6 +1,6 @@
 import React from 'react'
 import { PopoverTitleMolecule } from '@/features/building/popover-title/UI/PopoverTitle.molecule'
-import { MAIN_THREAD_KEY } from '@/app-config-constants'
+import { MAIN_THREAD_KEY } from '@/core/constants.core'
 import scss from './mainThreadSwitch.module.scss'
 import dynamic from 'next/dynamic'
 

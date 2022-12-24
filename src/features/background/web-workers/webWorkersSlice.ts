@@ -15,7 +15,7 @@ import {
     WorkersGlobalComplexityType
 } from '@/features/background/web-workers/webWorkers.types'
 import { getValidatedPassedAmount } from '@/features/background/web-workers/webWorkers.api'
-import { MAX_WORKERS_LIMIT } from '@/app-config-constants'
+import { MAX_WORKERS_LIMIT } from '@/core/constants.core'
 
 
 

@@ -5,10 +5,10 @@ import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLog
 
 // Server Side Rendering guard for browser global objects access while Next.js making a build.
 //
-export const fireJustClientSide = <D>(justClientSideCallback: UnknownFunctionType<undefined, D>, loggerAdditionalEcho = ''): D | null => {
+export const fireClientSide = <D>(clientSideCallback: UnknownFunctionType<undefined, D>, loggerAdditionalEcho = ''): D | null => {
     loggerAdditionalEcho && addConsoleVerbose(`[Trying to -> ${loggerAdditionalEcho}]`)
     if (!(typeof window === 'undefined' && !process.browser)) {
-        return justClientSideCallback()
+        return clientSideCallback()
     } else {
         loggerAdditionalEcho && addConsoleVerbose(`[Failed -> ${loggerAdditionalEcho}] - Probably server side.`)
         return null

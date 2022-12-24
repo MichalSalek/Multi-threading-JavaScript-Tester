@@ -21,7 +21,7 @@ import WorkersScoreboardWindowMolecule from '@/features/building/workers-scorebo
 import WorkersGlobalWorkControlWindowMolecule
     from '@/features/building/workers-global-work-control/UI/WorkersGlobalWorkControlWindow.molecule'
 import MetaHead from '@/layout/partials/MetaHead'
-import '@/global-styles/variables-and-mixins.scss'
+import '@/global-styles/variables-and-functions.scss'
 import '@/global-styles/global-styles.scss'
 
 

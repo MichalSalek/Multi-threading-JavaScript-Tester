@@ -1,6 +1,6 @@
 import { WEB_WORKER_TASKS } from '@/features/background/web-workers/webWorkersEvents'
 import { workersKeysNames } from '@/features/background/web-workers/add-new-physical-worker-here'
-import { MAIN_THREAD_KEY } from '@/app-config-constants'
+import { MAIN_THREAD_KEY } from '@/core/constants.core'
 import { ClientBrowserIDType } from '@/features/background/socket-client/socket.types'
 
 

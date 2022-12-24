@@ -1,10 +1,10 @@
 import { IWorkerKey } from '@/features/background/web-workers/webWorkers.types'
-import { fireJustClientSide } from '@/coding-utils/environmentOperations.api'
+import { fireClientSide } from '@/coding-utils/environmentOperations.api'
 
 
 
 // Worker limit. Automatic set - window.navigator.hardwareConcurrency
-export const MAX_WORKERS_LIMIT = fireJustClientSide<number>(() => window.navigator.hardwareConcurrency || 4) as number
+export const MAX_WORKERS_LIMIT = fireClientSide<number>(() => window.navigator.hardwareConcurrency || 4) as number
 
 // WorkerKey entity for main thread. Exceptionally - it is not a Worker :-) But using the same logic and the case is singular.
 export const MAIN_THREAD_KEY: IWorkerKey = {workerName: 'mainThread'}

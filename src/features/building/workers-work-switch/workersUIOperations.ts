@@ -1,5 +1,5 @@
 import React from 'react'
-import { MAX_WORKER_COMPLEXITY_POSSIBILITY } from '@/app-config-constants'
+import { MAX_WORKER_COMPLEXITY_POSSIBILITY } from '@/core/constants.core'
 import { ComplexityValueType } from '@/features/building/workers-work-switch/UI/WorkersWorkSwitch.molecule'
 import scss from '@/features/building/workers-work-switch/UI/workersWorkSwitch.module.scss'
 

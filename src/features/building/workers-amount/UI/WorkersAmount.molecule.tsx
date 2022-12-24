@@ -9,7 +9,7 @@ import {
 import { WorkerAmountChangeActionEnum } from '@/features/background/web-workers/webWorkers.types'
 import { getValidatedPassedAmount } from '@/features/background/web-workers/webWorkers.api'
 import { useAppDispatch, useAppSelector } from '@/core/store.core'
-import { MAX_WORKERS_LIMIT } from '@/app-config-constants'
+import { MAX_WORKERS_LIMIT } from '@/core/constants.core'
 
 import AppButtonAtom from '@/app-components/AppButton.atom'
 import AppInputAtom from '@/app-components/AppInput.atom'

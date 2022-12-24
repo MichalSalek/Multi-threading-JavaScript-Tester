@@ -23,14 +23,12 @@ const initialState: IControlPanelState = {
     }
 } as const
 
-// All visibility switch control possibilities - no enums, no hard-typed strings.
-// You can use it to handle some crazy logic - without data turnouts (single source of truth).
 export type SystemComponentNameType = keyof typeof initialState.visibilitySwitches
 
 export const possibleControlPanelSwitchesNames = Object.keys(initialState.visibilitySwitches) as SystemComponentNameType[]
 
 // By this switch you can:
-// pass nothing - then switch works like typical on/off switch
+// undefined - then switch works like typical on/off switch
 // true - turn on the visibility
 // false - turn it off - hide component
 export type ControlPanelSwitchVisibilityType = { name: SystemComponentNameType; visibilitySwitchState?: boolean | undefined }

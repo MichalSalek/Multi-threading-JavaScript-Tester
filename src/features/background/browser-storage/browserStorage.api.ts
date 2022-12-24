@@ -1,11 +1,11 @@
-import { fireJustClientSide } from '@/coding-utils/environmentOperations.api'
+import { fireClientSide } from '@/coding-utils/environmentOperations.api'
 
 
 
 export const setStorageItem = (key: string, value: string): void => {
-    fireJustClientSide<void>(() => window.localStorage.setItem(key, value))
+    fireClientSide<void>(() => window.localStorage.setItem(key, value))
 }
 
 export const getStorageItem = (key: string): string | null => {
-    return fireJustClientSide<string | null>(() => window.localStorage.getItem(key))
+    return fireClientSide<string | null>(() => window.localStorage.getItem(key))
 }

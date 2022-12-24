@@ -12,7 +12,7 @@ import {
     MAIN_THREAD_KEY,
     MAX_WORKER_COMPLEXITY_POSSIBILITY,
     MIN_WORKER_COMPLEXITY_POSSIBILITY
-} from '@/app-config-constants'
+} from '@/core/constants.core'
 import { Slider, Typography } from '@mui/material'
 import scss from './workersWorkSwitch.module.scss'
 import { randomIntFromNumbersRange } from '@/coding-utils/numberOperations.api'

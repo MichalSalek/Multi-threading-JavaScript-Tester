@@ -1,7 +1,7 @@
 import { Socket } from 'socket.io-client'
 import { WebSocketEventTriggersType } from '@/features/background/socket-client/socketEventsEntities'
 import { AppToSocketDTO, AppToSocketEmitDTO, SocketToAppDTO } from '@/features/background/socket-client/socket.types'
-import { INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES } from '@/app-config-constants'
+import { INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES } from '@/core/constants.core'
 import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLogs.api'
 
 
