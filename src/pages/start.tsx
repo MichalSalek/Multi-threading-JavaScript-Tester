@@ -24,7 +24,7 @@ const StartScreenPage: NextPage = () => {
 
         <section className={'lower-opacity'}>
             <Typography variant="h6"> Work in progress - building UI.</Typography>
-            <Typography variant="body2"> Please come back soon to feel a new look.</Typography>
+            <Typography variant="body2"> Come back soon to feel a new look.</Typography>
             <Typography variant="body2"> Best on the desktop.</Typography>
         </section>
 

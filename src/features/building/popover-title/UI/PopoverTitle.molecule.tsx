@@ -18,7 +18,7 @@ interface IProps {
 export const PopoverTitleMolecule = ({
     popoverTextContent,
     titleTextContent,
-    titleVariant = 'h6'
+    titleVariant = 'h5'
 }: IProps): JSX.Element => {
 
     return (<article className={scss.host}>

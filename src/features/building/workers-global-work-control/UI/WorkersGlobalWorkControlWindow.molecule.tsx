@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import scss from './workersGlobalWorkControl.module.scss'
 import { DraggableWindowComposition } from '@/layout/compositions/draggable-window/DraggableWindow.composition'
 import { useAppSelector } from '@/core/store.core'
@@ -15,7 +15,7 @@ import {
     queueAllWorkersTask,
     queueWorkerTask
 } from '@/features/background/web-workers/webWorkers.api'
-import { ButtonGroup } from '@mui/material'
+import {ButtonGroup, CircularProgress, Stack, Typography} from '@mui/material'
 import { IWorkerKey } from '@/features/background/web-workers/webWorkers.types'
 
 
@@ -29,8 +29,19 @@ const WorkersGlobalWorkControlWindowMolecule = (): JSX.Element => {
     const isAllOfWorkersWorking = useAppSelector(selectIsAllOfWorkersWorking)
 
 
+    const [workCommandLoader, setWorkCommandLoader] = useState(false)
+    const [stopCommandLoader, setStopCommandLoader] = useState(false)
+
+    useEffect(() => {
+        isAllOfWorkersWorking && setWorkCommandLoader(false)
+        !isAnyWorkerWorking && setStopCommandLoader(false)
+    }, [setWorkCommandLoader, setStopCommandLoader, isAllOfWorkersWorking, isAnyWorkerWorking])
+
+
     const handleAllWorkersWorkCommand = useCallback(() => {
         const activeWorkersByNow: IWorkerKey[] = getExistingWorkersKeys()
+
+        setWorkCommandLoader(true)
 
         activeWorkersByNow.forEach((workerKey: IWorkerKey) => {
             queueWorkerTask(workerKey, {
@@ -40,6 +51,13 @@ const WorkersGlobalWorkControlWindowMolecule = (): JSX.Element => {
         })
 
     }, [workersComplexity])
+
+    const handleAllWorkersStopCommand = useCallback(() => {
+
+        setStopCommandLoader(true)
+
+        queueAllWorkersTask('calculation-worker.js', {workerTaskName: 'task__calculations_off'})
+    }, [])
 
 
     const defaultOnTheScreenPosition = useMemo(() => ({x: 50, y: 70}), [])
@@ -52,23 +70,38 @@ const WorkersGlobalWorkControlWindowMolecule = (): JSX.Element => {
                 onTheScreenPosition={defaultOnTheScreenPosition}
                 zIndex={1900}
             >
-                <section
+                <Stack
+                    minWidth={'300px'}
                     className={`${scss.host} display-inline-block`}>
 
-                    <ButtonGroup>
+                    <Typography variant={'h6'}>
+                        ALL WORKERS:
+                    </Typography>
+
+                    <ButtonGroup fullWidth={true}>
                         <AppButtonAtom
                             onClick={handleAllWorkersWorkCommand}
                             disabled={isAllOfWorkersWorking}>
-                            <span>MAKE THEM ALL WORK</span>
+                            {workCommandLoader ? (
+                                <CircularProgress
+                                    size={18}
+                                    color="inherit"
+                                />
+                            ) : <span>START</span>}
                         </AppButtonAtom>
                         <AppButtonAtom
-                            onClick={() => queueAllWorkersTask('calculation-worker.js', {workerTaskName: 'task__calculations_off'})}
+                            onClick={handleAllWorkersStopCommand}
                             disabled={!isAnyWorkerWorking}>
-                            <span>STOP ALL WORKERS</span>
+                            {stopCommandLoader ? (
+                                <CircularProgress
+                                    size={18}
+                                    color="inherit"
+                                />
+                            ) : <span>STOP</span>}
                         </AppButtonAtom>
                     </ButtonGroup>
 
-                </section>
+                </Stack>
             </DraggableWindowComposition>
         </SystemComponentVisibilityComposition>
     )

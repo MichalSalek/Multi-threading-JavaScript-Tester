@@ -1,8 +1,11 @@
+@import "src/global-styles/variables-and-functions";
+
 .host {
 
   .textContent {
-    margin-top: 1rem;
-    margin-bottom: 3rem;
+    display: flex;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
   }
 
 
@@ -11,8 +14,9 @@
   }
 
   .icon {
+
     transition: transform 0.07s ease-out;
-    transform: scale(1.2);
+    transform: scale(1.5);
 
 
     @keyframes heartbeat {
@@ -21,17 +25,19 @@
       }
       50% {
         opacity: 1;
+        filter: contrast(1.1)
       }
       100% {
         opacity: 0.8;
       }
     }
 
-    animation: heartbeat 1.7s ease-in-out infinite both;
+    animation: heartbeat 1s ease-in-out infinite both;
 
 
     &:hover {
-      transform: scale(1.4);
+      transform: scale(1.8);
+      @extend %animateReadyState;
     }
   }
 }

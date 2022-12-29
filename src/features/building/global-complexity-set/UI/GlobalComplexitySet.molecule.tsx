@@ -1,5 +1,5 @@
 import { Slider } from '@mui/material'
-import React, { useMemo, useState } from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 import { PopoverTitleMolecule } from '@/features/building/popover-title/UI/PopoverTitle.molecule'
 import { MAX_WORKER_COMPLEXITY_POSSIBILITY, MIN_WORKER_COMPLEXITY_POSSIBILITY } from '@/core/constants.core'
 import AppButtonAtom from '@/app-components/AppButton.atom'
@@ -13,6 +13,7 @@ import {
 import { fireClientSide } from '@/coding-utils/environmentOperations.api'
 import {useSliderRAWValueHandler} from '@/features/building/global-complexity-set/useSliderRAWValueHandler'
 import {handleNewGlobalComplexitySet} from '@/features/building/global-complexity-set/global-complexity-set.api'
+import {freezeThreadAndWait} from '@/coding-utils/asyncOperations.api'
 
 
 
@@ -25,6 +26,16 @@ export const GlobalComplexitySetMolecule = (): JSX.Element => {
     const isNoWorkerActive = useAppSelector(selectIsNoWorkerActive)
 
     const [sliderValue, handleSliderRAWValue] = useSliderRAWValueHandler()
+
+    const [setDataButtonDisabledState, setSetDataButtonDisabledState] = useState(false)
+    useEffect(() => {
+        setSetDataButtonDisabledState(false)
+    }, [sliderValue, setSetDataButtonDisabledState])
+
+
+    const [initialSettingsButtonDisabledState, setInitialSettingsButtonDisabledState] = useState(false)
+
+
 
     const isSliderHasAnInitialStateYet = useMemo<boolean>(() =>
         typeof sliderValue === 'undefined', [sliderValue])
@@ -41,7 +52,7 @@ export const GlobalComplexitySetMolecule = (): JSX.Element => {
     return (<section className={scss.host}>
         <PopoverTitleMolecule
             popoverTextContent={'It can be useful if you have many active Workers.'}
-            titleTextContent={'Global complexity controls'}
+            titleTextContent={'Global complexity controls:'}
         />
 
         <Slider
@@ -59,13 +70,23 @@ export const GlobalComplexitySetMolecule = (): JSX.Element => {
 
         <section className={scss.buttons}>
             <AppButtonAtom
-                disabled={isSliderHasAnInitialStateYet || isAnyWorkerWorking || isNoWorkerActive}
-                onClick={() => handleNewGlobalComplexitySet(sliderValue)}>
+                disabled={isSliderHasAnInitialStateYet || isAnyWorkerWorking || isNoWorkerActive || setDataButtonDisabledState}
+                onClick={() => {
+                    setSetDataButtonDisabledState(true)
+                    handleNewGlobalComplexitySet(sliderValue)
+                }}>
                 <span>Set to all workers</span>
             </AppButtonAtom>
             <AppButtonAtom
-                onClick={handleRefreshUndefinedGlobalComplexityState}
-                disabled={isAnyWorkerWorking || isNoWorkerActive}>
+                onClick={async () => {
+                    handleRefreshUndefinedGlobalComplexityState()
+
+                    setInitialSettingsButtonDisabledState(true)
+                    await freezeThreadAndWait(250)
+                    setInitialSettingsButtonDisabledState(false)
+                    setSetDataButtonDisabledState(false)
+                }}
+                disabled={isAnyWorkerWorking || isNoWorkerActive || initialSettingsButtonDisabledState}>
                 <span>Come back to initial setting</span>
             </AppButtonAtom>
         </section>

@@ -8,7 +8,7 @@ const Footer = () => {
 
     return (
         <footer className={scss.footer}>
-            <Typography variant={'body2'}>build version 0.8</Typography>
+            <Typography variant={'body2'}>build version 0.9</Typography>
         </footer>
     )
 }

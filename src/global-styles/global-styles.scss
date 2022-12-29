@@ -140,10 +140,3 @@ html body {
   background-color: hsl(15deg 75% 30%);
 }
 
-html body .MuiButton-root {
-  transition: filter 0.1s ease-out;
-
-  &:hover {
-    filter: hue-rotate(3deg) saturate(1.5) contrast(1.3);
-  }
-}

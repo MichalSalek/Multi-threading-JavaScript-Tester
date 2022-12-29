@@ -8,6 +8,7 @@
 
 
 .host {
+  display: inline-flex;
 
   svg {
     @extend %colorVariables;

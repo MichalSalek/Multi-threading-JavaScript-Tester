@@ -12,34 +12,21 @@ const ClarifyingInformationMolecule = (): JSX.Element => {
         <section className={scss.textBlock}>
             <Typography variant="h4">
 
-                Multithreading JavaScript tester.
+                Multithreading in-browser CPU stability test.
 
             </Typography>
             <Typography variant="h6">
 
-                This application is used to artificially load the CPU with calculations performed by JavaScript.
+                The application can artificially load the CPU with random calculations performed by JavaScript.
 
             </Typography>
             <Typography variant="body1">
 
-                In general, using a WebWorkers you can delegate heavy tasks to other
-                threads
-
-            </Typography>
-            <Typography variant="body1">
+                Using a WebWorkers you can delegate heavy tasks to other
+                threads.<br/>
 
                 What does means? Instead of using your server resources and user client transfer
-                - you can do it instantly within the user browser - but without slowing down the user interface.
-
-            </Typography>
-            <Typography variant="body1">
-
-                The page you are currently on will run without any loss of smoothness.
-
-            </Typography>
-            <Typography variant="body1">
-
-                Why? The main thread responsible for drawing the GUI will remain unencumbered.
+                - do it instantly within the user browser - but without slowing down the User Interface.
 
             </Typography>
         </section>
@@ -51,7 +38,7 @@ const ClarifyingInformationMolecule = (): JSX.Element => {
                 To understand what is happening,
 
             </Typography>
-            <Typography variant="body2">
+            <Typography variant="body1">
 
                 you need to monitor your device&apos;s CPU load.
 
@@ -60,25 +47,25 @@ const ClarifyingInformationMolecule = (): JSX.Element => {
 
 
         <section className={scss.textBlock}>
-            <Typography variant="h5">
+            <Typography variant="h6">
 
                 Are you a Microsoft Windows user?
 
             </Typography>
-            <Typography variant="body2">
+            <Typography variant="body1">
 
                 Press all these buttons simultaneously:
 
             </Typography>
-            <Typography variant="h6">
+            <Typography variant="body1">
 
                 CTRL <strong>+</strong> LEFT SHIFT <strong>+</strong> ESC
                 <i className="fad fa-keyboard"/>
 
             </Typography>
-            <Typography variant="body2">
+            <Typography variant="body1">
 
-                Then go to second tab - Performance
+                Then go to second tab - Performance.
 
             </Typography>
         </section>
@@ -92,7 +79,7 @@ const ClarifyingInformationMolecule = (): JSX.Element => {
             </Typography>
             <Typography variant="body2">
 
-                Find an app like CPU monitor in the app store.
+                Find and use an app like CPU monitor in the app store.
 
             </Typography>
         </section>

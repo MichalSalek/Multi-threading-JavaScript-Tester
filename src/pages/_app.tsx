@@ -1,6 +1,6 @@
 import React from 'react'
-import type { AppProps } from 'next/app'
-import { Provider } from 'react-redux'
+import type {AppProps} from 'next/app'
+import {Provider} from 'react-redux'
 import store from '@/core/store.core'
 import LayoutComposition from '@/layout/Layout.composition'
 import BrowserStoragePersistController from '@/features/background/browser-storage/BrowserStoragePersist.controller'
@@ -8,19 +8,18 @@ import SocketConnectionAndListeningController
     from '@/features/background/socket-client/SocketConnectionAndListening.controller'
 import WorkersActiveInstancesAndCommunicationController
     from '@/features/background/web-workers/WorkersActiveInstancesAndCommunication.controller'
-import { CssBaseline, ThemeProvider } from '@mui/material'
+import {CssBaseline, ThemeProvider} from '@mui/material'
 import FPSMonitorWindowMolecule from '@/features/building/fps-monitor/UI/FPSMonitorWindow.molecule'
 import IconPackController from '@/features/background/icon-pack/IconPack.controller'
 import BorderColorChangeController from '@/features/background/border-color-change/BorderColorChange.controller'
-import { createTheme } from '@mui/material/styles'
-import { grey, lightBlue } from '@mui/material/colors'
+import {createTheme} from '@mui/material/styles'
+import {deepOrange, green, grey, lightBlue, orange} from '@mui/material/colors'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
-import { ROUTE_START_PAGE_SCREEN } from '@/core/routes.core'
+import {useRouter} from 'next/router'
+import {ROUTE_START_PAGE_SCREEN} from '@/core/routes.core'
 import WorkersScoreboardWindowMolecule from '@/features/building/workers-scoreboard/UI/WorkersScoreboardWindow.molecule'
 import WorkersGlobalWorkControlWindowMolecule
     from '@/features/building/workers-global-work-control/UI/WorkersGlobalWorkControlWindow.molecule'
-import MetaHead from '@/layout/partials/MetaHead'
 import '@/global-styles/variables-and-functions.scss'
 import '@/global-styles/global-styles.scss'
 
@@ -78,9 +77,20 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
             MuiButton: {
                 styleOverrides: {
                     root: {
-                        color: '#e0e0e0'
+                        color: '#e0e0e0',
+                        backgroundColor: '#0277bd71',
+                        transition: 'filter background 0.07s ease-out',
+                        '&:hover': {
+                            filter: 'hue-rotate(3deg) saturate(1.5) contrast(1.3)'
+                        },
+                    },
+                    containedWarning: {
+                        backgroundColor: '#bf360c71'
+                    },
+                    containedSuccess: {
+                        backgroundColor: '#2e7d3271'
                     }
-                }
+                },
             },
             MuiButtonGroup: {
                 styleOverrides: {
@@ -95,6 +105,19 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
                 styleOverrides: {
                     badge: {
                         pointerEvents: 'all'
+                    }
+                }
+            },
+            MuiTypography: {
+                styleOverrides: {
+                    h4: {
+                        marginBottom: '15px'
+                    },
+                    h6: {
+                        marginBottom: '10px'
+                    },
+                    body1: {
+                        textIndent: '5px'
                     }
                 }
             }

@@ -3,6 +3,7 @@ import { PopoverTitleMolecule } from '@/features/building/popover-title/UI/Popov
 import { MAIN_THREAD_KEY } from '@/core/constants.core'
 import scss from './mainThreadSwitch.module.scss'
 import dynamic from 'next/dynamic'
+import {Container} from '@mui/material'
 
 
 
@@ -15,18 +16,19 @@ const MainThreadSwitchMolecule = (): JSX.Element => {
 
     return (
         <section className={scss.host}>
-            <PopoverTitleMolecule
-                popoverTextContent={'Control the use of the main, standard thread. In this case, no Worker\n' +
+            <Container maxWidth={'sm'}>
+                <PopoverTitleMolecule
+                    popoverTextContent={'Control the use of the main, standard thread. In this case, no Worker\n' +
                 '                        will\n' +
                 '                        be\n' +
                 '                        used.' + 'Causes loss of GUI smoothness. Animations may be slowed down. Try to\n' +
                 '                        start\n' +
                 '                        with\n' +
                 '                        a low values.'}
-                titleTextContent={'The main thread of the browser'}
-                titleVariant={'h5'}
-            />
-            <WorkersWorkSwitchMolecule workerKey={MAIN_THREAD_KEY}/>
+                    titleTextContent={'Main browser\'s thread:'}
+                />
+                <WorkersWorkSwitchMolecule workerKey={MAIN_THREAD_KEY}/>
+            </Container>
         </section>
     )
 }
