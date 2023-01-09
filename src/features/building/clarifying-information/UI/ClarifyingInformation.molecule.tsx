@@ -77,7 +77,7 @@ const ClarifyingInformationMolecule = (): JSX.Element => {
                 Using smartphone?
 
             </Typography>
-            <Typography variant="body2">
+            <Typography variant="body1">
 
                 Find and use an app like CPU monitor in the app store.
 

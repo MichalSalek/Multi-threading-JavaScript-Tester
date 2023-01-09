@@ -1,10 +1,7 @@
-import { useAppDispatch, useAppSelector } from '@/core/store.core'
-import {
-    handleWorkerAmountChange,
-    selectRequestedWorkersAmount
-} from '@/features/background/web-workers/webWorkersSlice'
-import { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { getStorageItem, setStorageItem } from '@/features/background/browser-storage/browserStorage.api'
+import {useAppDispatch, useAppSelector} from '@/core/store.core'
+import {handleWorkerAmountChange, selectRequestedWorkersAmount} from '@/features/background/web-workers/webWorkersSlice'
+import {Dispatch, SetStateAction, useCallback, useEffect, useMemo, useRef, useState} from 'react'
+import {getStorageItem, setStorageItem} from '@/features/background/browser-storage/browserStorage.api'
 import {
     STORAGE_KEY_CONTROL_PANEL_COLLAPSE_STATE,
     STORAGE_KEY_CONTROL_PANEL_SWITCHES,
@@ -12,17 +9,17 @@ import {
     STORAGE_KEY_WORKERS_AMOUNT,
     StorageKeyControlPanelCollapseStateEnum
 } from '@/core/constants.core'
-import { WorkerAmountChangeActionEnum } from '@/features/background/web-workers/webWorkers.types'
+import {WorkerAmountChangeActionEnum} from '@/features/background/web-workers/webWorkers.types'
 import {
     handleControlPanelSwitchVisibility,
-    ISystemComponentsVisibilities,
     possibleControlPanelSwitchesNames,
     selectSystemComponentsVisibilities,
     SystemComponentNameType
 } from '@/features/building/control-panel/controlPanelSlice'
-import { ControlPosition, DraggableData, DraggableEvent } from 'react-draggable'
-import { isUndefinedType } from '@/coding-utils/typeOperations.api'
-import { fireClientSide } from '@/coding-utils/environmentOperations.api'
+import {ControlPosition, DraggableData, DraggableEvent} from 'react-draggable'
+import {isUndefinedType} from '@/coding-utils/typeOperations.api'
+import {fireClientSide} from '@/coding-utils/environmentOperations.api'
+import {ISystemComponentsVisibilities} from '@/features/building/control-panel/controlPanel.types'
 
 
 
@@ -202,7 +199,7 @@ export const usePersistedPositionByBrowserStorage = (
 
     const checkIfTheOffScreenPositionRequireValidation = useCallback((position: ControlPositionType): boolean =>
         ifSingleAxisRequiresValidation(position.x, 'X')
-            || ifSingleAxisRequiresValidation(position.y, 'Y')
+      || ifSingleAxisRequiresValidation(position.y, 'Y')
     , [ifSingleAxisRequiresValidation])
 
     const validateConsumerPosition = useCallback((position: ControlPositionType): ControlPositionType => ({

@@ -4,7 +4,6 @@ import scss from './controlPanel.module.scss'
 import { useAppDispatch, useAppSelector } from '@/core/store.core'
 import {
     handleControlPanelSwitchVisibility,
-    ISystemComponentsVisibilities,
     selectSystemComponentsVisibilities
 } from '@/features/building/control-panel/controlPanelSlice'
 import { useControlPanelCollapseStateStoragePersist } from '@/features/background/browser-storage/browserStorage.hooks'
@@ -15,6 +14,7 @@ import {
 } from '@/core/constants.core'
 import { getStorageItem, setStorageItem } from '@/features/background/browser-storage/browserStorage.api'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import {ISystemComponentsVisibilities} from '@/features/building/control-panel/controlPanel.types'
 
 
 

@@ -1,17 +1,12 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { AppState } from '@/core/store.core'
+import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {AppState} from '@/core/store.core'
+import {ISystemComponentsVisibilities} from '@/features/building/control-panel/controlPanel.types'
 
 
-
-export type ISystemComponentsVisibilities = {
-    FPSMonitor: boolean
-    scoreboard: boolean
-    workControl: boolean
-}
 
 
 type IControlPanelState = {
-    visibilitySwitches: ISystemComponentsVisibilities
+  visibilitySwitches: ISystemComponentsVisibilities
 }
 
 

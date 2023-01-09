@@ -1,23 +1,20 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { io } from 'socket.io-client'
-import store, { AppState } from '@/core/store.core'
-import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/background/socket-client/socketEventsEntities'
-import { ClientBrowserIDType } from '@/features/background/socket-client/socket.types'
-import {
-    WorkerJobsByClientBrowserIDTypeDTO,
-    WorkerJobsTypeDTO
-} from '@/features/background/web-workers/webWorkers.types'
+import {ActionReducerMapBuilder, createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
+import {io} from 'socket.io-client'
+import store, {AppState} from '@/core/store.core'
+import {WEB_SOCKET_EVENTS_TRIGGERS} from '@/features/background/socket-client/socketEventsEntities'
+import {ClientBrowserIDType} from '@/features/background/socket-client/socket.types'
+import {WorkerJobsByClientBrowserIDTypeDTO, WorkerJobsTypeDTO} from '@/features/background/web-workers/webWorkers.types'
 import {
     listenToSocketEventWithDebounce,
     sendCommandMessageToSocket
 } from '@/features/background/socket-client/socket.api'
-import { ROUTE_API_WEB_SOCKET } from '@/core/routes.core'
-import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLogs.api'
+import {ROUTE_API_WEB_SOCKET} from '@/core/routes.core'
+import {addConsoleVerbose} from '@/features/background/verbose-logs/verboseLogs.api'
 
 
 
 interface IConnectSocketThunkPayload {
-    isSocketActive: boolean
+  isSocketActive: boolean
 }
 
 
@@ -82,10 +79,10 @@ export const connectSocketThunk = createAsyncThunk('connectSocketThunk', async (
 
 
 type ISocketState = {
-    active: boolean
-    lastReceivedAnyWorkerJobsData: WorkerJobsByClientBrowserIDTypeDTO
-    lastReceivedClientBrowserWorkerJobsData: WorkerJobsTypeDTO
-    clientBrowserID: ClientBrowserIDType | null
+  active: boolean
+  lastReceivedAnyWorkerJobsData: WorkerJobsByClientBrowserIDTypeDTO
+  lastReceivedClientBrowserWorkerJobsData: WorkerJobsTypeDTO
+  clientBrowserID: ClientBrowserIDType | null
 }
 
 
@@ -94,13 +91,14 @@ const initialState: ISocketState = {
     lastReceivedAnyWorkerJobsData: {},
     lastReceivedClientBrowserWorkerJobsData: {},
     clientBrowserID: null
-}
+} as const
 
 export const socketSlice = createSlice({
     name: 'socketSlice',
     initialState,
 
     reducers: {
+
         handleNewAnyWorkersJobDataReceiveFromSocket: (state, action: PayloadAction<WorkerJobsByClientBrowserIDTypeDTO>) => {
             state.lastReceivedAnyWorkerJobsData = action.payload
         },
@@ -109,15 +107,17 @@ export const socketSlice = createSlice({
         },
         handleNewClientBrowserID: (state, action: PayloadAction<ClientBrowserIDType>) => {
             if (typeof state.clientBrowserID === 'string') return void undefined
-
             state.clientBrowserID = action.payload
+            return state
         }
     },
 
-    extraReducers: (builder) => {
+    extraReducers: (builder: ActionReducerMapBuilder<ISocketState>) => {
 
         builder.addCase(connectSocketThunk.fulfilled, (state, action: PayloadAction<IConnectSocketThunkPayload>) => {
-            state.active = action.payload.isSocketActive
+            if (state) {
+                state.active = action.payload.isSocketActive
+            }
         })
     }
 })

@@ -13,7 +13,7 @@ import FPSMonitorWindowMolecule from '@/features/building/fps-monitor/UI/FPSMoni
 import IconPackController from '@/features/background/icon-pack/IconPack.controller'
 import BorderColorChangeController from '@/features/background/border-color-change/BorderColorChange.controller'
 import {createTheme} from '@mui/material/styles'
-import {deepOrange, green, grey, lightBlue, orange} from '@mui/material/colors'
+import {grey, lightBlue} from '@mui/material/colors'
 import dynamic from 'next/dynamic'
 import {useRouter} from 'next/router'
 import {ROUTE_START_PAGE_SCREEN} from '@/core/routes.core'
@@ -82,7 +82,7 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
                         transition: 'filter background 0.07s ease-out',
                         '&:hover': {
                             filter: 'hue-rotate(3deg) saturate(1.5) contrast(1.3)'
-                        },
+                        }
                     },
                     containedWarning: {
                         backgroundColor: '#bf360c71'
@@ -90,7 +90,7 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
                     containedSuccess: {
                         backgroundColor: '#2e7d3271'
                     }
-                },
+                }
             },
             MuiButtonGroup: {
                 styleOverrides: {

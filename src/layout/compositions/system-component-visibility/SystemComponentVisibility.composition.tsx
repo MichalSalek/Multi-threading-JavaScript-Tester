@@ -1,11 +1,11 @@
 import React, { JSXElementConstructor, ReactElement, useMemo } from 'react'
 import { AppProps } from 'next/app'
 import {
-    ISystemComponentsVisibilities,
     selectSystemComponentsVisibilities,
     SystemComponentNameType
 } from '@/features/building/control-panel/controlPanelSlice'
 import { useAppSelector } from '@/core/store.core'
+import {ISystemComponentsVisibilities} from '@/features/building/control-panel/controlPanel.types'
 
 
 
