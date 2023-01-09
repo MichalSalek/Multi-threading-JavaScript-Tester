@@ -74,12 +74,13 @@ const WorkersGlobalWorkControlWindowMolecule = (): JSX.Element => {
                     minWidth={'300px'}
                     className={`${scss.host} display-inline-block`}>
 
-                    <Typography variant={'h6'}>
-                        ALL WORKERS:
+                    <Typography variant={'body2'} paddingBottom={1}>
+                        All workers state:
                     </Typography>
 
-                    <ButtonGroup fullWidth={true}>
+                    <ButtonGroup fullWidth={true} size={'small'}>
                         <AppButtonAtom
+                            color={'success'}
                             onClick={handleAllWorkersWorkCommand}
                             disabled={isAllOfWorkersWorking}>
                             {workCommandLoader ? (
@@ -90,6 +91,7 @@ const WorkersGlobalWorkControlWindowMolecule = (): JSX.Element => {
                             ) : <span>START</span>}
                         </AppButtonAtom>
                         <AppButtonAtom
+                            color={'warning'}
                             onClick={handleAllWorkersStopCommand}
                             disabled={!isAnyWorkerWorking}>
                             {stopCommandLoader ? (

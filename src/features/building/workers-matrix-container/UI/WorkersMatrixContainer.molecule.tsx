@@ -6,12 +6,12 @@ import {
 import WorkersWorkSwitchMolecule from '@/features/building/workers-work-switch/UI/WorkersWorkSwitch.molecule'
 import { constructWorkerNameByOrderIndex } from '@/features/background/web-workers/webWorkers.api'
 import { useAppSelector } from '@/core/store.core'
-import scss from './workersSwitchesViewContainer.module.scss'
+import scss from './workersMatrixContainer.module.scss'
 import { PopoverTitleMolecule } from '@/features/building/popover-title/UI/PopoverTitle.molecule'
 
 
 
-const WorkersSwitchesViewContainerMolecule = (): JSX.Element => {
+const WorkersMatrixContainerMolecule = (): JSX.Element => {
 
     const workerRequestedAmount = useAppSelector(selectRequestedWorkersAmount)
 
@@ -49,4 +49,4 @@ const WorkersSwitchesViewContainerMolecule = (): JSX.Element => {
     </main>)
 }
 
-export default WorkersSwitchesViewContainerMolecule
+export default WorkersMatrixContainerMolecule

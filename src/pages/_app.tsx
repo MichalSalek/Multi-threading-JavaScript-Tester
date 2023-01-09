@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import type {AppProps} from 'next/app'
 import {Provider} from 'react-redux'
 import store from '@/core/store.core'
@@ -37,8 +37,8 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
 
     const router = useRouter()
 
-
-    const isTheStartPageActually = (): boolean => router.route === ROUTE_START_PAGE_SCREEN
+    const isTheStartPageActually = useMemo<boolean>(() => router.route === ROUTE_START_PAGE_SCREEN,
+        [router.route])
 
     const theme = createTheme({
         palette: {
@@ -142,7 +142,7 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
 
 
             {/* Whole app runtime components - above all pages during a whole app life. */}
-            {isTheStartPageActually() ? <></> : (<>
+            {isTheStartPageActually ? <></> : (<>
                 <FPSMonitorWindowMolecule/>
                 <WorkersScoreboardWindowMolecule/>
                 <WorkersGlobalWorkControlWindowMolecule/>

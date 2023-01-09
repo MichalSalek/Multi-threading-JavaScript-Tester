@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, {useMemo, useState} from 'react'
 import scss from './workersScoreboard.module.scss'
 import {
     NamedWorkerReadyStatusType,
@@ -7,18 +7,19 @@ import {
     WorkerNameType,
     WorkersAmountStateType
 } from '@/features/background/web-workers/webWorkers.types'
-import { DraggableWindowComposition } from '@/layout/compositions/draggable-window/DraggableWindow.composition'
-import { useAppSelector } from '@/core/store.core'
+import {DraggableWindowComposition} from '@/layout/compositions/draggable-window/DraggableWindow.composition'
+import {useAppSelector} from '@/core/store.core'
 import {
     selectActuallyWorkingWorkersAmount,
     selectRequestedWorkersAmount,
     selectWholeWorkersReadyState,
     selectWholeWorkersWorkState
 } from '@/features/background/web-workers/webWorkersSlice'
-import { selectLastReceivedClientBrowserWorkerJobsData } from '@/features/background/socket-client/socketSlice'
-import { MAIN_THREAD_KEY } from '@/core/constants.core'
+import {selectLastReceivedClientBrowserWorkerJobsData} from '@/features/background/socket-client/socketSlice'
+import {MAIN_THREAD_KEY} from '@/core/constants.core'
 import SystemComponentVisibilityComposition
     from '@/layout/compositions/system-component-visibility/SystemComponentVisibility.composition'
+import {Switch} from '@mui/material'
 
 
 
@@ -54,24 +55,30 @@ const WorkersScoreboardWindowMolecule = (): JSX.Element => {
     const defaultOnTheScreenPosition = useMemo(() => ({x: 50, y: 160}), [])
 
     return (
-        <SystemComponentVisibilityComposition visibilityOfSystemComponentControl={'scoreboard'}>
+        <SystemComponentVisibilityComposition
+            visibilityOfSystemComponentControl={'scoreboard'}>
             <DraggableWindowComposition
-                componentUITitleBarName={'Scoreboard'}
+                componentUITitleBarName={'Calculation results'}
                 switchVisibilityConfiguration={{name: 'scoreboard', visibilitySwitchState: false}}
                 onTheScreenPosition={defaultOnTheScreenPosition}
                 zIndex={1900}
             >
                 <section
                     className={`${scss.host} display-inline-block`}>
-                    <p>Calculation results:</p>
 
-                    <span>Show all, even currently deactivated: </span><input
-                        type={'checkbox'} checked={shouldShowDeactivated}
-                        onChange={(event => setShouldShowDeactivated(event.currentTarget.checked))}/>
+                    <span>Show all, even currently deactivated: </span>
 
+
+                    <Switch
+                        size={'small'}
+                        color={'warning'}
+                        checked={shouldShowDeactivated}
+                        onChange={(event => setShouldShowDeactivated(event.currentTarget.checked))}
+                        inputProps={{'aria-label': 'controlled'}}
+                    />
 
                     <p>
-                        <span>{MAIN_THREAD_KEY.workerName}:</span>
+                        <span>{MAIN_THREAD_KEY.workerName} done: </span>
 
                         <span>{
                             Object.keys(receivedSocketResponse)
@@ -85,52 +92,59 @@ const WorkersScoreboardWindowMolecule = (): JSX.Element => {
 
                     <p>Workers who actually work: {allActuallyWorkWorkersAmount.amount}</p>
 
-                    <ol className={[scss.listGrid, (() => (shouldShowDeactivated || workerRequestedAmount.amount > 0) ? '' : 'display-none')()].join(' ')}>
+                    <ul
+                        className={[scss.listGrid, (() => (shouldShowDeactivated || workerRequestedAmount.amount > 0) ? '' : 'display-none')()].join(' ')}>
 
                         {Object.keys(allWorkersReadyStatuses)
-                            .filter((workerName: WorkerNameType) => { // showDeactivated checkbox handling here
+
+                            .filter((workerName: WorkerNameType) => {
                                 if (shouldShowDeactivated) {
                                     return true
                                 } else {
                                     return allWorkersReadyStatuses[workerName].ready
                                 }
                             })
+
                             .map((workerName: WorkerNameType, index) =>
                                 <li key={index} className={[scss.worker].join(' ')}>
 
-                                    <span className={scss.smallAndBoldHeading}>
-
-                                        <span className={scss.labelInfo}>
-                                            {workerName} {allWorkersReadyStatuses[workerName].ready ?
-                                                <strong>Ready!</strong> :
-                                                <span>OFF</span>
-                                            }
-                                        </span>
-
-                                    </span>
-
-
                                     <ul>
-                                        <li className={(() => allWorkersWorkStatuses[workerName]?.working ? '' : scss.labelInfo)()}>
+                                        <li className={[
+                                            scss.labelInfo,
+                                            (() => allWorkersWorkStatuses[workerName].working ? scss.activeLabel : '')()].join(' ')}>
 
-                                            {workerHasResponseData(workerName) &&
-                                            <strong>[{String(receivedSocketResponse[workerName].amount)}] </strong>
-                                            }
 
-                                            <span>
-                                                {!workerHasResponseData(workerName) ?
-                                                    'No work yet' :
-                                                    'Already made'
-                                                }
-                                            </span>
+                                            <span>[{index + 1} - {allWorkersReadyStatuses[workerName].ready ?
+                                                <strong>{allWorkersWorkStatuses[workerName].working ? 'Working' : 'Ready!'}</strong> :
+                                                <span>OFF</span>
+                                            }]</span>
 
                                         </li>
 
                                     </ul>
+
+                                    <span className={scss.smallAndBoldHeading}>
+
+
+                                        <span>
+                                            {!workerHasResponseData(workerName) ?
+                                                'No work yet ' :
+                                                'Already done: '
+                                            }
+                                        </span>
+
+
+                                        {workerHasResponseData(workerName) &&
+                      <strong>{String(receivedSocketResponse[workerName].amount)} </strong>
+                                        }
+
+                                    </span>
+
+
                                 </li>
                             )}
 
-                    </ol>
+                    </ul>
                 </section>
             </DraggableWindowComposition>
         </SystemComponentVisibilityComposition>

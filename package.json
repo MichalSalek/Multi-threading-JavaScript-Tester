@@ -14,7 +14,7 @@
     "start": "next start -p 3999",
     "type-check": "tsc",
     "test": "jest --watch",
-    "lint": "next lint",
+    "lint": "next lint && npm run type-check",
     "lint:fix": "next lint --fix && npm run type-check"
   },
   "dependencies": {

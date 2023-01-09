@@ -4,11 +4,9 @@
 .host {
   display: flex;
 
-  height: 80px;
+  height: 70px;
   width: 100%;
   max-width: 600px;
-
-  margin: auto;
 
   position: relative;
 
@@ -38,7 +36,7 @@
   .mainFireButton {
     color: $mainBackground;
 
-    max-width: 80px;
+    max-width: 70px;
     height: 100%;
 
     font-weight: bolder;
@@ -56,9 +54,9 @@
       font-size: 1rem;
     }
 
-    &:hover { // Material UI overrides:
-      background-color: rgba(255, 255, 255, 0.17);
-      border-width: 1px;
+    &:hover {
+      @extend %animateReadyState;
+      border-width: 2px;
     }
   }
 
@@ -83,7 +81,7 @@
 
   .buttonAnimationSoft {
 
-    $vibration-range: 0.3px;
+    $vibration-range: 0.8px;
 
     @keyframes vibrate1 {
       0% {
@@ -123,7 +121,7 @@
 
   .buttonAnimationMedium {
 
-    $vibration-range: 0.6px;
+    $vibration-range: 1px;
 
     @keyframes vibrate2 {
       0% {
@@ -162,8 +160,9 @@
   }
 
   .buttonAnimationHard {
+    @include hoverEffectControlChange();
 
-    $vibration-range: 0.8px;
+    $vibration-range: 1.2px;
 
     @keyframes vibrate3 {
       0% {
@@ -203,8 +202,9 @@
 
 
   .buttonAnimationExtreme {
+    @include hoverEffectControlChange();
 
-    $vibration-range: 1.6px;
+    $vibration-range: 2px;
 
     @keyframes vibrate4 {
       0% {

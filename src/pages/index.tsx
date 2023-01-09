@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react'
-import { NextPage } from 'next'
+import React, {useEffect} from 'react'
+import {NextPage} from 'next'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
-import { ROUTE_START_PAGE_SCREEN } from '@/core/routes.core'
-import { getStorageItem } from '@/features/background/browser-storage/browserStorage.api'
-import { STORAGE_KEY_START_PAGE_SEEN, StorageKeyStartPageEnum } from '@/core/constants.core'
+import {useRouter} from 'next/router'
+import {ROUTE_START_PAGE_SCREEN} from '@/core/routes.core'
+import {getStorageItem} from '@/features/background/browser-storage/browserStorage.api'
+import {STORAGE_KEY_START_PAGE_SEEN, StorageKeyStartPageEnum} from '@/core/constants.core'
 import PreviewAnimationMolecule from '@/features/building/preview-animation/UI/PreviewAnimation.molecule'
 import NavLinksMolecule from '@/features/building/nav-links/UI/NavLinks.molecule'
 import scss from '../pages-styles/index.module.scss'
 import MainThreadSwitchMolecule from '@/features/building/main-thread-switch/UI/MainThreadSwitch.molecule'
-import WorkersSwitchesViewContainerMolecule
-    from '@/features/building/workers-switches-container/UI/WorkersSwitchesViewContainer.molecule'
+import FloatingWorkersAmountAtom from '@/features/building/floating-workers-amount/FloatingWorkersAmount.atom'
+import {Container, Stack} from '@mui/material'
+import WorkersMatrixContainerMolecule
+    from '@/features/building/workers-matrix-container/UI/WorkersMatrixContainer.molecule'
 
 
 
@@ -24,9 +26,9 @@ const MainAppScreenPage: NextPage = () => {
     useEffect(() => {
         const memorizedValue = getStorageItem(STORAGE_KEY_START_PAGE_SEEN)
         if (typeof memorizedValue === 'string') {
-            if (memorizedValue !== StorageKeyStartPageEnum.true) router.push(ROUTE_START_PAGE_SCREEN)
+            if (memorizedValue !== StorageKeyStartPageEnum.true) void router.push(ROUTE_START_PAGE_SCREEN)
         } else {
-            router.push(ROUTE_START_PAGE_SCREEN)
+            void router.push(ROUTE_START_PAGE_SCREEN)
         }
         return () => undefined
     }, [router])
@@ -35,18 +37,26 @@ const MainAppScreenPage: NextPage = () => {
     return (
         <main className={scss.host}>
 
-            <PreviewAnimationMolecule/>
+            <Container>
 
-            <nav className={scss.textCenter}><NavLinksMolecule/></nav>
+                <Stack alignItems={'center'}><NavLinksMolecule/></Stack>
+
+                <PreviewAnimationMolecule/>
 
 
-            <div className={scss.textCenter}><MainThreadSwitchMolecule/></div>
+                <Stack maxWidth={'666px'} alignItems={'center'} marginX={'auto'}>
+                    <MainThreadSwitchMolecule/>
+
+                    <CalculationsWorkersControlsOrganism/>
+                </Stack>
 
 
-            <CalculationsWorkersControlsOrganism/>
+                <WorkersMatrixContainerMolecule/>
 
-            <WorkersSwitchesViewContainerMolecule/>
+                <PreviewAnimationMolecule/>
 
+                <FloatingWorkersAmountAtom/>
+            </Container>
         </main>
     )
 }

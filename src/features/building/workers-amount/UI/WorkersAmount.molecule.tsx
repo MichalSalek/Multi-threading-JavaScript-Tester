@@ -1,4 +1,4 @@
-import React, {FormEvent, useMemo, useState} from 'react'
+import React, {useMemo, useState} from 'react'
 import {Badge, BadgeProps, ButtonGroup, styled, Tooltip, Typography} from '@mui/material'
 import scss from './workersAmount.module.scss'
 
@@ -9,7 +9,6 @@ import {useAppDispatch, useAppSelector} from '@/core/store.core'
 import {MAX_WORKERS_LIMIT} from '@/core/constants.core'
 
 import AppButtonAtom from '@/app-components/AppButton.atom'
-import AppInputAtom from '@/app-components/AppInput.atom'
 import {PopoverTitleMolecule} from '@/features/building/popover-title/UI/PopoverTitle.molecule'
 import Zoom from '@mui/material/Zoom'
 
@@ -21,7 +20,7 @@ const WorkersAmountMolecule = (): JSX.Element => {
 
     const dispatch = useAppDispatch()
 
-    const [newWorkersAmount, setNewWorkersAmount] = useState<number | string>(4)
+    const [newWorkersAmount, setNewWorkersAmount] = useState<number>(workerRequestedAmount.amount)
 
 
     const StyledBadge = useMemo(() => styled(Badge)<BadgeProps>(() => ({
@@ -29,6 +28,13 @@ const WorkersAmountMolecule = (): JSX.Element => {
             right: -22
         }
     })), [])
+
+
+    const changeAmountPerOneHandler = (action: 'increment' | 'decrement') => {
+        const getNumber = (numb: number) =>
+            action === 'increment' ? numb + 1 : numb - 1
+        setNewWorkersAmount((prevState) => getValidatedPassedAmount(getNumber(prevState), 0, MAX_WORKERS_LIMIT))
+    }
 
 
     return (
@@ -45,30 +51,40 @@ const WorkersAmountMolecule = (): JSX.Element => {
 
                 <section className={scss.amountSetGroup}>
 
-                    <StyledBadge color={'secondary'} badgeContent={
-                        <Tooltip
-                            placement={'top-start'}
-                            title="Number depends of your CPU cores amount"
-                            TransitionComponent={Zoom}
-                            arrow
-                        >
-                            <strong>0 - {MAX_WORKERS_LIMIT}</strong>
-                        </Tooltip>}>
+                    <StyledBadge
+                        color={'secondary'}
+                        badgeContent={
+                            <Tooltip
+                                placement={'top-start'}
+                                title="MAX number - depends of your CPU cores amount"
+                                TransitionComponent={Zoom}
+                                arrow
+                            >
+                                <strong>{MAX_WORKERS_LIMIT}</strong>
+                            </Tooltip>}>
 
-                        <AppInputAtom
-                            type={'number'}
-                            value={newWorkersAmount}
-                            aria-label={'Expected Workers amount'}
-                            placeholder={`0 - ${MAX_WORKERS_LIMIT}`}
-                            className={scss.amountInput}
-                            onChange={(e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => setNewWorkersAmount(e.currentTarget.value)}
-                            onBlur={(e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-                                setNewWorkersAmount(getValidatedPassedAmount(e.currentTarget.value, 0, MAX_WORKERS_LIMIT))}
-                        />
+                        <Typography variant={'h6'}>{newWorkersAmount}</Typography>
+
                     </StyledBadge>
+
+                    <ButtonGroup size={'large'} sx={{borderWidth: 0}} fullWidth={true}>
+                        <AppButtonAtom
+                            color={'success'}
+                            disabled={newWorkersAmount === MAX_WORKERS_LIMIT}
+                            onClick={() => changeAmountPerOneHandler('increment')}>
+              +
+                        </AppButtonAtom>
+                        <AppButtonAtom
+                            color={'warning'}
+                            disabled={newWorkersAmount === 0}
+                            onClick={() => changeAmountPerOneHandler('decrement')}>
+                        -
+                        </AppButtonAtom>
+                    </ButtonGroup>
 
                     <AppButtonAtom
                         fullWidth={true}
+                        freezeOnClick={true}
                         onClick={() => dispatch(handleWorkerAmountChange({
                             amountChangeCommand: WorkerAmountChangeActionEnum.setAmount,
                             amount: getValidatedPassedAmount(newWorkersAmount, 0, MAX_WORKERS_LIMIT)
@@ -127,10 +143,11 @@ const WorkersAmountMolecule = (): JSX.Element => {
                 </section>
 
 
-                <Typography marginTop={2} variant={'h6'}> Currently state is:</Typography>
+                <Typography marginTop={2} variant={'body2'}>Current amount:</Typography>
 
-                <Typography marginTop={2} textAlign={'center'}
-                    variant={'h4'}><strong>{workerRequestedAmount.amount}</strong></Typography>
+                <Typography marginTop={2} variant={'h4'}>
+                    <strong>{workerRequestedAmount.amount}</strong>
+                </Typography>
 
 
             </main>

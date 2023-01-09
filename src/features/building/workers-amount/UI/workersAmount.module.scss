@@ -6,12 +6,11 @@
     flex-direction: column;
     flex-wrap: wrap;
 
-    > section {
+    section {
       flex: 1;
 
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
     }
   }
 
@@ -23,7 +22,7 @@
       width: 100%;
     }
 
-    row-gap: 15px;
+    row-gap: 5px;
 
     margin-top: 1rem;
 
@@ -35,9 +34,8 @@
 
   .amountSetGroup {
     min-width: 300px;
-    width: 100%;
     margin-bottom: 1rem;
-
+    align-items: center;
     row-gap: 5px;
 
     .amountInput {

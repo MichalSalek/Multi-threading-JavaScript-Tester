@@ -16,19 +16,19 @@ const MainThreadSwitchMolecule = (): JSX.Element => {
 
     return (
         <section className={scss.host}>
-            <Container maxWidth={'sm'}>
-                <PopoverTitleMolecule
-                    popoverTextContent={'Control the use of the main, standard thread. In this case, no Worker\n' +
+            {/*<Container maxWidth={'sm'}>*/}
+            <PopoverTitleMolecule
+                popoverTextContent={'Control the use of the main, standard thread. In this case, no Worker\n' +
                 '                        will\n' +
                 '                        be\n' +
                 '                        used.' + 'Causes loss of GUI smoothness. Animations may be slowed down. Try to\n' +
                 '                        start\n' +
                 '                        with\n' +
                 '                        a low values.'}
-                    titleTextContent={'Main browser\'s thread:'}
-                />
-                <WorkersWorkSwitchMolecule workerKey={MAIN_THREAD_KEY}/>
-            </Container>
+                titleTextContent={'Main browser\'s thread:'}
+            />
+            <WorkersWorkSwitchMolecule workerKey={MAIN_THREAD_KEY}/>
+            {/*</Container>*/}
         </section>
     )
 }

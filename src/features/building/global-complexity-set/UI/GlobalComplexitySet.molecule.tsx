@@ -1,19 +1,18 @@
-import { Slider } from '@mui/material'
+import {Slider} from '@mui/material'
 import React, {useEffect, useMemo, useState} from 'react'
-import { PopoverTitleMolecule } from '@/features/building/popover-title/UI/PopoverTitle.molecule'
-import { MAX_WORKER_COMPLEXITY_POSSIBILITY, MIN_WORKER_COMPLEXITY_POSSIBILITY } from '@/core/constants.core'
+import {PopoverTitleMolecule} from '@/features/building/popover-title/UI/PopoverTitle.molecule'
+import {MAX_WORKER_COMPLEXITY_POSSIBILITY, MIN_WORKER_COMPLEXITY_POSSIBILITY} from '@/core/constants.core'
 import AppButtonAtom from '@/app-components/AppButton.atom'
 import scss from './globalComplexitySet.module.scss'
-import { useAppDispatch, useAppSelector } from '@/core/store.core'
+import {useAppDispatch, useAppSelector} from '@/core/store.core'
 import {
     handleGlobalComplexityChange,
     selectIsAnyWorkerWorking,
     selectIsNoWorkerActive
 } from '@/features/background/web-workers/webWorkersSlice'
-import { fireClientSide } from '@/coding-utils/environmentOperations.api'
+import {fireClientSide} from '@/coding-utils/environmentOperations.api'
 import {useSliderRAWValueHandler} from '@/features/building/global-complexity-set/useSliderRAWValueHandler'
 import {handleNewGlobalComplexitySet} from '@/features/building/global-complexity-set/global-complexity-set.api'
-import {freezeThreadAndWait} from '@/coding-utils/asyncOperations.api'
 
 
 
@@ -31,11 +30,7 @@ export const GlobalComplexitySetMolecule = (): JSX.Element => {
     useEffect(() => {
         setSetDataButtonDisabledState(false)
     }, [sliderValue, setSetDataButtonDisabledState])
-
-
-    const [initialSettingsButtonDisabledState, setInitialSettingsButtonDisabledState] = useState(false)
-
-
+    
 
     const isSliderHasAnInitialStateYet = useMemo<boolean>(() =>
         typeof sliderValue === 'undefined', [sliderValue])
@@ -78,15 +73,14 @@ export const GlobalComplexitySetMolecule = (): JSX.Element => {
                 <span>Set to all workers</span>
             </AppButtonAtom>
             <AppButtonAtom
+                freezeOnClick={true}
                 onClick={async () => {
                     handleRefreshUndefinedGlobalComplexityState()
 
-                    setInitialSettingsButtonDisabledState(true)
-                    await freezeThreadAndWait(250)
-                    setInitialSettingsButtonDisabledState(false)
                     setSetDataButtonDisabledState(false)
                 }}
-                disabled={isAnyWorkerWorking || isNoWorkerActive || initialSettingsButtonDisabledState}>
+                disabled={isAnyWorkerWorking || isNoWorkerActive}
+            >
                 <span>Come back to initial setting</span>
             </AppButtonAtom>
         </section>
