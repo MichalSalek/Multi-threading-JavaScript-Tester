@@ -85,6 +85,7 @@ const WorkersAmountMolecule = (): JSX.Element => {
                     <AppButtonAtom
                         fullWidth={true}
                         freezeOnClick={true}
+                        disabled={workerRequestedAmount.amount === newWorkersAmount}
                         onClick={() => dispatch(handleWorkerAmountChange({
                             amountChangeCommand: WorkerAmountChangeActionEnum.setAmount,
                             amount: getValidatedPassedAmount(newWorkersAmount, 0, MAX_WORKERS_LIMIT)
