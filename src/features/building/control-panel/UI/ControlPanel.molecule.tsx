@@ -27,6 +27,7 @@ const ControlPanelMolecule = (): JSX.Element => {
 
     const isAnyWorkerWorking = useAppSelector(selectIsAnyWorkerWorking)
 
+
     const systemComponentsVisibilities: ISystemComponentsVisibilities = useAppSelector(selectSystemComponentsVisibilities)
 
 
