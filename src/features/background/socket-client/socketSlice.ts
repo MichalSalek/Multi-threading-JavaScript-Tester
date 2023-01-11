@@ -3,13 +3,13 @@ import {io} from 'socket.io-client'
 import store, {AppState} from '@/core/store.core'
 import {WEB_SOCKET_EVENTS_TRIGGERS} from '@/features/background/socket-client/socketEventsEntities'
 import {ClientBrowserIDType} from '@/features/background/socket-client/socket.types'
-import {WorkerJobsByClientBrowserIDTypeDTO, WorkerJobsTypeDTO} from '@/features/background/web-workers/webWorkers.types'
 import {
     listenToSocketEventWithDebounce,
     sendCommandMessageToSocket
 } from '@/features/background/socket-client/socket.api'
 import {ROUTE_API_WEB_SOCKET} from '@/core/routes.core'
 import {addConsoleVerbose} from '@/features/background/verbose-logs/verboseLogs.api'
+import {DBModel, WorkerJobsTypeDTO} from '../../../../src-backend/features/db/db.types'
 
 
 
@@ -44,7 +44,7 @@ export const connectSocketThunk = createAsyncThunk('connectSocketThunk', async (
             // with all calculation jobs done
             //
             listenToSocketEventWithDebounce(ioSocket, WEB_SOCKET_EVENTS_TRIGGERS.getAllJobsDone,
-                (response: WorkerJobsByClientBrowserIDTypeDTO) => {
+                (response: DBModel) => {
                     store.dispatch(socketSlice.actions.handleNewAnyWorkersJobDataReceiveFromSocket(response))
                 })
 
@@ -80,7 +80,7 @@ export const connectSocketThunk = createAsyncThunk('connectSocketThunk', async (
 
 type ISocketState = {
   active: boolean
-  lastReceivedAnyWorkerJobsData: WorkerJobsByClientBrowserIDTypeDTO
+  lastReceivedAnyWorkerJobsData: DBModel
   lastReceivedClientBrowserWorkerJobsData: WorkerJobsTypeDTO
   clientBrowserID: ClientBrowserIDType | null
 }
@@ -99,7 +99,7 @@ export const socketSlice = createSlice({
 
     reducers: {
 
-        handleNewAnyWorkersJobDataReceiveFromSocket: (state, action: PayloadAction<WorkerJobsByClientBrowserIDTypeDTO>) => {
+        handleNewAnyWorkersJobDataReceiveFromSocket: (state, action: PayloadAction<DBModel>) => {
             state.lastReceivedAnyWorkerJobsData = action.payload
         },
         handleNewClientBrowserWorkersJobDataReceiveFromSocket: (state, action: PayloadAction<WorkerJobsTypeDTO>) => {
@@ -124,7 +124,7 @@ export const socketSlice = createSlice({
 
 
 export const selectSocketIsActive = (state: AppState): boolean => state.socketSlice.active
-export const selectLastReceivedAnyWorkerJobsData = (state: AppState): WorkerJobsByClientBrowserIDTypeDTO => state.socketSlice.lastReceivedAnyWorkerJobsData
+export const selectLastReceivedAnyWorkerJobsData = (state: AppState): DBModel => state.socketSlice.lastReceivedAnyWorkerJobsData
 export const selectLastReceivedClientBrowserWorkerJobsData = (state: AppState): WorkerJobsTypeDTO => state.socketSlice.lastReceivedClientBrowserWorkerJobsData
 
 export default socketSlice.reducer

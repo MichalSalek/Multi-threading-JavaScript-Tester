@@ -3,14 +3,12 @@ import scss from './workersScoreboard.module.scss'
 import {
     NamedWorkerReadyStatusType,
     NamedWorkerWorkStatusType,
-    WorkerJobsTypeDTO,
-    WorkerNameType,
     WorkersAmountStateType
 } from '@/features/background/web-workers/webWorkers.types'
 import {DraggableWindowComposition} from '@/layout/compositions/draggable-window/DraggableWindow.composition'
 import {useAppSelector} from '@/core/store.core'
 import {
-    selectActuallyWorkingWorkersAmount, selectIsAnyWorkerWorking,
+    selectActuallyWorkingWorkersAmount,
     selectRequestedWorkersAmount,
     selectWholeWorkersReadyState,
     selectWholeWorkersWorkState
@@ -20,6 +18,7 @@ import {MAIN_THREAD_KEY} from '@/core/constants.core'
 import SystemComponentVisibilityComposition
     from '@/layout/compositions/system-component-visibility/SystemComponentVisibility.composition'
 import {Switch} from '@mui/material'
+import {WorkerJobsTypeDTO, WorkerNameType} from '../../../../../src-backend/features/db/db.types'
 
 
 

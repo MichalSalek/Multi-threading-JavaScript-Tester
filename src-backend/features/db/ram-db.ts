@@ -1,4 +1,3 @@
-import { WorkerJobsByClientBrowserIDTypeDTO } from '@/features/background/web-workers/webWorkers.types'
 
 //
 // It's a pseudo-DB for the app presentation and fast start dev env.
@@ -12,7 +11,11 @@ import { WorkerJobsByClientBrowserIDTypeDTO } from '@/features/background/web-wo
 // // 	amount: 3
 // // }, worker2: {...}}}
 //
-export const workersRuntimeData: WorkerJobsByClientBrowserIDTypeDTO = {}
+import {DBModel} from './db.types'
+
+
+
+export const workersRuntimeData: DBModel = {}
 //
 //
 //////////////////////////////////////////////////////////////////

@@ -2,6 +2,7 @@ import { WEB_WORKER_TASKS } from '@/features/background/web-workers/webWorkersEv
 import { workersKeysNames } from '@/features/background/web-workers/add-new-physical-worker-here'
 import { MAIN_THREAD_KEY } from '@/core/constants.core'
 import { ClientBrowserIDType } from '@/features/background/socket-client/socket.types'
+import {WorkerNameType} from '../../../../src-backend/features/db/db.types'
 
 
 
@@ -26,7 +27,6 @@ export type IWorkerTask = {
 }
 
 
-export type WorkerNameType = string
 export type WorkerFilenameType = string
 
 export type WorkerCalculationType = number
@@ -53,27 +53,8 @@ type KeyOfWorkersKeysNamesType = keyof typeof workersKeysNames
 export type WorkerKeyType = typeof workersKeysNames[KeyOfWorkersKeysNamesType] | IWorkerKey
 
 
-export type WorkersJobBodyType = {
-    results: number[]
-    amount: number
-}
 
 
-// eg:
-// { worker1: {
-// 	results: [235452,253234,523434]
-// 	amount: 3
-// },... }
-//
-export type WorkerJobsTypeDTO = Record<WorkerNameType, WorkersJobBodyType>
-
-// eg:
-// { '192.168.1.100': { worker1: {
-// 	results: [235452,253234,523434]
-// 	amount: 3
-// },... }}
-//
-export type WorkerJobsByClientBrowserIDTypeDTO = Record<ClientBrowserIDType, WorkerJobsTypeDTO>
 
 
 export interface IWorkerReadyState {

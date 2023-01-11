@@ -9,7 +9,7 @@ import {
     WorkerToSocketDTO
 } from '@/features/background/web-workers/webWorkers.types'
 
-import { setNewJobDone } from '../../../../src-backend/features/socket-server/runtimeData.api'
+import { setNewJobDone } from '../../../../src-backend/features/db/db.api'
 import {
     getAllJobsDoneResponse,
     getClientBrowserIDJobsDoneResponse,

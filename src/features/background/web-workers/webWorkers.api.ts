@@ -1,11 +1,10 @@
-import { MAX_WORKERS_LIMIT } from '@/core/constants.core'
+import {MAX_WORKERS_LIMIT} from '@/core/constants.core'
 import {
     IWorkerKey,
     IWorkerTask,
     IWorkerWorkState,
     WorkerFilenameType,
     WorkerKeyType,
-    WorkerNameType,
     WorkerToSocketDTO
 } from '@/features/background/web-workers/webWorkers.types'
 import store from '@/core/store.core'
@@ -14,8 +13,9 @@ import {
     handleWorkerReadyStateReport,
     handleWorkerWorkStateReport
 } from '@/features/background/web-workers/webWorkersSlice'
-import { workersKeysNames } from '@/features/background/web-workers/add-new-physical-worker-here'
-import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLogs.api'
+import {workersKeysNames} from '@/features/background/web-workers/add-new-physical-worker-here'
+import {addConsoleVerbose} from '@/features/background/verbose-logs/verboseLogs.api'
+import {WorkerNameType} from '../../../../src-backend/features/db/db.types'
 
 
 
@@ -38,7 +38,7 @@ export const constructWorkerJobToSocketDTO = <T>(event: MessageEvent<T>, workerK
 })
 
 
-export const getWorkerInstanceAbsolutely = (workerKey: WorkerKeyType): Worker => window[workerKey.workerName] as Worker
+export const getWorkerInstanceAbsolutely = (workerKey: WorkerKeyType): Worker => window[workerKey.workerName] as unknown as Worker
 
 
 // Strict, in-action check of worker activity

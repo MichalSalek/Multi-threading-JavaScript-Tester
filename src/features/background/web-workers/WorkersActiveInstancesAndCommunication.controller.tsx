@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, {useEffect, useRef} from 'react'
 import {
     constructCalculationWorkerKeyByName,
     constructWorkerJobToSocketDTO,
@@ -16,24 +16,21 @@ import {
     IWorkerKey,
     WorkerKeyType,
     WorkerLifeSwitchCommandEnum,
-    WorkerNameType,
     WorkersAmountStateType,
     WorkerToSocketDTO,
     WorkerTriggerMessageCommandEnum
 } from '@/features/background/web-workers/webWorkers.types'
-import { MAX_WORKERS_LIMIT, WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS } from '@/core/constants.core'
-import store, { useAppSelector } from '@/core/store.core'
-import {
-    IWorkersSlice,
-    selectRequestedWorkersAmount
-} from '@/features/background/web-workers/webWorkersSlice'
-import { WEB_WORKER_TASKS } from '@/features/background/web-workers/webWorkersEvents'
-import { selectSocketIsActive } from '@/features/background/socket-client/socketSlice'
-import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/background/socket-client/socketEventsEntities'
-import { fireClientSide } from '@/coding-utils/environmentOperations.api'
-import { isUndefinedType } from '@/coding-utils/typeOperations.api'
-import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLogs.api'
-import { sendCommandMessageToSocket } from '@/features/background/socket-client/socket.api'
+import {MAX_WORKERS_LIMIT, WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS} from '@/core/constants.core'
+import store, {useAppSelector} from '@/core/store.core'
+import {IWorkersSlice, selectRequestedWorkersAmount} from '@/features/background/web-workers/webWorkersSlice'
+import {WEB_WORKER_TASKS} from '@/features/background/web-workers/webWorkersEvents'
+import {selectSocketIsActive} from '@/features/background/socket-client/socketSlice'
+import {WEB_SOCKET_EVENTS_TRIGGERS} from '@/features/background/socket-client/socketEventsEntities'
+import {fireClientSide} from '@/coding-utils/environmentOperations.api'
+import {isUndefinedType} from '@/coding-utils/typeOperations.api'
+import {addConsoleVerbose} from '@/features/background/verbose-logs/verboseLogs.api'
+import {sendCommandMessageToSocket} from '@/features/background/socket-client/socket.api'
+import {WorkerNameType} from '../../../../src-backend/features/db/db.types'
 
 
 
@@ -124,7 +121,7 @@ const controlAmountOfActiveWorkerInstances = (requestedNumberOfWorkers: WorkersA
     // If requested web-workers amount:
     //
     if (requestedNumberOfWorkers.amount > existingWorkersKeyNames.length) {
-        // ...is higher - increase a real web-workers amount by adding more instances.
+    // ...is higher - increase a real web-workers amount by adding more instances.
 
         for (let index = 0; index < requestedNumberOfWorkers.amount; index++) {
             const workerKeyOfRequestedWorker = constructCalculationWorkerKeyByName(constructWorkerNameByOrderIndex(index + 1))
@@ -141,15 +138,15 @@ const controlAmountOfActiveWorkerInstances = (requestedNumberOfWorkers: WorkersA
         }
 
     } else if (requestedNumberOfWorkers.amount < existingWorkersKeyNames.length) {
-        // ...is lower - removeLast one or few last instances.
+    // ...is lower - removeLast one or few last instances.
 
         for (let index = existingWorkersKeyNames.length; requestedNumberOfWorkers.amount < index; index--) {
             const workerKeyOfRequestedWorker = constructCalculationWorkerKeyByName(constructWorkerNameByOrderIndex(index))
 
             workerLifeSwitch(workerKeyOfRequestedWorker, WorkerLifeSwitchCommandEnum.uninstall)
                 .then(() => updateWorkerIsReadyState(workerKeyOfRequestedWorker)
-                    && flagIfWorkerHasError(workerKeyOfRequestedWorker, false)
-                    && flagIfWorkerIsWorking(workerKeyOfRequestedWorker, false))
+          && flagIfWorkerHasError(workerKeyOfRequestedWorker, false)
+          && flagIfWorkerIsWorking(workerKeyOfRequestedWorker, false))
                 .catch((error: Error) => flagIfWorkerHasError(workerKeyOfRequestedWorker, true, error))
         }
     }
