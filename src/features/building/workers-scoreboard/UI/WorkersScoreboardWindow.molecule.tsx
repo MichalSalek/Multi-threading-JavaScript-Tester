@@ -10,7 +10,7 @@ import {
 import {DraggableWindowComposition} from '@/layout/compositions/draggable-window/DraggableWindow.composition'
 import {useAppSelector} from '@/core/store.core'
 import {
-    selectActuallyWorkingWorkersAmount,
+    selectActuallyWorkingWorkersAmount, selectIsAnyWorkerWorking,
     selectRequestedWorkersAmount,
     selectWholeWorkersReadyState,
     selectWholeWorkersWorkState

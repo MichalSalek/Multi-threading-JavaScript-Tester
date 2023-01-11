@@ -228,6 +228,10 @@ $control-switch-label-min-width: 192px;
         @include svgShortAnimation();
       }
     }
+
+    .workStateActive {
+      @extend %animateReadyState;
+    }
   }
 
   .expandedControlsList {

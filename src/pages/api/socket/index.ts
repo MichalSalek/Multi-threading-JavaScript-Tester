@@ -9,12 +9,12 @@ import {
     WorkerToSocketDTO
 } from '@/features/background/web-workers/webWorkers.types'
 
-import { setNewJobDone } from '../../../../src-backend/runtimeData.api'
+import { setNewJobDone } from '../../../../src-backend/features/socket-server/runtimeData.api'
 import {
     getAllJobsDoneResponse,
     getClientBrowserIDJobsDoneResponse,
     getClientBrowserIDResponse
-} from '../../../../src-backend/responsesEntities'
+} from '../../../../src-backend/features/socket-server/responsesEntities'
 import { addServerConsoleVerbose } from '../../../../src-backend/features/server-verbose-logs/serverVerboseLogs.api'
 import { AppToSocketDTO } from '@/features/background/socket-client/socket.types'
 import { getSecuredClientBrowserID } from '../../../../src-backend/features/client-browser-id/clientBrowserID.api'

@@ -4,7 +4,7 @@ import {
 } from '@/features/background/web-workers/webWorkers.types'
 import { workersRuntimeData } from './runtimeData'
 import { AppToSocketDTO, SocketToAppDTO } from '@/features/background/socket-client/socket.types'
-import { getSecuredClientBrowserID } from './features/client-browser-id/clientBrowserID.api'
+import { getSecuredClientBrowserID } from '../client-browser-id/clientBrowserID.api'
 
 
 

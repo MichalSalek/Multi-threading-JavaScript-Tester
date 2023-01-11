@@ -15,6 +15,7 @@ import {
 import { getStorageItem, setStorageItem } from '@/features/background/browser-storage/browserStorage.api'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import {ISystemComponentsVisibilities} from '@/features/building/control-panel/controlPanel.types'
+import {selectIsAnyWorkerWorking} from '@/features/background/web-workers/webWorkersSlice'
 
 
 
@@ -24,6 +25,7 @@ const Y_AXIS_STORAGE_KEY = `${STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSIT
 const ControlPanelMolecule = (): JSX.Element => {
     const dispatch = useAppDispatch()
 
+    const isAnyWorkerWorking = useAppSelector(selectIsAnyWorkerWorking)
 
     const systemComponentsVisibilities: ISystemComponentsVisibilities = useAppSelector(selectSystemComponentsVisibilities)
 
@@ -134,7 +136,10 @@ const ControlPanelMolecule = (): JSX.Element => {
                                 </button>
                             </li>
 
-                            <li className={[scss.listItem, getUIEnabledFeatureClassName(systemComponentsVisibilities.scoreboard)].join(' ')}>
+                            <li className={[
+                                scss.listItem,
+                                getUIEnabledFeatureClassName(systemComponentsVisibilities.scoreboard),
+                                (() => isAnyWorkerWorking ? scss.workStateActive : '')()].join(' ')}>
                                 <button
                                     onClick={() => dispatch(handleControlPanelSwitchVisibility({name: 'scoreboard'}))}>
                                     <span>SCOREBOARD</span>
