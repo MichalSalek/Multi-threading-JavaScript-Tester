@@ -8,21 +8,21 @@ import PreviewAnimationMolecule from '@/features/building/preview-animation/UI/P
 import NavLinksMolecule from '@/features/building/nav-links/UI/NavLinks.molecule'
 import scss from '../pages-styles/index.module.scss'
 import MainThreadSwitchMolecule from '@/features/building/main-thread-switch/UI/MainThreadSwitch.molecule'
-import FloatingWorkersAmountAtom from '@/features/building/floating-workers-amount/FloatingWorkersAmount.atom'
+import FloatingWorkersAmountAtom from '@/features/building/workers/floating-amount/FloatingWorkersAmount.atom'
 import {Container, Stack} from '@mui/material'
 import WorkersMatrixContainerMolecule
-    from '@/features/building/workers-matrix-container/UI/WorkersMatrixContainer.molecule'
+    from '@/features/building/workers/matrix-container/UI/WorkersMatrixContainer.molecule'
 import {
     STORAGE_KEY_START_PAGE_SEEN,
     StorageKeyStartPageEnum
-} from '@/features/background/browser-storage/domain/browserStorage.config'
+} from '@/features/background/browser-storage/browserStorage.config'
 
 
 
 const MainAppScreenPage: NextPage = () => {
 
     const CalculationsWorkersControlsOrganism = dynamic(() =>
-        import('@/features/building/workers-controls/UI/WorkersControls.organism'), {ssr: false})
+        import('@/features/building/workers/controls/UI/WorkersControls.organism'), {ssr: false})
 
     const router = useRouter()
 

@@ -6,13 +6,13 @@ import LayoutComposition from '@/layout/compositions/main-layout/Layout.composit
 import {CssBaseline} from '@mui/material'
 import FPSMonitorWindowMolecule from '@/features/building/fps-monitor/UI/FPSMonitorWindow.molecule'
 import dynamic from 'next/dynamic'
-import WorkersScoreboardWindowMolecule from '@/features/building/workers-scoreboard/UI/WorkersScoreboardWindow.molecule'
+import WorkersScoreboardWindowMolecule from '@/features/building/workers/scoreboard/UI/WorkersScoreboardWindow.molecule'
 import WorkersGlobalWorkControlWindowMolecule
-    from '@/features/building/workers-global-work-control/UI/WorkersGlobalWorkControlWindow.molecule'
+    from '@/features/building/workers/global-work-control/UI/WorkersGlobalWorkControlWindow.molecule'
 import '@/global-styles/variables-and-functions.scss'
 import '@/global-styles/global-styles.scss'
 import {SharedControllersHandler} from '@/features/background/controllers-handler/useControllersHandler.controller'
-import {ThemeComposition} from '@/features/building/_shared-components/Theme.composition'
+import {ThemeComposition} from '@/features/shared-components/Theme.composition'
 import {MainViewOnlyGuardComposition} from '@/layout/compositions/main-view-only-guard/MainViewOnlyGuard.composition'
 
 

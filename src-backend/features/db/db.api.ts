@@ -1,4 +1,4 @@
-import {NewWorkersJobByIPType} from '@/features/background/web-workers/webWorkers.types'
+import {NewWorkersJobByIPType} from '@/features/background/workers/workers.types'
 import {workersRuntimeData} from './ram-db'
 import {DBModel, WorkersJobBodyType} from './db.types'
 

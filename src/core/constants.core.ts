@@ -1,4 +1,4 @@
-import {IWorkerKey} from '@/features/background/web-workers/webWorkers.types'
+import {IWorkerKey} from '@/features/background/workers/workers.types'
 import {fireClientSide} from '@/core/low-level-utils/environmentOperations.api'
 
 

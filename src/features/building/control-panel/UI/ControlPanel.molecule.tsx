@@ -5,8 +5,8 @@ import { useAppDispatch, useAppSelector } from '@/core/store.core'
 import {
     handleControlPanelSwitchVisibility,
     selectSystemComponentsVisibilities
-} from '@/features/building/control-panel/controlPanelSlice'
-import { useControlPanelCollapseStateStoragePersist } from '@/features/background/browser-storage/domain/browserStorage.hooks'
+} from '@/features/building/control-panel/controlPanel.slice'
+import { useControlPanelCollapseStateStoragePersist } from '@/features/background/browser-storage/browserStorage.hooks'
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable'
 import {
     MIN_DESKTOP_INNER_WIDTH_MEDIA_QUERY,
@@ -14,10 +14,10 @@ import {
 import { getStorageItem, setStorageItem } from '@/features/background/browser-storage/browserStorage.api'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import {ISystemComponentsVisibilities} from '@/features/building/control-panel/controlPanel.types'
-import {selectIsAnyWorkerWorking} from '@/features/background/web-workers/webWorkersSlice'
+import {selectIsAnyWorkerWorking} from '@/features/background/workers/workers.slice'
 import {
     STORAGE_KEY_FLOATING_COMPONENT_UI_POSITION
-} from '@/features/background/browser-storage/domain/browserStorage.config'
+} from '@/features/background/browser-storage/browserStorage.config'
 
 
 

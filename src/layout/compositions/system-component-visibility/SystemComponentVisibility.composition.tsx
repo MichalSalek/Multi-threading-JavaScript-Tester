@@ -3,7 +3,7 @@ import { AppProps } from 'next/app'
 import {
     selectSystemComponentsVisibilities,
     SystemComponentNameType
-} from '@/features/building/control-panel/controlPanelSlice'
+} from '@/features/building/control-panel/controlPanel.slice'
 import { useAppSelector } from '@/core/store.core'
 import {ISystemComponentsVisibilities} from '@/features/building/control-panel/controlPanel.types'
 

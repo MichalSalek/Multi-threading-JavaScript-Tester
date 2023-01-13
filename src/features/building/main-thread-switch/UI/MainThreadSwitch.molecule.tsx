@@ -8,7 +8,7 @@ import {Container} from '@mui/material'
 
 
 const WorkersWorkSwitchMolecule = dynamic(() =>
-    import('@/features/building/workers-work-switch/UI/WorkersWorkSwitch.molecule'), {ssr: false})
+    import('@/features/building/workers/work-switch/UI/WorkersWorkSwitch.molecule'), {ssr: false})
 
 
 const MainThreadSwitchMolecule = (): JSX.Element => {

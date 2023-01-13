@@ -7,7 +7,7 @@ import {
     IWorkerDTO,
     WorkerKeyType,
     WorkerToSocketDTO
-} from '@/features/background/web-workers/webWorkers.types'
+} from '@/features/background/workers/workers.types'
 
 import { setNewJobDone } from '../../../../src-backend/features/db/db.api'
 import {

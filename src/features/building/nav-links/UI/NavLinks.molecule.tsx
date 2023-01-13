@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { ROUTE_MAIN_APP_SCREEN, ROUTE_START_PAGE_SCREEN } from '@/core/routes.core'
-import AppButtonAtom from '@/features/building/_shared-components/AppButton.atom'
+import AppButtonAtom from '@/features/shared-components/AppButton.atom'
 import { useRouter } from 'next/router'
 import { Badge, BadgeProps, ButtonGroup, styled, Tooltip } from '@mui/material'
 import scss from './navLinks.module.scss'
