@@ -11,7 +11,7 @@ import WorkersGlobalWorkControlWindowMolecule
     from '@/features/building/workers-global-work-control/UI/WorkersGlobalWorkControlWindow.molecule'
 import '@/global-styles/variables-and-functions.scss'
 import '@/global-styles/global-styles.scss'
-import {useControllersHandler} from '@/features/background/controllers-handler/useControllersHandler.controller'
+import {SharedControllersHandler} from '@/features/background/controllers-handler/useControllersHandler.controller'
 import {ThemeComposition} from '@/features/building/_shared-components/Theme.composition'
 import {MainViewOnlyGuardComposition} from '@/layout/compositions/main-view-only-guard/MainViewOnlyGuard.composition'
 
@@ -26,10 +26,6 @@ const ControlPanelMolecule = dynamic(() =>
 // Includes app layout as well as realtime controllers
 //
 export default function ApplicationComposition({Component, pageProps}: AppProps) {
-
-
-    useControllersHandler()
-
     return (<ThemeComposition>
 
         <CssBaseline/>
@@ -37,6 +33,8 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
         {/*<MetaHead/> @TODO create _document */}
 
         <Provider store={store}>
+
+            <SharedControllersHandler/>
 
             <MainViewOnlyGuardComposition>
                 <FPSMonitorWindowMolecule/>

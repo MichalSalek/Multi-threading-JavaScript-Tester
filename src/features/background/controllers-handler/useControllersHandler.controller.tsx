@@ -9,10 +9,12 @@ import useWorkersActiveInstancesAndCommunicationController
 
 
 
-export const useControllersHandler = (): void => {
+export const SharedControllersHandler = (): JSX.Element => {
     useIconPackController()
     useSocketConnectionAndListeningController()
     useBrowserStoragePersistController()
     useBorderColorChangeController()
     useWorkersActiveInstancesAndCommunicationController()
+
+    return <></>
 }

@@ -15,5 +15,5 @@ export const MainViewOnlyGuardComposition = ({children}: Props): JSX.Element => 
     const isNotStartPageActually = useMemo<boolean>(() => router.route !== ROUTE_START_PAGE_SCREEN,
         [router.route])
 
-    return isNotStartPageActually ? <>{children}</> : <>null</>
+    return isNotStartPageActually ? <>{children}</> : <>{null}</>
 }
