@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Button} from '@mui/material'
 import {ButtonProps} from '@mui/material/Button/Button'
 import scss from './AppComponents.module.scss'
-import {freezeThreadAndWait} from '@/coding-utils/asyncOperations.api'
+import {freezeThreadAndWait} from '@/core/low-level-utils/asyncOperations.api'
 
 
 

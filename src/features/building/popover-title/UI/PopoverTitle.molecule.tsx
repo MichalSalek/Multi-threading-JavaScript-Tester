@@ -8,7 +8,7 @@ import { TypographyPropsVariantOverrides } from '@mui/material/Typography/Typogr
 
 
 
-interface IProps {
+type Props = {
     popoverTextContent: string
     titleTextContent: string
     titleVariant?: OverridableStringUnion<Variant | 'inherit', TypographyPropsVariantOverrides>
@@ -19,7 +19,7 @@ export const PopoverTitleMolecule = ({
     popoverTextContent,
     titleTextContent,
     titleVariant = 'h6'
-}: IProps): JSX.Element => {
+}: Props): JSX.Element => {
 
     return (<article className={scss.host}>
         <Typography

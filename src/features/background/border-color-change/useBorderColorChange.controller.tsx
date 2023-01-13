@@ -1,14 +1,14 @@
-import React, { useEffect, useMemo } from 'react'
-import { WorkersAmountStateType } from '@/features/background/web-workers/webWorkers.types'
-import { useAppSelector } from '@/core/store.core'
-import { selectActuallyWorkingWorkersAmount } from '@/features/background/web-workers/webWorkersSlice'
-import { fireClientSide } from '@/coding-utils/environmentOperations.api'
+import React, {useEffect, useMemo} from 'react'
+import {WorkersAmountStateType} from '@/features/background/web-workers/webWorkers.types'
+import {useAppSelector} from '@/core/store.core'
+import {selectActuallyWorkingWorkersAmount} from '@/features/background/web-workers/webWorkersSlice'
+import {fireClientSide} from '@/core/low-level-utils/environmentOperations.api'
 
 
 
 const APP_BORDER_ENABLED_CLASS_NAME = 'enabled-state'
 
-const BorderColorChangeController = (): JSX.Element => {
+const useBorderColorChangeController = (): void => {
 
     const allActuallyWorkWorkersAmount: WorkersAmountStateType = useAppSelector(selectActuallyWorkingWorkersAmount)
 
@@ -25,12 +25,7 @@ const BorderColorChangeController = (): JSX.Element => {
         } else {
             bodyElement.classList.remove(APP_BORDER_ENABLED_CLASS_NAME)
         }
-
-        return () => undefined
     }, [allActuallyWorkWorkersAmount.amount, bodyElement])
-
-
-    return <></>
 }
 
-export default BorderColorChangeController
+export default useBorderColorChangeController

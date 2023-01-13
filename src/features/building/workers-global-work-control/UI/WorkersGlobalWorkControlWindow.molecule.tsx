@@ -9,7 +9,7 @@ import {
 } from '@/features/background/web-workers/webWorkersSlice'
 import SystemComponentVisibilityComposition
     from '@/layout/compositions/system-component-visibility/SystemComponentVisibility.composition'
-import AppButtonAtom from '@/app-components/AppButton.atom'
+import AppButtonAtom from '@/features/building/_shared-components/AppButton.atom'
 import {
     getExistingWorkersKeys,
     queueAllWorkersTask,

@@ -28,8 +28,6 @@ const FPSMonitorWindowMolecule = (): JSX.Element => {
         }
         script.src = '/stats.min.js'
         document.head.appendChild(script)
-
-        return () => undefined
     }, [])
     
 

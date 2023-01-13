@@ -1,4 +1,4 @@
-import { fireClientSide } from '@/coding-utils/environmentOperations.api'
+import { fireClientSide } from '@/core/low-level-utils/environmentOperations.api'
 
 
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import scss from './Layout.module.scss'
+import scss from '../compositions/main-layout/Layout.module.scss'
 import { Typography } from '@mui/material'
 
 

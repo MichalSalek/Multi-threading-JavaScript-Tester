@@ -2,13 +2,6 @@ import {useAppDispatch, useAppSelector} from '@/core/store.core'
 import {handleWorkerAmountChange, selectRequestedWorkersAmount} from '@/features/background/web-workers/webWorkersSlice'
 import {Dispatch, SetStateAction, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 import {getStorageItem, setStorageItem} from '@/features/background/browser-storage/browserStorage.api'
-import {
-    STORAGE_KEY_CONTROL_PANEL_COLLAPSE_STATE,
-    STORAGE_KEY_CONTROL_PANEL_SWITCHES,
-    STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION,
-    STORAGE_KEY_WORKERS_AMOUNT,
-    StorageKeyControlPanelCollapseStateEnum
-} from '@/core/constants.core'
 import {WorkerAmountChangeActionEnum} from '@/features/background/web-workers/webWorkers.types'
 import {
     handleControlPanelSwitchVisibility,
@@ -17,9 +10,15 @@ import {
     SystemComponentNameType
 } from '@/features/building/control-panel/controlPanelSlice'
 import {ControlPosition, DraggableData, DraggableEvent} from 'react-draggable'
-import {isUndefinedType} from '@/coding-utils/typeOperations.api'
-import {fireClientSide} from '@/coding-utils/environmentOperations.api'
+import {isUndefinedType} from '@/core/low-level-utils/typeOperations.api'
+import {fireClientSide} from '@/core/low-level-utils/environmentOperations.api'
 import {ISystemComponentsVisibilities} from '@/features/building/control-panel/controlPanel.types'
+import {
+    STORAGE_KEY_CONTROL_PANEL_COLLAPSE_STATE,
+    STORAGE_KEY_CONTROL_PANEL_SWITCHES,
+    STORAGE_KEY_FLOATING_COMPONENT_UI_POSITION, STORAGE_KEY_WORKERS_AMOUNT,
+    StorageKeyControlPanelCollapseStateEnum
+} from '@/features/background/browser-storage/domain/browserStorage.config'
 
 
 
@@ -40,13 +39,12 @@ export const useWorkersAmountStoragePersist = (): void => {
             amountChangeCommand: WorkerAmountChangeActionEnum.setAmount,
             amount: memorizedAmountOfWorkers
         }))
-        return () => undefined
+
     }, [dispatch])
 
 
     useEffect(() => {
         setStorageItem(STORAGE_KEY_WORKERS_AMOUNT, String(workerRequestedAmount.amount))
-        return () => undefined
     }, [workerRequestedAmount.amount])
 
 
@@ -82,14 +80,11 @@ export const useControlPanelSwitchesStoragePersist = (): void => {
                 })
             })
         }
-
-        return () => undefined
     }, [dispatch])
 
 
     useEffect(() => {
         setStorageItem(STORAGE_KEY_CONTROL_PANEL_SWITCHES, JSON.stringify(systemComponentsVisibilities))
-        return () => undefined
     }, [systemComponentsVisibilities])
 
 
@@ -127,7 +122,6 @@ export const useControlPanelCollapseStateStoragePersist = (initialBehavior: bool
             //
             setIsListCollapsed(initialBehavior)
         }
-        return () => undefined
     }, [initialBehavior])
 
 
@@ -136,7 +130,6 @@ export const useControlPanelCollapseStateStoragePersist = (initialBehavior: bool
         if (!isUndefinedType(isListCollapsed)) {
             setStorageItem(STORAGE_KEY_CONTROL_PANEL_COLLAPSE_STATE, String(isListCollapsed))
         }
-        return () => undefined
     }, [isListCollapsed])
 
 
@@ -157,7 +150,7 @@ export const usePersistedPositionByBrowserStorage = (
 
     const [consumerPosition, setConsumerPosition] = useState<ControlPositionType>(initialPosition)
 
-    const browserStorageKey = useMemo(() => `${STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION}_${storageSwitchName}`, [storageSwitchName])
+    const browserStorageKey = useMemo(() => `${STORAGE_KEY_FLOATING_COMPONENT_UI_POSITION}_${storageSwitchName}`, [storageSwitchName])
 
     // Pass value from storage to consumer on mount.
     //
@@ -173,7 +166,6 @@ export const usePersistedPositionByBrowserStorage = (
             //
             setConsumerPosition(initialPosition)
         }
-        return () => undefined
     }, [initialPosition, browserStorageKey])
 
 
@@ -183,7 +175,6 @@ export const usePersistedPositionByBrowserStorage = (
         if (!isUndefinedType(consumerPosition)) {
             setStorageItem(browserStorageKey, JSON.stringify(consumerPosition))
         }
-        return () => undefined
     }, [consumerPosition, browserStorageKey])
 
 

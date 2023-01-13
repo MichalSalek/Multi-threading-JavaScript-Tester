@@ -2,11 +2,11 @@ import React from 'react'
 import {
     useControlPanelSwitchesStoragePersist,
     useWorkersAmountStoragePersist
-} from '@/features/background/browser-storage/browserStorage.hooks'
+} from '@/features/background/browser-storage/domain/browserStorage.hooks'
 
 
 
-const BrowserStoragePersistController = (): JSX.Element => {
+const useBrowserStoragePersistController = (): void => {
 
     // Persist amount of ready Workers
     useWorkersAmountStoragePersist()
@@ -14,7 +14,6 @@ const BrowserStoragePersistController = (): JSX.Element => {
     // Persist Control Panel switches state
     useControlPanelSwitchesStoragePersist()
 
-    return <></>
 }
 
-export default BrowserStoragePersistController
+export default useBrowserStoragePersistController

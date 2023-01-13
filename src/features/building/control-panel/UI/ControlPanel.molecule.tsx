@@ -6,20 +6,22 @@ import {
     handleControlPanelSwitchVisibility,
     selectSystemComponentsVisibilities
 } from '@/features/building/control-panel/controlPanelSlice'
-import { useControlPanelCollapseStateStoragePersist } from '@/features/background/browser-storage/browserStorage.hooks'
+import { useControlPanelCollapseStateStoragePersist } from '@/features/background/browser-storage/domain/browserStorage.hooks'
 import Draggable, { DraggableData, DraggableEvent } from 'react-draggable'
 import {
     MIN_DESKTOP_INNER_WIDTH_MEDIA_QUERY,
-    STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION
 } from '@/core/constants.core'
 import { getStorageItem, setStorageItem } from '@/features/background/browser-storage/browserStorage.api'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import {ISystemComponentsVisibilities} from '@/features/building/control-panel/controlPanel.types'
 import {selectIsAnyWorkerWorking} from '@/features/background/web-workers/webWorkersSlice'
+import {
+    STORAGE_KEY_FLOATING_COMPONENT_UI_POSITION
+} from '@/features/background/browser-storage/domain/browserStorage.config'
 
 
 
-const Y_AXIS_STORAGE_KEY = `${STORAGE_KEY_FLOATING_COMPONENT_ON_THE_SCREEN_POSITION}_controlPanelYAxis`
+const Y_AXIS_STORAGE_KEY = `${STORAGE_KEY_FLOATING_COMPONENT_UI_POSITION}_controlPanelYAxis`
 
 
 const ControlPanelMolecule = (): JSX.Element => {
@@ -48,13 +50,11 @@ const ControlPanelMolecule = (): JSX.Element => {
 
     useEffect(() => {
         setPositionFlipped(!isDesktopResolution)
-        return () => undefined
     }, [isDesktopResolution])
 
 
     useEffect(() => {
         setIsListCollapsed(true)
-        return () => undefined
     }, [positionFlipped, setIsListCollapsed])
 
 
@@ -63,7 +63,6 @@ const ControlPanelMolecule = (): JSX.Element => {
         if (typeof memoizedValue === 'string') {
             setYAxisPositionOfControlPanel(Number(memoizedValue))
         }
-        return () => undefined
     }, [])
 
 

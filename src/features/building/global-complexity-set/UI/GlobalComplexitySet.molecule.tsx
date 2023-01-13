@@ -2,7 +2,7 @@ import {Slider} from '@mui/material'
 import React, {useEffect, useMemo, useState} from 'react'
 import {PopoverTitleMolecule} from '@/features/building/popover-title/UI/PopoverTitle.molecule'
 import {MAX_WORKER_COMPLEXITY_POSSIBILITY, MIN_WORKER_COMPLEXITY_POSSIBILITY} from '@/core/constants.core'
-import AppButtonAtom from '@/app-components/AppButton.atom'
+import AppButtonAtom from '@/features/building/_shared-components/AppButton.atom'
 import scss from './globalComplexitySet.module.scss'
 import {useAppDispatch, useAppSelector} from '@/core/store.core'
 import {
@@ -10,7 +10,7 @@ import {
     selectIsAnyWorkerWorking,
     selectIsNoWorkerActive
 } from '@/features/background/web-workers/webWorkersSlice'
-import {fireClientSide} from '@/coding-utils/environmentOperations.api'
+import {fireClientSide} from '@/core/low-level-utils/environmentOperations.api'
 import {useSliderRAWValueHandler} from '@/features/building/global-complexity-set/useSliderRAWValueHandler'
 import {handleNewGlobalComplexitySet} from '@/features/building/global-complexity-set/global-complexity-set.api'
 

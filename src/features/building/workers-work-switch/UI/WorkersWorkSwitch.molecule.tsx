@@ -6,8 +6,8 @@ import {
     useSingleWorkerSpecificStatus,
     UseSpecificWorkerStatusCommandEnum
 } from '@/features/background/web-workers/webWorkers.hooks'
-import AppButtonAtom from '@/app-components/AppButton.atom'
-import AppInputAtom from '@/app-components/AppInput.atom'
+import AppButtonAtom from '@/features/building/_shared-components/AppButton.atom'
+import AppInputAtom from '@/features/building/_shared-components/AppInput.atom'
 import {
     MAIN_THREAD_KEY,
     MAX_WORKER_COMPLEXITY_POSSIBILITY,
@@ -15,7 +15,7 @@ import {
 } from '@/core/constants.core'
 import { Slider, Typography } from '@mui/material'
 import scss from './workersWorkSwitch.module.scss'
-import { randomIntFromNumbersRange } from '@/coding-utils/numberOperations.api'
+import { randomIntFromNumbersRange } from '@/core/low-level-utils/numberOperations.api'
 import { useMainThreadCalculations } from '@/features/building/workers-work-switch/workersWork.hooks'
 import { useAppDispatch } from '@/core/store.core'
 import { handleWorkerComplexityStateReport } from '@/features/background/web-workers/webWorkersSlice'
@@ -30,13 +30,13 @@ import {
 export type ComplexityValueType = number | string
 
 
-interface IProps {
+type Props = {
     workerKey: WorkerKeyType
     globalComplexityValue?: ComplexityValueType
 }
 
 
-const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): JSX.Element => {
+const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: Props): JSX.Element => {
 
     const dispatch = useAppDispatch()
 
@@ -74,7 +74,6 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
         } else {
             setUserInputComplexity(globalComplexityValue)
         }
-        return () => undefined
     }, [globalComplexityValue, randomizedNumber])
 
 
@@ -90,7 +89,6 @@ const WorkersWorkSwitchMolecule = ({workerKey, globalComplexityValue}: IProps): 
             complexity: Number(userInputComplexity)
         }))
 
-        return () => undefined
     }, [dispatch, userInputComplexity, workerKey.workerName])
 
 

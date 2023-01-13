@@ -9,13 +9,13 @@ import {ISystemComponentsVisibilities} from '@/features/building/control-panel/c
 
 
 
-interface IProps {
+type Props = {
     children: ReactElement<AppProps & { isComponentVisible: boolean }, JSXElementConstructor<unknown>>
     visibilityOfSystemComponentControl: SystemComponentNameType
 }
 
 
-const SystemComponentVisibilityComposition = ({children, visibilityOfSystemComponentControl}: IProps) => {
+const SystemComponentVisibilityComposition = ({children, visibilityOfSystemComponentControl}: Props) => {
 
     const systemComponentsVisibilities: ISystemComponentsVisibilities = useAppSelector(selectSystemComponentsVisibilities)
 

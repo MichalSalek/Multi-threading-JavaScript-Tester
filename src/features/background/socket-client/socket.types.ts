@@ -9,7 +9,7 @@ export type ClientBrowserIDType = string
 export type UserAgentType = string
 
 
-export interface AppToBackendGenericDTO<T> {
+export type AppToBackendGenericDTO<T> = {
     status: SocketResponseStatusesType
     data: T
     userAgent: UserAgentType

@@ -49,7 +49,6 @@ export const useMainThreadCalculations = <D>(CALCULATION_INTERVAL_TIMING_IN_MS =
             }
         })
 
-        return () => undefined
     }, [lastMadeCalculation, isMainThreadOn])
 
 

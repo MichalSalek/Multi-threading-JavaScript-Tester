@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React, {useEffect} from 'react'
 
 
 
-const IconPackController = (): JSX.Element => {
+const useIconPackController = (): void => {
 
     useEffect(() => {
         const script1 = document.createElement('script')
@@ -14,10 +14,7 @@ const IconPackController = (): JSX.Element => {
         script2.src = '/fontawesome.min.js'
         script1.async = true
         document.head.appendChild(script2)
-        return () => undefined
     }, [])
-
-    return (<></>)
 }
 
-export default IconPackController
+export default useIconPackController

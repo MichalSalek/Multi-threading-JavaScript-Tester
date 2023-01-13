@@ -1,23 +1,23 @@
-import Draggable, { ControlPosition } from 'react-draggable'
-import React, { JSXElementConstructor, ReactElement, useEffect, useState } from 'react'
-import { AppProps } from 'next/app'
+import Draggable, {ControlPosition} from 'react-draggable'
+import React, {ReactNode, useEffect, useState} from 'react'
 import scss from './DraggableWindow.module.scss'
 import {
     ControlPanelSwitchVisibilityType,
     handleControlPanelSwitchVisibility
 } from '@/features/building/control-panel/controlPanelSlice'
-import { useAppDispatch } from '@/core/store.core'
-import { usePersistedPositionByBrowserStorage } from '@/features/background/browser-storage/browserStorage.hooks'
+import {useAppDispatch} from '@/core/store.core'
+import {usePersistedPositionByBrowserStorage} from '@/features/background/browser-storage/domain/browserStorage.hooks'
 
 
 
-interface IProps {
-    children: ReactElement<AppProps, JSXElementConstructor<unknown>>
-    componentUITitleBarName: string
-    switchVisibilityConfiguration: ControlPanelSwitchVisibilityType
-    onTheScreenPosition?: ControlPosition
-    zIndex?: number
-    isComponentVisible?: boolean
+
+type Props = {
+  children: ReactNode
+  componentUITitleBarName: string
+  switchVisibilityConfiguration: ControlPanelSwitchVisibilityType
+  onTheScreenPosition?: ControlPosition
+  zIndex?: number
+  isComponentVisible?: boolean
 }
 
 
@@ -28,7 +28,7 @@ export const DraggableWindowComposition = ({
     onTheScreenPosition = {x: 50, y: 50},
     zIndex = 1900,
     isComponentVisible
-}: IProps): JSX.Element => {
+}: Props): JSX.Element => {
 
     const dispatch = useAppDispatch()
 

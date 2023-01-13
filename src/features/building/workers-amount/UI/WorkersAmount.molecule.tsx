@@ -8,7 +8,7 @@ import {getValidatedPassedAmount} from '@/features/background/web-workers/webWor
 import {useAppDispatch, useAppSelector} from '@/core/store.core'
 import {MAX_WORKERS_LIMIT} from '@/core/constants.core'
 
-import AppButtonAtom from '@/app-components/AppButton.atom'
+import AppButtonAtom from '@/features/building/_shared-components/AppButton.atom'
 import {PopoverTitleMolecule} from '@/features/building/popover-title/UI/PopoverTitle.molecule'
 import Zoom from '@mui/material/Zoom'
 

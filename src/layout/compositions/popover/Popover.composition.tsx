@@ -1,17 +1,17 @@
-import { Popover, Typography } from '@mui/material'
-import React, { JSXElementConstructor, ReactElement } from 'react'
-import { AppProps } from 'next/app'
+import {Popover, Typography} from '@mui/material'
+import React, {ReactNode} from 'react'
 import scss from './Popover.module.scss'
 
 
 
-interface IProps {
-    children: ReactElement<AppProps, JSXElementConstructor<unknown>>,
-    textContent: string
+type Props = {
+  children: ReactNode
+  textContent: string
 }
 
 
-export const PopoverComposition = ({children, textContent}: IProps): JSX.Element => {
+
+export const PopoverComposition = ({children, textContent}: Props): JSX.Element => {
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

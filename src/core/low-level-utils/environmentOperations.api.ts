@@ -14,5 +14,3 @@ export const fireClientSide = <D>(clientSideCallback: UnknownFunctionType<undefi
         return null
     }
 }
-
-

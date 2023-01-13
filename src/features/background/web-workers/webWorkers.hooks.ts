@@ -40,7 +40,6 @@ export const useSingleWorkerSpecificStatus = (command: UseSpecificWorkerStatusCo
         const thisWorkerReadyState: IWorkerReadyState = allWorkersReadyStatuses[workerKey.workerName]
         setIsActive(thisWorkerReadyState.ready)
 
-        return () => undefined
     }, [allWorkersReadyStatuses, workerKey.workerName, command])
 
 
@@ -53,7 +52,6 @@ export const useSingleWorkerSpecificStatus = (command: UseSpecificWorkerStatusCo
         const thisWorkerWorkState: IWorkerWorkState = allWorkersWorkStatuses[workerKey.workerName]
         setIsWorking(thisWorkerWorkState.working)
 
-        return () => undefined
     }, [allWorkersWorkStatuses, workerKey.workerName, command])
 
 
@@ -66,7 +64,6 @@ export const useSingleWorkerSpecificStatus = (command: UseSpecificWorkerStatusCo
                 return isWorking
             }
         })
-        return () => undefined
     }, [command, isReady, isWorking])
 
 

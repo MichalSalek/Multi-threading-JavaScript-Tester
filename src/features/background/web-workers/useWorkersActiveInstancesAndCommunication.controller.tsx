@@ -26,8 +26,8 @@ import {IWorkersSlice, selectRequestedWorkersAmount} from '@/features/background
 import {WEB_WORKER_TASKS} from '@/features/background/web-workers/webWorkersEvents'
 import {selectSocketIsActive} from '@/features/background/socket-client/socketSlice'
 import {WEB_SOCKET_EVENTS_TRIGGERS} from '@/features/background/socket-client/socketEventsEntities'
-import {fireClientSide} from '@/coding-utils/environmentOperations.api'
-import {isUndefinedType} from '@/coding-utils/typeOperations.api'
+import {fireClientSide} from '@/core/low-level-utils/environmentOperations.api'
+import {isUndefinedType} from '@/core/low-level-utils/typeOperations.api'
 import {addConsoleVerbose} from '@/features/background/verbose-logs/verboseLogs.api'
 import {sendCommandMessageToSocket} from '@/features/background/socket-client/socket.api'
 import {WorkerNameType} from '../../../../src-backend/features/db/db.types'
@@ -170,7 +170,7 @@ const setReduxDefaultValuesForWorker = (workerKey: WorkerKeyType): void => {
 
 // Single dependency controller - just the quantity requested.
 //
-const WorkersActiveInstancesAndCommunicationController = (): JSX.Element => {
+const useWorkersActiveInstancesAndCommunicationController = (): void => {
 
     // Check is socket connection is OK
     //
@@ -196,7 +196,6 @@ const WorkersActiveInstancesAndCommunicationController = (): JSX.Element => {
             , WAITING_TIME_FOR_BUNDLE_WORKER_ACTIONS)
 
         })
-        return () => undefined
     }, [isSocketActive, requestedNumberOfWorkers])
 
 
@@ -213,11 +212,7 @@ const WorkersActiveInstancesAndCommunicationController = (): JSX.Element => {
         }
         fillReduxStoreWithDefaultMaxWorkersAmount()
 
-        return () => undefined
     }, [isSocketActive])
-
-
-    return <></>
 }
 
-export default WorkersActiveInstancesAndCommunicationController
+export default useWorkersActiveInstancesAndCommunicationController
