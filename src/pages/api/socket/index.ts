@@ -14,9 +14,9 @@ import {
     getAllJobsDoneResponse,
     getClientBrowserIDJobsDoneResponse,
     getClientBrowserIDResponse
-} from '../../../../src-backend/features/socket-server/responsesEntities'
+} from '../../../../src-backend/features/socket-server/DTO.api'
 import { addServerConsoleVerbose } from '../../../../src-backend/features/server-verbose-logs/serverVerboseLogs.api'
-import { AppToSocketDTO } from '@/features/background/socket-client/socket.types'
+import { AppToBackendGenericDTO } from '@/features/background/socket-client/socket.types'
 import { getSecuredClientBrowserID } from '../../../../src-backend/features/client-browser-id/clientBrowserID.api'
 import { logToFile } from '../../../../src-backend/features/server-verbose-logs/serverVerboseLogsToFile'
 
@@ -38,7 +38,7 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponse & any) => {
             //
             // WRITE
             //
-            serverSocketClient.on(WEB_SOCKET_EVENTS_TRIGGERS.reportJobDone, (request: AppToSocketDTO<WorkerToSocketDTO<IWorkerDTO>>) => {
+            serverSocketClient.on(WEB_SOCKET_EVENTS_TRIGGERS.reportJobDone, (request: AppToBackendGenericDTO<WorkerToSocketDTO<IWorkerDTO>>) => {
                 const workerKey: WorkerKeyType = request.data.keyNames
                 const workerWorkAndCalculationData: IWorkerDTO = request.data.unknownData
 
@@ -62,7 +62,7 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponse & any) => {
                 serverSocketClient.emit(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserIDJobsDone, getClientBrowserIDJobsDoneResponse(request, clientIP))
             })
 
-            serverSocketClient.on(WEB_SOCKET_EVENTS_TRIGGERS.reportNewLog, (request: AppToSocketDTO<string>) => {
+            serverSocketClient.on(WEB_SOCKET_EVENTS_TRIGGERS.reportNewLog, (request: AppToBackendGenericDTO<string>) => {
                 logToFile(`[${clientIP}] ${request.data}`, 'warn')
             })
 
@@ -71,11 +71,11 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponse & any) => {
             //
             // READ
             //
-            serverSocketClient.on(WEB_SOCKET_EVENTS_TRIGGERS.getAllJobsDone, (request: AppToSocketDTO<null>) => {
+            serverSocketClient.on(WEB_SOCKET_EVENTS_TRIGGERS.getAllJobsDone, (request: AppToBackendGenericDTO<null>) => {
                 serverSocketClient.emit(WEB_SOCKET_EVENTS_TRIGGERS.getAllJobsDone, getAllJobsDoneResponse(request, clientIP))
             })
 
-            serverSocketClient.on(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserID, (request: AppToSocketDTO<null>) => {
+            serverSocketClient.on(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserID, (request: AppToBackendGenericDTO<null>) => {
                 serverSocketClient.emit(WEB_SOCKET_EVENTS_TRIGGERS.getClientBrowserID, getClientBrowserIDResponse(request, clientIP))
             })
 

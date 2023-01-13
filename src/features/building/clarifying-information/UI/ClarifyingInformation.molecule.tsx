@@ -22,11 +22,13 @@ const ClarifyingInformationMolecule = (): JSX.Element => {
             </Typography>
             <Typography variant="body1">
 
-                Using a WebWorkers you can delegate heavy tasks to other
+                Using a WebWorkers you can delegate heavy tasks to the other
                 threads.<br/>
 
-                What does means? Instead of using your server resources and user client transfer
-                - do it instantly within the user browser - but without slowing down the User Interface.
+                What does means?<br/>
+
+                Instead of wasting server resources and client transfer
+                - does it instantly within the browser mechanisms - but without slowing down the User Interface.
 
             </Typography>
         </section>
@@ -40,13 +42,18 @@ const ClarifyingInformationMolecule = (): JSX.Element => {
             </Typography>
             <Typography variant="body1">
 
-                you need to monitor your device&apos;s CPU load.
+                you need to monitor your device&apos;s CPU current load.
 
             </Typography>
         </section>
 
 
         <section className={scss.textBlock}>
+            <Typography variant="h5">
+
+                How to do it?
+
+            </Typography>
             <Typography variant="h6">
 
                 Are you a Microsoft Windows user?
@@ -72,7 +79,7 @@ const ClarifyingInformationMolecule = (): JSX.Element => {
 
 
         <section className={scss.textBlock}>
-            <Typography variant="h5">
+            <Typography variant="h6">
 
                 Using smartphone?
 

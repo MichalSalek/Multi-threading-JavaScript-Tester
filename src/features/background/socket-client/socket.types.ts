@@ -9,18 +9,12 @@ export type ClientBrowserIDType = string
 export type UserAgentType = string
 
 
-export interface AppToSocketDTO<T> {
+export interface AppToBackendGenericDTO<T> {
     status: SocketResponseStatusesType
     data: T
     userAgent: UserAgentType
 }
 
 
-export interface SocketToAppDTO<T> {
-    status: SocketResponseStatusesType
-    data: T
-    clientBrowserID: ClientBrowserIDType
-}
 
-
-export type AppToSocketEmitDTO = <T>(eventName: WebSocketEventTriggersType, dataToSend: T) => void
+export type AppToBackedEmitterDTO = <T>(eventName: WebSocketEventTriggersType, dataToSend: T) => void

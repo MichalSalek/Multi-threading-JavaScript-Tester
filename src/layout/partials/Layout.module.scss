@@ -19,6 +19,9 @@
   opacity: 0.5;
   padding: 0 1px 10px 0;
   overflow: hidden;
+  position: fixed;
+  right: 0;
+  bottom: 0;
 
   > p {
     writing-mode: vertical-lr;

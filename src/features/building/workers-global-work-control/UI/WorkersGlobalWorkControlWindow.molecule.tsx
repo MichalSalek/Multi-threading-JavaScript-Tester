@@ -75,7 +75,7 @@ const WorkersGlobalWorkControlWindowMolecule = (): JSX.Element => {
                     className={`${scss.host} display-inline-block`}>
 
                     <Typography variant={'body2'} paddingBottom={1}>
-                        All workers state:
+                        Global control switch:
                     </Typography>
 
                     <ButtonGroup fullWidth={true} size={'small'}>
@@ -88,7 +88,7 @@ const WorkersGlobalWorkControlWindowMolecule = (): JSX.Element => {
                                     size={18}
                                     color="inherit"
                                 />
-                            ) : <span>START</span>}
+                            ) : <span>START ALL</span>}
                         </AppButtonAtom>
                         <AppButtonAtom
                             color={'warning'}
@@ -99,7 +99,7 @@ const WorkersGlobalWorkControlWindowMolecule = (): JSX.Element => {
                                     size={18}
                                     color="inherit"
                                 />
-                            ) : <span>STOP</span>}
+                            ) : <span>STOP ALL</span>}
                         </AppButtonAtom>
                     </ButtonGroup>
 

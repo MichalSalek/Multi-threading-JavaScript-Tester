@@ -1,8 +1,9 @@
 import { Socket } from 'socket.io-client'
 import { WebSocketEventTriggersType } from '@/features/background/socket-client/socketEventsEntities'
-import { AppToSocketDTO, AppToSocketEmitDTO, SocketToAppDTO } from '@/features/background/socket-client/socket.types'
+import { AppToBackendGenericDTO, AppToBackedEmitterDTO } from '@/features/background/socket-client/socket.types'
 import { INTERVAL_TIME_DEBOUNCING_SOCKET_MESSAGES } from '@/core/constants.core'
 import { addConsoleVerbose } from '@/features/background/verbose-logs/verboseLogs.api'
+import {BackendToAppGenericDTO} from '../../../../src-backend/features/socket-server/DTO.types'
 
 
 
@@ -10,8 +11,8 @@ export const getSocketInstanceAbsolutely = () => window.clientSocket as Socket
 
 
 
-export const sendCommandMessageToSocket: AppToSocketEmitDTO = <T>(eventName: WebSocketEventTriggersType, data: T): void => {
-    const dataToSend: AppToSocketDTO<T> = {
+export const sendCommandMessageToSocket: AppToBackedEmitterDTO = <T>(eventName: WebSocketEventTriggersType, data: T): void => {
+    const dataToSend: AppToBackendGenericDTO<T> = {
         status: 200,
         data,
         userAgent: navigator.userAgent
@@ -30,7 +31,7 @@ export const listenToSocketEventWithDebounce = <T>(
 
     let timeoutID = 0
 
-    socketClient.on(socketEventName, (response: SocketToAppDTO<T>) => {
+    socketClient.on(socketEventName, (response: BackendToAppGenericDTO<T>) => {
 
         if (response.status !== 200) addConsoleVerbose('Response status is different than 200.', 'warn')
 

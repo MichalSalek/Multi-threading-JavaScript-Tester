@@ -41,24 +41,22 @@ $edgeBorderDistanceAmount: 70px;
   .animateIcons {
     @keyframes loopedMove {
       0%, 100% {
-        margin: 0; // Random layout prop for keeping animation in a main thread.
-        transform: translateX(calc(#{$translateXAmount} / 3.5));
-      }
-      10% {
+
+        // Random layout prop for keeping animation in a main thread.
+        margin: 0;
+
         transform: translateX(0);
       }
-      18% {
+
+      50% {
         transform: translateX($translateXAmount);
-      }
-      70% {
-        transform: translateX(0);
       }
     }
 
     display: inline-block;
     position: relative;
     z-index: 2;
-    animation: loopedMove 4.5s cubic-bezier(.55,-0.05,.95,.84) infinite both;
+    animation: loopedMove 4.5s cubic-bezier(.73,.17,.27,.83) infinite both;
 
 
     > svg {

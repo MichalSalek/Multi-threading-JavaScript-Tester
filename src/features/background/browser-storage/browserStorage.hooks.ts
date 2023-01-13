@@ -32,7 +32,7 @@ export const useWorkersAmountStoragePersist = (): void => {
     const workerRequestedAmount = useAppSelector(selectRequestedWorkersAmount)
 
     useEffect(() => {
-        // @todo dopisać query po ilość kalkulacji workerków.
+        // @todo HERE trigger a query for amounts of all workers calculations.
         //
         const memorizedValue = getStorageItem(STORAGE_KEY_WORKERS_AMOUNT)
         const memorizedAmountOfWorkers = memorizedValue ? Number(memorizedValue) : 0
