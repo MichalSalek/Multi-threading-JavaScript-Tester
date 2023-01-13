@@ -12,7 +12,7 @@ contact@michalsalek.pl
 
 ###                       
 
-##### App inspired by DDD, CQRS and Event Sourcing methodologies
+##### App inspired by DDD, CQRS and Event Sourcing goods.
 
 ###                                  
 
