@@ -12,7 +12,7 @@ contact@michalsalek.pl
 
 ###                       
 
-##### App inspired by DDD, CQRS and Event Sourcing methodologies
+##### App inspired by DDD, CQRS and Event Sourcing goods.
 
 ###                                  
 
@@ -79,8 +79,6 @@ The AMD Ryzen 9 5950X 16 x 4.0GHz processor can be loaded even over 80% by JavaS
       place.
 - `React JSX compositions` inside the layout dir - to extend components functionality with a common features.
 - `Simply backend` in this case has a very similar structure.
-
-![structure](https://michalsalek.pl/public_files/struktura.png)
 
 ###                                   
 
