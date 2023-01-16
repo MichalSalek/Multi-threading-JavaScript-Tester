@@ -7,14 +7,14 @@ import {DBModel, WorkersJobBodyType} from './db.types'
 
 // Return current state of all jobs done by all threads
 //
-export const getAllJobsDone = (): DBModel => workersRuntimeData
+export const getWholeData = (): DBModel => workersRuntimeData
 
 
 // Check a collection length and remove overload when it's needed.
 //
 const checkAndCleanupMemoryAllocation = (clientBrowserID: string, workerName: string): void => {
-    getAllJobsDone()[clientBrowserID][workerName].results.length > 200
-  && (() => getAllJobsDone()[clientBrowserID][workerName].results.length = 200)()
+    getWholeData()[clientBrowserID][workerName].results.length > 200
+  && (() => getWholeData()[clientBrowserID][workerName].results.length = 200)()
 }
 
 
@@ -22,8 +22,8 @@ const setNewValuesToWorkerKey = ({clientBrowserID, data}: NewWorkersJobByIPType)
     const roundDecimalCalculationResultToInt = (number: number): number => Math.round(number * 1000000000000)
     const {workerName, lastCalculations} = data
 
-    getAllJobsDone()[clientBrowserID][workerName].results.unshift(roundDecimalCalculationResultToInt(lastCalculations))
-    getAllJobsDone()[clientBrowserID][workerName].amount += 1
+    getWholeData()[clientBrowserID][workerName].results.unshift(roundDecimalCalculationResultToInt(lastCalculations))
+    getWholeData()[clientBrowserID][workerName].amount += 1
 }
 
 
@@ -37,11 +37,11 @@ const returnDefaultWorkerJobBody = (): WorkersJobBodyType => ({
 //
 const checkAndCreateNotExistingWorkerSchema = ({clientBrowserID, data}: NewWorkersJobByIPType): void => {
 
-    typeof getAllJobsDone()[clientBrowserID] === 'undefined'
-  && (() => getAllJobsDone()[clientBrowserID] = {})()
+    typeof getWholeData()[clientBrowserID] === 'undefined'
+  && (() => getWholeData()[clientBrowserID] = {})()
 
-    typeof getAllJobsDone()[clientBrowserID][data.workerName] === 'undefined'
-  && (() => getAllJobsDone()[clientBrowserID][data.workerName] = returnDefaultWorkerJobBody())()
+    typeof getWholeData()[clientBrowserID][data.workerName] === 'undefined'
+  && (() => getWholeData()[clientBrowserID][data.workerName] = returnDefaultWorkerJobBody())()
 }
 
 
@@ -60,6 +60,6 @@ export const setNewJobDone = (newWorkersJobByIP: NewWorkersJobByIPType): void =>
 // Erase _ALL_ data
 //
 export const eraseDBData = (): void => {
-    const keys: string[] = Object.keys(getAllJobsDone())
-    keys.forEach((key) => delete getAllJobsDone()[key])
+    const keys: string[] = Object.keys(getWholeData())
+    keys.forEach((key) => delete getWholeData()[key])
 }

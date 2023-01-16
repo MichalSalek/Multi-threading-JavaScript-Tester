@@ -1,3 +1,0 @@
-// GET placeholder
-//
-export default {}

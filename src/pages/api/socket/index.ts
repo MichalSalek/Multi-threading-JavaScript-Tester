@@ -15,10 +15,9 @@ import {
     getClientBrowserIDJobsDoneResponse,
     getClientBrowserIDResponse
 } from '../../../../src-backend/features/socket-server/DTO.api'
-import { addServerConsoleVerbose } from '../../../../src-backend/features/server-verbose-logs/serverVerboseLogs.api'
+import {addServerConsoleVerbose, logToFile} from '../../../../src-backend/features/server-logs/serverLogs.api'
 import { AppToBackendGenericDTO } from '@/features/background/socket-client/socket.types'
 import { getSecuredClientBrowserID } from '../../../../src-backend/features/client-browser-id/clientBrowserID.api'
-import { logToFile } from '../../../../src-backend/features/server-verbose-logs/serverVerboseLogsToFile'
 
 
 

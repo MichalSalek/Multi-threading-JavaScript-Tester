@@ -1,3 +1,0 @@
-// POST placeholder
-//
-export default {}

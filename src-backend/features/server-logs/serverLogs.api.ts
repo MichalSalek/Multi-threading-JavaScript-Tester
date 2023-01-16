@@ -1,18 +1,20 @@
-import 'winston-daily-rotate-file'
-
-
-import { SERVER_VERBOSE_MODE } from './serverVerboseLogsEntity'
-import { logToFile } from './serverVerboseLogsToFile'
+import {logger, SERVER_VERBOSE_MODE} from './serverLogs.config'
 
 
 
-export const changeServerVerboseModeFlag = (verboseModeEnableState: 'on' | 'off') => {
-    switch (verboseModeEnableState) {
-    case 'on':
-        SERVER_VERBOSE_MODE.isEnabled = true
+
+export const logToFile = (communicate: string, mode: 'log' | 'warn' | 'error' = 'log') => {
+    switch (mode) {
+    case 'log':
+        logger.verbose(communicate)
         break
-    case 'off':
-        SERVER_VERBOSE_MODE.isEnabled = false
+
+    case 'warn':
+        logger.warn(communicate)
+        break
+
+    case 'error':
+        logger.error(communicate)
     }
 }
 
@@ -50,10 +52,8 @@ export const addServerConsoleVerbose = (communicate: string | Error, mode: 'log'
         console.error(dateString, communicate)
         logToFile(`${dateString} ${communicate}`, 'error')
 
-        //
-        // Here we can also send the errors to an any error-tracking app
-        //
+    //
+    // Here we can also send the errors to an any error-tracking app
+    //
     }
 }
-
-
