@@ -1,4 +1,4 @@
-import {NewWorkersJobByIPType} from '@/features/background/workers/workers.types'
+import {NewWorkersJobByIPType} from '@/core/features/calculations-workers/calculationsWorkers.types'
 import {workersRuntimeData} from './ram-db'
 import {DBModel, WorkersJobBodyType} from './db.types'
 
@@ -33,7 +33,7 @@ const returnDefaultWorkerJobBody = (): WorkersJobBodyType => ({
 })
 
 
-// Add newly created client and workers models.
+// Add newly created client and calculations-workers models.
 //
 const checkAndCreateNotExistingWorkerSchema = ({clientBrowserID, data}: NewWorkersJobByIPType): void => {
 

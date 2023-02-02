@@ -1,29 +1,32 @@
 import React from 'react'
 import type {AppProps} from 'next/app'
 import {Provider} from 'react-redux'
-import store from '@/core/store.core'
-import LayoutComposition from '@/layout/compositions/main-layout/Layout.composition'
+import store from '@/application/store/store'
+import LayoutComposition from '@/core/layout/compositions/main-layout/Layout.composition'
 import {CssBaseline} from '@mui/material'
-import FPSMonitorWindowMolecule from '@/features/building/fps-monitor/UI/FPSMonitorWindow.molecule'
+import FPSMonitorWindowMolecule from '@/core/layout/components/atoms-and-molecules/fps-monitor/UI/FPSMonitorWindow.molecule'
 import dynamic from 'next/dynamic'
-import WorkersScoreboardWindowMolecule from '@/features/building/workers/scoreboard/UI/WorkersScoreboardWindow.molecule'
+import WorkersScoreboardWindowMolecule
+    from '@/core/layout/components/atoms-and-molecules/workers/scoreboard/UI/WorkersScoreboardWindow.molecule'
 import WorkersGlobalWorkControlWindowMolecule
-    from '@/features/building/workers/global-work-control/UI/WorkersGlobalWorkControlWindow.molecule'
-import '@/global-styles/variables-and-functions.scss'
-import '@/global-styles/global-styles.scss'
-import {SharedControllersHandler} from '@/features/background/controllers-handler/useControllersHandler.controller'
-import {ThemeComposition} from '@/features/shared-components/Theme.composition'
-import {MainViewOnlyGuardComposition} from '@/layout/compositions/main-view-only-guard/MainViewOnlyGuard.composition'
+    from '@/core/layout/components/atoms-and-molecules/workers/global-work-control/UI/WorkersGlobalWorkControlWindow.molecule'
+import '@/core/layout/styles/common/variables-and-functions.scss'
+import '@/core/layout/styles/common/global-styles.scss'
+import {
+    CommonControllersHandler
+} from '@/application/controllers-handler/CommonControllersHandler.controller'
+import {ThemeComposition} from '@/core/layout/compositions/Theme.composition'
+import {AppIndexViewPermissionsComposition} from '@/core/layout/compositions/main-view-only-guard/AppIndexViewPermissions.composition'
 
 
 
 const ControlPanelMolecule = dynamic(() =>
-    import('@/features/building/control-panel/UI/ControlPanel.molecule'), {ssr: false})
+    import('@/core/layout/components/atoms-and-molecules/control-panel/UI/ControlPanel.molecule'), {ssr: false})
 
 
-
-// Main application component.
-// Includes app layout as well as realtime controllers
+// ***********
+// Entry point
+// ***********
 //
 export default function ApplicationComposition({Component, pageProps}: AppProps) {
     return (<ThemeComposition>
@@ -33,21 +36,23 @@ export default function ApplicationComposition({Component, pageProps}: AppProps)
         {/*<MetaHead/> @TODO create _document */}
 
         <Provider store={store}>
-
-            <SharedControllersHandler/>
-
-            <MainViewOnlyGuardComposition>
-                <FPSMonitorWindowMolecule/>
-                <WorkersScoreboardWindowMolecule/>
-                <WorkersGlobalWorkControlWindowMolecule/>
-                <ControlPanelMolecule/>
-            </MainViewOnlyGuardComposition>
+            <CommonControllersHandler>
 
 
-            <LayoutComposition>
-                <Component {...pageProps} />
-            </LayoutComposition>
+                <AppIndexViewPermissionsComposition>
+                    <FPSMonitorWindowMolecule/>
+                    <WorkersScoreboardWindowMolecule/>
+                    <WorkersGlobalWorkControlWindowMolecule/>
+                    <ControlPanelMolecule/>
+                </AppIndexViewPermissionsComposition>
 
+
+                <LayoutComposition>
+                    <Component {...pageProps} />
+                </LayoutComposition>
+
+                
+            </CommonControllersHandler>
         </Provider>
 
     </ThemeComposition>)

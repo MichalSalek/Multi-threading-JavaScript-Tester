@@ -1,0 +1,68 @@
+@import '../../../../styles/common/variables-and-functions';
+
+
+$translateXAmount: 230px;
+$edgeBorderDistanceAmount: 70px;
+
+
+.host {
+  display: flex;
+  justify-content: center;
+  margin: 15px auto;
+
+
+  .iconSection {
+    width: 360px;
+    position: relative;
+
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 2px;
+      z-index: 0;
+    }
+
+    &::before {
+      left: $edgeBorderDistanceAmount;
+      background-color: $mainContent;
+      opacity: 0.8;
+    }
+
+    &::after {
+      right: $edgeBorderDistanceAmount;
+      opacity: 1;
+      background-color: $primaryAccentColor;
+    }
+  }
+
+
+  .animateIcons {
+    @keyframes loopedMove {
+      0%, 100% {
+
+        // Random layout prop for keeping animation in a main thread.
+        margin: 0;
+
+        transform: translateX(0);
+      }
+
+      50% {
+        transform: translateX($translateXAmount);
+      }
+    }
+
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    animation: loopedMove 4.5s cubic-bezier(.73,.17,.27,.83) infinite both;
+
+
+    > svg {
+      @include svgSize(32px);
+
+      padding: 0 3px;
+    }
+  }
+}

@@ -1,23 +1,20 @@
-import { Server } from 'socket.io'
-import { NextApiRequest, NextApiResponse } from 'next'
+import {Server} from 'socket.io'
+import {NextApiRequest, NextApiResponse} from 'next'
 import requestedIP from 'request-ip'
 
-import { WEB_SOCKET_EVENTS_TRIGGERS } from '@/features/background/socket-client/socketEventsEntities'
-import {
-    IWorkerDTO,
-    WorkerKeyType,
-    WorkerToSocketDTO
-} from '@/features/background/workers/workers.types'
+import {WEB_SOCKET_EVENTS_TRIGGERS} from '@/application/socket-client/socketEventsEntities'
+import {CalculationWorkerDTO, WorkerToSocketDTO} from '@/core/features/calculations-workers/calculationsWorkers.types'
 
-import { setNewJobDone } from '../../../../src-backend/features/db/db.api'
+import {setNewJobDone} from '../../../../src-backend/features/db/db.api'
 import {
     getAllJobsDoneResponse,
     getClientBrowserIDJobsDoneResponse,
     getClientBrowserIDResponse
-} from '../../../../src-backend/features/socket-server/DTO.api'
+} from '../../../../src-backend/features/_background-core/socket-server/DTO.api'
 import {addServerConsoleVerbose, logToFile} from '../../../../src-backend/features/server-logs/serverLogs.api'
-import { AppToBackendGenericDTO } from '@/features/background/socket-client/socket.types'
-import { getSecuredClientBrowserID } from '../../../../src-backend/features/client-browser-id/clientBrowserID.api'
+import {AppToBackendGenericDTO} from '@/application/socket-client/socket.types'
+import {getSecuredClientBrowserID} from '../../../../src-backend/features/client-browser-id/clientBrowserID.api'
+import {WorkerKeyType} from '@/application/workers/workers.types'
 
 
 
@@ -37,12 +34,11 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponse & any) => {
             //
             // WRITE
             //
-            serverSocketClient.on(WEB_SOCKET_EVENTS_TRIGGERS.reportJobDone, (request: AppToBackendGenericDTO<WorkerToSocketDTO<IWorkerDTO>>) => {
+            serverSocketClient.on(WEB_SOCKET_EVENTS_TRIGGERS.reportJobDone, (request: AppToBackendGenericDTO<WorkerToSocketDTO<CalculationWorkerDTO>>) => {
                 const workerKey: WorkerKeyType = request.data.keyNames
-                const workerWorkAndCalculationData: IWorkerDTO = request.data.unknownData
+                const workerWorkAndCalculationData: CalculationWorkerDTO = request.data.unknownData
 
                 if (!workerWorkAndCalculationData.lastCalculations) {
-                    addServerConsoleVerbose(`The message just came in, but with no calculation data: ${workerKey.workerName} ${new Date(workerWorkAndCalculationData.timestamp)}`, 'log')
                     return void undefined
                 }
 

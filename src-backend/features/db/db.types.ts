@@ -4,11 +4,12 @@
 // 	amount: 3
 // },... }
 //
-import {ClientBrowserIDType} from '@/features/background/socket-client/socket.types'
+import {ClientBrowserIDType} from '@/application/socket-client/socket.types'
+import {WorkerName} from '@/application/workers/workers.types'
 
 
 
-export type WorkerNameType = string
+
 
 export type WorkersJobBodyType = {
   results: number[]
@@ -16,7 +17,7 @@ export type WorkersJobBodyType = {
 }
 
 
-export type WorkerJobsTypeDTO = Record<WorkerNameType, WorkersJobBodyType>
+export type WorkerJobsTypeDTO = Record<WorkerName, WorkersJobBodyType>
 
 
 // eg:

@@ -11,15 +11,14 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:jsx-a11y/recommended',
-        'prettier',
-        'next/core-web-vitals',
+        'prettier'
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaFeatures: {
             jsx: true,
         },
-        ecmaVersion: "latest",
+        ecmaVersion: 'latest',
         sourceType: 'module',
     },
     plugins: ['@typescript-eslint', 'react'],
@@ -28,7 +27,6 @@ module.exports = {
         'linebreak-style': ['error', 'windows'],
         quotes: ['error', 'single'],
         semi: ['error', 'never'],
-        'import/no-anonymous-default-export': ['off'],
-        'react-hooks/exhaustive-deps': ['error']
+        'import/no-anonymous-default-export': ['off']
     },
 }

@@ -1,0 +1,47 @@
+@import "../../../../../styles/common/variables-and-functions";
+
+
+.host {
+  color: $mainContent;
+  padding: 0.5rem;
+  font-size: 13px;
+
+
+  .worker {
+    font-family: monospace;
+    letter-spacing: -1px;
+    margin: 5px 0;
+  }
+
+  .labelInfo {
+    letter-spacing: 0.4px;
+    text-transform: lowercase;
+    line-height: 8px;
+
+    span {
+      font-size: 11px;
+    }
+  }
+
+  .activeLabel {
+    strong {
+      color: red;
+    }
+  }
+
+  .listGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-auto-flow: column;
+    row-gap: 0;
+    column-gap: 40px;
+    min-width: fit-content;
+  }
+
+  .smallAndBoldHeading {
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
+
