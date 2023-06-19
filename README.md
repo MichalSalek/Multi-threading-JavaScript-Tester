@@ -1,4 +1,4 @@
-## Multithread JavaScript Tester Application
+## Multithread JavaScript Tester Application (legacy not updated, working live)
 
 Live: https://multithread.michalsalek.pl/
 
